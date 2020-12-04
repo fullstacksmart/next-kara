@@ -7,7 +7,7 @@ export type LinkedButtonProps = ButtonProps & LinkProps;
 const LinkedButton = (props: LinkedButtonProps): React.ReactElement => {
   return (
     <Link href={props.href} passHref>
-      <Button {...props}>{props.children}</Button>
+      <Button {...(props as ButtonProps)}>{props.children}</Button>
     </Link>
   );
 };
