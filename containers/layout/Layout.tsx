@@ -1,5 +1,6 @@
 import { LinkedButton } from '../../components/buttons';
 import Head from 'next/head';
+import { getTitleString } from '../../lib/utils/strings';
 import styles from '../../styles/Layout.module.css';
 
 export interface LayoutProps {
@@ -7,19 +8,6 @@ export interface LayoutProps {
   title?: string | string[];
   children?: React.ReactNode;
 }
-
-const getTitleString = (title: string | string[]): string => {
-  let titleString = 'Kara';
-  if (title) {
-    titleString += ' | ';
-    if (Array.isArray(title)) {
-      titleString += title.join(' | ');
-    } else {
-      titleString += title;
-    }
-  }
-  return titleString;
-};
 
 const Layout = ({
   home = false,
