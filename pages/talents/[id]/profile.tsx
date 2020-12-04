@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
-      id: params.id,
+      id: params?.id,
     },
   };
 };

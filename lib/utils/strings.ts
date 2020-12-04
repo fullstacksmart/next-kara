@@ -1,4 +1,6 @@
-export const getTitleString = (title: string | string[]): string => {
+export const getTitleString = (
+  title: string | string[] | undefined,
+): string => {
   let titleString = 'Kara';
   if (title) {
     titleString += ' | ';
