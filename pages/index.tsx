@@ -1,12 +1,12 @@
-import { LinkedButton } from '../components/buttons';
+import { Button } from '../components/buttons';
 import { Layout } from '../containers/layout';
 
 export default function Home(): React.ReactNode {
   return (
     <Layout title="Home" home>
-      <LinkedButton href="/signin" color="primary" variant="contained">
+      <Button href="/signin" color="primary" variant="contained">
         sign in / register
-      </LinkedButton>
+      </Button>
     </Layout>
     // <div className={styles.container}>
     //   <Head>
@@ -14,9 +14,9 @@ export default function Home(): React.ReactNode {
     //     <link rel="icon" href="/favicon.ico" />
     //   </Head>
     //   <main className={styles.main}></main>
-    //   <LinkedButton href="/signin" color="primary" variant="contained">
+    //   <Button href="/signin" color="primary" variant="contained">
     //     sign in / register
-    //   </LinkedButton>
+    //   </Button>
     //   <footer className={styles.footer}></footer>
     // </div>
   );

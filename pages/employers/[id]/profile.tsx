@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { LinkedButton } from '../../../components/buttons';
+import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 
 export interface ProfilePageProps {
@@ -10,9 +10,7 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   return (
     <Layout title={['profile', `Employer ${id}`]}>
       <h1>Profile Page for Employer {id}</h1>
-      <LinkedButton href={`/employers/${id}/settings`}>
-        To Settings
-      </LinkedButton>
+      <Button href={`/employers/${id}/settings`}>To Settings</Button>
     </Layout>
   );
 };

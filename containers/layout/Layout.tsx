@@ -1,4 +1,4 @@
-import { LinkedButton } from '../../components/buttons';
+import { Button } from '../../components/buttons';
 import Head from 'next/head';
 import { getTitleString } from '../../lib/utils/strings';
 import styles from '../../styles/Layout.module.css';
@@ -21,7 +21,7 @@ const Layout = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        {!home && <LinkedButton href="/">take me back home</LinkedButton>}
+        {!home && <Button href="/">take me back home</Button>}
       </header>
       <main className={styles.main}>{children}</main>
       <footer></footer>
