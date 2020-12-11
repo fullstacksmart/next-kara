@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-micro';
 
-export const typedefs = gql`
+const typedefs = gql`
   enum ProfessionType {
     NURSE,
     DOCTOR,
@@ -147,3 +147,4 @@ export const typedefs = gql`
     description: String
   }
 `;
+export default typedefs;

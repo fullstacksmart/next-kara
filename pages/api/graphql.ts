@@ -1,0 +1,14 @@
+import { ApolloServer } from 'apollo-server-micro';
+import typeDefs from '../../apollo/schema';
+
+const server = new ApolloServer({
+  typeDefs,
+});
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default server.createHandler({ path: '/api/graphql' });
