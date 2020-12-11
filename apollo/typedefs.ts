@@ -14,6 +14,20 @@ export const typedefs = gql`
     DENIED
   }
 
+  enum LanguageSkillLevel {
+    BASIC,
+    PROFICIENT,
+    BUSINESS_CONVERSATION,
+    MOTHER_TONGUE
+  }
+
+  enum OtherSKillLevel {
+    BASIC,
+    PROFICIENT,
+    EXPERT,
+    MASTER
+  }
+
   enum FederalState {
     BW
     BY
@@ -120,17 +134,16 @@ export const typedefs = gql`
   }
 
   type LanguageSkill {
-    id: ID!
     talent: Talent!
     language: String
-    level: Int
+    level: LanguageSkillLevel
   }
 
   type OtherSkill {
     id: ID!
     talent: Talent!
     name: String
-    level: Int
+    level: OtherSKillLevel
     description: String
   }
 `;
