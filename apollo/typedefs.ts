@@ -10,8 +10,8 @@ export const typedefs = gql`
 
   enum ApprobationStatus {
     ONGOING,
-    SUCCESSFUL,
-    UNSUCCESSFUL
+    APPROVED,
+    DENIED
   }
 
   enum FederalState {
@@ -32,6 +32,11 @@ export const typedefs = gql`
     SH
     TH
     OTHER
+  }
+  interface User {
+    id: ID!
+    email: String!
+    password: String!
   }
 
   type FullName {
@@ -58,12 +63,15 @@ export const typedefs = gql`
   }
 
   type Organization {
+    id: ID!
     name: String!
     address: Address
   }
 
-  type Talent {
+  type Talent implements User {
     id: ID!
+    email: String!
+    password: String!
     name: FullName!
     profession: ProfessionType
     address: Address
