@@ -8,6 +8,11 @@ const typeDefs = gql`
     OTHER_NON_MEDICAL
   }
 
+  enum UserType {
+    TALENT
+    EMPLOYER
+  }
+
   enum ApprobationStatus {
     ONGOING
     APPROVED
@@ -51,6 +56,7 @@ const typeDefs = gql`
     id: ID!
     email: String!
     password: String!
+    type: UserType!
   }
 
   type FullName {
@@ -86,6 +92,7 @@ const typeDefs = gql`
     id: ID!
     email: String!
     password: String!
+    type: UserType!
     name: FullName!
     profession: ProfessionType
     address: Address
@@ -147,7 +154,7 @@ const typeDefs = gql`
     description: String
   }
   type Query {
-    getName: FullName
+    getAllTalentIds: [ID]!
   }
 `;
 export default typeDefs;
