@@ -1,8 +1,11 @@
 import { ApolloServer } from 'apollo-server-micro';
-import typeDefs from '../../apollo/schema';
+import typeDefs from '../../apollo/typedefs';
 
 const server = new ApolloServer({
   typeDefs,
+  context(ctx) {
+    return ctx;
+  },
 });
 
 export const config = {

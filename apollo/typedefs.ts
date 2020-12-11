@@ -1,30 +1,30 @@
 import { gql } from 'apollo-server-micro';
 
-const typedefs = gql`
+const typeDefs = gql`
   enum ProfessionType {
-    NURSE,
-    DOCTOR,
-    OTHER_MEDICAL,
-    OTHER_NON-MEDICAL
+    NURSE
+    DOCTOR
+    OTHER_MEDICAL
+    OTHER_NON_MEDICAL
   }
 
   enum ApprobationStatus {
-    ONGOING,
-    APPROVED,
+    ONGOING
+    APPROVED
     DENIED
   }
 
   enum LanguageSkillLevel {
-    BASIC,
-    PROFICIENT,
-    BUSINESS_CONVERSATION,
+    BASIC
+    PROFICIENT
+    BUSINESS_CONVERSATION
     MOTHER_TONGUE
   }
 
   enum OtherSKillLevel {
-    BASIC,
-    PROFICIENT,
-    EXPERT,
+    BASIC
+    PROFICIENT
+    EXPERT
     MASTER
   }
 
@@ -146,5 +146,8 @@ const typedefs = gql`
     level: OtherSKillLevel
     description: String
   }
+  type Query {
+    getName: FullName
+  }
 `;
-export default typedefs;
+export default typeDefs;
