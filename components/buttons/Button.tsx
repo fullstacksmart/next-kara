@@ -18,7 +18,7 @@ const Button = (props: ButtonProps): React.ReactElement => {
   }
   return (
     <Link href={props.href} passHref>
-      <MuiButton {...(props as MuiButtonProps)}>{props.children}</MuiButton>
+      <MuiButton {...props}>{props.children}</MuiButton>
     </Link>
   );
 };
