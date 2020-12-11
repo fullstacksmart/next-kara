@@ -2,7 +2,7 @@
   "talents": [
     {
       "id": "yasbiuycdbucoiuscboiucsiousc!@",
-      "email": "katalina@cimpric.rs",
+      "email": "galina@cimprich.rs",
       "password": "pass",
       "name": {
         "firstName": "Galina",
@@ -126,7 +126,8 @@
       "address": {
         "street": "Crnotravska",
         "streetNo": "27",
-        "city": "Belgrade"
+        "city": "Belgrade",
+        "isoCode": "SRB"
       }
     }
   ]
