@@ -7,6 +7,11 @@ const resolvers = {
       return user.type === 'TALENT' ? 'Talent' : 'Employer';
     },
   },
+  Talent: {
+    type(): string {
+      return 'TALENT';
+    },
+  },
   Query: {
     getAllTalentIds(): string[] {
       return models.Talent.findMany().map((talent: Talent) => talent.id);
