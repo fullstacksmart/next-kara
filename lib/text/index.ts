@@ -15,6 +15,16 @@ export default {
       },
     },
   },
+  type: {
+    talent: {
+      german: 'Talent',
+      english: 'Talent',
+    },
+    employer: {
+      german: 'Arbeitgeber',
+      english: 'Employer',
+    },
+  },
   fullName: {
     firstName: {
       german: 'Vorname',

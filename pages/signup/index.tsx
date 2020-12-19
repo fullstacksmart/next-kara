@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
-import { Button } from '../../components/buttons';
+import TypeToggler from '../../components/OptionToggler/OptionToggler';
 import { Layout } from '../../containers/layout';
 import text from '../../lib/text';
 
@@ -11,6 +11,16 @@ const SignUpPage = (): React.ReactElement => {
           <Typography variant="h2">
             {text.pages.signup.header.german}
           </Typography>
+          <TypeToggler
+            options={[
+              { value: text.type.talent.german },
+              { value: text.type.employer.german },
+            ]}
+            optionsLabel="type"
+            setOption={(option) => {
+              console.log(option);
+            }}
+          />
         </CardContent>
       </Card>
     </Layout>
