@@ -1,4 +1,4 @@
-import { User, NewUser } from '../lib/types';
+import { User, UserInput } from '../lib/types';
 import * as helpers from './helpers';
 
 const resolvers = {
@@ -24,7 +24,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    async addUser(_: unknown, { input }: { input: NewUser }): Promise<User> {
+    async addUser(_: unknown, { input }: { input: UserInput }): Promise<User> {
       return await helpers.addUser(input);
     },
   },
