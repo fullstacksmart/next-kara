@@ -1,4 +1,4 @@
-const nano = require('nanoid');
+const { nanoid: nano } = require('nanoid');
 
 const createModel = (db, table) => ({
   findOne(filter = {}) {

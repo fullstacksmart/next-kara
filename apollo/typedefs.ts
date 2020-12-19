@@ -11,6 +11,7 @@ const typeDefs = gql`
   enum UserType {
     TALENT
     EMPLOYER
+    AGENCY
   }
 
   enum ApprobationStatus {
@@ -22,7 +23,7 @@ const typeDefs = gql`
   enum LanguageSkillLevel {
     BASIC
     PROFICIENT
-    BUSINESS_CONVERSATION
+    BUSINESS_LEVEL
     MOTHER_TONGUE
   }
 
@@ -153,8 +154,20 @@ const typeDefs = gql`
     level: OtherSKillLevel
     description: String
   }
+
+  input NewUser {
+    email: String!
+    password: String!
+    type: UserType!
+  }
+
   type Query {
     getAllTalentIds: [ID]!
+    getAllUserIds: [ID]!
+    getAllEmployerIds: [ID]!
+  }
+  type Mutation {
+    addUser(input: NewUser!): User!
   }
 `;
 export default typeDefs;

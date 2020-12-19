@@ -12,5 +12,6 @@ module.exports = {
     Talent: createModel(db, 'talents'),
     Employer: createModel(db, 'employers'),
     Organization: createModel(db, 'organizations'),
+    Agency: createModel(db, 'agencies'),
   },
 };

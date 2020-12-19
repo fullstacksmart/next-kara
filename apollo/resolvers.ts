@@ -1,5 +1,5 @@
-import { models } from '../db';
-import { Talent, User } from '../lib/types';
+import { User, NewUser } from '../lib/types';
+import * as helpers from './helpers';
 
 const resolvers = {
   User: {
@@ -14,7 +14,18 @@ const resolvers = {
   },
   Query: {
     getAllTalentIds(): string[] {
-      return models.Talent.findMany().map((talent: Talent) => talent.id);
+      return helpers.getAllTalentIds();
+    },
+    getAllEmployerIds(): string[] {
+      return helpers.getAllEmployerIds();
+    },
+    getAllUserIds(): string[] {
+      return helpers.getAllUserIds();
+    },
+  },
+  Mutation: {
+    async addUser(_: unknown, { input }: { input: NewUser }): Promise<User> {
+      return await helpers.addUser(input);
     },
   },
 };
