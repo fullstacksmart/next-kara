@@ -39,4 +39,20 @@ export default {
       english: 'last name',
     },
   },
+  email: {
+    german: 'Email',
+    english: 'email',
+  },
+  password: {
+    german: 'Passwort',
+    english: 'password',
+  },
+  repeatPassword: {
+    german: 'Passwort wiederholen',
+    english: 'please reenter password',
+  },
+  signUp: {
+    german: 'registrieren',
+    english: 'sign up',
+  },
 };
