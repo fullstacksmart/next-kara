@@ -7,7 +7,7 @@ export interface User {
   type: UserType;
 }
 
-export interface newUser {
+export interface NewUser {
   email: string;
   password: string;
   type: UserType;
