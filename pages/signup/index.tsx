@@ -9,7 +9,7 @@ const SignUpPage = (): React.ReactElement => {
       <Card>
         <CardContent>
           <Typography variant="h2">
-            {text.german.pages.signup.header}
+            {text.pages.signup.header.german}
           </Typography>
         </CardContent>
       </Card>
