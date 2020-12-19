@@ -1,4 +1,4 @@
-import { User } from './user';
+import { User, FullName } from './user';
 
 type ProfessionType =
   | 'NURSE'
@@ -34,12 +34,6 @@ type FederalState =
   | 'SH'
   | 'TH'
   | 'OTHER';
-
-interface FullName {
-  firstName?: string;
-  middleName?: string;
-  lastName: string;
-}
 
 interface Address {
   street?: string;

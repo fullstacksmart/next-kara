@@ -56,6 +56,7 @@ const typeDefs = gql`
 
   interface User {
     id: ID!
+    name: FullName!
     email: String!
     password: String!
     type: UserType!
@@ -157,6 +158,7 @@ const typeDefs = gql`
   }
 
   input NewUser {
+    name: FullName!
     email: String!
     password: String!
     type: UserType!
