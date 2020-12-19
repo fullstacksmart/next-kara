@@ -156,9 +156,14 @@ const typeDefs = gql`
     level: OtherSKillLevel
     description: String
   }
+  input NameInput {
+    firstName: String
+    middleName: String
+    lastName: String!
+  }
 
-  input NewUser {
-    name: FullName!
+  input UserInput {
+    name: NameInput!
     email: String!
     password: String!
     type: UserType!
@@ -171,7 +176,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(input: NewUser!): User!
+    addUser(input: UserInput!): User!
   }
 `;
 export default typeDefs;

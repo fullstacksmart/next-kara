@@ -1,5 +1,5 @@
 import { models } from '../db';
-import { NewUser, User } from '../lib/types';
+import { UserInput, User } from '../lib/types';
 
 export const getAllTalentIds = (): string[] =>
   models.Talent.findMany().map((talent: User) => talent.id);
@@ -13,7 +13,7 @@ export const getAllUserIds = (): string[] => {
   return talents.concat(employers);
 };
 
-export const addUser = async (input: NewUser): Promise<User> => {
+export const addUser = async (input: UserInput): Promise<User> => {
   const type =
     input.type === 'TALENT'
       ? 'Talent'

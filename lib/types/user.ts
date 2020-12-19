@@ -14,7 +14,8 @@ export interface User {
   type: UserType;
 }
 
-export interface NewUser {
+export interface UserInput {
+  name: FullName;
   email: string;
   password: string;
   type: UserType;
