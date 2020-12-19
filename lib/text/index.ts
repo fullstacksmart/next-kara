@@ -1,14 +1,24 @@
 export default {
-  german: {
-    pages: {
-      signup: {
-        header: 'Erstelle Dein Profil',
+  pages: {
+    signup: {
+      header: {
+        german: 'Erstelle Dein Profil',
+        english: 'Create your profile',
       },
     },
-    fullName: {
-      firstName: 'Vorname',
-      middleName: 'Zweiter Vorname',
-      lastName: 'Nachname',
+  },
+  fullName: {
+    firstName: {
+      german: 'Vorname',
+      english: 'first name',
+    },
+    middleName: {
+      german: 'Zweiter Vorname',
+      english: 'middle name',
+    },
+    lastName: {
+      german: 'Nachname',
+      english: 'last name',
     },
   },
 };
