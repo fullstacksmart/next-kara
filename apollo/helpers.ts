@@ -14,7 +14,6 @@ export const getAllUserIds = (): string[] => {
 };
 
 export const addUser = async (input: NewUser): Promise<User> => {
-  console.log(input);
   const type =
     input.type === 'TALENT'
       ? 'Talent'
