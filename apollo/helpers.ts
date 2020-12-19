@@ -20,5 +20,9 @@ export const addUser = async (input: NewUser): Promise<User> => {
       : input.type === 'EMPLOYER'
       ? 'Employer'
       : 'Agency';
+  const oldUser = models[type].findOne({
+    email: input.email,
+  });
+  if (oldUser) throw new Error('user already exists');
   return await models[type].createOne(input);
 };

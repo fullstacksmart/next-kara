@@ -53,6 +53,7 @@ const typeDefs = gql`
     TH
     OTHER
   }
+
   interface User {
     id: ID!
     email: String!
@@ -166,6 +167,7 @@ const typeDefs = gql`
     getAllUserIds: [ID]!
     getAllEmployerIds: [ID]!
   }
+
   type Mutation {
     addUser(input: NewUser!): User!
   }
