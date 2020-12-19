@@ -25,6 +25,10 @@ export default {
       english: 'Employer',
     },
   },
+  companyName: {
+    german: 'Firmenname',
+    english: 'company name',
+  },
   fullName: {
     firstName: {
       german: 'Vorname',
