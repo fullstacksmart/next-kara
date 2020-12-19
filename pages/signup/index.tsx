@@ -43,7 +43,7 @@ const SignUpPage = (): React.ReactElement => {
       />
     );
 
-  const handleClick = (): void => {
+  const handleClick = async (): Promise<void> => {
     const newUser = {
       name: {
         firstName: formValues.firstName,
@@ -54,14 +54,17 @@ const SignUpPage = (): React.ReactElement => {
       type: formValues.type,
     };
     try {
-      createUser({
+      console.log('got here');
+      await createUser({
         variables: {
           input: newUser,
         },
       });
     } catch (e) {
+      console.log('error');
       console.error('user already exists: ', e.message);
     }
+    console.log('but not here');
   };
 
   useEffect(() => {
