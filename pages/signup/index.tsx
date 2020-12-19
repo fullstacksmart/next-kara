@@ -43,16 +43,28 @@ const SignUpPage = (): React.ReactElement => {
       />
     );
 
-  const handleClick = () => {
-    createUser({
-      variables: {
-        input: formValues,
+  const handleClick = (): void => {
+    const newUser = {
+      name: {
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
       },
-    });
+      email: formValues.email,
+      password: formValues.password,
+      type: formValues.type,
+    };
+    try {
+      createUser({
+        variables: {
+          input: newUser,
+        },
+      });
+    } catch (e) {
+      console.error('user already exists: ', e.message);
+    }
   };
 
   useEffect(() => {
-    console.log(newUser);
     setIsFormFilled(
       Boolean(
         passwordsIdentical &&
@@ -62,6 +74,10 @@ const SignUpPage = (): React.ReactElement => {
       ),
     );
   }, [formValues, passwordsIdentical]);
+
+  useEffect(() => {
+    console.log('new User:', newUser);
+  }, [newUser]);
 
   return (
     <Layout title="sign up">
