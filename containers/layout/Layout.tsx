@@ -1,6 +1,7 @@
 import { Button } from '../../components/buttons';
 import Head from 'next/head';
 import { getTitleString } from '../../lib/utils/strings';
+import text from '../../lib/text';
 import styles from '../../styles/Layout.module.css';
 
 export interface LayoutProps {
@@ -21,7 +22,9 @@ const Layout = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        {!home && <Button href="/">take me back home</Button>}
+        {!home && (
+          <Button href="/">{text.components.layout.backHome.german}</Button>
+        )}
       </header>
       <main className={styles.main}>{children}</main>
       <footer></footer>

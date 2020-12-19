@@ -7,6 +7,14 @@ export default {
       },
     },
   },
+  components: {
+    layout: {
+      backHome: {
+        german: 'zurück zur Homepage',
+        english: 'take me back home',
+      },
+    },
+  },
   fullName: {
     firstName: {
       german: 'Vorname',
