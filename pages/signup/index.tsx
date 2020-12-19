@@ -12,6 +12,15 @@ import InputField from '../../components/input-field/InputField';
 import text from '../../lib/text';
 import { useEffect, useState } from 'react';
 import { UserInput, UserType } from '../../lib/types';
+import { useMutation, gql } from '@apollo/react-hooks';
+
+const ADD_USER = gql`
+  mutation AddUser($input: UserInput!) {
+    addUser(input: $input) {
+      id
+    }
+  }
+`;
 
 const SignUpPage = (): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
@@ -23,6 +32,8 @@ const SignUpPage = (): React.ReactElement => {
   });
   const [passwordsIdentical, setPasswordsIdentical] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
+  const [createUser, newUser] = useMutation(ADD_USER);
+
   const company =
     formValues.type === text.type.talent.german.toUpperCase() ? null : (
       <InputField
@@ -32,9 +43,16 @@ const SignUpPage = (): React.ReactElement => {
       />
     );
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    createUser({
+      variables: {
+        input: formValues,
+      },
+    });
+  };
 
   useEffect(() => {
+    console.log(newUser);
     setIsFormFilled(
       Boolean(
         passwordsIdentical &&
