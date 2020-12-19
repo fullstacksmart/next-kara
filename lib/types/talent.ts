@@ -1,6 +1,4 @@
-import {} from '@apollo/client';
-
-type UserType = 'TALENT' | 'EMPLOYER';
+import { User } from './user';
 
 type ProfessionType =
   | 'NURSE'
@@ -13,7 +11,7 @@ type ApprobationStatus = 'ONGOING' | 'APPROVED' | 'DENIED';
 type LanguageSkillLevel =
   | 'BASIC'
   | 'PROFICIENT'
-  | 'BUSINESS_CONVERSATION'
+  | 'BUSINESS_LEVEL'
   | 'MOTHER_TONGUE';
 
 type OtherSKillLevel = 'BASIC' | 'PROFICIENT' | 'EXPERT' | 'MASTER';
@@ -36,13 +34,6 @@ type FederalState =
   | 'SH'
   | 'TH'
   | 'OTHER';
-
-export interface User {
-  id: string;
-  email: string;
-  password: string;
-  type: UserType;
-}
 
 interface FullName {
   firstName?: string;
