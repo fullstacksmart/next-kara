@@ -23,6 +23,8 @@ const ADD_USER = gql`
   }
 `;
 
+const currentText = text.german;
+
 const SignUpPage = (): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
     name: {
@@ -36,10 +38,10 @@ const SignUpPage = (): React.ReactElement => {
   const [createUser, newUser] = useMutation(ADD_USER);
 
   const company =
-    formValues.type === text.type.talent.german.toUpperCase() ? null : (
+    formValues.type === 'TALENT' ? null : (
       <InputField
         id="company"
-        label={text.companyName.german}
+        label={currentText.companyName}
         setValue={setFormValues}
         required
       />
@@ -80,13 +82,13 @@ const SignUpPage = (): React.ReactElement => {
         <CardContent>
           <Container>
             <Typography variant="h2">
-              {text.pages.signup.header.german}
+              {currentText.pages.signup.header}
             </Typography>
             <form onSubmit={handleSubmit}>
               <OptionsToggler
                 options={[
-                  { value: 'TALENT', display: text.type.talent.german },
-                  { value: 'EMPLOYER', display: text.type.employer.german },
+                  { value: 'TALENT', display: currentText.type.talent },
+                  { value: 'EMPLOYER', display: currentText.type.employer },
                 ]}
                 optionsLabel="type"
                 setOption={(type) => {
@@ -100,14 +102,14 @@ const SignUpPage = (): React.ReactElement => {
                 <InputField
                   id="firstName"
                   nesting="name"
-                  label={text.fullName.firstName.german}
+                  label={currentText.fullName.firstName}
                   fullWidth={false}
                   setValue={setFormValues}
                 />
                 <InputField
                   id="lastName"
                   nesting="name"
-                  label={text.fullName.lastName.german}
+                  label={currentText.fullName.lastName}
                   fullWidth={false}
                   setValue={setFormValues}
                   required
@@ -117,21 +119,21 @@ const SignUpPage = (): React.ReactElement => {
               <InputField
                 id="email"
                 type="email"
-                label={text.email.german}
+                label={currentText.email}
                 setValue={setFormValues}
                 inputProps={{ className: styles.FormInput }}
                 required
               />
               <InputField
                 id="password"
-                label={text.password.german}
+                label={currentText.password}
                 setValue={setFormValues}
                 type="password"
                 required
               />
               <InputField
                 id="passwordConfirm"
-                label={text.repeatPassword.german}
+                label={currentText.repeatPassword}
                 onChange={(e) =>
                   setPasswordsIdentical(e.target.value === formValues.password)
                 }
@@ -143,7 +145,7 @@ const SignUpPage = (): React.ReactElement => {
                 }}
               />
               <Button disabled={!passwordsIdentical} type="submit">
-                {text.signUp.german}
+                {currentText.signUp}
               </Button>
             </form>
           </Container>
