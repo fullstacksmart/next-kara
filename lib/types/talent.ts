@@ -1,4 +1,4 @@
-import { User, FullName } from './user';
+import { User, FullName } from './index';
 
 type ProfessionType =
   | 'NURSE'

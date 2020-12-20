@@ -11,9 +11,10 @@ import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import text from '../../lib/text';
 import { useEffect, useState } from 'react';
-import { UserInput, UserType } from '../../lib/types';
+import { SupportedLanguage, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/react-hooks';
 import styles from './Signup.module.css';
+import { currentLanguageVar } from '../../apollo/client';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -22,8 +23,6 @@ const ADD_USER = gql`
     }
   }
 `;
-
-const currentText = text.german;
 
 const SignUpPage = (): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
@@ -36,6 +35,11 @@ const SignUpPage = (): React.ReactElement => {
   });
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser, newUser] = useMutation(ADD_USER);
+  const currentText = text['GERMAN'];
+
+  useEffect(() => {
+    console.log(currentLanguageVar());
+  });
 
   const company =
     formValues.type === 'TALENT' ? null : (

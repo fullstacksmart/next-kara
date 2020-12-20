@@ -1,10 +1,6 @@
-export type UserType = 'TALENT' | 'EMPLOYER' | 'AGENCY';
+import { FullName } from './index';
 
-export interface FullName {
-  firstName?: string;
-  middleName?: string;
-  lastName: string;
-}
+export type UserType = 'TALENT' | 'EMPLOYER' | 'AGENCY';
 
 export interface User {
   id: string;
