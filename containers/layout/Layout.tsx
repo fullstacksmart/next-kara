@@ -4,7 +4,7 @@ import { getTitleString } from '../../lib/utils/strings';
 import text from '../../lib/text';
 import styles from '../../styles/Layout.module.css';
 
-const currentText = text.german;
+const currentText = text.GERMAN;
 
 export interface LayoutProps {
   home?: boolean;

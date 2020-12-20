@@ -62,7 +62,7 @@
 // };
 
 export default {
-  german: {
+  GERMAN: {
     pages: {
       signup: {
         header: 'Erstelle Dein Profil',
@@ -88,7 +88,7 @@ export default {
     repeatPassword: 'Passwort wiederholen',
     signUp: 'registrieren',
   },
-  english: {
+  ENGLISH: {
     pages: {
       signup: {
         header: 'Create your profile',
