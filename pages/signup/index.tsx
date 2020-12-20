@@ -11,7 +11,6 @@ import OptionsToggler from '../../components/option-toggler/OptionToggler';
 import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
-import text from '../../lib/text';
 import { useEffect, useState } from 'react';
 import { UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/react-hooks';
