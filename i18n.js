@@ -8,5 +8,6 @@ module.exports = new NextI18Next({
   fallbackLng: 'de',
   defaultNS: 'common',
   localeSubpaths,
+  browserLanguageDetection: false,
   localePath: path.resolve('./public/static/locales'),
 });

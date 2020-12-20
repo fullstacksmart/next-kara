@@ -17,6 +17,7 @@ import { UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/react-hooks';
 import styles from './Signup.module.css';
 
+
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
     addUser(input: $input) {
@@ -27,7 +28,9 @@ const ADD_USER = gql`
 
 const currentText = text.GERMAN;
 
-const SignUpPage = ({t}): React.ReactElement => {
+const SignUpPage = ({t, i18n}): React.ReactElement => {
+  console.log(i18n)
+
   const [formValues, setFormValues] = useState<UserInput>({
     name: {
       lastName: '',
