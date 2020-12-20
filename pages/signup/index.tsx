@@ -25,8 +25,9 @@ const ADD_USER = gql`
 
 const SignUpPage = (): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
-    firstName: '',
-    lastName: '',
+    name: {
+      lastName: '',
+    },
     email: '',
     password: '',
     type: 'TALENT',
@@ -48,20 +49,18 @@ const SignUpPage = (): React.ReactElement => {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     e.preventDefault();
-    const newUser = {
-      name: {
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-      },
-      email: formValues.email,
-      password: formValues.password,
-      type: formValues.type,
-    };
-    console.log(newUser);
+    // const newUser = {
+    //   name: formValues.name,
+    //   email: formValues.email,
+    //   password: formValues.password,
+    //   type: formValues.type,
+    // };
+    // if (formValues.company) newUser.company = formValues.company;
+    console.log(formValues);
     try {
       await createUser({
         variables: {
-          input: newUser,
+          input: formValues,
         },
       });
     } catch (e) {
@@ -100,12 +99,14 @@ const SignUpPage = (): React.ReactElement => {
               <Box component="div">
                 <InputField
                   id="firstName"
+                  nesting="name"
                   label={text.fullName.firstName.german}
                   fullWidth={false}
                   setValue={setFormValues}
                 />
                 <InputField
                   id="lastName"
+                  nesting="name"
                   label={text.fullName.lastName.german}
                   fullWidth={false}
                   setValue={setFormValues}

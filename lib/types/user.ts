@@ -15,8 +15,7 @@ export interface User {
 }
 
 export interface UserInput {
-  firstName: string;
-  lastName: string;
+  name: FullName;
   company?: string;
   email: string;
   password: string;
