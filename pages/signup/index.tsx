@@ -28,9 +28,7 @@ const ADD_USER = gql`
 
 const currentText = text.GERMAN;
 
-const SignUpPage = ({t, i18n}): React.ReactElement => {
-  console.log(i18n)
-
+const SignUpPage = ({t}): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
     name: {
       lastName: '',
@@ -87,7 +85,7 @@ const SignUpPage = ({t, i18n}): React.ReactElement => {
         <CardContent>
           <Container>
             <Typography variant="h2">
-              {t('repeatPassword')}
+              {t('pages.signup.header')}
             </Typography>
             <form onSubmit={handleSubmit}>
               <OptionsToggler
