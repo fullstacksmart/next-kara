@@ -26,8 +26,6 @@ const ADD_USER = gql`
   }
 `;
 
-const currentText = text.GERMAN;
-
 const SignUpPage = ({t}): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
     name: {
