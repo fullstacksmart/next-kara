@@ -1,23 +1,35 @@
 import PropTypes from 'prop-types'
-import { withTranslation } from '../i18n'
+import { withTranslation } from '../i18n';
+import TranslateIcon from "@material-ui/icons/Translate"
 import { Button } from '../components/buttons';
 import { Layout } from '../containers/layout';
+import { Router, Link } from '../i18n'
 
 const Home = ({t, i18n}): React.ReactElement => {
-  const changeLocales = (locale) => {
-    i18n.changeLanguage(locale)
+  const handleClick = () => {
+    const newLang = i18n.language === 'en' ? 'de' : 'en'
+    // Router.push('/signup')
+    i18n.changeLanguage(newLang)
   }
+
+  const test = () => {
+    Router.push('/signup')
+  }
+
   return (
     <Layout title="Home" home>
-      <Button onClick={() => changeLocales('de')}>
-        change langauge
+      <Button onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true"  color="primary" startIcon={<TranslateIcon />}>
+           Switch Language
       </Button>
       <Button href="/signin" color="primary" variant="contained">
         {t('signin')}
       </Button>
-      <Button href="/signup" color="secondary" variant="contained">
+      <Link href='/signup'>
         sign up
-      </Button>
+      </Link>
+      {/* <Button href="/signup" color="secondary" variant="contained">
+        sign up
+      </Button> */}
     </Layout>
   );
 }
