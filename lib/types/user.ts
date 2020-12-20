@@ -17,6 +17,7 @@ export interface User {
 export interface UserInput {
   firstName: string;
   lastName: string;
+  company?: string;
   email: string;
   password: string;
   type: UserType;

@@ -13,6 +13,7 @@ import text from '../../lib/text';
 import { useEffect, useState } from 'react';
 import { UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/react-hooks';
+import styles from './Signup.module.css';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -28,10 +29,9 @@ const SignUpPage = (): React.ReactElement => {
     lastName: '',
     email: '',
     password: '',
-    type: text.type.talent.german.toUpperCase() as UserType,
+    type: 'TALENT',
   });
-  const [passwordsIdentical, setPasswordsIdentical] = useState(false);
-  const [isFormFilled, setIsFormFilled] = useState(false);
+  const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser, newUser] = useMutation(ADD_USER);
 
   const company =
@@ -40,10 +40,14 @@ const SignUpPage = (): React.ReactElement => {
         id="company"
         label={text.companyName.german}
         setValue={setFormValues}
+        required
       />
     );
 
-  const handleClick = async (): Promise<void> => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    e.preventDefault();
     const newUser = {
       name: {
         firstName: formValues.firstName,
@@ -53,33 +57,22 @@ const SignUpPage = (): React.ReactElement => {
       password: formValues.password,
       type: formValues.type,
     };
+    console.log(newUser);
     try {
-      console.log('got here');
       await createUser({
         variables: {
           input: newUser,
         },
       });
     } catch (e) {
-      console.log('error');
       console.error('user already exists: ', e.message);
     }
-    console.log('but not here');
   };
 
   useEffect(() => {
-    setIsFormFilled(
-      Boolean(
-        passwordsIdentical &&
-          formValues.lastName &&
-          formValues.email &&
-          formValues.password,
-      ),
-    );
-  }, [formValues, passwordsIdentical]);
-
-  useEffect(() => {
-    console.log('new User:', newUser);
+    if (newUser.data) {
+      console.log('new User:', newUser);
+    }
   }, [newUser]);
 
   return (
@@ -90,54 +83,68 @@ const SignUpPage = (): React.ReactElement => {
             <Typography variant="h2">
               {text.pages.signup.header.german}
             </Typography>
-            <OptionsToggler
-              options={[
-                { value: text.type.talent.german },
-                { value: text.type.employer.german },
-              ]}
-              optionsLabel="type"
-              setOption={(type) => {
-                setFormValues((oldValues) => ({
-                  ...oldValues,
-                  type: type?.toUpperCase() as UserType,
-                }));
-              }}
-            />
-            <Box component="div">
+            <form onSubmit={handleSubmit}>
+              <OptionsToggler
+                options={[
+                  { value: 'TALENT', display: text.type.talent.german },
+                  { value: 'EMPLOYER', display: text.type.employer.german },
+                ]}
+                optionsLabel="type"
+                setOption={(type) => {
+                  setFormValues((oldValues) => ({
+                    ...oldValues,
+                    type: type as UserType,
+                  }));
+                }}
+              />
+              <Box component="div">
+                <InputField
+                  id="firstName"
+                  label={text.fullName.firstName.german}
+                  fullWidth={false}
+                  setValue={setFormValues}
+                />
+                <InputField
+                  id="lastName"
+                  label={text.fullName.lastName.german}
+                  fullWidth={false}
+                  setValue={setFormValues}
+                  required
+                />
+              </Box>
+              {company}
               <InputField
-                id="firstName"
-                label={text.fullName.firstName.german}
-                fullWidth={false}
+                id="email"
+                type="email"
+                label={text.email.german}
                 setValue={setFormValues}
+                inputProps={{ className: styles.FormInput }}
+                required
               />
               <InputField
-                id="lastName"
-                label={text.fullName.lastName.german}
-                fullWidth={false}
+                id="password"
+                label={text.password.german}
                 setValue={setFormValues}
+                type="password"
+                required
               />
-            </Box>
-            {company}
-            <InputField
-              id="email"
-              label={text.email.german}
-              setValue={setFormValues}
-            />
-            <InputField
-              id="password"
-              label={text.password.german}
-              setValue={setFormValues}
-            />
-            <InputField
-              id="passwordConfirm"
-              label={text.repeatPassword.german}
-              onChange={(e) =>
-                setPasswordsIdentical(e.target.value === formValues.password)
-              }
-            />
-            <Button disabled={!isFormFilled} onClick={handleClick}>
-              {text.signUp.german}
-            </Button>
+              <InputField
+                id="passwordConfirm"
+                label={text.repeatPassword.german}
+                onChange={(e) =>
+                  setPasswordsIdentical(e.target.value === formValues.password)
+                }
+                type="password"
+                required
+                inputProps={{
+                  className: styles.FormInput,
+                  pattern: `^${formValues.password}$`,
+                }}
+              />
+              <Button disabled={!passwordsIdentical} type="submit">
+                {text.signUp.german}
+              </Button>
+            </form>
           </Container>
         </CardContent>
       </Card>
