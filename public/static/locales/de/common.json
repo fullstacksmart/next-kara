@@ -22,6 +22,6 @@
   "email": "Email",
   "password": "Passwort",
   "repeatPassword": "Passwort wiederholen",
-  "signUp": "registrieren",
+  "signup": "registrieren",
   "signin": "anmelden"
 }
