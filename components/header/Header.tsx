@@ -1,6 +1,5 @@
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import AnimatedPics from '../animated-pics/AnimatedPics';
 
@@ -8,30 +7,28 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       marginTop: '4rem',
-      marginBottom: '2rem',
+      marginBottom: '1rem',
     },
     mainText: {
       color: theme.palette.text.primary,
-      margin: '3.5rem 4.5rem',
-      fontSize: '4rem',
-      letterSpacing: '0.07rem',
+      margin: '3rem 0 3rem 3.2rem',
+      fontSize: '2.5rem',
+      fontWeight: 'bold',
     },
     secondaryText: {
       color: 'rgb(255, 255, 255)',
       fontWeight: 'bold',
-      fontSize: '2rem',
+      fontSize: '1.5rem',
+      lineHeight: '1.5',
     },
     leftColoredDiv: {
       borderRadius: '0px 100px 100px 0px',
       background: theme.palette.primary.main,
-      padding: '3rem 5rem',
+      padding: '1rem 5rem',
     },
     rightColoredDiv: {
-      position: 'absolute',
-      width: '30rem',
-      height: '7rem',
-      right: '0',
-      top: '52rem',
+      width: '310px',
+      height: '80px',
       background:
         'linear-gradient(270deg, #018395 0%, rgba(255, 255, 255, 0) 75%), #00ACAC',
       borderRadius: '0px 0px 0px 100px',
@@ -52,7 +49,7 @@ const Header = (): React.ReactElement => {
       alignItems="center"
       className={classes.root}
     >
-      <Grid item xs={6}>
+      <Grid item lg={6}>
         <Typography variant="h3" gutterBottom className={classes.mainText}>
           Start today your healthcare career in Germany.
         </Typography>
@@ -67,7 +64,7 @@ const Header = (): React.ReactElement => {
           </Typography>
         </div>
       </Grid>
-      <Grid item xs={6} container className={classes.picsContainer}>
+      <Grid item lg={6} container spacing={0} className={classes.picsContainer}>
         <AnimatedPics />
         <div className={classes.rightColoredDiv}></div>
       </Grid>

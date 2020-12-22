@@ -2,12 +2,11 @@ import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Image from 'next/image';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: '3rem 3rem',
+      padding: '1.5rem 1.5rem',
     },
     middleGridContainer: {
       justifyContent: 'space-between',
@@ -16,13 +15,19 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     logo: {
-      paddingLeft: '1rem',
+      paddingLeft: '1.5rem',
+      width: '130px',
+      height: '40px',
+    },
+    a: {
+      textDecoration: 'none',
     },
     link: {
-      padding: '1rem 1.5rem',
+      color: theme.palette.text.primary,
+      padding: '0.5rem 1rem',
       borderRadius: '20px',
-      fontSize: '1.5rem',
-      letterSpacing: '0.07rem',
+      fontSize: '1rem',
+      letterSpacing: '0.05rem',
       transition: 'color 0.2s, background 0.2s',
       '&:hover': {
         color: 'rgb(255, 255, 255)',
@@ -46,29 +51,24 @@ const Navbar = (): React.ReactElement => {
       alignItems="center"
       className={classes.root}
     >
-      <Grid item xs={2} className={classes.logo}>
-        <Image
+      <Grid item lg={2}>
+        <img
           src="/kara_gradient.png"
           alt="kara logo"
-          width="100px"
-          height="36px"
+          className={classes.logo}
         />
       </Grid>
       <Grid
         item
-        xs={6}
+        lg={6}
         container
-        spacing={2}
+        spacing={1}
         className={classes.middleGridContainer}
       >
         <Grid item>
           <Link href="/">
-            <a>
-              <Typography
-                variant="h6"
-                color="textPrimary"
-                className={classes.link}
-              >
+            <a className={classes.a}>
+              <Typography variant="h6" className={classes.link}>
                 Home
               </Typography>
             </a>
@@ -76,12 +76,8 @@ const Navbar = (): React.ReactElement => {
         </Grid>
         <Grid item>
           <Link href="/">
-            <a>
-              <Typography
-                variant="h6"
-                color="textPrimary"
-                className={classes.link}
-              >
+            <a className={classes.a}>
+              <Typography variant="h6" className={classes.link}>
                 Für Arbeitgeber
               </Typography>
             </a>
@@ -89,12 +85,8 @@ const Navbar = (): React.ReactElement => {
         </Grid>
         <Grid item>
           <Link href="/">
-            <a>
-              <Typography
-                variant="h6"
-                color="textPrimary"
-                className={classes.link}
-              >
+            <a className={classes.a}>
+              <Typography variant="h6" className={classes.link}>
                 Für Talente
               </Typography>
             </a>
@@ -102,12 +94,8 @@ const Navbar = (): React.ReactElement => {
         </Grid>
         <Grid item>
           <Link href="/">
-            <a>
-              <Typography
-                variant="h6"
-                color="textPrimary"
-                className={classes.link}
-              >
+            <a className={classes.a}>
+              <Typography variant="h6" className={classes.link}>
                 Über uns
               </Typography>
             </a>
@@ -117,17 +105,16 @@ const Navbar = (): React.ReactElement => {
       </Grid>
       <Grid
         item
-        xs={3}
+        lg={3}
         container
-        spacing={4}
+        spacing={2}
         className={classes.rightGridContainer}
       >
         <Grid item>
           <Link href="/signup">
-            <a>
+            <a className={classes.a}>
               <Typography
                 variant="h6"
-                color="textPrimary"
                 className={`${classes.link} ${classes.linkBold}`}
               >
                 Mitglied werden
@@ -137,10 +124,9 @@ const Navbar = (): React.ReactElement => {
         </Grid>
         <Grid item>
           <Link href="/signin">
-            <a>
+            <a className={classes.a}>
               <Typography
                 variant="h6"
-                color="textPrimary"
                 className={`${classes.link} ${classes.linkBold}`}
               >
                 Login

@@ -5,10 +5,10 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() =>
   createStyles({
     footer: {
-      marginTop: '15rem',
-      padding: '4rem 2rem',
-      fontSize: '1.5rem',
-      letterSpacing: '0.07rem',
+      marginTop: '5rem',
+      padding: '2rem 2rem',
+      fontSize: '1rem',
+      letterSpacing: '0.05rem',
     },
   }),
 );
