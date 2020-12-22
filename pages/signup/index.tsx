@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Card,
   CardContent,
@@ -5,15 +6,16 @@ import {
   Container,
   Box,
 } from '@material-ui/core';
+import { withTranslation } from '../../i18n';
 import OptionsToggler from '../../components/option-toggler/OptionToggler';
 import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
-import text from '../../lib/text';
 import { useEffect, useState } from 'react';
 import { UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/react-hooks';
 import styles from './Signup.module.css';
+
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -23,9 +25,7 @@ const ADD_USER = gql`
   }
 `;
 
-const currentText = text.GERMAN;
-
-const SignUpPage = (): React.ReactElement => {
+const SignUpPage = ({t}): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
     name: {
       lastName: '',
@@ -41,7 +41,7 @@ const SignUpPage = (): React.ReactElement => {
     formValues.type === 'TALENT' ? null : (
       <InputField
         id="company"
-        label={currentText.companyName}
+        label={t('companyName')}
         setValue={setFormValues}
         required
       />
@@ -82,13 +82,13 @@ const SignUpPage = (): React.ReactElement => {
         <CardContent>
           <Container>
             <Typography variant="h2">
-              {currentText.pages.signup.header}
+              {t('pages.signup.header')}
             </Typography>
             <form onSubmit={handleSubmit}>
               <OptionsToggler
                 options={[
-                  { value: 'TALENT', display: currentText.type.talent },
-                  { value: 'EMPLOYER', display: currentText.type.employer },
+                  { value: 'TALENT', display: t('type.talent')},
+                  { value: 'EMPLOYER', display: t('type.employer')},
                 ]}
                 optionsLabel="type"
                 setOption={(type) => {
@@ -102,14 +102,14 @@ const SignUpPage = (): React.ReactElement => {
                 <InputField
                   id="firstName"
                   nesting="name"
-                  label={currentText.fullName.firstName}
+                  label={t('fullName.firstName')}
                   fullWidth={false}
                   setValue={setFormValues}
                 />
                 <InputField
                   id="lastName"
                   nesting="name"
-                  label={currentText.fullName.lastName}
+                  label={t('fullName.lastName')}
                   fullWidth={false}
                   setValue={setFormValues}
                   required
@@ -119,21 +119,21 @@ const SignUpPage = (): React.ReactElement => {
               <InputField
                 id="email"
                 type="email"
-                label={currentText.email}
+                label={t('email')}
                 setValue={setFormValues}
                 inputProps={{ className: styles.FormInput }}
                 required
               />
               <InputField
                 id="password"
-                label={currentText.password}
+                label={t('password')}
                 setValue={setFormValues}
                 type="password"
                 required
               />
               <InputField
                 id="passwordConfirm"
-                label={currentText.repeatPassword}
+                label={t('repeatPassword')}
                 onChange={(e) =>
                   setPasswordsIdentical(e.target.value === formValues.password)
                 }
@@ -145,7 +145,7 @@ const SignUpPage = (): React.ReactElement => {
                 }}
               />
               <Button disabled={!passwordsIdentical} type="submit">
-                {currentText.signUp}
+                {t('signup')}
               </Button>
             </form>
           </Container>
@@ -155,4 +155,12 @@ const SignUpPage = (): React.ReactElement => {
   );
 };
 
-export default SignUpPage;
+SignUpPage.getInitialProps = async () => ({
+  namespacesRequired: ['common']
+})
+
+SignUpPage.propTypes = {
+  t: PropTypes.func.isRequired,
+}
+
+export default withTranslation('common')(SignUpPage);
