@@ -1,5 +1,6 @@
 import Carousel from 'react-material-ui-carousel';
-import { Card, CardMedia } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>

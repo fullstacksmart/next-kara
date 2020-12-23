@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: '1rem',
     },
     mainText: {
-      color: theme.palette.text.primary,
       margin: '3rem 0 3rem 3.2rem',
       fontSize: '2.5rem',
       fontWeight: 'bold',
