@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "signup": {
+      "header": "Erstelle Dein Profil"
+    }
+  },
+  "components": {
+    "layout": {
+      "backHome": "zurück zur Homepage"
+    }
+  },
+  "type": {
+    "talent": "Talent",
+    "employer": "Arbeitgeber"
+  },
+  "companyName": "Firmenname",
+  "fullName": {
+    "firstName": "Vorname",
+    "middleName": "Zweiter Vorname",
+    "lastName": "Nachname"
+  },
+  "email": "Email",
+  "password": "Passwort",
+  "repeatPassword": "Passwort wiederholen",
+  "signup": "registrieren",
+  "signin": "anmelden"
+}

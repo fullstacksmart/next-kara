@@ -1,10 +1,16 @@
 import React from 'react';
+import App from 'next/app';
 import { AppProps } from 'next/app';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import baseTheme from '../lib/material-ui/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { appWithTranslation } from "../i18n";
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from '../apollo/client';
+import { Router } from 'next/dist/client/router';
+import { AppContextType } from 'next/dist/next-server/lib/utils';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   React.useEffect(() => {
@@ -16,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   }, []);
 
   return (
-    <React.Fragment>
+    <ApolloProvider client={client}>
       <Head>
         <title>Kara</title>
         <meta
@@ -28,11 +34,13 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
-    </React.Fragment>
+    </ApolloProvider>
   );
 }
 
-export default MyApp;
+MyApp.getInitialProps = async (appContext: AppContextType<Router>) => ({ ...await App.getInitialProps(appContext) })
+
+export default appWithTranslation(MyApp);
 
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,

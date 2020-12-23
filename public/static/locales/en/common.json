@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "signup": {
+      "header": "Create your profile"
+    }
+  },
+  "components": {
+    "layout": {
+      "backHome": "take me back home"
+    }
+  },
+  "type": {
+    "talent": "talent",
+    "employer": "employer"
+  },
+  "companyName": "company name",
+  "fullName": {
+    "firstName": "first name",
+    "middleName": "middle name",
+    "lastName": "last name"
+  },
+  "email": "email",
+  "password": "password",
+  "repeatPassword": "please reenter password",
+  "signup": "sign up",
+  "signin": "sign in dude!"
+}

@@ -7,6 +7,8 @@ import text from '../../lib/text';
 import Footer from '../../components/footer/Footer';
 import styles from '../../styles/Layout.module.css';
 
+const currentText = text.GERMAN;
+
 export interface LayoutProps {
   home?: boolean;
   title?: string | string[];
@@ -25,7 +27,7 @@ const Layout = ({
       </Head>
       <header className={styles.header}>
         {!home && (
-          <Button href="/">{text.components.layout.backHome.german}</Button>
+          <Button href="/">{currentText.components.layout.backHome}</Button>
         )}
       </header>
       <main>{children}</main>
