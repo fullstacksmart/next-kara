@@ -10,8 +10,8 @@ const useStyles = makeStyles(() =>
       boxShadow: 'none',
     },
     imgDimensions: {
-      width: '550px',
-      height: '400px',
+      width: '600px',
+      height: '350px',
     },
   }),
 );

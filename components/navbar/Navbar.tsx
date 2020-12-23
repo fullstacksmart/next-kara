@@ -6,7 +6,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: '1.5rem 1.5rem',
+      padding: '1rem 1.5rem',
     },
     middleGridContainer: {
       justifyContent: 'space-between',
@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logo: {
       paddingLeft: '1.5rem',
-      width: '130px',
-      height: '40px',
+      width: '120px',
+      height: '35px',
     },
     a: {
       textDecoration: 'none',

@@ -37,9 +37,11 @@ const useStyles = makeStyles(() =>
     cardTitle: {
       fontSize: '1rem',
       fontWeight: 'bold',
+      textAlign: 'center',
     },
     cardDescription: {
       fontSize: '1rem',
+      textAlign: 'center',
     },
   }),
 );
@@ -79,11 +81,7 @@ const LandingCards = (): React.ReactElement => {
             <Card className={classes.card}>
               <CardActionArea className={classes.actionArea}>
                 <CardContent>
-                  <Typography
-                    variant="h6"
-                    align="center"
-                    className={classes.cardTitle}
-                  >
+                  <Typography variant="h6" className={classes.cardTitle}>
                     {el.title}
                   </Typography>
                 </CardContent>
