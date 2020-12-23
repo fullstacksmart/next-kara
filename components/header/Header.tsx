@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: '3rem',
     },
     mainText: {
-      // margin: '3rem 0 2rem 3.2rem',
       margin: '3rem 0 2rem 2rem',
       fontSize: '2rem',
       fontWeight: 'bold',

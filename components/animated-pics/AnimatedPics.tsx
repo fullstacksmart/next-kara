@@ -11,7 +11,7 @@ const useStyles = makeStyles(() =>
     },
     imgDimensions: {
       width: '600px',
-      height: '350px',
+      height: '330px',
     },
   }),
 );

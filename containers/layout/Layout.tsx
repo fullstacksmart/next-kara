@@ -1,7 +1,10 @@
+import React from 'react';
+import Container from '@material-ui/core/Container';
 import { Button } from '../../components/buttons';
 import Head from 'next/head';
 import { getTitleString } from '../../lib/utils/strings';
 import text from '../../lib/text';
+import Footer from '../../components/footer/Footer';
 import styles from '../../styles/Layout.module.css';
 
 export interface LayoutProps {
@@ -16,7 +19,7 @@ const Layout = ({
   title,
 }: LayoutProps): React.ReactElement => {
   return (
-    <div className={styles.container}>
+    <Container disableGutters>
       <Head>
         <title>{getTitleString(title)}</title>
       </Head>
@@ -25,9 +28,9 @@ const Layout = ({
           <Button href="/">{text.components.layout.backHome.german}</Button>
         )}
       </header>
-      <main className={styles.main}>{children}</main>
-      <footer></footer>
-    </div>
+      <main>{children}</main>
+      {!home && <Footer />}
+    </Container>
   );
 };
 
