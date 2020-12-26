@@ -6,10 +6,10 @@ import { Layout } from '../containers/layout';
 import LandingPage from '../containers/landing/LandingPage';
 
 const Home = ({t, i18n}): React.ReactElement => {
-  const handleClick = (): void => {
-    const newLang = i18n.language === 'en' ? 'de' : 'en'
-    i18n.changeLanguage(newLang)
-  }
+  // const handleClick = (): void => {
+  //   const newLang = i18n.language === 'en' ? 'de' : 'en'
+  //   i18n.changeLanguage(newLang)
+  // }
 
   return (
     <Layout title="Home" home>
