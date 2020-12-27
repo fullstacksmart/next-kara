@@ -7,7 +7,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
   ],
@@ -19,10 +18,12 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  overrides: {
-    files: ['*.js'],
-    processor: 'eslint: recommended',
-  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+    },
+  ],
   settings: {
     react: {
       version: 'detect',
