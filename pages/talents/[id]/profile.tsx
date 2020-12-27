@@ -73,11 +73,12 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   });
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
+  const { name, profession } = data?.getTalentById;
   console.log(data.getTalentById);
   return (
     <Layout title={['profile', `Talent ${id}`]}>
-      <h1>Profile Page for Talent {id}</h1>
-      <p>Data: {data.getTalentById.id}</p>
+      <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
+      <p>Data: {profession}</p>
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );
