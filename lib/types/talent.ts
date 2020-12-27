@@ -52,7 +52,7 @@ interface Duration {
   to: Date;
 }
 
-interface Organization {
+export interface Organization {
   id: string;
   name: string;
   address: Address;
@@ -84,12 +84,32 @@ type Experience = {
   description?: string;
 };
 
+export type ExperienceInput = {
+  id: string;
+  talent: string;
+  title: string;
+  lineOfWork: ProfessionType;
+  employer: string;
+  duration?: Duration;
+  description?: string;
+};
+
 type Qualification = {
   id: string;
   talent: string;
   fieldOfEducation: string;
   degree: string;
   institution: Organization;
+  duration: Duration;
+  description: string;
+};
+
+export type QualificationInput = {
+  id: string;
+  talent: string;
+  fieldOfEducation: string;
+  degree: string;
+  institution: string;
   duration: Duration;
   description: string;
 };

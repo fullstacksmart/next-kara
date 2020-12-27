@@ -14,8 +14,11 @@ export const getAllUserIds = (): string[] => {
 };
 
 export const getTalentById = async (id: string) => {
-  console.log(id);
   return await models.Talent.findOne({ id });
+};
+
+export const getOrganizationById = async (id: string) => {
+  return await models.Organization.findOne({ id });
 };
 
 export const addUser = async (input: UserInput): Promise<User> => {

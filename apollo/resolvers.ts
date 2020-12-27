@@ -1,4 +1,9 @@
-import { User, UserInput } from '../lib/types';
+import {
+  User,
+  Organization,
+  ExperienceInput,
+  QualificationInput,
+} from '../lib/types';
 import * as helpers from './helpers';
 
 const resolvers = {
@@ -10,6 +15,16 @@ const resolvers = {
   Talent: {
     type(): string {
       return 'TALENT';
+    },
+  },
+  Experience: {
+    async employer(parent: ExperienceInput): Promise<Organization> {
+      return await helpers.getOrganizationById(parent.employer);
+    },
+  },
+  Qualification: {
+    async institution(parent: QualificationInput): Promise<Organization> {
+      return await helpers.getOrganizationById(parent.institution);
     },
   },
   Query: {

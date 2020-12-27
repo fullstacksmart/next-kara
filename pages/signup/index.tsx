@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Card,
   CardContent,
@@ -13,7 +12,7 @@ import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { useEffect, useState } from 'react';
 import { PageProps, UserInput, UserType } from '../../lib/types';
-import { useMutation, gql } from '@apollo/react-hooks';
+import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 
 const ADD_USER = gql`
@@ -155,9 +154,5 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 SignUpPage.getInitialProps = async () => ({
   namespacesRequired: ['common'],
 });
-
-SignUpPage.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default withTranslation('common')(SignUpPage);
