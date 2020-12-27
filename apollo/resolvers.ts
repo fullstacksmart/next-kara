@@ -22,10 +22,8 @@ const resolvers = {
     getAllUserIds(): string[] {
       return helpers.getAllUserIds();
     },
-  },
-  Mutation: {
-    async addUser(_: unknown, { input }: { input: UserInput }): Promise<User> {
-      return await helpers.addUser(input);
+    async getTalentById(_: unknown, { id }: { id: string }) {
+      return await helpers.getTalentById(id);
     },
   },
 };

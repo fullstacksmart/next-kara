@@ -174,6 +174,7 @@ const typeDefs = gql`
     getAllTalentIds: [ID]!
     getAllUserIds: [ID]!
     getAllEmployerIds: [ID]!
+    getTalentById(id: String!): Talent!
   }
 
   type Mutation {

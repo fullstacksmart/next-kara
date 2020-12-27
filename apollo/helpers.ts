@@ -13,6 +13,11 @@ export const getAllUserIds = (): string[] => {
   return talents.concat(employers);
 };
 
+export const getTalentById = async (id: string) => {
+  console.log(id);
+  return await models.Talent.findOne({ id });
+};
+
 export const addUser = async (input: UserInput): Promise<User> => {
   const type =
     input.type === 'TALENT'
