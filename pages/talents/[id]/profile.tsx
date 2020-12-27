@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import { PageProps } from '../../../lib/types';
+import { Section } from '../../../components/section/Section';
 
 export interface ProfilePageProps extends PageProps {
   id: string;
@@ -16,6 +17,8 @@ const GET_TALENT = gql`
         firstName
         lastName
       }
+      fullName
+      profilePic
       profession
       address {
         city
@@ -73,12 +76,12 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   });
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
-  const { name, profession } = data?.getTalentById;
-  console.log(data.getTalentById);
+  const { name, fullName, profilePic } = data?.getTalentById;
+  console.log(profilePic);
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
-      <p>Data: {profession}</p>
+      <Section>{fullName}</Section>
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );

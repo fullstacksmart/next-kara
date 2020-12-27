@@ -3,6 +3,7 @@ import {
   Organization,
   ExperienceInput,
   QualificationInput,
+  Talent,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -15,6 +16,11 @@ const resolvers = {
   Talent: {
     type(): string {
       return 'TALENT';
+    },
+    fullName(talent: Talent): string {
+      return `${talent.name.firstName} ${
+        talent.name.middleName ? talent.name.middleName + ' ' : ''
+      }${talent.name.lastName}`;
     },
   },
   Experience: {

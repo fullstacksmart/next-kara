@@ -57,6 +57,7 @@ const typeDefs = gql`
   interface User {
     id: ID!
     name: FullName!
+    fullName: String!
     email: String!
     password: String!
     type: UserType!
@@ -97,6 +98,8 @@ const typeDefs = gql`
     password: String!
     type: UserType!
     name: FullName!
+    fullName: String!
+    profilePic: String
     profession: ProfessionType
     address: Address
     description: String
