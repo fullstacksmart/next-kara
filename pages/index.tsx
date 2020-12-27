@@ -1,19 +1,27 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { withTranslation } from '../i18n';
-import TranslateIcon from "@material-ui/icons/Translate";
+import TranslateIcon from '@material-ui/icons/Translate';
 import { Button } from '../components/buttons';
 import { Layout } from '../containers/layout';
+import { TFunction, I18n } from 'next-i18next';
+import { PageProps } from '../lib/types';
 
-const Home = ({t, i18n}): React.ReactElement => {
+const Home = ({ t, i18n }: PageProps): React.ReactElement => {
   const handleClick = (): void => {
-    const newLang = i18n.language === 'en' ? 'de' : 'en'
-    i18n.changeLanguage(newLang)
-  }
+    const newLang = i18n.language === 'en' ? 'de' : 'en';
+    i18n.changeLanguage(newLang);
+  };
 
   return (
     <Layout title="Home" home>
-      <Button onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true"  color="primary" startIcon={<TranslateIcon />}>
-           Switch Language
+      <Button
+        onClick={handleClick}
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        color="primary"
+        startIcon={<TranslateIcon />}
+      >
+        Switch Language
       </Button>
       <Button href="/signin" color="primary" variant="contained">
         {t('signin')}
@@ -23,14 +31,14 @@ const Home = ({t, i18n}): React.ReactElement => {
       </Button>
     </Layout>
   );
-}
+};
 
-  Home.getInitialProps = async () => ({
-    namespacesRequired: ['common'],
-  })
+Home.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
-  Home.propTypes = {
-    t: PropTypes.func.isRequired,
-  }
+Home.propTypes = {
+  t: PropTypes.func.isRequired,
+};
 
-export default withTranslation('common')(Home)
+export default withTranslation('common')(Home);
