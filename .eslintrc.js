@@ -19,6 +19,10 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
+  overrides: {
+    files: ['*.js'],
+    processor: 'eslint: recommended',
+  },
   settings: {
     react: {
       version: 'detect',
