@@ -41,7 +41,9 @@ export const BasicInfo = ({
               <Typography variant="h4">{address}</Typography>
             </div>
           </div>
-          <div className={styles.Description}>{description}</div>
+          <div className={styles.Description}>
+            <Typography variant="body1">{description}</Typography>
+          </div>
         </SectionItem>
       </Section>
     </div>
