@@ -7,7 +7,7 @@
 
 .AddButtonContainer {
   min-height: 10rem;
-  width: var(--right-column-width);
+  min-width: var(--right-column-width);
   padding: 0 !important;
   display: flex;
   justify-content: center !important;
