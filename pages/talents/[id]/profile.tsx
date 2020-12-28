@@ -93,7 +93,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
       <BasicInfo
         fullName={fullName}
         profilePicUrl={profilePic}
-        profession={t(`${profession}-${gender}`)}
+        profession={t(`profession.${profession}-${gender}`)}
         address={address.city}
         description={description}
         done={true}
