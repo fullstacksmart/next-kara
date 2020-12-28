@@ -22,7 +22,12 @@
     "middleName": "middle name",
     "lastName": "last name"
   },
+  "address": {
+    "city": "city",
+    "country": "country"
+  },
   "email": "email",
+  "profilePic": "URL to profile pic",
   "password": "password",
   "repeatPassword": "please reenter password",
   "signup": "sign up",
@@ -40,5 +45,9 @@
   },
   "iso": {
     "SRB": "Serbia"
+  },
+  "buttonLabels": {
+    "save": "save",
+    "cancel": "cancel"
   }
 }

@@ -22,7 +22,12 @@
     "middleName": "Zweiter Vorname",
     "lastName": "Nachname"
   },
+  "address": {
+    "city": "Stadt",
+    "country": "Land"
+  },
   "email": "Email",
+  "profilePic": "URL Deines Profilbildes",
   "password": "Passwort",
   "repeatPassword": "Passwort wiederholen",
   "signup": "registrieren",
@@ -40,5 +45,9 @@
   },
   "iso": {
     "SRB": "Serbien"
+  },
+  "buttonLabels": {
+    "save": "speichern",
+    "cancel": "abbrechen"
   }
 }

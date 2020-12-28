@@ -1,6 +1,6 @@
 import { TextField, TextFieldProps } from '@material-ui/core';
 import { SetStateAction } from 'react';
-import { BasicInfoInput, FullName, UserInput } from '../../lib/types';
+import { BasicInfoInput, UserInput } from '../../lib/types';
 
 // TODO make component reusable by generalizing types
 type InputFieldProps = TextFieldProps & {

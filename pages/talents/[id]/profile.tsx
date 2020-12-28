@@ -113,6 +113,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
         basicInfo={basicInfo}
         open={modal === ModalType.BASIC_INFO}
         onClose={() => setModal(ModalType.NONE)}
+        handleClose={() => setModal(ModalType.NONE)}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
