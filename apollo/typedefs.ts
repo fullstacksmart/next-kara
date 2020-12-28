@@ -8,6 +8,12 @@ const typeDefs = gql`
     OTHER_NON_MEDICAL
   }
 
+  enum Gender {
+    MALE
+    FEMALE
+    OTHER
+  }
+
   enum UserType {
     TALENT
     EMPLOYER
@@ -57,6 +63,7 @@ const typeDefs = gql`
   interface User {
     id: ID!
     name: FullName!
+    gender: Gender!
     fullName: String!
     email: String!
     password: String!
@@ -96,6 +103,7 @@ const typeDefs = gql`
     id: ID!
     email: String!
     password: String!
+    gender: Gender!
     type: UserType!
     name: FullName!
     fullName: String!
@@ -168,6 +176,7 @@ const typeDefs = gql`
   input UserInput {
     name: NameInput!
     email: String!
+    gender: Gender!
     company: String
     password: String!
     type: UserType!

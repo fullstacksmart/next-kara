@@ -1,4 +1,4 @@
-import { User, FullName } from './index';
+import { User, FullName, Gender } from './index';
 
 type ProfessionType =
   | 'NURSE'
@@ -63,6 +63,7 @@ export interface Talent extends User {
   email: string;
   password: string;
   name: FullName;
+  gender: Gender;
   profession: ProfessionType;
   address: Address;
   description: string;
