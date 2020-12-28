@@ -87,6 +87,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
     address,
     description,
   } = data?.getTalentById;
+  const displayAddress = `${address.city}, ${t(`iso.${address.isoCode}`)}`;
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
@@ -94,7 +95,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
         fullName={fullName}
         profilePicUrl={profilePic}
         profession={t(`profession.${profession}-${gender}`)}
-        address={address.city}
+        address={displayAddress}
         description={description}
         done={true}
         handleEdit={() => console.log('edit')}
