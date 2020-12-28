@@ -82,17 +82,25 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
-      <Section
-        handleAdd={() => {
-          console.log('add');
-        }}
-      >
+      <Section>
         <SectionItem
           handleEdit={() => {
             console.log('edit');
           }}
         >
           {fullName}
+          <div>Galina, oh Galina</div>
+
+          <div>la la la la la</div>
+          <div>Galina, oh Galina</div>
+
+          <div>la la la la la</div>
+          <div>Galina, oh Galina</div>
+
+          <div>la la la la la</div>
+          <div>Galina, oh Galina</div>
+
+          <div>la la la la la</div>
         </SectionItem>
       </Section>
       <Button href={`/talents/${id}/settings`}>To Settings</Button>

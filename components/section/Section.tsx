@@ -20,15 +20,19 @@ export const Section = ({
   children,
 }: SectionProps): React.ReactElement => {
   return (
-    <Card className={styles.Card}>
-      <CardContent className={styles.ContentContainer}>{children}</CardContent>
-      {handleAdd && (
+    <section>
+      <Card className={styles.Card}>
+        <CardContent className={styles.ContentContainer}>
+          {children}
+        </CardContent>
         <CardActions disableSpacing className={styles.AddButtonContainer}>
-          <IconButton aria-label="add item" onClick={handleAdd}>
-            <AddCircleOutlineIcon />
-          </IconButton>
+          {handleAdd && (
+            <IconButton aria-label="add item" onClick={handleAdd}>
+              <AddCircleOutlineIcon />
+            </IconButton>
+          )}
         </CardActions>
-      )}
-    </Card>
+      </Card>
+    </section>
   );
 };
