@@ -6,7 +6,7 @@ import { IconButton } from '@material-ui/core';
 import styles from './SectionItem.module.css';
 
 interface SectionItemProps {
-  handleEdit: () => void;
+  handleEdit?: () => void;
   children: React.ReactNode;
 }
 
@@ -17,9 +17,11 @@ export const SectionItem = ({
   return (
     <div className={styles.SectionItem}>
       <div className={styles.ButtonContainer}>
-        <IconButton onClick={handleEdit}>
-          <Edit />
-        </IconButton>
+        {handleEdit && (
+          <IconButton onClick={handleEdit}>
+            <Edit />
+          </IconButton>
+        )}
       </div>
       <div className={styles.ContentContainer}>{children}</div>
     </div>
