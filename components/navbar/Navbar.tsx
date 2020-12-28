@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '../../i18n';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
