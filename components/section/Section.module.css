@@ -1,3 +1,15 @@
+.Card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  --right-column-width: 3.6rem;
+}
+
 .AddButtonContainer {
-  justify-content: flex-end;
+  min-height: 10rem;
+  width: var(--right-column-width);
+  padding: 0 !important;
+  display: flex;
+  justify-content: center !important;
+  align-items: flex-end !important;
 }

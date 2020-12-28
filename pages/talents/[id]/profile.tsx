@@ -4,6 +4,7 @@ import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import { PageProps } from '../../../lib/types';
 import { Section } from '../../../components/section/Section';
+import { SectionItem } from '../../../components/section-item/SectionItem';
 
 export interface ProfilePageProps extends PageProps {
   id: string;
@@ -81,7 +82,19 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
-      <Section>{fullName}</Section>
+      <Section
+        handleAdd={() => {
+          console.log('add');
+        }}
+      >
+        <SectionItem
+          handleEdit={() => {
+            console.log('edit');
+          }}
+        >
+          {fullName}
+        </SectionItem>
+      </Section>
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );

@@ -11,20 +11,20 @@ import {
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import styles from './Section.module.css';
 interface SectionProps extends CardProps {
-  addItem?: () => void;
+  handleAdd?: () => void;
   children: React.ReactNode;
 }
 
 export const Section = ({
-  addItem,
+  handleAdd,
   children,
 }: SectionProps): React.ReactElement => {
   return (
-    <Card>
-      <CardContent>{children}</CardContent>
-      {addItem && (
+    <Card className={styles.Card}>
+      <CardContent className={styles.ContentContainer}>{children}</CardContent>
+      {handleAdd && (
         <CardActions disableSpacing className={styles.AddButtonContainer}>
-          <IconButton aria-label="add item" onClick={addItem}>
+          <IconButton aria-label="add item" onClick={handleAdd}>
             <AddCircleOutlineIcon />
           </IconButton>
         </CardActions>
