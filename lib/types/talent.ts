@@ -143,3 +143,13 @@ type OtherSkill = {
   level: OtherSKillLevel;
   description: string;
 };
+
+export interface BasicInfoInput {
+  profilePic?: string;
+  fullName?: string;
+  name?: FullName;
+  profession: string;
+  displayAddress?: string;
+  address?: Address;
+  description?: string;
+}

@@ -3,23 +3,16 @@ import { SectionItem } from '../section-item/SectionItem';
 import { Section } from '../section/Section';
 import { CheckedTitle } from '../checked-title/CheckedTitle';
 import styles from './BasicInfo.module.css';
+import { BasicInfoInput } from '../../lib/types';
 
 interface BasicInfoProps {
-  profilePicUrl?: string;
-  fullName: string;
-  profession: string;
-  address: string;
-  description?: string;
+  basicInfo: BasicInfoInput;
   done: boolean;
   handleEdit: () => void;
 }
 
 export const BasicInfo = ({
-  profilePicUrl,
-  fullName,
-  profession,
-  address,
-  description,
+  basicInfo,
   done,
   handleEdit,
 }: BasicInfoProps): React.ReactElement => {
@@ -28,21 +21,21 @@ export const BasicInfo = ({
       <Section>
         <SectionItem handleEdit={handleEdit}>
           <div className={styles.HeaderContainer}>
-            {profilePicUrl && (
+            {basicInfo.profilePic && (
               <img
                 className={styles.ProfilePic}
-                src={profilePicUrl}
-                alt={fullName}
+                src={basicInfo.profilePic}
+                alt={basicInfo.fullName}
               />
             )}
             <div className={styles.Details}>
-              <CheckedTitle title={fullName} done={done} />
-              <Typography variant="h4">{profession}</Typography>
-              <Typography variant="h4">{address}</Typography>
+              <CheckedTitle title={basicInfo.fullName} done={done} />
+              <Typography variant="h4">{basicInfo.profession}</Typography>
+              <Typography variant="h4">{basicInfo.displayAddress}</Typography>
             </div>
           </div>
           <div className={styles.Description}>
-            <Typography variant="body1">{description}</Typography>
+            <Typography variant="body1">{basicInfo.description}</Typography>
           </div>
         </SectionItem>
       </Section>

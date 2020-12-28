@@ -7,6 +7,9 @@
   "components": {
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "basicInfo": {
+      "title": "Bearbeite Deine persönlichen Informationen"
     }
   },
   "type": {

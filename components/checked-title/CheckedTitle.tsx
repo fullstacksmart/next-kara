@@ -3,9 +3,9 @@ import { Typography, TypographyVariant } from '@material-ui/core';
 import { DoneOutline } from '@material-ui/icons';
 
 interface CheckedTitleProps {
-  title: string;
+  title?: string;
   variant?: TypographyVariant;
-  done: boolean;
+  done?: boolean;
 }
 
 export const CheckedTitle = ({

@@ -2,9 +2,10 @@ import { gql, useQuery } from '@apollo/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
-import { PageProps } from '../../../lib/types';
-import { BasicInfo } from '../../../components/basic-info/BasicInfo';
+import { ModalType, PageProps } from '../../../lib/types';
+import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
 import { withTranslation } from '../../../i18n';
+import { useState } from 'react';
 
 export interface ProfilePageProps extends PageProps {
   id: string;
@@ -76,6 +77,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
       id,
     },
   });
+  const [modal, setModal] = useState<ModalType>(ModalType.NONE);
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
   const {
@@ -88,17 +90,29 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
     description,
   } = data?.getTalentById;
   const displayAddress = `${address.city}, ${t(`iso.${address.isoCode}`)}`;
+  const basicInfo = {
+    fullName,
+    name,
+    profilePic,
+    profession: t(`profession.${profession}-${gender}`),
+    displayAddress,
+    address,
+    gender,
+    description,
+  };
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
       <BasicInfo
-        fullName={fullName}
-        profilePicUrl={profilePic}
-        profession={t(`profession.${profession}-${gender}`)}
-        address={displayAddress}
-        description={description}
+        basicInfo={basicInfo}
         done={true}
-        handleEdit={() => console.log('edit')}
+        handleEdit={() => setModal(ModalType.BASIC_INFO)}
+      />
+      <BasicInfoEdit
+        t={t}
+        basicInfo={basicInfo}
+        open={modal === ModalType.BASIC_INFO}
+        onClose={() => setModal(ModalType.NONE)}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
