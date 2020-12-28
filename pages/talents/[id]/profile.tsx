@@ -4,6 +4,7 @@ import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import { PageProps } from '../../../lib/types';
 import { BasicInfo } from '../../../components/basic-info/BasicInfo';
+import { withTranslation } from '../../../i18n';
 
 export interface ProfilePageProps extends PageProps {
   id: string;
@@ -17,6 +18,7 @@ const GET_TALENT = gql`
         firstName
         lastName
       }
+      gender
       fullName
       profilePic
       profession
@@ -68,7 +70,7 @@ const GET_TALENT = gql`
   }
 `;
 
-const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
+const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const { data, loading, error } = useQuery(GET_TALENT, {
     variables: {
       id,
@@ -79,19 +81,19 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   const {
     name,
     fullName,
+    gender,
     profilePic,
     profession,
     address,
     description,
   } = data?.getTalentById;
-  console.log(profilePic);
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
       <BasicInfo
         fullName={fullName}
         profilePicUrl={profilePic}
-        profession={profession}
+        profession={t(`${profession}-${gender}`)}
         address={address.city}
         description={description}
         done={true}
@@ -123,4 +125,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default ProfilePage;
+export default withTranslation('common')(ProfilePage);

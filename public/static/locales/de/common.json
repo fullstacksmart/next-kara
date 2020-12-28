@@ -23,5 +23,14 @@
   "password": "Passwort",
   "repeatPassword": "Passwort wiederholen",
   "signup": "registrieren",
-  "signin": "anmelden"
+  "signin": "anmelden",
+  "NURSE-MALE": "Krankenpfleger",
+  "NURSE-FEMALE": "Krankenpflegerin",
+  "NURSE-OTHER": "Krankenpfleger",
+  "DOCTOR-MALE": "Arzt",
+  "DOCTOR-FEMA": "Ärztin",
+  "DOCTOR-OTHER": "Ärztin",
+  "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
+  "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
+  "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
 }

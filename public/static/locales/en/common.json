@@ -23,5 +23,14 @@
   "password": "password",
   "repeatPassword": "please reenter password",
   "signup": "sign up",
-  "signin": "sign in dude!"
+  "signin": "sign in dude!",
+  "NURSE-MALE": "nurse",
+  "NURSE-FEMALE": "nurse",
+  "NURSE-OTHER": "nurse",
+  "DOCTOR-MALE": "doctor",
+  "DOCTOR-FEMA": "doctor",
+  "DOCTOR-OTHER": "doctor",
+  "OTHER_MEDICAL-MALE": "other medical personnel",
+  "OTHER_MEDICAL-FEMALE": "other medical personnel",
+  "OTHER_MEDICAL-OTHER": "other medical personnel"
 }
