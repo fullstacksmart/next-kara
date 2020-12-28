@@ -173,6 +173,11 @@ const typeDefs = gql`
     lastName: String!
   }
 
+  input AddressInput {
+    city: String
+    isoCode: String
+  }
+
   input UserInput {
     name: NameInput!
     email: String!
@@ -180,6 +185,16 @@ const typeDefs = gql`
     company: String
     password: String!
     type: UserType!
+  }
+
+  input TalentUpdate {
+    id: ID!
+    name: NameInput
+    gender: Gender
+    address: AddressInput
+    profilePic: String
+    profession: ProfessionType
+    description: String
   }
 
   type Query {
@@ -191,6 +206,7 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(input: UserInput!): User!
+    updateTalent(input: TalentUpdate!): Talent!
   }
 `;
 export default typeDefs;

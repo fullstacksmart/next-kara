@@ -148,7 +148,18 @@ export interface BasicInfoInput {
   profilePic?: string;
   fullName?: string;
   name?: FullName;
-  profession: string;
+  profession?: string;
+  displayAddress?: string;
+  address?: Address;
+  description?: string;
+}
+
+export interface TalentUpdate {
+  id: string;
+  profilePic?: string;
+  fullName?: string;
+  name?: FullName;
+  profession?: string;
   displayAddress?: string;
   address?: Address;
   description?: string;

@@ -4,6 +4,8 @@ import {
   ExperienceInput,
   QualificationInput,
   Talent,
+  UserInput,
+  TalentUpdate,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -43,8 +45,19 @@ const resolvers = {
     getAllUserIds(): string[] {
       return helpers.getAllUserIds();
     },
-    async getTalentById(_: unknown, { id }: { id: string }) {
+    async getTalentById(_: unknown, { id }: { id: string }): Promise<Talent> {
       return await helpers.getTalentById(id);
+    },
+  },
+  Mutation: {
+    async addUser(_: unknown, { input }: { input: UserInput }): Promise<User> {
+      return await helpers.addUser(input);
+    },
+    async updateTalent(
+      _: unknown,
+      { input }: { input: TalentUpdate },
+    ): Promise<Talent> {
+      return await helpers.updateTalent(input);
     },
   },
 };

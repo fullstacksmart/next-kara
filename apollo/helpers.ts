@@ -1,5 +1,11 @@
 import { models } from '../db';
-import { UserInput, User } from '../lib/types';
+import {
+  UserInput,
+  User,
+  Talent,
+  Organization,
+  TalentUpdate,
+} from '../lib/types';
 
 export const getAllTalentIds = (): string[] =>
   models.Talent.findMany().map((talent: User) => talent.id);
@@ -13,11 +19,13 @@ export const getAllUserIds = (): string[] => {
   return talents.concat(employers);
 };
 
-export const getTalentById = async (id: string) => {
+export const getTalentById = async (id: string): Promise<Talent> => {
   return await models.Talent.findOne({ id });
 };
 
-export const getOrganizationById = async (id: string) => {
+export const getOrganizationById = async (
+  id: string,
+): Promise<Organization> => {
   return await models.Organization.findOne({ id });
 };
 
@@ -33,4 +41,19 @@ export const addUser = async (input: UserInput): Promise<User> => {
   });
   if (oldUser) throw new Error('user already exists');
   return await models[type].createOne(input);
+};
+
+export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
+  const existingTalent = models.Talent.findOne({
+    id: input.id,
+  });
+  if (!existingTalent)
+    throw new Error(`no user with id ${input.id} in database`);
+  let updatedTalent;
+  try {
+    updatedTalent = await models.Talent.updateOne({ id: input.id }, input);
+  } catch (err) {
+    console.error(err);
+  }
+  return updatedTalent;
 };
