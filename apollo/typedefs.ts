@@ -170,6 +170,12 @@ const typeDefs = gql`
   input NameInput {
     firstName: String
     middleName: String
+    lastName: String
+  }
+
+  input InitialNameInput {
+    firstName: String
+    middleName: String
     lastName: String!
   }
 
@@ -179,7 +185,7 @@ const typeDefs = gql`
   }
 
   input UserInput {
-    name: NameInput!
+    name: InitialNameInput!
     email: String!
     gender: Gender!
     company: String

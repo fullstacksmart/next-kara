@@ -50,8 +50,18 @@ export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
   if (!existingTalent)
     throw new Error(`no user with id ${input.id} in database`);
   let updatedTalent;
+  const updatedAddress = { ...existingTalent.address, ...input.address };
+  const updatedName = { ...existingTalent.name, ...input.name };
+  const enrichedInput = {
+    ...input,
+    address: updatedAddress,
+    name: updatedName,
+  };
   try {
-    updatedTalent = await models.Talent.updateOne({ id: input.id }, input);
+    updatedTalent = await models.Talent.updateOne(
+      { id: input.id },
+      enrichedInput,
+    );
   } catch (err) {
     console.error(err);
   }
