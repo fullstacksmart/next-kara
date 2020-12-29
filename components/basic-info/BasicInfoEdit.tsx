@@ -39,6 +39,7 @@ export const BasicInfoEdit = ({
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
     basicInfo,
   );
+  // TODO implement optimistic update and refresh on change
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
       input: {
