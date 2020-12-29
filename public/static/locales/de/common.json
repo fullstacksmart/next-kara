@@ -43,6 +43,11 @@
     "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
     "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
   },
+  "gender": {
+    "MALE": "männlich",
+    "FEMALE": "weiblich",
+    "OTHER": "weiteres/keine Angabe"
+  },
   "iso": {
     "SRB": "Serbien"
   },

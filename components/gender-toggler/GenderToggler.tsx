@@ -18,15 +18,15 @@ export const GenderToggler = ({
 }: GenderTogglerProps): React.ReactElement => {
   const genderOptions = [
     {
-      display: t('MALE'),
+      display: t('gender.MALE'),
       value: 'MALE',
     },
     {
-      display: t('FEMALE'),
+      display: t('gender.FEMALE'),
       value: 'FEMALE',
     },
     {
-      display: t('OTHER'),
+      display: t('gender.OTHER'),
       value: 'OTHER',
     },
   ];

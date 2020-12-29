@@ -18,3 +18,10 @@ export enum ModalType {
 export interface BaseEntity {
   id: string;
 }
+export interface Address {
+  street?: string;
+  streetNo?: string;
+  city?: string;
+  postalCode?: string;
+  isoCode?: string;
+}

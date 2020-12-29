@@ -3,15 +3,19 @@ import { SectionItem } from '../section-item/SectionItem';
 import { Section } from '../section/Section';
 import { CheckedTitle } from '../checked-title/CheckedTitle';
 import styles from './BasicInfo.module.css';
-import { BasicInfoInput } from '../../lib/types';
+import { Talent } from '../../lib/types';
+import { TFunction } from 'next-i18next';
+import { displayAddress } from '../../lib/utils/strings';
 
 interface BasicInfoProps {
-  basicInfo: BasicInfoInput;
+  basicInfo: Partial<Talent>;
   done: boolean;
   handleEdit: () => void;
+  t: TFunction;
 }
 
 export const BasicInfo = ({
+  t,
   basicInfo,
   done,
   handleEdit,
@@ -30,8 +34,12 @@ export const BasicInfo = ({
             )}
             <div className={styles.Details}>
               <CheckedTitle title={basicInfo.fullName} done={done} />
-              <Typography variant="h4">{basicInfo.profession}</Typography>
-              <Typography variant="h4">{basicInfo.displayAddress}</Typography>
+              <Typography variant="h4">
+                {t(`profession.${basicInfo.profession}-${basicInfo.gender}`)}
+              </Typography>
+              <Typography variant="h4">
+                {displayAddress(basicInfo.address, t)}
+              </Typography>
             </div>
           </div>
           <div className={styles.Description}>

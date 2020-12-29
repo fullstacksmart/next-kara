@@ -1,4 +1,4 @@
-import { User, FullName, BaseEntity } from './index';
+import { User, FullName, BaseEntity, Address } from './index';
 
 type ProfessionType =
   | 'NURSE'
@@ -37,14 +37,6 @@ type FederalState =
 
 interface TalentAsset extends BaseEntity {
   talent: string;
-}
-
-interface Address {
-  street?: string;
-  streetNo?: string;
-  city?: string;
-  postalCode?: string;
-  isoCode?: string;
 }
 
 interface Date {

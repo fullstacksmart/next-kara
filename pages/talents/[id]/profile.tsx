@@ -89,13 +89,12 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
     address,
     description,
   } = data?.getTalentById;
-  const displayAddress = `${address.city}, ${t(`iso.${address.isoCode}`)}`;
   const basicInfo = {
+    id,
     fullName,
     name,
     profilePic,
-    profession: t(`profession.${profession}-${gender}`),
-    displayAddress,
+    profession,
     address,
     gender,
     description,
@@ -104,6 +103,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {name.firstName + ' ' + name.lastName}</h1>
       <BasicInfo
+        t={t}
         basicInfo={basicInfo}
         done={true}
         handleEdit={() => setModal(ModalType.BASIC_INFO)}

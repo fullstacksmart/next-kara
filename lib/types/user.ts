@@ -12,6 +12,7 @@ export interface FullName {
 
 export interface User extends BaseEntity {
   name: FullName;
+  fullName: string;
   gender: Gender;
   email: string;
   password: string;
