@@ -1,10 +1,11 @@
 import { TextField, TextFieldProps } from '@material-ui/core';
-import { SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 // TODO make component reusable by generalizing types
 type InputFieldProps = TextFieldProps & {
-  setValue?: React.Dispatch<SetStateAction<Record<string, unknown>>>;
+  setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
   nesting?: string;
+  id: string;
 };
 
 const InputField = ({
@@ -23,14 +24,14 @@ const InputField = ({
       if (!nesting) {
         setValue((oldValues) => ({
           ...oldValues,
-          [id as string]: event.target.value,
+          [id]: event.target.value,
         }));
       } else {
         setValue((oldValues) => ({
           ...oldValues,
-          [nesting as string]: {
+          [nesting]: {
             ...(oldValues[nesting] as Record<string, unknown>),
-            [id as string]: event.target.value,
+            [id]: event.target.value,
           },
         }));
       }

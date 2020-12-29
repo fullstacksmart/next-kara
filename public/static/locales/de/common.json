@@ -1,65 +1,66 @@
 {
-  "pages": {
-    "signup": {
-      "header": "Erstelle Dein Profil"
-    }
+  "address": {
+    "city": "Stadt",
+    "country": "Land"
   },
+  "buttonLabels": {
+    "cancel": "abbrechen",
+    "save": "speichern"
+  },
+  "companyName": "Firmenname",
   "components": {
-    "layout": {
-      "backHome": "zurück zur Homepage"
-    },
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
     },
     "countrySelector": {
       "label": "Land"
+    },
+    "layout": {
+      "backHome": "zurück zur Homepage"
     }
   },
-  "type": {
-    "talent": "Talent",
-    "employer": "Arbeitgeber"
-  },
-  "companyName": "Firmenname",
+  "description": "Über mich",
+  "email": "Email",
   "fullName": {
     "firstName": "Vorname",
-    "middleName": "Zweiter Vorname",
-    "lastName": "Nachname"
-  },
-  "address": {
-    "city": "Stadt",
-    "country": "Land"
-  },
-  "email": "Email",
-  "profilePic": "URL Deines Profilbildes",
-  "password": "Passwort",
-  "repeatPassword": "Passwort wiederholen",
-  "signup": "registrieren",
-  "signin": "anmelden",
-  "profession": {
-    "NURSE-MALE": "Krankenpfleger",
-    "NURSE-FEMALE": "Krankenpflegerin",
-    "NURSE-OTHER": "Krankenpfleger",
-    "DOCTOR-MALE": "Arzt",
-    "DOCTOR-FEMA": "Ärztin",
-    "DOCTOR-OTHER": "Ärztin",
-    "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
-    "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
-    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
+    "lastName": "Nachname",
+    "middleName": "Zweiter Vorname"
   },
   "gender": {
-    "MALE": "männlich",
     "FEMALE": "weiblich",
+    "MALE": "männlich",
     "OTHER": "weiteres/keine Angabe"
   },
   "iso": {
-    "SRB": "Serbien",
-    "DEU": "Deutschland",
+    "AUT": "Österreich",
     "CRO": "Kroatien",
+    "DEU": "Deutschland",
     "POL": "Poland",
-    "AUT": "Österreich"
+    "SRB": "Serbien"
   },
-  "buttonLabels": {
-    "save": "speichern",
-    "cancel": "abbrechen"
+  "pages": {
+    "signup": {
+      "header": "Erstelle Dein Profil"
+    }
+  },
+  "password": "Passwort",
+  "profession": {
+    "DOCTOR-FEMA": "Ärztin",
+    "DOCTOR-MALE": "Arzt",
+    "DOCTOR-OTHER": "Ärztin",
+    "NURSE-FEMALE": "Krankenpflegerin",
+    "NURSE-MALE": "Krankenpfleger",
+    "NURSE-OTHER": "Krankenpfleger",
+    "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
+    "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
+    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
+  },
+  "profilePic": "URL Deines Profilbildes",
+  "repeatPassword": "Passwort wiederholen",
+  "signin": "anmelden",
+  "signup": "registrieren",
+  "type": {
+    "employer": "Arbeitgeber",
+    "talent": "Talent"
   }
 }

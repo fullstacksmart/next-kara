@@ -1,4 +1,5 @@
 import { I18n, TFunction } from 'next-i18next';
+import { Dispatch, SetStateAction } from 'react';
 
 export type SupportedLanguage = 'GERMAN' | 'ENGLISH';
 
@@ -27,3 +28,7 @@ export interface Address {
   postalCode?: string;
   isoCode?: IsoCode;
 }
+
+export type SetValueFunction = Dispatch<
+  SetStateAction<{ id: string } & Record<string, unknown>>
+>;

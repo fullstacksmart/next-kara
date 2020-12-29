@@ -1,4 +1,10 @@
-import { InputLabel, MenuItem, Select, SelectProps } from '@material-ui/core';
+import {
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectProps,
+  FormControl,
+} from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import { ChangeEvent, useState } from 'react';
 import { IsoCode, Talent } from '../../lib/types';
@@ -44,7 +50,7 @@ const CountrySelector = ({
     );
   });
   return (
-    <>
+    <FormControl variant="standard" margin="normal">
       <InputLabel id="country-select-label">
         {t('components.countrySelector.label')}
       </InputLabel>
@@ -59,7 +65,7 @@ const CountrySelector = ({
         </MenuItem>
         {menuItems}
       </Select>
-    </>
+    </FormControl>
   );
 };
 

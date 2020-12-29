@@ -1,4 +1,4 @@
-import { User, FullName, BaseEntity, Address } from './index';
+import { User, FullName, BaseEntity, Address, Gender } from './index';
 
 type ProfessionType =
   | 'NURSE'
@@ -121,13 +121,12 @@ interface OtherSkill extends TalentAsset {
 }
 
 export interface BasicInfoInput {
-  profilePic?: string;
-  fullName?: string;
   name?: FullName;
-  profession?: string;
-  displayAddress?: string;
+  gender?: Gender;
   address?: Address;
+  profilePic?: string;
+  profession?: ProfessionType;
   description?: string;
 }
 
-export type TalentUpdate = BaseEntity & Partial<Talent>;
+export type TalentUpdate = BaseEntity & BasicInfoInput;

@@ -1,65 +1,66 @@
 {
-  "pages": {
-    "signup": {
-      "header": "Create your profile"
-    }
+  "address": {
+    "city": "city",
+    "country": "country"
   },
+  "buttonLabels": {
+    "cancel": "cancel",
+    "save": "save"
+  },
+  "companyName": "company name",
   "components": {
-    "layout": {
-      "backHome": "take me back home"
-    },
     "basicInfo": {
       "title": "edit your personal information"
     },
     "countrySelector": {
       "label": "country"
+    },
+    "layout": {
+      "backHome": "take me back home"
     }
   },
-  "type": {
-    "talent": "talent",
-    "employer": "employer"
-  },
-  "companyName": "company name",
+  "description": "about me",
+  "email": "email",
   "fullName": {
     "firstName": "first name",
-    "middleName": "middle name",
-    "lastName": "last name"
-  },
-  "address": {
-    "city": "city",
-    "country": "country"
-  },
-  "email": "email",
-  "profilePic": "URL to profile pic",
-  "password": "password",
-  "repeatPassword": "please reenter password",
-  "signup": "sign up",
-  "signin": "sign in dude!",
-  "profession": {
-    "NURSE-MALE": "nurse",
-    "NURSE-FEMALE": "nurse",
-    "NURSE-OTHER": "nurse",
-    "DOCTOR-MALE": "doctor",
-    "DOCTOR-FEMA": "doctor",
-    "DOCTOR-OTHER": "doctor",
-    "OTHER_MEDICAL-MALE": "other medical personnel",
-    "OTHER_MEDICAL-FEMALE": "other medical personnel",
-    "OTHER_MEDICAL-OTHER": "other medical personnel"
+    "lastName": "last name",
+    "middleName": "middle name"
   },
   "gender": {
-    "MALE": "male",
     "FEMALE": "female",
+    "MALE": "male",
     "OTHER": "other"
   },
   "iso": {
-    "SRB": "Serbia",
-    "DEU": "Germany",
+    "AUT": "Austria",
     "CRO": "Croatia",
+    "DEU": "Germany",
     "POL": "Poland",
-    "AUT": "Austria"
+    "SRB": "Serbia"
   },
-  "buttonLabels": {
-    "save": "save",
-    "cancel": "cancel"
+  "pages": {
+    "signup": {
+      "header": "Create your profile"
+    }
+  },
+  "password": "password",
+  "profession": {
+    "DOCTOR-FEMA": "doctor",
+    "DOCTOR-MALE": "doctor",
+    "DOCTOR-OTHER": "doctor",
+    "NURSE-FEMALE": "nurse",
+    "NURSE-MALE": "nurse",
+    "NURSE-OTHER": "nurse",
+    "OTHER_MEDICAL-FEMALE": "other medical personnel",
+    "OTHER_MEDICAL-MALE": "other medical personnel",
+    "OTHER_MEDICAL-OTHER": "other medical personnel"
+  },
+  "profilePic": "URL to profile pic",
+  "repeatPassword": "please reenter password",
+  "signin": "sign in dude!",
+  "signup": "sign up",
+  "type": {
+    "employer": "employer",
+    "talent": "talent"
   }
 }
