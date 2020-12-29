@@ -138,9 +138,9 @@ export const BasicInfoEdit = ({
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>{t('cancel')}</Button>
+        <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
         <Button type="submit" form="basicInfoForm">
-          {t('save')}
+          {t('buttonLabels.save')}
         </Button>
       </DialogActions>
     </Dialog>
