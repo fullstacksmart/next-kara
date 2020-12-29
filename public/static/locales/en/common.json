@@ -10,6 +10,9 @@
     },
     "basicInfo": {
       "title": "edit your personal information"
+    },
+    "countrySelector": {
+      "label": "country"
     }
   },
   "type": {
@@ -49,7 +52,11 @@
     "OTHER": "other"
   },
   "iso": {
-    "SRB": "Serbia"
+    "SRB": "Serbia",
+    "DEU": "Germany",
+    "CRO": "Croatia",
+    "POL": "Poland",
+    "AUT": "Austria"
   },
   "buttonLabels": {
     "save": "save",

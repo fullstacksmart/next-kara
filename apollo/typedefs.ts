@@ -8,6 +8,15 @@ const typeDefs = gql`
     OTHER_NON_MEDICAL
   }
 
+  # TODO populate dynamically
+  enum IsoCode {
+    SRB
+    DEU
+    AUT
+    CRO
+    POL
+  }
+
   enum Gender {
     MALE
     FEMALE
@@ -81,7 +90,7 @@ const typeDefs = gql`
     streetNo: String
     city: String
     postalCode: String
-    isoCode: String
+    isoCode: IsoCode
   }
 
   type Date {
@@ -181,7 +190,7 @@ const typeDefs = gql`
 
   input AddressInput {
     city: String
-    isoCode: String
+    isoCode: IsoCode
   }
 
   input UserInput {

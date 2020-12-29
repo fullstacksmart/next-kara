@@ -10,6 +10,7 @@ import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
 import { Talent, TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
+import CountrySelector from '../country-selector/CountrySelector';
 import { GenderToggler } from '../gender-toggler/GenderToggler';
 import InputField from '../input-field/InputField';
 
@@ -80,6 +81,11 @@ export const BasicInfoEdit = ({
             nesting="address"
             value={updatedInfo.address?.city}
             setValue={setUpdatedInfo}
+          />
+          <CountrySelector
+            t={t}
+            updateFunction={setUpdatedInfo}
+            value={basicInfo.address?.isoCode}
           />
         </form>
       </DialogContent>

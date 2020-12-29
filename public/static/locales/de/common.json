@@ -10,6 +10,9 @@
     },
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
+    },
+    "countrySelector": {
+      "label": "Land"
     }
   },
   "type": {
@@ -49,7 +52,11 @@
     "OTHER": "weiteres/keine Angabe"
   },
   "iso": {
-    "SRB": "Serbien"
+    "SRB": "Serbien",
+    "DEU": "Deutschland",
+    "CRO": "Kroatien",
+    "POL": "Poland",
+    "AUT": "Österreich"
   },
   "buttonLabels": {
     "save": "speichern",
