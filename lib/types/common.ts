@@ -12,5 +12,9 @@ export enum ModalType {
   BASIC_INFO,
   EXPERIENCE,
   QUALIFICATION,
-  LANGUAGE
+  LANGUAGE,
+}
+
+export interface BaseEntity {
+  id: string;
 }

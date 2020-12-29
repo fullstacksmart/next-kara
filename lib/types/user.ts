@@ -1,3 +1,5 @@
+import { BaseEntity } from '.';
+
 export type UserType = 'TALENT' | 'EMPLOYER' | 'AGENCY';
 
 export type Gender = 'MALE' | 'FEMALE' | 'OTHER';
@@ -8,8 +10,7 @@ export interface FullName {
   lastName: string;
 }
 
-export interface User {
-  id: string;
+export interface User extends BaseEntity {
   name: FullName;
   gender: Gender;
   email: string;
