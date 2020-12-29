@@ -7,12 +7,12 @@ import {
 } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import { useState } from 'react';
-import { BasicInfoInput, UserInput } from '../../lib/types';
+import { TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
 import InputField from '../input-field/InputField';
 
 interface BasicInfoEditProps extends DialogProps {
-  basicInfo: BasicInfoInput;
+  basicInfo: TalentUpdate;
   t: TFunction;
   handleClose: () => void;
 }
@@ -23,8 +23,8 @@ export const BasicInfoEdit = ({
   handleClose,
   ...props
 }: BasicInfoEditProps): React.ReactElement => {
-  const [updatedInfo, setUpdatedInfo] = useState<UserInput & BasicInfoInput>(
-    basicInfo as UserInput & BasicInfoInput,
+  const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
+    basicInfo,
   );
   const save = (): void => {
     handleClose();

@@ -11,12 +11,7 @@ import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { useEffect, useState } from 'react';
-import {
-  BasicInfoInput,
-  PageProps,
-  UserInput,
-  UserType,
-} from '../../lib/types';
+import { PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 
@@ -29,7 +24,7 @@ const ADD_USER = gql`
 `;
 
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
-  const [formValues, setFormValues] = useState<UserInput & BasicInfoInput>({
+  const [formValues, setFormValues] = useState<Partial<UserInput>>({
     name: {
       lastName: '',
     },
