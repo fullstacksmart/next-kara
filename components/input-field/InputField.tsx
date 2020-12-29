@@ -41,7 +41,7 @@ const InputField = ({
       id={id}
       fullWidth
       margin="normal"
-      value={value}
+      value={value || ''}
       onChange={handleChange}
       {...props}
     ></TextField>
