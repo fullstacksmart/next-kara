@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
+import { GenderToggler } from '../../components/gender-toggler/GenderToggler';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -111,6 +112,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                   required
                 />
               </Box>
+              <GenderToggler t={t} updateFunction={setFormValues} />
               {company}
               <InputField
                 id="email"

@@ -1,4 +1,5 @@
 import {
+  Box,
   Dialog,
   DialogActions,
   DialogContent,
@@ -6,9 +7,10 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
-import { useState } from 'react';
-import { TalentUpdate } from '../../lib/types';
+import React, { useEffect, useState } from 'react';
+import { Talent, TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
+import { GenderToggler } from '../gender-toggler/GenderToggler';
 import InputField from '../input-field/InputField';
 
 interface BasicInfoEditProps extends DialogProps {
@@ -23,36 +25,48 @@ export const BasicInfoEdit = ({
   handleClose,
   ...props
 }: BasicInfoEditProps): React.ReactElement => {
-  const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
-    basicInfo,
-  );
+  const [updatedInfo, setUpdatedInfo] = useState<Partial<Talent>>(basicInfo);
   const save = (): void => {
     handleClose();
   };
+
+  useEffect(() => {
+    console.log(updatedInfo);
+  }, [updatedInfo]);
   return (
     <Dialog {...props}>
       <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
       <DialogContent>
-        <InputField
-          label={t('fullName.firstName')}
-          id="firstName"
-          nesting="name"
-          value={updatedInfo.name?.firstName}
-          setValue={setUpdatedInfo}
-        />
-        <InputField
-          label={t('fullName.middleName')}
-          id="middleName"
-          nesting="name"
-          value={updatedInfo.name?.middleName}
-          setValue={setUpdatedInfo}
-        />
-        <InputField
-          label={t('fullName.lastName')}
-          id="lastName"
-          nesting="name"
-          value={updatedInfo.name?.lastName}
-          setValue={setUpdatedInfo}
+        <Box component="div">
+          <InputField
+            label={t('fullName.firstName')}
+            id="firstName"
+            nesting="name"
+            value={updatedInfo.name?.firstName}
+            setValue={setUpdatedInfo}
+            fullWidth={false}
+          />
+          <InputField
+            label={t('fullName.middleName')}
+            id="middleName"
+            nesting="name"
+            value={updatedInfo.name?.middleName}
+            setValue={setUpdatedInfo}
+            fullWidth={false}
+          />
+          <InputField
+            label={t('fullName.lastName')}
+            id="lastName"
+            nesting="name"
+            value={updatedInfo.name?.lastName}
+            setValue={setUpdatedInfo}
+            fullWidth={false}
+          />
+        </Box>
+        <GenderToggler
+          input={basicInfo.gender}
+          updateFunction={setUpdatedInfo}
+          t={t}
         />
         <InputField
           label={t('profilePic')}

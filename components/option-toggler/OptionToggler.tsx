@@ -5,7 +5,7 @@ import {
 } from '@material-ui/lab';
 import { useState } from 'react';
 
-interface OptionTogglerProps extends ToggleButtonGroupProps {
+export interface OptionTogglerProps extends ToggleButtonGroupProps {
   options: {
     display?: React.ReactNode;
     value: string;
@@ -17,13 +17,14 @@ interface OptionTogglerProps extends ToggleButtonGroupProps {
 const OptionToggler = ({
   options,
   optionsLabel,
+  defaultValue,
   setOption = () => {
     return;
   },
   ...props
 }: OptionTogglerProps): React.ReactElement => {
   const firstOption = options.length > 0 ? options[0] : null;
-  const [value, setValue] = useState(firstOption?.value);
+  const [value, setValue] = useState(defaultValue || firstOption?.value);
   const handleChange = (e: React.MouseEvent, newValue: string): void => {
     setValue(newValue);
     setOption(newValue);
@@ -39,12 +40,12 @@ const OptionToggler = ({
   ));
   return (
     <ToggleButtonGroup
-      {...props}
       exclusive
       aria-label={optionsLabel}
       value={value}
       defaultValue={firstOption?.value}
       onChange={handleChange}
+      {...props}
     >
       {buttons}
     </ToggleButtonGroup>
