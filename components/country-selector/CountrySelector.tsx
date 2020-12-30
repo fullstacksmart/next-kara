@@ -17,7 +17,7 @@ export interface CountrySelectorProps extends SelectProps {
 
 const CountrySelector = ({
   t,
-  value = '',
+  value = null,
   updateFunction,
   ...props
 }: CountrySelectorProps): React.ReactElement => {

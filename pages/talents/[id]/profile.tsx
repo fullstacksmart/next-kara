@@ -5,7 +5,7 @@ import { Layout } from '../../../containers/layout';
 import { ModalType, PageProps } from '../../../lib/types';
 import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
 import { withTranslation } from '../../../i18n';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 export interface ProfilePageProps extends PageProps {
   id: string;

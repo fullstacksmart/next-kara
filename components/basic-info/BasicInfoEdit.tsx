@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
 import CountrySelector from '../country-selector/CountrySelector';
@@ -20,6 +20,17 @@ const UPDATE_TALENT = gql`
     updateTalent(input: $input) {
       id
       fullName
+      name {
+        firstName
+        middleName
+        lastName
+      }
+      gender
+      address {
+        city
+        isoCode
+      }
+      description
     }
   }
 `;
@@ -62,14 +73,9 @@ export const BasicInfoEdit = ({
   });
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    console.log('submit', updatedInfo);
     await mutate();
     handleClose();
   };
-
-  useEffect(() => {
-    console.log(mutate);
-  }, [mutate]);
 
   return (
     <Dialog {...props}>
