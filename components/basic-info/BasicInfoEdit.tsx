@@ -50,7 +50,7 @@ export const BasicInfoEdit = ({
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
     basicInfo,
   );
-  // TODO implement optimistic update and refresh on change
+
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
       input: {
@@ -70,10 +70,33 @@ export const BasicInfoEdit = ({
         description: updatedInfo.description,
       },
     },
+    optimisticResponse: {
+      __typeName: 'Mutation',
+      updateTalent: {
+        id: updatedInfo.id,
+        gender: updatedInfo.gender,
+        name: {
+          firstName: updatedInfo.name?.firstName,
+          middleName: updatedInfo.name?.middleName,
+          lastName: updatedInfo.name?.lastName,
+          __typename: 'FullName',
+        },
+        address: {
+          city: updatedInfo.address?.city,
+          isoCode: updatedInfo.address?.isoCode,
+          __typename: 'Address',
+        },
+        profilePic: updatedInfo.profilePic,
+        profession: updatedInfo.profession,
+        description: updatedInfo.description,
+        __typename: 'Talent',
+      },
+    },
   });
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    await mutate();
+    const result = await mutate();
+    console.log(result);
     handleClose();
   };
 
