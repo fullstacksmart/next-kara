@@ -100,6 +100,7 @@ export const BasicInfoEdit = ({
               value={updatedInfo.name?.lastName}
               setValue={setUpdatedInfo}
               fullWidth={false}
+              required
             />
           </Box>
           <GenderToggler

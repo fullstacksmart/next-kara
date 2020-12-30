@@ -19,5 +19,8 @@ export const getTitleString = (
 export const displayAddress = (address?: Address, t?: TFunction): string => {
   if (!address) return '';
   if (!t) return `${address.city}, ${address.isoCode}`;
-  return `${address.city}, ${t(`iso.${address.isoCode}`)}`;
+  const translatedIso = address.isoCode ? t(`iso.${address.isoCode}`) : '';
+  if (address.city && translatedIso) return `${address.city}, ${translatedIso}`;
+  if (address.city) return address.city;
+  return translatedIso;
 };

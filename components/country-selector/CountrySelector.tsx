@@ -11,7 +11,7 @@ import { IsoCode, Talent } from '../../lib/types';
 
 export interface CountrySelectorProps extends SelectProps {
   t: TFunction;
-  value?: IsoCode | '';
+  value?: IsoCode | null;
   updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
 }
 
@@ -31,11 +31,13 @@ const CountrySelector = ({
     }>,
   ): void => {
     setCountry(e.target.value as IsoCode);
-    if (e.target.value) {
+    if (e.target.value !== undefined) {
+      const newAddress =
+        e.target.value !== '' ? (e.target.value as IsoCode) : null;
       updateFunction((oldValues) => {
         const address = {
           ...oldValues.address,
-          isoCode: e.target.value as IsoCode,
+          isoCode: newAddress,
         };
         return { ...oldValues, address };
       });
@@ -61,7 +63,7 @@ const CountrySelector = ({
         onChange={handleChange}
       >
         <MenuItem key="NONE" value="">
-          {'       '}
+          {''}
         </MenuItem>
         {menuItems}
       </Select>
