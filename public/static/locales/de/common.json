@@ -15,6 +15,9 @@
     "countrySelector": {
       "label": "Land"
     },
+    "genderSelector": {
+      "label": "Anrede"
+    },
     "layout": {
       "backHome": "zurück zur Homepage"
     }
@@ -29,7 +32,7 @@
   "gender": {
     "FEMALE": "Frau",
     "MALE": "Herr",
-    "OTHER": "/"
+    "OTHER": ""
   },
   "iso": {
     "AUT": "Österreich",

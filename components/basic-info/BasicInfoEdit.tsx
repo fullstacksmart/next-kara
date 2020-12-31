@@ -13,6 +13,7 @@ import { TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
 import CountrySelector from '../country-selector/CountrySelector';
 import { GenderRadio } from '../gender-radio/GenderRadio';
+import { GenderSelector } from '../gender-selector/GenderSelector';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 
@@ -112,8 +113,8 @@ export const BasicInfoEdit = ({
       <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
       <DialogContent>
         <form id="basicInfoForm" onSubmit={handleSubmit}>
-          <GenderRadio
-            input={basicInfo.gender}
+          <GenderSelector
+            defaultValue={basicInfo.gender}
             updateFunction={setUpdatedInfo}
             t={t}
           />

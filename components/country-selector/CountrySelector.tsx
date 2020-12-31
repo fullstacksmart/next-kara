@@ -44,7 +44,7 @@ const CountrySelector = ({
   return (
     <OptionsSelector
       {...props}
-      defaultValue={defaultValue || 'NONE'}
+      defaultValue={defaultValue}
       options={enrichedOptions}
       setUpdate={handleChange}
       inputLabelId="country-selector-label"

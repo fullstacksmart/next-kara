@@ -15,6 +15,9 @@
     "countrySelector": {
       "label": "country"
     },
+    "genderSelector": {
+      "label": "designation"
+    },
     "layout": {
       "backHome": "take me back home"
     }
