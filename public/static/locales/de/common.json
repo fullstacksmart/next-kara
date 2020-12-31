@@ -27,9 +27,9 @@
     "middleName": "Zweiter Vorname"
   },
   "gender": {
-    "FEMALE": "weiblich",
-    "MALE": "männlich",
-    "OTHER": "weiteres/keine Angabe"
+    "FEMALE": "Frau",
+    "MALE": "Herr",
+    "OTHER": "/"
   },
   "iso": {
     "AUT": "Österreich",
@@ -45,9 +45,9 @@
   },
   "password": "Passwort",
   "profession": {
-    "DOCTOR-FEMA": "Ärztin",
+    "DOCTOR-FEMALE": "Ärztin",
     "DOCTOR-MALE": "Arzt",
-    "DOCTOR-OTHER": "Ärztin",
+    "DOCTOR-OTHER": "Arzt",
     "NURSE-FEMALE": "Krankenpflegerin",
     "NURSE-MALE": "Krankenpfleger",
     "NURSE-OTHER": "Krankenpfleger",

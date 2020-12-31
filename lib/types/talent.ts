@@ -1,6 +1,6 @@
 import { User, FullName, BaseEntity, Address, Gender } from './index';
 
-type ProfessionType =
+export type Profession =
   | 'NURSE'
   | 'DOCTOR'
   | 'OTHER_MEDICAL'
@@ -55,7 +55,7 @@ export interface Organization extends BaseEntity {
 
 export interface Talent extends User {
   profilePic: string;
-  profession: ProfessionType;
+  profession: Profession;
   address: Address;
   description: string;
   experiences: Experience[];
@@ -69,7 +69,7 @@ export interface Talent extends User {
 
 interface Experience extends TalentAsset {
   title: string;
-  lineOfWork: ProfessionType;
+  lineOfWork: Profession;
   employer?: Organization;
   duration?: Duration;
   description?: string;
@@ -77,7 +77,7 @@ interface Experience extends TalentAsset {
 
 export interface ExperienceInput extends TalentAsset {
   title: string;
-  lineOfWork: ProfessionType;
+  lineOfWork: Profession;
   employer: string;
   duration?: Duration;
   description?: string;
@@ -126,7 +126,7 @@ export interface BasicInfoInput {
   gender?: Gender;
   address?: Address;
   profilePic?: string;
-  profession?: ProfessionType;
+  profession?: Profession;
   description?: string;
 }
 

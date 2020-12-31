@@ -27,9 +27,9 @@
     "middleName": "middle name"
   },
   "gender": {
-    "FEMALE": "female",
-    "MALE": "male",
-    "OTHER": "other"
+    "FEMALE": "Mrs.",
+    "MALE": "Mr.",
+    "OTHER": "/"
   },
   "iso": {
     "AUT": "Austria",
