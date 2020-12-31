@@ -66,7 +66,11 @@ export const BasicInfoEdit = ({
         },
         address: {
           city: updatedInfo.address?.city,
-          isoCode: updatedInfo.address?.isoCode,
+          isoCode:
+            updatedInfo.address?.isoCode &&
+            updatedInfo.address.isoCode !== 'NONE'
+              ? updatedInfo.address.isoCode
+              : null,
         },
         profilePic: updatedInfo.profilePic,
         profession: updatedInfo.profession,
@@ -164,7 +168,7 @@ export const BasicInfoEdit = ({
             <CountrySelector
               t={t}
               updateFunction={setUpdatedInfo}
-              value={basicInfo.address?.isoCode}
+              defaultValue={basicInfo.address?.isoCode}
               fullWidth={false}
             />
           </Box>

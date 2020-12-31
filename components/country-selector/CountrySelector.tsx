@@ -1,39 +1,27 @@
-import {
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectProps,
-  FormControl,
-} from '@material-ui/core';
+import OptionsSelector, {
+  OptionsSelectorProps,
+} from '../options-selector/OptionsSelector';
 import { TFunction } from 'next-i18next';
-import { ChangeEvent, useState } from 'react';
 import { IsoCode, Talent } from '../../lib/types';
 
-export interface CountrySelectorProps extends SelectProps {
+export interface CountrySelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
-  value?: IsoCode | null;
+  defaultValue?: IsoCode | 'NONE';
   updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
 }
 
 const CountrySelector = ({
   t,
-  value = null,
+  defaultValue = 'NONE',
   updateFunction,
   ...props
 }: CountrySelectorProps): React.ReactElement => {
-  const [country, setCountry] = useState(value);
   const isoCodes: IsoCode[] = ['SRB', 'AUT', 'DEU', 'CRO', 'POL'];
 
-  const handleChange = (
-    e: ChangeEvent<{
-      name?: string | undefined;
-      value: unknown;
-    }>,
-  ): void => {
-    setCountry(e.target.value as IsoCode);
-    if (e.target.value !== undefined) {
-      const newAddress =
-        e.target.value !== '' ? (e.target.value as IsoCode) : null;
+  const handleChange = (value: string | undefined): void => {
+    if (value !== undefined) {
+      const newAddress: IsoCode | 'NONE' =
+        value !== '' ? (value as IsoCode) : 'NONE';
       updateFunction((oldValues) => {
         const address = {
           ...oldValues.address,
@@ -44,30 +32,24 @@ const CountrySelector = ({
     }
   };
 
-  const menuItems = isoCodes.map((code) => {
-    return (
-      <MenuItem key={code} value={code}>
-        {t(`iso.${code}`)}
-      </MenuItem>
-    );
+  const options = isoCodes.map((code) => {
+    return {
+      value: code,
+      label: t(`iso.${code}`),
+    };
   });
+
+  const enrichedOptions = [{ value: 'NONE', label: '' }, ...options];
+
   return (
-    <FormControl variant="standard" margin="normal">
-      <InputLabel id="country-select-label">
-        {t('components.countrySelector.label')}
-      </InputLabel>
-      <Select
-        {...props}
-        labelId="country-select-label"
-        value={country}
-        onChange={handleChange}
-      >
-        <MenuItem key="NONE" value="">
-          {''}
-        </MenuItem>
-        {menuItems}
-      </Select>
-    </FormControl>
+    <OptionsSelector
+      {...props}
+      defaultValue={defaultValue || 'NONE'}
+      options={enrichedOptions}
+      setUpdate={handleChange}
+      inputLabelId="country-selector-label"
+      inputLabel={t('components.countrySelector.label')}
+    />
   );
 };
 

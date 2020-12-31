@@ -26,7 +26,7 @@ export interface Address {
   streetNo?: string;
   city?: string;
   postalCode?: string;
-  isoCode?: IsoCode | null;
+  isoCode?: IsoCode | 'NONE';
 }
 
 export type SetValueFunction = Dispatch<
