@@ -24,6 +24,20 @@ const resolvers = {
         talent.name.middleName ? talent.name.middleName + ' ' : ''
       }${talent.name.lastName}`;
     },
+    isBasicInfoComplete(talent: Talent): boolean {
+      return Boolean(
+        talent.name?.lastName &&
+          talent.name?.lastName !== '' &&
+          talent.address?.city !== '' &&
+          talent.address?.city &&
+          talent.address?.isoCode &&
+          talent.address?.isoCode !== null &&
+          talent.description &&
+          talent.description !== '' &&
+          talent.profilePic &&
+          talent.profilePic !== '',
+      );
+    },
   },
   Experience: {
     async employer(parent: ExperienceInput): Promise<Organization> {

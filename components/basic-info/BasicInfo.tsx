@@ -5,11 +5,10 @@ import { CheckedTitle } from '../checked-title/CheckedTitle';
 import styles from './BasicInfo.module.css';
 import { Talent } from '../../lib/types';
 import { TFunction } from 'next-i18next';
-import { displayAddress } from '../../lib/utils/strings';
+import { getDisplayAddress } from '../../lib/utils/strings';
 
 interface BasicInfoProps {
   basicInfo: Partial<Talent>;
-  done: boolean;
   handleEdit: () => void;
   t: TFunction;
 }
@@ -17,7 +16,6 @@ interface BasicInfoProps {
 export const BasicInfo = ({
   t,
   basicInfo,
-  done,
   handleEdit,
 }: BasicInfoProps): React.ReactElement => {
   return (
@@ -33,12 +31,15 @@ export const BasicInfo = ({
               />
             )}
             <div className={styles.Details}>
-              <CheckedTitle title={basicInfo.fullName} done={done} />
+              <CheckedTitle
+                title={basicInfo.fullName}
+                done={basicInfo.isBasicInfoComplete}
+              />
               <Typography variant="h4">
                 {t(`profession.${basicInfo.profession}-${basicInfo.gender}`)}
               </Typography>
               <Typography variant="h4">
-                {displayAddress(basicInfo.address, t)}
+                {getDisplayAddress(basicInfo.address, t)}
               </Typography>
             </div>
           </div>

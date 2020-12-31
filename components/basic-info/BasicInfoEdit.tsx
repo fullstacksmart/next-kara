@@ -31,6 +31,7 @@ const UPDATE_TALENT = gql`
         isoCode
       }
       description
+      isBasicInfoComplete
     }
   }
 `;

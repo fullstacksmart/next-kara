@@ -88,6 +88,7 @@ const GET_BASIC_INFO = gql`
         city
         isoCode
       }
+      isBasicInfoComplete
       description
     }
   }
@@ -106,14 +107,10 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
 
   return (
     <Layout title={['profile', `Talent ${id}`]}>
-      <h1>
-        Profile Page for Talent{' '}
-        {basicInfo.name.firstName + ' ' + basicInfo.name.lastName}
-      </h1>
+      <h1>Profile Page for Talent {basicInfo.fullName}</h1>
       <BasicInfo
         t={t}
         basicInfo={basicInfo}
-        done={true}
         handleEdit={() => setModal(ModalType.BASIC_INFO)}
       />
       <BasicInfoEdit

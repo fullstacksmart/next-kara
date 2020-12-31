@@ -126,6 +126,7 @@ const typeDefs = gql`
     documents: [Document]
     languages: [LanguageSkill]
     otherSkills: [OtherSkill]
+    isBasicInfoComplete: Boolean!
   }
 
   type Experience {

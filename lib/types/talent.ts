@@ -64,6 +64,7 @@ export interface Talent extends User {
   documents: Document[];
   languages: LanguageSkill[];
   otherSkills: OtherSkill[];
+  isBasicInfoComplete: boolean;
 }
 
 interface Experience extends TalentAsset {
