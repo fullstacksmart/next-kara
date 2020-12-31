@@ -12,8 +12,9 @@ import React, { useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
 import CountrySelector from '../country-selector/CountrySelector';
-import { GenderToggler } from '../gender-toggler/GenderToggler';
+import { GenderRadio } from '../gender-radio/GenderRadio';
 import InputField from '../input-field/InputField';
+import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 
 const UPDATE_TALENT = gql`
   mutation UpdateTalent($input: TalentUpdate!) {
@@ -26,6 +27,7 @@ const UPDATE_TALENT = gql`
         lastName
       }
       gender
+      profession
       address {
         city
         isoCode
@@ -106,6 +108,11 @@ export const BasicInfoEdit = ({
       <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
       <DialogContent>
         <form id="basicInfoForm" onSubmit={handleSubmit}>
+          <GenderRadio
+            input={basicInfo.gender}
+            updateFunction={setUpdatedInfo}
+            t={t}
+          />
           <Box component="div">
             <InputField
               label={t('fullName.firstName')}
@@ -133,10 +140,11 @@ export const BasicInfoEdit = ({
               required
             />
           </Box>
-          <GenderToggler
-            input={basicInfo.gender}
-            updateFunction={setUpdatedInfo}
+          <ProfessionRadio
             t={t}
+            input={basicInfo.profession}
+            updateFunction={setUpdatedInfo}
+            gender={updatedInfo.gender}
           />
           <InputField
             label={t('profilePic')}
