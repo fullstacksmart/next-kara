@@ -53,6 +53,10 @@ export const BasicInfoEdit = ({
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
     basicInfo,
   );
+  const handleClose = (): void => {
+    setUpdatedInfo(basicInfo);
+    onClose();
+  };
 
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
@@ -108,6 +112,7 @@ export const BasicInfoEdit = ({
   };
 
   return (
+    // TODO Decide whether to discard input on outside click (perhaps not?)
     <Dialog {...props} onClose={onClose}>
       <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
       <DialogContent>
@@ -182,7 +187,7 @@ export const BasicInfoEdit = ({
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>{t('buttonLabels.cancel')}</Button>
+        <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
         <Button type="submit" form="basicInfoForm">
           {t('buttonLabels.save')}
         </Button>
