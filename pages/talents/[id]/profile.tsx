@@ -94,6 +94,31 @@ const GET_BASIC_INFO = gql`
         description
         isBasicInfoComplete
       }
+      experiences {
+        id
+        talent {
+          id
+        }
+        title
+        lineOfWork
+        employer {
+          id
+          title
+          address {
+            city
+            isoCode
+          }
+          duration {
+            from {
+              timeStamp
+            }
+            to {
+              timeStamp
+            }
+          }
+          description
+        }
+      }
     }
   }
 `;
@@ -108,7 +133,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
   const basicInfo = data.getTalentById.basicInfo;
-  const experiences: Experience[] = [];
+  const experiences: Experience[] = data.getTalentById.experiences;
 
   const handleModalClose = (): void => {
     setModal(ModalType.NONE);

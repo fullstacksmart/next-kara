@@ -7,6 +7,7 @@ import {
   UserInput,
   TalentUpdate,
   BasicInfo,
+  Experience,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -35,6 +36,9 @@ const resolvers = {
     },
   },
   Experience: {
+    async talent(input: Experience): Promise<Talent> {
+      return helpers.getTalentById(input.talent);
+    },
     async employer(parent: ExperienceInput): Promise<Organization> {
       return await helpers.getOrganizationById(parent.employer);
     },
