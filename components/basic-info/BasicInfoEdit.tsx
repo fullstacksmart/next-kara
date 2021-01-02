@@ -41,13 +41,13 @@ const UPDATE_TALENT = gql`
 interface BasicInfoEditProps extends DialogProps {
   basicInfo: TalentUpdate;
   t: TFunction;
-  handleClose: () => void;
+  onClose: () => void;
 }
 
 export const BasicInfoEdit = ({
   basicInfo,
   t,
-  handleClose,
+  onClose,
   ...props
 }: BasicInfoEditProps): React.ReactElement => {
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
@@ -104,11 +104,11 @@ export const BasicInfoEdit = ({
     e.preventDefault();
     const result = await mutate();
     console.log(result);
-    handleClose();
+    onClose();
   };
 
   return (
-    <Dialog {...props}>
+    <Dialog {...props} onClose={onClose}>
       <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
       <DialogContent>
         <form id="basicInfoForm" onSubmit={handleSubmit}>
@@ -182,7 +182,7 @@ export const BasicInfoEdit = ({
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
+        <Button onClick={onClose}>{t('buttonLabels.cancel')}</Button>
         <Button type="submit" form="basicInfoForm">
           {t('buttonLabels.save')}
         </Button>
