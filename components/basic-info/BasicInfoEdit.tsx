@@ -12,7 +12,6 @@ import React, { useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
 import { Button } from '../buttons';
 import CountrySelector from '../country-selector/CountrySelector';
-import { GenderRadio } from '../gender-radio/GenderRadio';
 import { GenderSelector } from '../gender-selector/GenderSelector';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
