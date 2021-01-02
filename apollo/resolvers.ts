@@ -6,6 +6,7 @@ import {
   Talent,
   UserInput,
   TalentUpdate,
+  BasicInfo,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -19,24 +20,18 @@ const resolvers = {
     type(): string {
       return 'TALENT';
     },
-    fullName(talent: Talent): string {
-      return `${talent.name.firstName} ${
-        talent.name.middleName ? talent.name.middleName + ' ' : ''
-      }${talent.name.lastName}`;
-    },
-    isBasicInfoComplete(talent: Talent): boolean {
-      return Boolean(
-        talent.name?.lastName &&
-          talent.name?.lastName !== '' &&
-          talent.address?.city !== '' &&
-          talent.address?.city &&
-          talent.address?.isoCode &&
-          talent.address?.isoCode !== null &&
-          talent.description &&
-          talent.description !== '' &&
-          talent.profilePic &&
-          talent.profilePic !== '',
-      );
+    basicInfo(talent: Talent): BasicInfo {
+      return {
+        id: talent.id,
+        name: talent.name,
+        fullName: helpers.getFullName(talent),
+        gender: talent.gender,
+        profilePic: talent.profilePic,
+        profession: talent.profession,
+        address: talent.address,
+        description: talent.description,
+        isBasicInfoComplete: helpers.isBasicInfoComplete(talent),
+      };
     },
   },
   Experience: {
@@ -49,6 +44,7 @@ const resolvers = {
       return await helpers.getOrganizationById(parent.institution);
     },
   },
+
   Query: {
     getAllTalentIds(): string[] {
       return helpers.getAllTalentIds();

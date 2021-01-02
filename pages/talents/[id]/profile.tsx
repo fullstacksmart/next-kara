@@ -2,8 +2,9 @@ import { gql, useQuery } from '@apollo/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
-import { ModalType, PageProps } from '../../../lib/types';
+import { Experience, ModalType, PageProps } from '../../../lib/types';
 import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
+import { ExperienceSection } from '../../../components/experience-section/ExperienceSection';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
 
@@ -72,24 +73,27 @@ export interface ProfilePageProps extends PageProps {
 //   }
 // `;
 const GET_BASIC_INFO = gql`
-  query GetTalent($id: String!) {
+  query GetTalentWithFragment($id: String!) {
     getTalentById(id: $id) {
       id
-      name {
-        firstName
-        middleName
-        lastName
+      basicInfo {
+        id
+        name {
+          firstName
+          middleName
+          lastName
+        }
+        fullName
+        gender
+        profilePic
+        profession
+        address {
+          city
+          isoCode
+        }
+        description
+        isBasicInfoComplete
       }
-      gender
-      fullName
-      profilePic
-      profession
-      address {
-        city
-        isoCode
-      }
-      isBasicInfoComplete
-      description
     }
   }
 `;
@@ -103,7 +107,13 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const [modal, setModal] = useState<ModalType>(ModalType.NONE);
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
-  const basicInfo = data.getTalentById;
+  const basicInfo = data.getTalentById.basicInfo;
+  const experiences: Experience[] = [];
+
+  const handleModalClose = (): void => {
+    setModal(ModalType.NONE);
+  };
+  console.log(data.getTalentById);
 
   return (
     <Layout title={['profile', `Talent ${id}`]}>
@@ -117,7 +127,12 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
         t={t}
         basicInfo={basicInfo}
         open={modal === ModalType.BASIC_INFO}
-        onClose={() => setModal(ModalType.NONE)}
+        onClose={handleModalClose}
+      />
+      <ExperienceSection
+        t={t}
+        experiences={experiences}
+        handleEdit={() => setModal(ModalType.EXPERIENCE)}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

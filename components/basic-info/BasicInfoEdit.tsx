@@ -19,21 +19,23 @@ import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 const UPDATE_TALENT = gql`
   mutation UpdateTalent($input: TalentUpdate!) {
     updateTalent(input: $input) {
-      id
-      fullName
-      name {
-        firstName
-        middleName
-        lastName
+      basicInfo {
+        id
+        name {
+          firstName
+          middleName
+          lastName
+        }
+        fullName
+        gender
+        profession
+        address {
+          city
+          isoCode
+        }
+        description
+        isBasicInfoComplete
       }
-      gender
-      profession
-      address {
-        city
-        isoCode
-      }
-      description
-      isBasicInfoComplete
     }
   }
 `;

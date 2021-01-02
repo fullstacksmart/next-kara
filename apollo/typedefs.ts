@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-micro';
 
 const typeDefs = gql`
-  enum ProfessionType {
+  enum Profession {
     NURSE
     DOCTOR
     OTHER_MEDICAL
@@ -73,7 +73,6 @@ const typeDefs = gql`
     id: ID!
     name: FullName!
     gender: Gender!
-    fullName: String!
     email: String!
     password: String!
     type: UserType!
@@ -115,9 +114,8 @@ const typeDefs = gql`
     gender: Gender!
     type: UserType!
     name: FullName!
-    fullName: String!
     profilePic: String
-    profession: ProfessionType
+    profession: Profession
     address: Address
     description: String
     experiences: [Experience]
@@ -126,6 +124,18 @@ const typeDefs = gql`
     documents: [Document]
     languages: [LanguageSkill]
     otherSkills: [OtherSkill]
+    basicInfo: BasicInfo!
+  }
+
+  type BasicInfo {
+    id: ID!
+    gender: Gender!
+    name: FullName!
+    fullName: String
+    profilePic: String
+    profession: Profession
+    address: Address
+    description: String
     isBasicInfoComplete: Boolean!
   }
 
@@ -133,7 +143,7 @@ const typeDefs = gql`
     id: ID!
     talent: Talent!
     title: String!
-    lineOfWork: ProfessionType
+    lineOfWork: Profession
     employer: Organization
     duration: Duration
     description: String
@@ -209,7 +219,7 @@ const typeDefs = gql`
     gender: Gender
     address: AddressInput
     profilePic: String
-    profession: ProfessionType
+    profession: Profession
     description: String
   }
 

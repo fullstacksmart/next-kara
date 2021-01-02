@@ -67,3 +67,24 @@ export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
   }
   return updatedTalent;
 };
+
+export const isBasicInfoComplete = (talent: Talent): boolean => {
+  return Boolean(
+    talent.name?.lastName &&
+      talent.name?.lastName !== '' &&
+      talent.address?.city !== '' &&
+      talent.address?.city &&
+      talent.address?.isoCode &&
+      talent.address?.isoCode !== null &&
+      talent.description &&
+      talent.description !== '' &&
+      talent.profilePic &&
+      talent.profilePic !== '',
+  );
+};
+
+export const getFullName = (talent: Talent): string => {
+  return `${talent.name.firstName} ${
+    talent.name.middleName ? talent.name.middleName + ' ' : ''
+  }${talent.name.lastName}`;
+};

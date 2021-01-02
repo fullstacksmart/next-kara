@@ -67,7 +67,19 @@ export interface Talent extends User {
   isBasicInfoComplete: boolean;
 }
 
-interface Experience extends TalentAsset {
+export interface BasicInfo {
+  id: string;
+  name: FullName;
+  fullName: string;
+  gender: Gender;
+  profilePic: string;
+  profession: Profession;
+  address: Address;
+  description: string;
+  isBasicInfoComplete: boolean;
+}
+
+export interface Experience extends TalentAsset {
   title: string;
   lineOfWork: Profession;
   employer?: Organization;
