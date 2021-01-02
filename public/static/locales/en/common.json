@@ -48,7 +48,7 @@
   },
   "password": "password",
   "profession": {
-    "DOCTOR-FEMA": "doctor",
+    "DOCTOR-FEMALE": "doctor",
     "DOCTOR-MALE": "doctor",
     "DOCTOR-OTHER": "doctor",
     "NURSE-FEMALE": "nurse",
