@@ -13,6 +13,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "apollo-server-micro": "^2.19.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "10.0.3",
     "next-i18next": "^7.0.1",
     "react": "17.0.1",

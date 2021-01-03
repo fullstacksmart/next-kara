@@ -14,4 +14,5 @@ module.exports = {
     Organization: createModel(db, 'organizations'),
     Agency: createModel(db, 'agencies'),
   },
+  db,
 };
