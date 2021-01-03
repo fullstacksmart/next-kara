@@ -28,7 +28,3 @@ export interface Address {
   postalCode?: string;
   isoCode?: IsoCode | 'NONE';
 }
-
-export type SetValueFunction = Dispatch<
-  SetStateAction<{ id: string } & Record<string, unknown>>
->;
