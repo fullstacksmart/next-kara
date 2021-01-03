@@ -1,0 +1,27 @@
+.BasicInfo {
+  --pic-size: 15rem;
+  --horizontal-gutter: 5rem;
+  --vertical-gutter: 3rem;
+}
+
+.HeaderContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProfilePic {
+  border-radius: 100%;
+  width: var(--pic-size);
+  height: var(--pic-size);
+  margin-right: var(--horizontal-gutter);
+}
+.Details {
+  height: var(--picSize);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.Description {
+  margin-top: var(--vertical-gutter);
+}
