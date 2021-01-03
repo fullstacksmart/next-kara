@@ -4,7 +4,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 
-const uri = '/api/graphql';
+const uri = '/api';
 
 
 // link needed?

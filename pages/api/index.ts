@@ -16,4 +16,4 @@ export const config = {
   },
 };
 
-export default server.createHandler({ path: '/api/graphql' });
+export default server.createHandler({ path: '/api' });
