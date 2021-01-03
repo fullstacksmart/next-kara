@@ -1,27 +1,69 @@
 {
+  "address": {
+    "city": "Stadt",
+    "country": "Land"
+  },
+  "buttonLabels": {
+    "cancel": "abbrechen",
+    "save": "speichern"
+  },
+  "companyName": "Firmenname",
+  "components": {
+    "basicInfo": {
+      "title": "Bearbeite Deine persönlichen Informationen"
+    },
+    "countrySelector": {
+      "label": "Land"
+    },
+    "genderSelector": {
+      "label": "Anrede"
+    },
+    "layout": {
+      "backHome": "zurück zur Homepage"
+    }
+  },
+  "description": "Über mich",
+  "email": "Email",
+  "fullName": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "middleName": "Zweiter Vorname"
+  },
+  "gender": {
+    "FEMALE": "Frau",
+    "MALE": "Herr",
+    "OTHER": ""
+  },
+  "iso": {
+    "AUT": "Österreich",
+    "CRO": "Kroatien",
+    "DEU": "Deutschland",
+    "POL": "Poland",
+    "SRB": "Serbien"
+  },
   "pages": {
     "signup": {
       "header": "Erstelle Dein Profil"
     }
   },
-  "components": {
-    "layout": {
-      "backHome": "zurück zur Homepage"
-    }
-  },
-  "type": {
-    "talent": "Talent",
-    "employer": "Arbeitgeber"
-  },
-  "companyName": "Firmenname",
-  "fullName": {
-    "firstName": "Vorname",
-    "middleName": "Zweiter Vorname",
-    "lastName": "Nachname"
-  },
-  "email": "Email",
   "password": "Passwort",
+  "profession": {
+    "DOCTOR-FEMALE": "Ärztin",
+    "DOCTOR-MALE": "Arzt",
+    "DOCTOR-OTHER": "Arzt",
+    "NURSE-FEMALE": "Krankenpflegerin",
+    "NURSE-MALE": "Krankenpfleger",
+    "NURSE-OTHER": "Krankenpfleger",
+    "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
+    "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
+    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
+  },
+  "profilePic": "URL Deines Profilbildes",
   "repeatPassword": "Passwort wiederholen",
+  "signin": "anmelden",
   "signup": "registrieren",
-  "signin": "anmelden"
+  "type": {
+    "employer": "Arbeitgeber",
+    "talent": "Talent"
+  }
 }

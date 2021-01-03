@@ -2,8 +2,8 @@ import {
   ButtonProps as MuiButtonProps,
   Button as MuiButton,
 } from '@material-ui/core';
-import { LinkProps } from 'next/link'
-import { Link } from '../../i18n'
+import { LinkProps } from 'next/link';
+import { Link } from '../../i18n';
 
 type OptionalLinkProps =
   | {

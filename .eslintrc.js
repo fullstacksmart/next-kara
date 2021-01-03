@@ -10,6 +10,12 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
   ],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -18,12 +24,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  overrides: [
-    {
-      files: ['*.ts', '*.tsx'],
-      extends: ['plugin:@typescript-eslint/recommended'],
-    },
-  ],
   settings: {
     react: {
       version: 'detect',

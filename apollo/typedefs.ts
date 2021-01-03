@@ -8,6 +8,21 @@ const typeDefs = gql`
     OTHER_NON_MEDICAL
   }
 
+  # TODO populate dynamically
+  enum IsoCode {
+    SRB
+    DEU
+    AUT
+    CRO
+    POL
+  }
+
+  enum Gender {
+    MALE
+    FEMALE
+    OTHER
+  }
+
   enum UserType {
     TALENT
     EMPLOYER
@@ -57,6 +72,8 @@ const typeDefs = gql`
   interface User {
     id: ID!
     name: FullName!
+    gender: Gender!
+    fullName: String!
     email: String!
     password: String!
     type: UserType!
@@ -73,7 +90,7 @@ const typeDefs = gql`
     streetNo: String
     city: String
     postalCode: String
-    isoCode: String
+    isoCode: IsoCode
   }
 
   type Date {
@@ -95,8 +112,11 @@ const typeDefs = gql`
     id: ID!
     email: String!
     password: String!
+    gender: Gender!
     type: UserType!
     name: FullName!
+    fullName: String!
+    profilePic: String
     profession: ProfessionType
     address: Address
     description: String
@@ -106,6 +126,7 @@ const typeDefs = gql`
     documents: [Document]
     languages: [LanguageSkill]
     otherSkills: [OtherSkill]
+    isBasicInfoComplete: Boolean!
   }
 
   type Experience {
@@ -159,25 +180,49 @@ const typeDefs = gql`
   input NameInput {
     firstName: String
     middleName: String
+    lastName: String
+  }
+
+  input InitialNameInput {
+    firstName: String
+    middleName: String
     lastName: String!
   }
 
+  input AddressInput {
+    city: String
+    isoCode: IsoCode
+  }
+
   input UserInput {
-    name: NameInput!
+    name: InitialNameInput!
     email: String!
+    gender: Gender!
     company: String
     password: String!
     type: UserType!
+  }
+
+  input TalentUpdate {
+    id: ID!
+    name: NameInput
+    gender: Gender
+    address: AddressInput
+    profilePic: String
+    profession: ProfessionType
+    description: String
   }
 
   type Query {
     getAllTalentIds: [ID]!
     getAllUserIds: [ID]!
     getAllEmployerIds: [ID]!
+    getTalentById(id: String!): Talent!
   }
 
   type Mutation {
     addUser(input: UserInput!): User!
+    updateTalent(input: TalentUpdate!): Talent!
   }
 `;
 export default typeDefs;

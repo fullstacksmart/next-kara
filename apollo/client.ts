@@ -6,6 +6,7 @@ import {
 
 const uri = '/api/graphql';
 
+
 // link needed?
 // const link = ApolloLink.from([http]);
 
