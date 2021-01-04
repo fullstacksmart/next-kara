@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Card,
   CardContent,
@@ -11,9 +12,10 @@ import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { useEffect, useState } from 'react';
-import { PageProps, UserInput, UserType } from '../../lib/types';
+import { UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
+
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -23,8 +25,7 @@ const ADD_USER = gql`
   }
 `;
 
-
-const SignUpPage = ({ t }: PageProps): React.ReactElement => {
+const SignUpPage = ({t}): React.ReactElement => {
   const [formValues, setFormValues] = useState<UserInput>({
     name: {
       lastName: '',
@@ -86,8 +87,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
             <form onSubmit={handleSubmit}>
               <OptionsToggler
                 options={[
-                  { value: 'TALENT', display: t('type.talent') },
-                  { value: 'EMPLOYER', display: t('type.employer') },
+                  { value: 'TALENT', display: t('type.talent')},
+                  { value: 'EMPLOYER', display: t('type.employer')},
                 ]}
                 optionsLabel="type"
                 setOption={(type) => {
@@ -155,7 +156,11 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 };
 
 SignUpPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
+  namespacesRequired: ['common']
+})
+
+SignUpPage.propTypes = {
+  t: PropTypes.func.isRequired,
+}
 
 export default withTranslation('common')(SignUpPage);
