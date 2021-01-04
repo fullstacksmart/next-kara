@@ -32,6 +32,7 @@ const SignUpPage = ({t}): React.ReactElement => {
     },
     email: '',
     password: '',
+    gender: 'MALE',
     type: 'TALENT',
   });
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
@@ -58,7 +59,6 @@ const SignUpPage = ({t}): React.ReactElement => {
     //   type: formValues.type,
     // };
     // if (formValues.company) newUser.company = formValues.company;
-    console.log(formValues);
     try {
       await createUser({
         variables: {
