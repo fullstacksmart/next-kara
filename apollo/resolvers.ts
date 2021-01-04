@@ -7,7 +7,7 @@ import {
   UserInput,
   TalentUpdate,
 } from '../lib/types';
-import { authenticated } from '../pages/api/auth';
+//import { authenticated } from '../pages/api/auth';
 import * as helpers from './helpers';
 
 const resolvers = {
