@@ -15,11 +15,12 @@ import { useEffect, useState } from 'react';
 import { UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
+import { CropDinSharp } from '@material-ui/icons';
 
 
-const ADD_USER = gql`
-  mutation AddUser($input: UserInput!) {
-    addUser(input: $input) {
+const SIGNUP = gql`
+  mutation Signup($input: UserInput!) {
+    signup(input: $input) {
       id
     }
   }
@@ -36,7 +37,7 @@ const SignUpPage = ({t}): React.ReactElement => {
     type: 'TALENT',
   });
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
-  const [createUser, newUser] = useMutation(ADD_USER);
+  const [createUser, newUser] = useMutation(SIGNUP);
 
   const company =
     formValues.type === 'TALENT' ? null : (
@@ -52,21 +53,15 @@ const SignUpPage = ({t}): React.ReactElement => {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     e.preventDefault();
-    // const newUser = {
-    //   name: formValues.name,
-    //   email: formValues.email,
-    //   password: formValues.password,
-    //   type: formValues.type,
-    // };
-    // if (formValues.company) newUser.company = formValues.company;
     try {
-      await createUser({
+      const {newUser, token} = await createUser({
         variables: {
           input: formValues,
         },
       });
+      console.log(newUser, token)
     } catch (e) {
-      console.error('user already exists: ', e.message);
+      console.error('Error while signing up user: ', e.message);
     }
   };
 

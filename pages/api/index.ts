@@ -8,8 +8,10 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context({ req }) {
+    console.log('hi from api');
     const token = req.headers.authorization;
     const user = getUserFromToken(token);
+    console.log('user in API Index: ', user)
     return { ...db, user, createToken };
   },
 });

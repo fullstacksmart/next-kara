@@ -29,7 +29,7 @@ export const getOrganizationById = async (
   return await models.Organization.findOne({ id });
 };
 
-export const addUser = async (input: UserInput): Promise<User> => {
+export const signup = async (input: UserInput, createToken): Promise<User> => {
   const type =
     input.type === 'TALENT'
       ? 'Talent'
@@ -39,10 +39,11 @@ export const addUser = async (input: UserInput): Promise<User> => {
   const oldUser = models[type].findOne({
     email: input.email,
   });
-  console.log(oldUser)
-  if (oldUser) throw new Error('user already exists');
+  if (oldUser) throw new Error('User with same email and same type already exists');
   const newUser = await models[type].createOne(input);
-  return newUser;
+  const token = createToken(newUser);
+  console.log(token)
+  return {newUser, token};
 };
 
 export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {

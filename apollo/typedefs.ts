@@ -221,7 +221,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(input: UserInput!): User!
+    signup(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
   }
 `;

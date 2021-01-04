@@ -66,8 +66,9 @@ const resolvers = {
     },
   },
   Mutation: {
-    async addUser(_: unknown, { input }: { input: UserInput }): Promise<User> {
-      return await helpers.addUser(input);
+    async signup(_: unknown, { input }: { input: UserInput }, {createToken}): Promise<User> {
+      console.log('hi from mutation')
+      return await helpers.signup(input, createToken);
     },
     async updateTalent(
       _: unknown,
