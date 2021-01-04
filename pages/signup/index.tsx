@@ -105,7 +105,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                     type: type as UserType,
                   }));
                 }}
-                required
               />
               <Box component="div">
                 <GenderSelector t={t} updateFunction={setFormValues} />
