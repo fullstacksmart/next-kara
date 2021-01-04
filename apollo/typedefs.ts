@@ -220,8 +220,13 @@ const typeDefs = gql`
     getTalentById(id: String!): Talent!
   }
 
+  type SignupOutput {
+    newUser: User!,
+    token: String
+  }
+
   type Mutation {
-    signup(input: UserInput!): User!
+    signup(input: UserInput!): SignupOutput!
     updateTalent(input: TalentUpdate!): Talent!
   }
 `;

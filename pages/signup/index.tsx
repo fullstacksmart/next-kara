@@ -17,11 +17,13 @@ import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { CropDinSharp } from '@material-ui/icons';
 
-
 const SIGNUP = gql`
   mutation Signup($input: UserInput!) {
     signup(input: $input) {
-      id
+      newUser {
+        id
+      }
+      token
     }
   }
 `;
@@ -54,12 +56,11 @@ const SignUpPage = ({t}): React.ReactElement => {
   ): Promise<void> => {
     e.preventDefault();
     try {
-      const {newUser, token} = await createUser({
+      await createUser({
         variables: {
           input: formValues,
         },
-      });
-      console.log(newUser, token)
+      })
     } catch (e) {
       console.error('Error while signing up user: ', e.message);
     }
@@ -68,6 +69,7 @@ const SignUpPage = ({t}): React.ReactElement => {
   useEffect(() => {
     if (newUser.data) {
       console.log('new User:', newUser);
+      localStorage.setItem('token', newUser.data.signup.token);
     }
   }, [newUser]);
 
