@@ -66,7 +66,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    async signup(_: unknown, { input }: { input: UserInput }, {createToken}): Promise<User> {
+    async signup(_: unknown, { input }: { input: UserInput }, {createToken}: { createToken: (arg0: User) => string}): Promise<{newUser: User, token: string}> {
       console.log('hi from mutation')
       return await helpers.signup(input, createToken);
     },
