@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
-import { GenderToggler } from '../../components/gender-toggler/GenderToggler';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -24,8 +23,9 @@ const ADD_USER = gql`
   }
 `;
 
+
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
-  const [formValues, setFormValues] = useState<Partial<UserInput>>({
+  const [formValues, setFormValues] = useState<UserInput>({
     name: {
       lastName: '',
     },
@@ -46,8 +46,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     );
 
-  console.log(formValues);
-
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
@@ -59,9 +57,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     //   type: formValues.type,
     // };
     // if (formValues.company) newUser.company = formValues.company;
+    console.log(formValues);
     try {
-      // const token = await createUser
-      // then save to local storage (for now)
       await createUser({
         variables: {
           input: formValues,
@@ -83,7 +80,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       <Card>
         <CardContent>
           <Container>
-            <Typography variant="h2">{t('pages.signup.header')}</Typography>
+            <Typography variant="h2">
+              {t('pages.signup.header')}
+            </Typography>
             <form onSubmit={handleSubmit}>
               <OptionsToggler
                 options={[
@@ -115,7 +114,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                   required
                 />
               </Box>
-              <GenderToggler t={t} updateFunction={setFormValues} />
               {company}
               <InputField
                 id="email"
