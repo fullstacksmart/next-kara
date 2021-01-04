@@ -29,7 +29,7 @@ export const getOrganizationById = async (
   return await models.Organization.findOne({ id });
 };
 
-export const signup = async (input: UserInput, createToken): Promise<User> => {
+export const signup = async (input: UserInput, createToken: (arg0: User) => string): Promise<{newUser: User, token: string}> => {
   const type =
     input.type === 'TALENT'
       ? 'Talent'
