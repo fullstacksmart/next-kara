@@ -53,9 +53,9 @@ const resolvers = {
     },
   },
   Query: {
-    getAllTalentIds: authenticated((_, __, {user}) => {
+    getAllTalentIds(): string[] {
       return helpers.getAllTalentIds();
-    }),
+    },
     getAllEmployerIds(): string[] {
       return helpers.getAllEmployerIds();
     },
@@ -82,7 +82,9 @@ const resolvers = {
 
 export default resolvers;
 
-
-// getAllTalentIds(): string[] {
-    //   return helpers.getAllTalentIds();
-    // },
+/*
+example how to add authentication check to resolver:
+getAllTalentIds: authenticated((_, __, {user}) => {
+      return helpers.getAllTalentIds();
+}),
+*/
