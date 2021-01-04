@@ -1,11 +1,15 @@
 import {
   ApolloClient,
+  createHttpLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
 
-const uri = '/api';
+// const uri = '/api';
 
+const httpLink = createHttpLink({
+  uri: '/api',
+});
 
 // link needed?
 // const link = ApolloLink.from([http]);
@@ -13,8 +17,8 @@ const uri = '/api';
 const cache = new InMemoryCache();
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-  cache,
-  uri,
+  link: httpLink,
+  cache
 });
 
 export default client;
