@@ -51,6 +51,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     formValues.type === 'EMPLOYER' ? (
       <InputField
         id="company"
+        value={formValues.company}
         label={t('companyName')}
         setValue={setFormValues}
         required
