@@ -40,7 +40,8 @@ export const addUser = async (input: UserInput): Promise<User> => {
     email: input.email,
   });
   if (oldUser) throw new Error('user already exists');
-  return await models[type].createOne(input);
+  const newUser = await models[type].createOne(input);
+  return newUser;
 };
 
 export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {

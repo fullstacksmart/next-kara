@@ -46,6 +46,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     );
 
+  console.log(formValues);
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
@@ -57,8 +59,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     //   type: formValues.type,
     // };
     // if (formValues.company) newUser.company = formValues.company;
-    console.log(formValues);
     try {
+      // const token = await createUser
+      // then save to local storage (for now)
       await createUser({
         variables: {
           input: formValues,
