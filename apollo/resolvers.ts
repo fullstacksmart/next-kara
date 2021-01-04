@@ -7,6 +7,7 @@ import {
   UserInput,
   TalentUpdate,
 } from '../lib/types';
+import { authenticated } from '../pages/api/auth';
 import * as helpers from './helpers';
 
 const resolvers = {
@@ -52,9 +53,9 @@ const resolvers = {
     },
   },
   Query: {
-    getAllTalentIds(): string[] {
+    getAllTalentIds: authenticated((_, __, {user}) => {
       return helpers.getAllTalentIds();
-    },
+    }),
     getAllEmployerIds(): string[] {
       return helpers.getAllEmployerIds();
     },
@@ -80,3 +81,8 @@ const resolvers = {
 };
 
 export default resolvers;
+
+
+// getAllTalentIds(): string[] {
+    //   return helpers.getAllTalentIds();
+    // },

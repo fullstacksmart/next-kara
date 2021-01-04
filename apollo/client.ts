@@ -30,9 +30,3 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 });
 
 export default client;
-
-
-/*
-r@ownefewf.com
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImgzanlHdkdBWnJEa083cm5jcDRKRiIsInR5cGUiOiJUQUxFTlQiLCJpYXQiOjE2MDk3NzYyODZ9.8HLb4Oq3ovto405jWLepZwYNWJBjyG5w2XrvjH8nKso
-*/

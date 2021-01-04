@@ -1,3 +1,4 @@
+import { AuthenticationError } from 'apollo-server-micro';
 import jwt from 'jsonwebtoken'
 import {models} from '../../db'
 
@@ -21,3 +22,10 @@ export const getUserFromToken = (token: string)  => {
     return null;
   }
 };
+
+export const authenticated = next => (root, args, context, info) => {
+  if (!context.user) {
+    throw new AuthenticationError('must authenticate')
+  }
+  return next(root, args, context, info)
+}
