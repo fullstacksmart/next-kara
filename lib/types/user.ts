@@ -1,3 +1,4 @@
+import { Address } from 'cluster';
 import { BaseEntity } from '.';
 
 export type UserType = 'TALENT' | 'EMPLOYER' | 'AGENCY';
@@ -21,6 +22,7 @@ export interface User extends BaseEntity {
 
 export interface UserInput {
   name: FullName;
+  gender: Gender;
   company?: string;
   email: string;
   password: string;
