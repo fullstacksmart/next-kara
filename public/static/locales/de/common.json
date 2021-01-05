@@ -20,6 +20,9 @@
     },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "experienceSection": {
+      "title": "Berufserfahrung"
     }
   },
   "description": "Über mich",

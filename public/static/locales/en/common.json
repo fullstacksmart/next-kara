@@ -20,6 +20,9 @@
     },
     "layout": {
       "backHome": "take me back home"
+    },
+    "experienceSection": {
+      "title": "job experience"
     }
   },
   "description": "about me",
