@@ -27,7 +27,7 @@ export const ExperienceSection = ({
   });
 
   return (
-    <Section>
+    <Section {...props}>
       <CheckedTitle
         title={t('components.experienceSection.title')}
         done={Boolean(

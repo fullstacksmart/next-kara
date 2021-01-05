@@ -9,9 +9,13 @@ export interface ExperienceItemProps {
 export const ExperienceItem = ({
   experience,
 }: ExperienceItemProps): React.ReactElement => {
-  console.log('got here');
   return (
-    <SectionItem handleEdit={() => console.log('edit', experience.id)}>
+    <SectionItem
+      handleEdit={
+        () =>
+          console.log('edit', experience.id) /* eslint-disable-line no-console*/
+      }
+    >
       <Typography variant="h4">{experience.title}</Typography>
     </SectionItem>
   );

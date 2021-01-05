@@ -123,42 +123,6 @@ const GET_ALL_INFO = gql`
     }
   }
 `;
-// const GET_BASIC_INFO = gql`
-//   query GetBasicInfo($id: String!) {
-//     getTalentById(id: $id) {
-//       basicInfo {
-//         id
-//         name {
-//           firstName
-//           middleName
-//           lastName
-//         }
-//         fullName
-//         gender
-//         profilePic
-//         profession
-//         address {
-//           city
-//           isoCode
-//         }
-//         description
-//         isBasicInfoComplete
-//       }
-//       experiences {
-//         id
-//         talent {
-//           id
-//         }
-//         title
-//         lineOfWork
-//         employer {
-//           id
-
-//         }
-//       }
-//     }
-//   }
-// `;
 
 const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
@@ -175,7 +139,6 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const handleModalClose = (): void => {
     setModal(ModalType.NONE);
   };
-  console.log(data.getTalentById);
 
   return (
     <Layout title={['profile', `Talent ${id}`]}>
