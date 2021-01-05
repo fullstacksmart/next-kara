@@ -6,7 +6,7 @@ import baseTheme from '../lib/material-ui/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { appWithTranslation } from '../i18n';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import client from '../apollo/client';
 import { Router } from 'next/dist/client/router';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
       </ThemeProvider>
     </ApolloProvider>
   );
-};
+}
 
 MyApp.getInitialProps = async (appContext: AppContextType<Router>) =>
   await App.getInitialProps(appContext);
