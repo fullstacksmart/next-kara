@@ -147,6 +147,7 @@ const typeDefs = gql`
     employer: Organization
     duration: Duration
     description: String
+    isComplete: Boolean
   }
 
   type Qualification {

@@ -37,6 +37,11 @@ type FederalState =
 
 interface TalentAsset extends BaseEntity {
   talent: Talent;
+  isComplete: boolean;
+}
+
+interface TalentAssetInput {
+  talent: string;
 }
 
 interface Date {
@@ -87,7 +92,7 @@ export interface Experience extends TalentAsset {
   description?: string;
 }
 
-export interface ExperienceInput extends TalentAsset {
+export interface ExperienceInput extends TalentAssetInput {
   title: string;
   lineOfWork: Profession;
   employer: string;

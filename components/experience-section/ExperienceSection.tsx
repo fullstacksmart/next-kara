@@ -28,7 +28,12 @@ export const ExperienceSection = ({
 
   return (
     <Section>
-      <CheckedTitle title={t('components.experienceSection.title')} />
+      <CheckedTitle
+        title={t('components.experienceSection.title')}
+        done={Boolean(
+          experiences.filter((experience) => experience.isComplete).length,
+        )}
+      />
       {experienceItems}
     </Section>
   );

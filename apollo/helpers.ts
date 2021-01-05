@@ -5,6 +5,7 @@ import {
   Talent,
   Organization,
   TalentUpdate,
+  Experience,
 } from '../lib/types';
 
 export const getAllTalentIds = (): string[] =>
@@ -87,4 +88,16 @@ export const getFullName = (talent: Talent): string => {
   return `${talent.name.firstName} ${
     talent.name.middleName ? talent.name.middleName + ' ' : ''
   }${talent.name.lastName}`;
+};
+
+export const isExperienceComplete = async (
+  experience: Experience,
+): Promise<boolean> => {
+  return Boolean(
+    experience.description &&
+      experience.duration &&
+      experience.employer &&
+      experience.lineOfWork &&
+      experience.title,
+  );
 };
