@@ -2,18 +2,16 @@
   "talents": [
     {
       "id": "yasbiuycdbucoiuscboiucsiousc!@",
-      "email": "galina@cimprich.rs",
+      "email": "galina@cimpric.rs",
       "password": "pass",
       "name": {
         "firstName": "Galina",
-        "lastName": "Cimprich"
+        "lastName": "Cimpriç",
+        "middleName": ""
       },
+      "gender": "FEMALE",
+      "profilePic": "https://www.unitex.com/wp-content/uploads/2018/04/Unitex-Nursing-Shortage-1.jpg",
       "profession": "NURSE",
-      "address": {
-        "city": "Belgrade",
-        "postalCode": 101801,
-        "isoCode": "SRB"
-      },
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus.",
       "experiences": [
         {
@@ -28,9 +26,9 @@
             },
             "to": {
               "timeStamp": 1549015200
-            },
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum."
-          }
+            }
+          },
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum."
         },
         {
           "id": 2,
@@ -44,9 +42,9 @@
             },
             "to": {
               "timeStamp": 1433160000
-            },
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum."
-          }
+            }
+          },
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum."
         }
       ],
       "qualifications": [
@@ -94,7 +92,11 @@
           "level": "MASTER",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus."
         }
-      ]
+      ],
+      "address": {
+        "city": "Belgrad",
+        "isoCode": "SRB"
+      }
     }
   ],
   "employers": [],
