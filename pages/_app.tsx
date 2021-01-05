@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import App from 'next/app';
 import { AppProps } from 'next/app';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 import baseTheme from '../lib/material-ui/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -12,12 +11,12 @@ import client from '../apollo/client';
 import { Router } from 'next/dist/client/router';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 
-function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
+function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
+      jssStyles.parentElement?.removeChild(jssStyles);
     }
   }, []);
 
@@ -43,8 +42,3 @@ MyApp.getInitialProps = async (appContext: AppContextType<Router>) => ({
 });
 
 export default appWithTranslation(MyApp);
-
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
-};
