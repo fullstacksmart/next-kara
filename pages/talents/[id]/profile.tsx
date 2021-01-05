@@ -103,7 +103,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const [modal, setModal] = useState<ModalType>(ModalType.NONE);
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
-  const basicInfo = data.getTalentById;
+  const basicInfo = data?.getTalentById;
 
   return (
     <Layout title={['profile', `Talent ${id}`]}>
