@@ -19,10 +19,10 @@ export const ExperienceSection = ({
   const experienceItems = experiences.map((experience, i, arr) => {
     const divider = i < arr.length - 1 ? <ItemDivider /> : null;
     return (
-      <>
-        <ExperienceItem key={experience.id} experience={experience} />
+      <div key={`experience${experience.talent?.id}-${experience.id}`}>
+        <ExperienceItem experience={experience} />
         {divider}
-      </>
+      </div>
     );
   });
 
