@@ -72,8 +72,8 @@ export interface ProfilePageProps extends PageProps {
 //     }
 //   }
 // `;
-const GET_BASIC_INFO = gql`
-  query GetTalentWithFragment($id: String!) {
+const GET_ALL_INFO = gql`
+  query GetTalentById($id: String!) {
     getTalentById(id: $id) {
       id
       basicInfo {
@@ -103,28 +103,64 @@ const GET_BASIC_INFO = gql`
         lineOfWork
         employer {
           id
-          title
+          name
           address {
             city
             isoCode
           }
-          duration {
-            from {
-              timeStamp
-            }
-            to {
-              timeStamp
-            }
-          }
-          description
         }
+        duration {
+          from {
+            timeStamp
+          }
+          to {
+            timeStamp
+          }
+        }
+        description
       }
     }
   }
 `;
+// const GET_BASIC_INFO = gql`
+//   query GetBasicInfo($id: String!) {
+//     getTalentById(id: $id) {
+//       basicInfo {
+//         id
+//         name {
+//           firstName
+//           middleName
+//           lastName
+//         }
+//         fullName
+//         gender
+//         profilePic
+//         profession
+//         address {
+//           city
+//           isoCode
+//         }
+//         description
+//         isBasicInfoComplete
+//       }
+//       experiences {
+//         id
+//         talent {
+//           id
+//         }
+//         title
+//         lineOfWork
+//         employer {
+//           id
+
+//         }
+//       }
+//     }
+//   }
+// `;
 
 const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
-  const { data, loading, error } = useQuery(GET_BASIC_INFO, {
+  const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
       id,
     },
@@ -132,7 +168,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const [modal, setModal] = useState<ModalType>(ModalType.NONE);
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
-  const basicInfo = data.getTalentById.basicInfo;
+  const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
 
   const handleModalClose = (): void => {

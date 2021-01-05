@@ -36,16 +36,18 @@ const resolvers = {
     },
   },
   Experience: {
-    async talent(input: Experience): Promise<Talent> {
-      return helpers.getTalentById(input.talent);
+    async talent(experience: Experience): Promise<Talent> {
+      return helpers.getTalentById(experience.talent);
     },
-    async employer(parent: ExperienceInput): Promise<Organization> {
-      return await helpers.getOrganizationById(parent.employer);
+    async employer(experience: ExperienceInput): Promise<Organization> {
+      return await helpers.getOrganizationById(experience.employer);
     },
   },
   Qualification: {
-    async institution(parent: QualificationInput): Promise<Organization> {
-      return await helpers.getOrganizationById(parent.institution);
+    async institution(
+      qualification: QualificationInput,
+    ): Promise<Organization> {
+      return await helpers.getOrganizationById(qualification.institution);
     },
   },
 

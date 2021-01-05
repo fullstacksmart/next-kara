@@ -26,8 +26,10 @@ const OptionToggler = ({
   const firstOption = options.length > 0 ? options[0] : null;
   const [value, setValue] = useState(defaultValue || firstOption?.value);
   const handleChange = (e: React.MouseEvent, newValue: string): void => {
-    setValue(newValue);
-    setOption(newValue);
+    if (newValue !== null) {
+      setValue(newValue);
+      setOption(newValue);
+    }
   };
   const buttons = options.map((option) => (
     <ToggleButton

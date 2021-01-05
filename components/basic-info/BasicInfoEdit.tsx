@@ -96,7 +96,11 @@ export const BasicInfoEdit = ({
         },
         address: {
           city: updatedInfo.address?.city,
-          isoCode: updatedInfo.address?.isoCode,
+          isoCode:
+            updatedInfo.address?.isoCode &&
+            updatedInfo.address.isoCode !== 'NONE'
+              ? updatedInfo.address.isoCode
+              : null,
           __typename: 'Address',
         },
         profilePic: updatedInfo.profilePic,
