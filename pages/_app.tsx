@@ -35,10 +35,9 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
       </ThemeProvider>
     </ApolloProvider>
   );
-}
+};
 
-MyApp.getInitialProps = async (appContext: AppContextType<Router>) => ({
-  ...(await App.getInitialProps(appContext)),
-});
+MyApp.getInitialProps = async (appContext: AppContextType<Router>) =>
+  await App.getInitialProps(appContext);
 
 export default appWithTranslation(MyApp);

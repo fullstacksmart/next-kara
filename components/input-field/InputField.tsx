@@ -1,11 +1,11 @@
 import { TextField, TextFieldProps } from '@material-ui/core';
-import { SetStateAction } from 'react';
-import { FullName, UserInput } from '../../lib/types';
+import { Dispatch, SetStateAction } from 'react';
 
 // TODO make component reusable by generalizing types
 type InputFieldProps = TextFieldProps & {
-  setValue?: React.Dispatch<SetStateAction<UserInput>>;
-  nesting?: keyof UserInput;
+  setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
+  nesting?: string;
+  id: string;
 };
 
 const InputField = ({
@@ -13,6 +13,7 @@ const InputField = ({
   setValue,
   nesting,
   id,
+  value,
   ...props
 }: InputFieldProps): React.ReactElement => {
   const labelText = label?.toString();
@@ -21,16 +22,16 @@ const InputField = ({
   ): void => {
     if (setValue)
       if (!nesting) {
-        setValue((oldValues: UserInput) => ({
+        setValue((oldValues) => ({
           ...oldValues,
-          [id as string]: event.target.value,
+          [id]: event.target.value,
         }));
       } else {
-        setValue((oldValues: UserInput) => ({
+        setValue((oldValues) => ({
           ...oldValues,
-          [nesting as string]: {
-            ...(oldValues[nesting] as FullName),
-            [id as string]: event.target.value,
+          [nesting]: {
+            ...(oldValues[nesting] as Record<string, unknown>),
+            [id]: event.target.value,
           },
         }));
       }
@@ -41,6 +42,7 @@ const InputField = ({
       id={id}
       fullWidth
       margin="normal"
+      value={value || ''}
       onChange={handleChange}
       {...props}
     ></TextField>

@@ -7,9 +7,14 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
+  ],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+    },
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

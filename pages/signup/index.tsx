@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Card,
   CardContent,
@@ -12,10 +11,10 @@ import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { useEffect, useState } from 'react';
-import { UserInput, UserType } from '../../lib/types';
-import { useMutation, gql } from '@apollo/react-hooks';
+import { PageProps, UserInput, UserType } from '../../lib/types';
+import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
-
+import { GenderSelector } from '../../components/gender-selector/GenderSelector';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -25,27 +24,39 @@ const ADD_USER = gql`
   }
 `;
 
-const SignUpPage = ({t}): React.ReactElement => {
-  const [formValues, setFormValues] = useState<UserInput>({
+const SignUpPage = ({ t }: PageProps): React.ReactElement => {
+  const [formValues, setFormValues] = useState<Partial<UserInput>>({
     name: {
       lastName: '',
     },
+    gender: 'OTHER',
     email: '',
     password: '',
     type: 'TALENT',
   });
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser, newUser] = useMutation(ADD_USER);
+  const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
+    { passwordConfirm: '' },
+  );
+
+  const handlePasswordRepeat = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
+    setPasswordRepeat({ passwordConfirm: e.target.value });
+    setPasswordsIdentical(formValues.password === e.target.value);
+  };
 
   const company =
-    formValues.type === 'TALENT' ? null : (
+    formValues.type === 'EMPLOYER' ? (
       <InputField
         id="company"
+        value={formValues.company}
         label={t('companyName')}
         setValue={setFormValues}
         required
       />
-    );
+    ) : null;
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -81,14 +92,12 @@ const SignUpPage = ({t}): React.ReactElement => {
       <Card>
         <CardContent>
           <Container>
-            <Typography variant="h2">
-              {t('pages.signup.header')}
-            </Typography>
+            <Typography variant="h2">{t('pages.signup.header')}</Typography>
             <form onSubmit={handleSubmit}>
               <OptionsToggler
                 options={[
-                  { value: 'TALENT', display: t('type.talent')},
-                  { value: 'EMPLOYER', display: t('type.employer')},
+                  { value: 'TALENT', display: t('type.talent') },
+                  { value: 'EMPLOYER', display: t('type.employer') },
                 ]}
                 optionsLabel="type"
                 setOption={(type) => {
@@ -99,8 +108,10 @@ const SignUpPage = ({t}): React.ReactElement => {
                 }}
               />
               <Box component="div">
+                <GenderSelector t={t} updateFunction={setFormValues} />
                 <InputField
                   id="firstName"
+                  value={formValues.name?.firstName}
                   nesting="name"
                   label={t('fullName.firstName')}
                   fullWidth={false}
@@ -108,6 +119,7 @@ const SignUpPage = ({t}): React.ReactElement => {
                 />
                 <InputField
                   id="lastName"
+                  value={formValues.name?.lastName}
                   nesting="name"
                   label={t('fullName.lastName')}
                   fullWidth={false}
@@ -119,6 +131,7 @@ const SignUpPage = ({t}): React.ReactElement => {
               <InputField
                 id="email"
                 type="email"
+                value={formValues.email}
                 label={t('email')}
                 setValue={setFormValues}
                 inputProps={{ className: styles.FormInput }}
@@ -126,6 +139,7 @@ const SignUpPage = ({t}): React.ReactElement => {
               />
               <InputField
                 id="password"
+                value={formValues.password}
                 label={t('password')}
                 setValue={setFormValues}
                 type="password"
@@ -134,11 +148,11 @@ const SignUpPage = ({t}): React.ReactElement => {
               <InputField
                 id="passwordConfirm"
                 label={t('repeatPassword')}
-                onChange={(e) =>
-                  setPasswordsIdentical(e.target.value === formValues.password)
-                }
+                onChange={handlePasswordRepeat}
                 type="password"
                 required
+                value={passwordRepeat.passwordConfirm}
+                // setValue={handlePasswordRepeat}
                 inputProps={{
                   className: styles.FormInput,
                   pattern: `^${formValues.password}$`,
@@ -156,11 +170,7 @@ const SignUpPage = ({t}): React.ReactElement => {
 };
 
 SignUpPage.getInitialProps = async () => ({
-  namespacesRequired: ['common']
-})
-
-SignUpPage.propTypes = {
-  t: PropTypes.func.isRequired,
-}
+  namespacesRequired: ['common'],
+});
 
 export default withTranslation('common')(SignUpPage);

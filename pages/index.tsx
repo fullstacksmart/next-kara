@@ -1,3 +1,4 @@
+
 // import PropTypes from 'prop-types'
 // import { withTranslation } from '../i18n';
 // import TranslateIcon from "@material-ui/icons/Translate";
@@ -27,14 +28,8 @@ const Home = (): React.ReactElement => {
   );
 };
 
-//   Home.getInitialProps = async () => ({
-//     namespacesRequired: ['common'],
-//   })
-
-//   Home.propTypes = {
-//     t: PropTypes.func.isRequired,
-//   }
-
-// export default withTranslation('common')(Home);
+Home.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default Home;

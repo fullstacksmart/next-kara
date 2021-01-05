@@ -1,6 +1,6 @@
-import { User, FullName } from './index';
+import { User, FullName, BaseEntity, Address, Gender } from './index';
 
-type ProfessionType =
+export type Profession =
   | 'NURSE'
   | 'DOCTOR'
   | 'OTHER_MEDICAL'
@@ -35,12 +35,8 @@ type FederalState =
   | 'TH'
   | 'OTHER';
 
-interface Address {
-  street?: string;
-  streetNo?: string;
-  city?: string;
-  postalCode?: string;
-  isoCode?: string;
+interface TalentAsset extends BaseEntity {
+  talent: string;
 }
 
 interface Date {
@@ -52,18 +48,14 @@ interface Duration {
   to: Date;
 }
 
-interface Organization {
-  id: string;
+export interface Organization extends BaseEntity {
   name: string;
   address: Address;
 }
 
 export interface Talent extends User {
-  id: string;
-  email: string;
-  password: string;
-  name: FullName;
-  profession: ProfessionType;
+  profilePic: string;
+  profession: Profession;
   address: Address;
   description: string;
   experiences: Experience[];
@@ -72,53 +64,70 @@ export interface Talent extends User {
   documents: Document[];
   languages: LanguageSkill[];
   otherSkills: OtherSkill[];
+  isBasicInfoComplete: boolean;
 }
 
-type Experience = {
-  id: string;
-  talent: string;
+interface Experience extends TalentAsset {
   title: string;
-  lineOfWork: ProfessionType;
+  lineOfWork: Profession;
   employer?: Organization;
   duration?: Duration;
   description?: string;
-};
+}
 
-type Qualification = {
-  id: string;
-  talent: string;
+export interface ExperienceInput extends TalentAsset {
+  title: string;
+  lineOfWork: Profession;
+  employer: string;
+  duration?: Duration;
+  description?: string;
+}
+
+interface Qualification extends TalentAsset {
   fieldOfEducation: string;
   degree: string;
   institution: Organization;
   duration: Duration;
   description: string;
-};
+}
 
-type Approbation = {
-  id: string;
-  talent: string;
+export interface QualificationInput extends TalentAsset {
+  fieldOfEducation: string;
+  degree: string;
+  institution: string;
+  duration: Duration;
+  description: string;
+}
+
+interface Approbation extends TalentAsset {
   status: ApprobationStatus;
   state: FederalState;
-};
+}
 
-type Document = {
-  id: string;
-  talent: string;
+interface Document extends TalentAsset {
   name: string;
   description: string;
   url: string;
-};
+}
 
-type LanguageSkill = {
-  talent: string;
+interface LanguageSkill extends TalentAsset {
   language: string;
   level: LanguageSkillLevel;
-};
+}
 
-type OtherSkill = {
-  id: string;
-  talent: string;
+interface OtherSkill extends TalentAsset {
   name: string;
   level: OtherSKillLevel;
   description: string;
-};
+}
+
+export interface BasicInfoInput {
+  name?: FullName;
+  gender?: Gender;
+  address?: Address;
+  profilePic?: string;
+  profession?: Profession;
+  description?: string;
+}
+
+export type TalentUpdate = BaseEntity & BasicInfoInput;

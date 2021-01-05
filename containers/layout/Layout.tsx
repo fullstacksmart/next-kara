@@ -5,9 +5,6 @@ import Head from 'next/head';
 import { getTitleString } from '../../lib/utils/strings';
 import text from '../../lib/text';
 import Footer from '../../components/footer/Footer';
-import styles from '../../styles/Layout.module.css';
-
-const currentText = text.GERMAN;
 
 export interface LayoutProps {
   home?: boolean;
@@ -26,9 +23,7 @@ const Layout = ({
         <title>{getTitleString(title)}</title>
       </Head>
       <header className={styles.header}>
-        {!home && (
-          <Button href="/">{currentText.components.layout.backHome}</Button>
-        )}
+        {!home && <Button href="/">take me back home</Button>}
       </header>
       <main>{children}</main>
       {!home && <Footer />}
