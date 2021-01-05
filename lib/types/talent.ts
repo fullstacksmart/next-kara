@@ -36,7 +36,7 @@ type FederalState =
   | 'OTHER';
 
 interface TalentAsset extends BaseEntity {
-  talent: string;
+  talent: Talent;
 }
 
 interface Date {
