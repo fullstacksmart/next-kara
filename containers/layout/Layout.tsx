@@ -22,9 +22,7 @@ const Layout = ({
       <Head>
         <title>{getTitleString(title)}</title>
       </Head>
-      <header className={styles.header}>
-        {!home && <Button href="/">take me back home</Button>}
-      </header>
+      <header>{!home && <Button href="/">take me back home</Button>}</header>
       <main>{children}</main>
       {!home && <Footer />}
     </Container>
