@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types'
-import { withTranslation } from '../i18n';
+// import PropTypes from 'prop-types'
+// import { withTranslation } from '../i18n';
 // import TranslateIcon from "@material-ui/icons/Translate";
 // import { Button } from '../components/buttons';
 import { Layout } from '../containers/layout';
 import LandingPage from '../containers/landing/LandingPage';
 
-const Home = ({t, i18n}): React.ReactElement => {
+const Home = (): React.ReactElement => {
   // const handleClick = (): void => {
   //   const newLang = i18n.language === 'en' ? 'de' : 'en'
   //   i18n.changeLanguage(newLang)
@@ -25,14 +25,16 @@ const Home = ({t, i18n}): React.ReactElement => {
       <LandingPage />
     </Layout>
   );
-}
+};
 
-  Home.getInitialProps = async () => ({
-    namespacesRequired: ['common'],
-  })
+//   Home.getInitialProps = async () => ({
+//     namespacesRequired: ['common'],
+//   })
 
-  Home.propTypes = {
-    t: PropTypes.func.isRequired,
-  }
+//   Home.propTypes = {
+//     t: PropTypes.func.isRequired,
+//   }
 
-export default withTranslation('common')(Home)
+// export default withTranslation('common')(Home);
+
+export default Home;

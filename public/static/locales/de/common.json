@@ -6,7 +6,7 @@
   },
   "components": {
     "layout": {
-      "backHome": "zurück zur Homepage"
+      "backHome": "Zurück zur Homepage"
     }
   },
   "type": {
@@ -22,6 +22,12 @@
   "email": "Email",
   "password": "Passwort",
   "repeatPassword": "Passwort wiederholen",
-  "signup": "registrieren",
-  "signin": "anmelden"
+  "signup": "Registrieren",
+  "signin": "Login",
+  "navbar": {
+    "home": "Home",
+    "forEmployers": "Für Arbeitgeber",
+    "forTalents": "Für Talente",
+    "aboutUs": "Über uns"
+  }
 }

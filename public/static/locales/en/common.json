@@ -6,22 +6,28 @@
   },
   "components": {
     "layout": {
-      "backHome": "take me back home"
+      "backHome": "Take me back home"
     }
   },
   "type": {
-    "talent": "talent",
-    "employer": "employer"
+    "talent": "Talent",
+    "employer": "Employer"
   },
-  "companyName": "company name",
+  "companyName": "Company name",
   "fullName": {
-    "firstName": "first name",
-    "middleName": "middle name",
-    "lastName": "last name"
+    "firstName": "First name",
+    "middleName": "Middle name",
+    "lastName": "Last name"
   },
-  "email": "email",
-  "password": "password",
-  "repeatPassword": "please reenter password",
-  "signup": "sign up",
-  "signin": "sign in dude!"
+  "email": "Email",
+  "password": "Password",
+  "repeatPassword": "Please reenter password",
+  "signup": "Sign up",
+  "signin": "Login",
+  "navbar": {
+    "home": "Home",
+    "forEmployers": "For Employers",
+    "forTalents": "For Talents",
+    "aboutUs": "About us"
+  }
 }

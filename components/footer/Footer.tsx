@@ -1,17 +1,5 @@
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    footer: {
-      marginTop: '2rem',
-      padding: '2rem 2rem',
-      fontSize: '1rem',
-      letterSpacing: '0.05rem',
-    },
-  }),
-);
+import { Container, Typography } from '@material-ui/core';
+import useStyles from './FooterStyles';
 
 const Footer = (): React.ReactElement => {
   const classes = useStyles();
@@ -26,7 +14,7 @@ const Footer = (): React.ReactElement => {
         align="center"
         className={classes.footer}
       >
-        Kara {year} &copy;
+        &copy; {year} Kara. All rights reserved.
       </Typography>
     </Container>
   );
