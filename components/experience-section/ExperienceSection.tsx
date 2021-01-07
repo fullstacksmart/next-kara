@@ -9,27 +9,33 @@ export interface ExperienceSectionProps {
   t: TFunction;
   experiences: Experience[];
   gender: Gender;
-  handleEdit: () => void;
+  handleEdit: (id?: string) => void;
 }
 
 export const ExperienceSection = ({
   t,
   gender = 'OTHER',
   experiences,
+  handleEdit,
   ...props
 }: ExperienceSectionProps): React.ReactElement => {
   const experienceItems = experiences.map((experience, i, arr) => {
     const divider = i < arr.length - 1 ? <ItemDivider /> : null;
     return (
       <div key={`experience${experience.talent?.id}-${experience.id}`}>
-        <ExperienceItem experience={experience} t={t} gender={gender} />
+        <ExperienceItem
+          experience={experience}
+          t={t}
+          gender={gender}
+          handleEdit={handleEdit}
+        />
         {divider}
       </div>
     );
   });
 
   return (
-    <Section {...props}>
+    <Section handleAdd={() => handleEdit()} {...props}>
       <CheckedTitle
         title={t('components.experienceSection.title')}
         done={Boolean(

@@ -4,7 +4,10 @@ import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import { Experience, ModalType, PageProps } from '../../../lib/types';
 import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
-import { ExperienceSection } from '../../../components/experience-section/ExperienceSection';
+import {
+  ExperienceSection,
+  ExperienceEdit,
+} from '../../../components/experience-section';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
 
@@ -131,14 +134,16 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
       id,
     },
   });
-  const [modal, setModal] = useState<ModalType>(ModalType.NONE);
+  const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
+    type: ModalType.NONE,
+  });
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
   const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
 
   const handleModalClose = (): void => {
-    setModal(ModalType.NONE);
+    setModal({ type: ModalType.NONE });
   };
 
   return (
@@ -147,19 +152,28 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
       <BasicInfo
         t={t}
         basicInfo={basicInfo}
-        handleEdit={() => setModal(ModalType.BASIC_INFO)}
+        handleEdit={() => setModal({ type: ModalType.BASIC_INFO })}
       />
       <BasicInfoEdit
         t={t}
         basicInfo={basicInfo}
-        open={modal === ModalType.BASIC_INFO}
+        open={modal.type === ModalType.BASIC_INFO}
         onClose={handleModalClose}
       />
       <ExperienceSection
         t={t}
         gender={basicInfo.gender}
         experiences={experiences}
-        handleEdit={() => setModal(ModalType.EXPERIENCE)}
+        handleEdit={(id?: string) => {
+          setModal({ type: ModalType.EXPERIENCE, id });
+        }}
+      />
+      <ExperienceEdit
+        t={t}
+        experiences={experiences}
+        id={modal.id}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.EXPERIENCE}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

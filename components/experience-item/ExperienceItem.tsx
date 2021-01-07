@@ -9,11 +9,13 @@ export interface ExperienceItemProps {
   t: TFunction;
   experience: Experience;
   gender: Gender;
+  handleEdit: (id?: string) => void;
 }
 
 export const ExperienceItem = ({
   experience,
   t,
+  handleEdit,
   gender = 'OTHER',
 }: ExperienceItemProps): React.ReactElement => {
   const formatedDuration = getFormatedDuration(
@@ -23,8 +25,7 @@ export const ExperienceItem = ({
   return (
     <SectionItem
       handleEdit={
-        () =>
-          console.log('edit', experience.id) /* eslint-disable-line no-console*/
+        () => handleEdit(experience.id) /* eslint-disable-line no-console*/
       }
     >
       <FieldDisplay
