@@ -98,6 +98,7 @@ const GET_ALL_INFO = gql`
         id
         talent {
           id
+          gender
         }
         title
         lineOfWork

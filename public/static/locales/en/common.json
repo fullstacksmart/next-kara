@@ -15,14 +15,14 @@
     "countrySelector": {
       "label": "country"
     },
+    "experienceSection": {
+      "title": "job experience"
+    },
     "genderSelector": {
       "label": "designation"
     },
     "layout": {
       "backHome": "take me back home"
-    },
-    "experienceSection": {
-      "title": "job experience"
     }
   },
   "description": "about me",
@@ -43,6 +43,9 @@
     "DEU": "Germany",
     "POL": "Poland",
     "SRB": "Serbia"
+  },
+  "labels": {
+    "position": "Position"
   },
   "pages": {
     "signup": {

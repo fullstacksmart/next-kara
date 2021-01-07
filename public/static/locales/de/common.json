@@ -15,14 +15,14 @@
     "countrySelector": {
       "label": "Land"
     },
+    "experienceSection": {
+      "title": "Berufserfahrung"
+    },
     "genderSelector": {
       "label": "Anrede"
     },
     "layout": {
       "backHome": "zurück zur Homepage"
-    },
-    "experienceSection": {
-      "title": "Berufserfahrung"
     }
   },
   "description": "Über mich",
@@ -43,6 +43,9 @@
     "DEU": "Deutschland",
     "POL": "Poland",
     "SRB": "Serbien"
+  },
+  "labels": {
+    "position": "Position"
   },
   "pages": {
     "signup": {

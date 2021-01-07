@@ -20,7 +20,7 @@ export const ExperienceSection = ({
     const divider = i < arr.length - 1 ? <ItemDivider /> : null;
     return (
       <div key={`experience${experience.talent?.id}-${experience.id}`}>
-        <ExperienceItem experience={experience} />
+        <ExperienceItem experience={experience} t={t} />
         {divider}
       </div>
     );
