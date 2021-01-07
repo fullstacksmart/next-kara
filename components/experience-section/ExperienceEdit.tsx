@@ -4,14 +4,15 @@ import { Experience } from '../../lib/types';
 
 interface ExperienceEditProps extends DialogProps {
   t: TFunction;
-  experiences: Experience[];
-  id?: string;
+  experience?: Experience;
 }
 
 export const ExperienceEdit = ({
-  experiences,
+  experience,
   id,
   ...props
 }: ExperienceEditProps): React.ReactElement => {
-  return <Dialog {...props}>{id ? id : 'new experience'}</Dialog>;
+  return (
+    <Dialog {...props}>{experience ? experience.id : 'new experience'}</Dialog>
+  );
 };

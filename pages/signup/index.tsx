@@ -62,14 +62,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     e.preventDefault();
-    // const newUser = {
-    //   name: formValues.name,
-    //   email: formValues.email,
-    //   password: formValues.password,
-    //   type: formValues.type,
-    // };
-    // if (formValues.company) newUser.company = formValues.company;
-    console.log(formValues);
     try {
       await createUser({
         variables: {
@@ -77,13 +69,13 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         },
       });
     } catch (e) {
-      console.error('user already exists: ', e.message);
+      console.error('user already exists: ', e.message); //eslint-disable-line no-console
     }
   };
 
   useEffect(() => {
     if (newUser.data) {
-      console.log('new User:', newUser);
+      console.log('new User:', newUser); //eslint-disable-line no-console
     }
   }, [newUser]);
 
