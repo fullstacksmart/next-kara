@@ -157,6 +157,7 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
       />
       <ExperienceSection
         t={t}
+        gender={basicInfo.gender}
         experiences={experiences}
         handleEdit={() => setModal(ModalType.EXPERIENCE)}
       />

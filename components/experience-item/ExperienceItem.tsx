@@ -1,5 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { Experience } from '../../lib/types';
+import { Experience, Gender } from '../../lib/types';
 import { getFormatedDuration } from '../../lib/utils/strings';
 import { FieldDisplay } from '../field-display/FieldDisplay';
 import { SectionItem } from '../section-item/SectionItem';
@@ -8,11 +8,13 @@ import { Box } from '@material-ui/core';
 export interface ExperienceItemProps {
   t: TFunction;
   experience: Experience;
+  gender: Gender;
 }
 
 export const ExperienceItem = ({
   experience,
   t,
+  gender = 'OTHER',
 }: ExperienceItemProps): React.ReactElement => {
   const formatedDuration = getFormatedDuration(
     t('duration.now'),
@@ -27,9 +29,7 @@ export const ExperienceItem = ({
     >
       <FieldDisplay
         label={t('labels.position')}
-        value={t(
-          `profession.${experience.lineOfWork}-${experience.talent.gender}`,
-        )}
+        value={t(`profession.${experience.lineOfWork}-${gender}`)}
       />
       <FieldDisplay label={t('labels.duration')} value={formatedDuration} />
       <FieldDisplay

@@ -36,6 +36,11 @@ const UPDATE_TALENT = gql`
         description
         isBasicInfoComplete
       }
+      experiences {
+        talent {
+          gender
+        }
+      }
     }
   }
 `;

@@ -1,5 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { Experience } from '../../lib/types';
+import { Experience, Gender } from '../../lib/types';
 import { CheckedTitle } from '../checked-title/CheckedTitle';
 import { Section } from '../section/Section';
 import { ExperienceItem } from '../experience-item/ExperienceItem';
@@ -8,11 +8,13 @@ import { ItemDivider } from '../item-divider/ItemDivider';
 export interface ExperienceSectionProps {
   t: TFunction;
   experiences: Experience[];
+  gender: Gender;
   handleEdit: () => void;
 }
 
 export const ExperienceSection = ({
   t,
+  gender = 'OTHER',
   experiences,
   ...props
 }: ExperienceSectionProps): React.ReactElement => {
@@ -20,7 +22,7 @@ export const ExperienceSection = ({
     const divider = i < arr.length - 1 ? <ItemDivider /> : null;
     return (
       <div key={`experience${experience.talent?.id}-${experience.id}`}>
-        <ExperienceItem experience={experience} t={t} />
+        <ExperienceItem experience={experience} t={t} gender={gender} />
         {divider}
       </div>
     );
