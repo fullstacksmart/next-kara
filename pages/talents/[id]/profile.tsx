@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import { Experience, ModalType, PageProps } from '../../../lib/types';
@@ -11,9 +11,9 @@ import {
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
 
-export interface ProfilePageProps extends PageProps {
-  id: string;
-}
+// export interface ProfilePageProps extends PageProps {
+//   id: string;
+// }
 
 // const GET_TALENT = gql`
 //   query GetTalent($id: String!) {
@@ -128,7 +128,8 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
+const ProfilePage = ({ t }: PageProps): React.ReactElement => {
+  const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
       id,
@@ -180,25 +181,29 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          id: 'yasbiuycdbucoiuscboiucsiousc!@',
-        },
-      },
-    ],
-    fallback: false,
-  };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [
+//       {
+//         params: {
+//           id: 'yasbiuycdbucoiuscboiucsiousc!@',
+//         },
+//       },
+//     ],
+//     fallback: false,
+//   };
+// };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  return {
-    props: {
-      id: params?.id,
-    },
-  };
-};
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   return {
+//     props: {
+//       id: params?.id,
+//     },
+//   };
+// };
+
+ProfilePage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default withTranslation('common')(ProfilePage);
