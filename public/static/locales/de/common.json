@@ -45,7 +45,9 @@
     "SRB": "Serbien"
   },
   "labels": {
-    "position": "Position"
+    "position": "Position",
+    "duration": "Zeitraum",
+    "employer": "Arbeitgeber / Unternehmen"
   },
   "pages": {
     "signup": {
