@@ -52,7 +52,7 @@ export const getFormatedDuration = (
   const fromDate = new Date(parseInt(duration.from.timeStamp));
   const fromMonth = getLocalMonth(fromDate);
   const fromYear = fromDate.getFullYear();
-  if (duration.to === undefined) return fromTo(`${fromMonth} ${fromYear}`, now);
+  if (!duration.to) return fromTo(`${fromMonth} ${fromYear}`, now);
   const toDate = new Date(parseInt(duration.to.timeStamp));
   const toMonth = getLocalMonth(toDate);
   const toYear = toDate.getFullYear();

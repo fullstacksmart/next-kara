@@ -15,6 +15,9 @@
     "countrySelector": {
       "label": "Land"
     },
+    "experienceEdit": {
+      "title": "Bearbeite Deine Berufserfahrung"
+    },
     "experienceSection": {
       "title": "Berufserfahrung"
     },

@@ -117,8 +117,7 @@ export const BasicInfoEdit = ({
   });
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const result = await mutate();
-    console.log(result);
+    await mutate();
     onClose();
   };
 

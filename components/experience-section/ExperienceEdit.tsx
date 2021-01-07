@@ -1,4 +1,4 @@
-import { Dialog, DialogProps } from '@material-ui/core';
+import { Dialog, DialogProps, DialogTitle } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import { Experience } from '../../lib/types';
 
@@ -9,10 +9,12 @@ interface ExperienceEditProps extends DialogProps {
 
 export const ExperienceEdit = ({
   experience,
-  id,
+  t,
   ...props
 }: ExperienceEditProps): React.ReactElement => {
   return (
-    <Dialog {...props}>{experience ? experience.id : 'new experience'}</Dialog>
+    <Dialog {...props}>
+      <DialogTitle>{t('components.experienceEdit.title')}</DialogTitle>
+    </Dialog>
   );
 };
