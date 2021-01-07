@@ -48,9 +48,9 @@ interface Date {
   timeStamp: string;
 }
 
-interface Duration {
+export interface Duration {
   from: Date;
-  to: Date;
+  to?: Date;
 }
 
 export interface Organization extends BaseEntity {
