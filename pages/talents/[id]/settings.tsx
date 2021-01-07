@@ -1,4 +1,3 @@
-import { getStaticPaths, getStaticProps } from './profile';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 
@@ -14,7 +13,5 @@ const SettingsPage = ({ id }: SettingsPageProps): React.ReactElement => {
     </Layout>
   );
 };
-
-export { getStaticPaths, getStaticProps };
 
 export default SettingsPage;
