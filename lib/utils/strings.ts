@@ -1,3 +1,4 @@
+import { Duration } from '../../lib/types';
 import { TFunction } from 'next-i18next';
 import { Address, FullName } from '../types';
 
@@ -32,4 +33,25 @@ export const getFullName = (name: FullName): string => {
   if (name.middleName) fullName += name.middleName + ' ';
   if (name.lastName) fullName += name.lastName;
   return fullName;
+};
+
+const fromTo = (from: string, to: string): string => {
+  return `${from} – ${to}`;
+};
+
+export const getFormatedDuration = (
+  now: string,
+  duration?: Duration,
+): string | undefined => {
+  if (!duration) return;
+  const fromDate = new Date(duration.from.timeStamp);
+  const fromMonth = fromDate.getMonth();
+  const fromYear = fromDate.getFullYear();
+  if (duration.to === undefined) return fromTo(`${fromMonth} ${fromYear}`, now);
+  const toDate = new Date(duration.to.timeStamp);
+  const toMonth = toDate.getMonth();
+  const toYear = toDate.getFullYear();
+  const fromString = fromMonth + fromYear !== toYear ? ` ${fromYear}` : '';
+  const toString = `${toMonth} ${toYear}`;
+  return fromTo(fromString, toString);
 };
