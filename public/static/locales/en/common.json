@@ -26,6 +26,9 @@
     }
   },
   "description": "about me",
+  "duration": {
+    "now": "now"
+  },
   "email": "email",
   "fullName": {
     "firstName": "first name",
@@ -47,7 +50,8 @@
   "labels": {
     "position": "Position",
     "duration": "Duration",
-    "employer": "Employer / Company"
+    "employer": "Employer / Company",
+    "experienceDescription": "Tätigkeit / Beschreibung"
   },
   "pages": {
     "signup": {

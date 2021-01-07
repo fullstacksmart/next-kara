@@ -36,22 +36,32 @@ export const getFullName = (name: FullName): string => {
 };
 
 const fromTo = (from: string, to: string): string => {
+  if (from === '') return to;
   return `${from} – ${to}`;
 };
 
+// TODO use correct month names
+const getLocalMonth = (date: Date, locale?: string, spec = 'short'): string => {
+  return date.toLocaleString(locale, { month: spec });
+};
 export const getFormatedDuration = (
   now: string,
   duration?: Duration,
 ): string | undefined => {
   if (!duration) return;
-  const fromDate = new Date(duration.from.timeStamp);
-  const fromMonth = fromDate.getMonth();
+  const fromDate = new Date(parseInt(duration.from.timeStamp));
+  const fromMonth = getLocalMonth(fromDate);
   const fromYear = fromDate.getFullYear();
   if (duration.to === undefined) return fromTo(`${fromMonth} ${fromYear}`, now);
-  const toDate = new Date(duration.to.timeStamp);
-  const toMonth = toDate.getMonth();
+  const toDate = new Date(parseInt(duration.to.timeStamp));
+  const toMonth = getLocalMonth(toDate);
   const toYear = toDate.getFullYear();
-  const fromString = fromMonth + fromYear !== toYear ? ` ${fromYear}` : '';
+  const fromString =
+    fromYear === toYear
+      ? fromMonth === toMonth
+        ? ''
+        : fromMonth
+      : `${fromMonth} ${fromYear}`;
   const toString = `${toMonth} ${toYear}`;
   return fromTo(fromString, toString);
 };
