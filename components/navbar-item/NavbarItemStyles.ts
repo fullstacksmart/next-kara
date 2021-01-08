@@ -7,9 +7,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     link: {
       color: theme.palette.text.primary,
-      padding: '0.5rem 1rem',
+      padding: '1rem 1.5rem',
       borderRadius: '20px',
-      fontSize: '1rem',
+      fontSize: '1.75rem',
       letterSpacing: '0.05rem',
       transition: 'color 0.2s, background 0.2s',
       '&:hover': {

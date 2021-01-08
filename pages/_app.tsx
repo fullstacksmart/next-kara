@@ -10,6 +10,7 @@ import { ApolloProvider } from '@apollo/client';
 import client from '../apollo/client';
 import { Router } from 'next/dist/client/router';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {

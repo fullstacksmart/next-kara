@@ -29,12 +29,12 @@ const useStyles = makeStyles(() =>
       borderRadius: '15px 0px 0px 15px',
     },
     cardTitle: {
-      fontSize: '1rem',
+      fontSize: '1.5rem',
       fontWeight: 'bold',
       textAlign: 'center',
     },
     cardDescription: {
-      fontSize: '1rem',
+      fontSize: '1.5rem',
       textAlign: 'center',
     },
   }),

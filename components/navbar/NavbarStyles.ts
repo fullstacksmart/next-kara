@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      padding: '1rem 1.5rem',
+      padding: '3rem',
     },
     middleGridContainer: {
       justifyContent: 'space-between',
@@ -12,7 +12,7 @@ const useStyles = makeStyles(() =>
       justifyContent: 'center',
     },
     logo: {
-      paddingLeft: '1.5rem',
+      paddingLeft: '2rem',
       width: '120px',
       height: '35px',
     },
