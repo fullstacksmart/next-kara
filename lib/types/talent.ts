@@ -40,7 +40,7 @@ interface TalentAsset extends BaseEntity {
   isComplete: boolean;
 }
 
-interface TalentAssetEntry {
+export interface TalentAssetEntry {
   talent: string;
 }
 
@@ -72,6 +72,21 @@ export interface Talent extends User {
   isBasicInfoComplete: boolean;
 }
 
+export interface TalentEntry {
+  id: string;
+  profilePic: string;
+  profession: Profession;
+  address: Address;
+  description: string;
+  experiences: (ExperienceEntry & BaseEntity)[];
+  qualifications: QualificationEntry[];
+  approbations: Approbation[];
+  documents: Document[];
+  languages: LanguageSkill[];
+  otherSkills: OtherSkill[];
+  isBasicInfoComplete: boolean;
+}
+
 export interface BasicInfo {
   id: string;
   name: FullName;
@@ -92,8 +107,8 @@ export interface Experience extends TalentAsset {
 }
 
 export interface ExperienceEntry extends TalentAssetEntry {
-  lineOfWork: Profession;
-  employer: string;
+  lineOfWork?: Profession;
+  employer?: string;
   duration?: Duration;
   description?: string;
 }

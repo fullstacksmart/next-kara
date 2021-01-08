@@ -4,10 +4,12 @@ import {
   ExperienceEntry,
   QualificationEntry,
   Talent,
+  TalentAssetEntry,
   UserInput,
   TalentUpdate,
   BasicInfo,
   Experience,
+  BaseEntity,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -39,7 +41,8 @@ const resolvers = {
     async talent(experience: ExperienceEntry): Promise<Talent> {
       return helpers.getTalentById(experience.talent);
     },
-    async employer(experience: ExperienceEntry): Promise<Organization> {
+    async employer(experience: ExperienceEntry): Promise<Organization | null> {
+      if (!experience.employer) return null;
       return await helpers.getOrganizationById(experience.employer);
     },
     async isComplete(experience: Experience): Promise<boolean> {
@@ -80,9 +83,17 @@ const resolvers = {
     },
     async addExperience(
       _: unknown,
-      { input }: { input: Partial<Experience> },
-    ): Promise<Experience> {
+      { input }: { input: Partial<ExperienceEntry> & TalentAssetEntry },
+    ): Promise<ExperienceEntry | null> {
       return await helpers.addExperience(input);
+    },
+    async updateExperience(
+      _: unknown,
+      {
+        input,
+      }: { input: Partial<ExperienceEntry> & TalentAssetEntry & BaseEntity },
+    ): Promise<ExperienceEntry | null> {
+      return await helpers.updateExperience(input);
     },
   },
 };
