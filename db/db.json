@@ -99,7 +99,22 @@
       }
     }
   ],
-  "employers": [],
+  "employers": [
+    {
+      "id": "EA1",
+      "email": "cecile@thunder.rs",
+      "password": "pass",
+      "company": "Charité – Universitätsmedizin Berlin",
+      "description": "We are a hospital. Etiam dictum ex eget magna feugiat consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo.",
+      "name": {
+        "firstName": "Cecile",
+        "lastName": "Thunder",
+        "gender": "FEMALE",
+        "middleName": ""
+      },
+      "gender": "FEMALE"
+    }
+  ],
   "organizations": [
     {
       "id": "iasuxoaiubcoaiudbci",

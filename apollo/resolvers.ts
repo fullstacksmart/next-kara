@@ -4,6 +4,7 @@ import {
   ExperienceInput,
   QualificationInput,
   Talent,
+  Employer,
   UserInput,
   TalentUpdate,
 } from '../lib/types';
@@ -39,6 +40,16 @@ const resolvers = {
       );
     },
   },
+  Employer: {
+    type(): string {
+      return 'EMPLOYER';
+    },
+    fullName(employer: Employer): string {
+      return `${employer.name.firstName} ${
+        employer.name.middleName ? employer.name.middleName + ' ' : ''
+      }${employer.name.lastName}`;
+    },
+  },
   Experience: {
     async employer(experience: ExperienceInput): Promise<Organization> {
       return await helpers.getOrganizationById(experience.employer);
@@ -63,6 +74,12 @@ const resolvers = {
     },
     async getTalentById(_: unknown, { id }: { id: string }): Promise<Talent> {
       return await helpers.getTalentById(id);
+    },
+    async getEmployerById(
+      _: unknown,
+      { id }: { id: string },
+    ): Promise<Employer> {
+      return await helpers.getEmployerById(id);
     },
   },
   Mutation: {

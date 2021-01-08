@@ -3,6 +3,7 @@ import {
   UserInput,
   User,
   Talent,
+  Employer,
   Organization,
   TalentUpdate,
 } from '../lib/types';
@@ -21,6 +22,10 @@ export const getAllUserIds = (): string[] => {
 
 export const getTalentById = async (id: string): Promise<Talent> => {
   return await models.Talent.findOne({ id });
+};
+
+export const getEmployerById = async (id: string): Promise<Employer> => {
+  return await models.Employer.findOne({ id });
 };
 
 export const getOrganizationById = async (

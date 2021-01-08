@@ -129,6 +129,19 @@ const typeDefs = gql`
     isBasicInfoComplete: Boolean!
   }
 
+  type Employer implements User {
+    id: ID!
+    company: String!
+    email: String!
+    password: String!
+    gender: Gender!
+    type: UserType!
+    name: FullName!
+    fullName: String!
+    address: Address
+    description: String
+  }
+
   type Experience {
     id: ID!
     talent: Talent!
@@ -218,6 +231,7 @@ const typeDefs = gql`
     getAllUserIds: [ID]!
     getAllEmployerIds: [ID]!
     getTalentById(id: String!): Talent!
+    getEmployerById(id: String!): Employer!
   }
 
   type Mutation {
