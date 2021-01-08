@@ -9,13 +9,14 @@ import {
 import { TFunction } from 'next-i18next';
 import { PropsWithChildren } from 'react';
 import { Button } from '../buttons';
+import { nanoid } from 'nanoid';
 
 interface EditPopupProps extends PropsWithChildren<DialogProps> {
   t: TFunction;
   title: string;
   onClose: () => void;
-  formId?: string;
-  mutate: MutationFunction;
+  formId: string;
+  mutate?: MutationFunction;
   reset: () => void;
 }
 
@@ -24,15 +25,15 @@ export const EditPopup = ({
   title,
   children,
   onClose,
-  formId,
+  formId = nanoid(),
   mutate,
   reset,
   ...props
 }: EditPopupProps): React.ReactElement => {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    await mutate();
     onClose();
+    if (mutate) await mutate();
   };
   const handleClose = (): void => {
     reset();
@@ -48,7 +49,7 @@ export const EditPopup = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
-        <Button type="submit" form="basicInfoForm">
+        <Button type="submit" form={formId}>
           {t('buttonLabels.save')}
         </Button>
       </DialogActions>
