@@ -6,7 +6,6 @@ import {
   Organization,
   TalentUpdate,
   Experience,
-  ExperienceEntry,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 
@@ -53,11 +52,13 @@ export const addExperience = async (
   if (!talent) throw new Error(`no user with id ${input.talent}`);
   const id = nanoid();
   const newExperience = { id, ...input };
-  const updatedTalent = await models.Talent.updateOne(
+  const updatedTalent: Talent = await models.Talent.updateOne(
     { id: talent.id },
     { experiences: [...talent.experiences, newExperience] },
   );
-  return updatedTalent.experiences.find({ id });
+  return updatedTalent.experiences.filter(
+    (experience) => experience.id === id,
+  )[0];
 };
 
 export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
