@@ -32,8 +32,8 @@ export const EditPopup = ({
 }: EditPopupProps): React.ReactElement => {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    onClose();
     if (mutate) await mutate();
+    onClose();
   };
   const handleClose = (): void => {
     reset();
