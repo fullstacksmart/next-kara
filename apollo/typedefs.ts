@@ -213,17 +213,18 @@ const typeDefs = gql`
     password: String!
     type: UserType!
   }
+
   input OrganizationInput {
     name: String
     address: AddressInput
   }
+
+  input DateInput {
+    timeStamp: String
+  }
   input DurationInput {
-    from: {
-      timeStamp
-    }
-    to: {
-      timeStamp
-    }
+    from: DateInput
+    to: DateInput
   }
 
   input TalentUpdate {
@@ -241,10 +242,9 @@ const typeDefs = gql`
     title: String
     lineOfWork: Profession
     employer: OrganizationInput
-    duration: DurationInput
+    duration: String
     description: String
   }
-
 
   input ExperienceUpdate {
     id: ID!
@@ -266,8 +266,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
-    addExperience(input: NewExperience): Experience!
-    updateExperience(input: ExperienceUodate!): Experience!
+    addExperience(input: NewExperience!): Experience!
+    # updateExperience(input: ExperienceUodate!): Experience!
   }
 `;
 export default typeDefs;
