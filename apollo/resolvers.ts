@@ -92,6 +92,12 @@ const resolvers = {
     ): Promise<Talent> {
       return await helpers.updateTalent(input);
     },
+    // async updateEmployer(
+    //   _: unknown,
+    //   { input }: { input: EmployerUpdate },
+    // ): Promise<Employer> {
+    //   return await helpers.updateEmployer(input);
+    // },
   },
 };
 

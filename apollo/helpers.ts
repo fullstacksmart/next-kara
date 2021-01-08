@@ -72,3 +72,30 @@ export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
   }
   return updatedTalent;
 };
+
+// export const updateEmployer = async (
+//   input: EmployerUpdate,
+// ): Promise<Employer> => {
+//   const existingEmployer = models.Employer.findOne({
+//     id: input.id,
+//   });
+//   if (!existingEmployer)
+//     throw new Error(`no user with id ${input.id} in database`);
+//   let updatedEmployer;
+//   const updatedAddress = { ...existingEmployer.address, ...input.address };
+//   const updatedName = { ...existingEmployer.name, ...input.company };
+//   const enrichedInput = {
+//     ...input,
+//     address: updatedAddress,
+//     company: updatedName,
+//   };
+//   try {
+//     updatedEmployer = await models.Employer.updateOne(
+//       { id: input.id },
+//       enrichedInput,
+//     );
+//   } catch (err) {
+//     console.error(err);
+//   }
+//   return updatedEmployer;
+// };

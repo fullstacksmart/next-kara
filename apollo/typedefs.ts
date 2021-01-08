@@ -140,6 +140,7 @@ const typeDefs = gql`
     fullName: String!
     address: Address
     description: String
+    website: String
   }
 
   type Experience {

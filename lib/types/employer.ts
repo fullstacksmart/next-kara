@@ -4,6 +4,7 @@ export interface Employer extends User {
   address: Address;
   description: string;
   company: string;
+  website?: string;
 }
 
 export interface BasicEmployerInfoInput {

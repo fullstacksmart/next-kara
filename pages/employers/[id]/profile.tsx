@@ -17,7 +17,14 @@ const GET_BASIC_INFO = gql`
     getEmployerById(id: $id) {
       id
       company
+      address {
+        street
+        streetNo
+        city
+        postalCode
+      }
       description
+      website
       name {
         firstName
         middleName
@@ -28,23 +35,6 @@ const GET_BASIC_INFO = gql`
     }
   }
 `;
-
-// const GET_BASIC_INFO = gql`
-//   query GetEmployer($id: String!) {
-//     getEmployerById(id: $id) {
-//       id
-//       company
-//       description
-//       name {
-//         firstName
-//         middleName
-//         lastName
-//       }
-//       gender
-//       fullName
-//     }
-//   }
-// `;
 
 const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   const { data, loading, error } = useQuery(GET_BASIC_INFO, {
@@ -62,6 +52,11 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   return (
     <Layout title={['profile', `Employer ${id}`]}>
       <h1>Profile Page for {basicInfo.company}</h1>
+      <p>
+        {basicInfo.address.street} {basicInfo.address.streetNo},{' '}
+        {basicInfo.address.postalCode}, {basicInfo.address.city}
+      </p>
+      <p>{basicInfo.website}</p>
       <p>Legal representative: {basicInfo.fullName}</p>
       <h3>{basicInfo.description}</h3>
 
