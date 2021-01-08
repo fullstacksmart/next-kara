@@ -102,7 +102,7 @@ const typeDefs = gql`
   }
 
   type Organization {
-    id: ID!
+    id: String!
     name: String!
     address: Address
   }
@@ -142,7 +142,6 @@ const typeDefs = gql`
   type Experience {
     id: ID!
     talent: Talent!
-    title: String!
     lineOfWork: Profession
     employer: Organization
     duration: Duration
@@ -239,7 +238,6 @@ const typeDefs = gql`
 
   input NewExperience {
     talent: String!
-    title: String
     lineOfWork: Profession
     employer: OrganizationInput
     duration: String
@@ -249,7 +247,6 @@ const typeDefs = gql`
   input ExperienceUpdate {
     id: ID!
     talent: String!
-    title: String
     lineOfWork: Profession
     employer: OrganizationInput
     duration: DurationInput

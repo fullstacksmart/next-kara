@@ -10,6 +10,7 @@ import {
   BaseEntity,
   ExperienceEntry,
   TalentEntry,
+  OrganizationEntry,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 
@@ -67,13 +68,30 @@ export const addUser = async (input: UserInput): Promise<User> => {
   return await models[type].createOne(input);
 };
 
+const getOrCreateOrganizationId = async (
+  organization: Organization | undefined,
+): Promise<string | undefined> => {
+  try {
+    const existingEntry = await models.Organization.findOne(organization);
+    if (existingEntry) return existingEntry.id;
+    const newOrganization = await models.Organization.createOne(organization);
+    return newOrganization.id;
+  } catch (e) {
+    handleError(e);
+  }
+};
+
 export const addExperience = async (
-  input: Partial<ExperienceEntry> & TalentAssetEntry,
+  input: Partial<Experience> & TalentAssetEntry,
 ): Promise<ExperienceEntry | null> => {
   const talent = await models.Talent.findOne({ id: input.talent });
   if (!talent) throw new Error(`no user with id ${input.talent}`);
   const id = nanoid();
-  const newExperience = { id, ...input };
+  const newExperience = {
+    id,
+    ...input,
+    employer: await getOrCreateOrganizationId(input.employer),
+  };
   let updatedTalent: TalentEntry | undefined;
   try {
     updatedTalent = await models.Talent.updateOne(

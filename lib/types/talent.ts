@@ -58,6 +58,11 @@ export interface Organization extends BaseEntity {
   address: Address;
 }
 
+export interface OrganizationEntry {
+  name: string;
+  address: Address;
+}
+
 export interface Talent extends User {
   profilePic: string;
   profession: Profession;
