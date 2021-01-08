@@ -1,17 +1,10 @@
-import { gql, useMutation } from '@apollo/client';
-import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogProps,
-  DialogTitle,
-} from '@material-ui/core';
+import { gql, MutationFunction, useMutation } from '@apollo/client';
+import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
-import { Button } from '../buttons';
 import CountrySelector from '../country-selector/CountrySelector';
+import { EditPopup } from '../edit-popup/EditPopup';
 import { GenderSelector } from '../gender-selector/GenderSelector';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
@@ -60,10 +53,6 @@ export const BasicInfoEdit = ({
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
     basicInfo,
   );
-  const handleClose = (): void => {
-    setUpdatedInfo(basicInfo);
-    onClose();
-  };
 
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
@@ -115,93 +104,98 @@ export const BasicInfoEdit = ({
       },
     },
   });
-  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    await mutate();
-    onClose();
-  };
 
   return (
     // TODO Decide whether to discard input on outside click (perhaps not?)
-    <Dialog {...props} onClose={onClose}>
-      <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
-      <DialogContent>
-        <form id="basicInfoForm" onSubmit={handleSubmit}>
-          <GenderSelector
-            defaultValue={basicInfo.gender}
-            updateFunction={setUpdatedInfo}
-            t={t}
-          />
-          <Box component="div">
-            <InputField
-              label={t('fullName.firstName')}
-              id="firstName"
-              nesting="name"
-              value={updatedInfo.name?.firstName}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-            />
-            <InputField
-              label={t('fullName.middleName')}
-              id="middleName"
-              nesting="name"
-              value={updatedInfo.name?.middleName}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-            />
-            <InputField
-              label={t('fullName.lastName')}
-              id="lastName"
-              nesting="name"
-              value={updatedInfo.name?.lastName}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-              required
-            />
-          </Box>
-          <ProfessionRadio
-            t={t}
-            input={basicInfo.profession}
-            updateFunction={setUpdatedInfo}
-            gender={updatedInfo.gender}
-          />
-          <InputField
-            label={t('profilePic')}
-            id="profilePic"
-            value={updatedInfo.profilePic}
-            setValue={setUpdatedInfo}
-          />
-          <Box component="div">
-            <InputField
-              label={t('address.city')}
-              id="city"
-              nesting="address"
-              value={updatedInfo.address?.city}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-            />
-            <CountrySelector
-              t={t}
-              updateFunction={setUpdatedInfo}
-              defaultValue={basicInfo.address?.isoCode}
-              fullWidth={false}
-            />
-          </Box>
-          <InputField
-            label={t('description')}
-            id="description"
-            value={updatedInfo.description}
-            setValue={setUpdatedInfo}
-            multiline={true}
-          />
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
-        <Button type="submit" form="basicInfoForm">
-          {t('buttonLabels.save')}
-        </Button>
-      </DialogActions>
-    </Dialog>
+    // <Dialog {...props} onClose={onClose}>
+    //   <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
+    //   <DialogContent>
+    //     <form id="basicInfoForm" onSubmit={handleSubmit}>
+    <EditPopup
+      {...props}
+      t={t}
+      title={t('components.basicInfo.title')}
+      onClose={onClose}
+      formId="basicInfoForm"
+      mutate={mutate as MutationFunction}
+      reset={() => setUpdatedInfo(basicInfo)}
+    >
+      <GenderSelector
+        defaultValue={basicInfo.gender}
+        updateFunction={setUpdatedInfo}
+        t={t}
+      />
+      <Box component="div">
+        <InputField
+          label={t('fullName.firstName')}
+          id="firstName"
+          nesting="name"
+          value={updatedInfo.name?.firstName}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+        />
+        <InputField
+          label={t('fullName.middleName')}
+          id="middleName"
+          nesting="name"
+          value={updatedInfo.name?.middleName}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+        />
+        <InputField
+          label={t('fullName.lastName')}
+          id="lastName"
+          nesting="name"
+          value={updatedInfo.name?.lastName}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+          required
+        />
+      </Box>
+      <ProfessionRadio
+        t={t}
+        input={basicInfo.profession}
+        updateFunction={setUpdatedInfo}
+        gender={updatedInfo.gender}
+      />
+      <InputField
+        label={t('profilePic')}
+        id="profilePic"
+        value={updatedInfo.profilePic}
+        setValue={setUpdatedInfo}
+      />
+      <Box component="div">
+        <InputField
+          label={t('address.city')}
+          id="city"
+          nesting="address"
+          value={updatedInfo.address?.city}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+        />
+        <CountrySelector
+          t={t}
+          updateFunction={setUpdatedInfo}
+          defaultValue={basicInfo.address?.isoCode}
+          fullWidth={false}
+        />
+      </Box>
+      <InputField
+        label={t('description')}
+        id="description"
+        value={updatedInfo.description}
+        setValue={setUpdatedInfo}
+        multiline={true}
+      />
+    </EditPopup>
+    //     </form>
+    //   </DialogContent>
+    //   <DialogActions>
+    //     <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
+    //     <Button type="submit" form="basicInfoForm">
+    //       {t('buttonLabels.save')}
+    //     </Button>
+    //   </DialogActions>
+    // </Dialog>
   );
 };
