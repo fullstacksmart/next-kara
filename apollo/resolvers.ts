@@ -1,8 +1,8 @@
 import {
   User,
   Organization,
-  ExperienceInput,
-  QualificationInput,
+  ExperienceEntry,
+  QualificationEntry,
   Talent,
   UserInput,
   TalentUpdate,
@@ -36,10 +36,10 @@ const resolvers = {
     },
   },
   Experience: {
-    async talent(experience: ExperienceInput): Promise<Talent> {
+    async talent(experience: ExperienceEntry): Promise<Talent> {
       return helpers.getTalentById(experience.talent);
     },
-    async employer(experience: ExperienceInput): Promise<Organization> {
+    async employer(experience: ExperienceEntry): Promise<Organization> {
       return await helpers.getOrganizationById(experience.employer);
     },
     async isComplete(experience: Experience): Promise<boolean> {
@@ -48,7 +48,7 @@ const resolvers = {
   },
   Qualification: {
     async institution(
-      qualification: QualificationInput,
+      qualification: QualificationEntry,
     ): Promise<Organization> {
       return await helpers.getOrganizationById(qualification.institution);
     },
@@ -77,6 +77,12 @@ const resolvers = {
       { input }: { input: TalentUpdate },
     ): Promise<Talent> {
       return await helpers.updateTalent(input);
+    },
+    async addExperience(
+      _: unknown,
+      { input }: { input: Partial<Experience> },
+    ): Promise<Experience> {
+      return await helpers.addExperience(input);
     },
   },
 };

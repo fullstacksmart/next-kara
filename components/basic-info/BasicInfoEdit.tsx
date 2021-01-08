@@ -106,11 +106,6 @@ export const BasicInfoEdit = ({
   });
 
   return (
-    // TODO Decide whether to discard input on outside click (perhaps not?)
-    // <Dialog {...props} onClose={onClose}>
-    //   <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
-    //   <DialogContent>
-    //     <form id="basicInfoForm" onSubmit={handleSubmit}>
     <EditPopup
       {...props}
       t={t}
@@ -188,14 +183,5 @@ export const BasicInfoEdit = ({
         multiline={true}
       />
     </EditPopup>
-    //     </form>
-    //   </DialogContent>
-    //   <DialogActions>
-    //     <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
-    //     <Button type="submit" form="basicInfoForm">
-    //       {t('buttonLabels.save')}
-    //     </Button>
-    //   </DialogActions>
-    // </Dialog>
   );
 };

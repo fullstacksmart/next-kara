@@ -213,6 +213,18 @@ const typeDefs = gql`
     password: String!
     type: UserType!
   }
+  input OrganizationInput {
+    name: String
+    address: AddressInput
+  }
+  input DurationInput {
+    from: {
+      timeStamp
+    }
+    to: {
+      timeStamp
+    }
+  }
 
   input TalentUpdate {
     id: ID!
@@ -221,6 +233,26 @@ const typeDefs = gql`
     address: AddressInput
     profilePic: String
     profession: Profession
+    description: String
+  }
+
+  input NewExperience {
+    talent: String!
+    title: String
+    lineOfWork: Profession
+    employer: OrganizationInput
+    duration: DurationInput
+    description: String
+  }
+
+
+  input ExperienceUpdate {
+    id: ID!
+    talent: String!
+    title: String
+    lineOfWork: Profession
+    employer: OrganizationInput
+    duration: DurationInput
     description: String
   }
 
@@ -234,6 +266,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
+    addExperience(input: NewExperience): Experience!
+    updateExperience(input: ExperienceUodate!): Experience!
   }
 `;
 export default typeDefs;

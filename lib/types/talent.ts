@@ -40,7 +40,7 @@ interface TalentAsset extends BaseEntity {
   isComplete: boolean;
 }
 
-interface TalentAssetInput {
+interface TalentAssetEntry {
   talent: string;
 }
 
@@ -85,15 +85,13 @@ export interface BasicInfo {
 }
 
 export interface Experience extends TalentAsset {
-  title: string;
   lineOfWork: Profession;
   employer?: Organization;
   duration?: Duration;
   description?: string;
 }
 
-export interface ExperienceInput extends TalentAssetInput {
-  title: string;
+export interface ExperienceEntry extends TalentAssetEntry {
   lineOfWork: Profession;
   employer: string;
   duration?: Duration;
@@ -108,7 +106,7 @@ interface Qualification extends TalentAsset {
   description: string;
 }
 
-export interface QualificationInput extends TalentAsset {
+export interface QualificationEntry extends TalentAsset {
   fieldOfEducation: string;
   degree: string;
   institution: string;
@@ -138,7 +136,7 @@ interface OtherSkill extends TalentAsset {
   description: string;
 }
 
-export interface BasicInfoInput {
+export interface BasicInfoEntry {
   name?: FullName;
   gender?: Gender;
   address?: Address;
@@ -147,4 +145,4 @@ export interface BasicInfoInput {
   description?: string;
 }
 
-export type TalentUpdate = BaseEntity & BasicInfoInput;
+export type TalentUpdate = BaseEntity & BasicInfoEntry;

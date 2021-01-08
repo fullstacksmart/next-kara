@@ -6,7 +6,9 @@ import {
   Organization,
   TalentUpdate,
   Experience,
+  ExperienceEntry,
 } from '../lib/types';
+import { nanoid } from 'nanoid';
 
 export const getAllTalentIds = (): string[] =>
   models.Talent.findMany().map((talent: User) => talent.id);
@@ -42,6 +44,20 @@ export const addUser = async (input: UserInput): Promise<User> => {
   });
   if (oldUser) throw new Error('user already exists');
   return await models[type].createOne(input);
+};
+
+export const addExperience = async (
+  input: Partial<Experience>,
+): Promise<Experience> => {
+  const talent = await models.Talent.findOne({ id: input.talent });
+  if (!talent) throw new Error(`no user with id ${input.talent}`);
+  const id = nanoid();
+  const newExperience = { id, ...input };
+  const updatedTalent = await models.Talent.updateOne(
+    { id: talent.id },
+    { experiences: [...talent.experiences, newExperience] },
+  );
+  return updatedTalent.experiences.find({ id });
 };
 
 export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
@@ -97,7 +113,6 @@ export const isExperienceComplete = async (
     experience.description &&
       experience.duration &&
       experience.employer &&
-      experience.lineOfWork &&
-      experience.title,
+      experience.lineOfWork,
   );
 };
