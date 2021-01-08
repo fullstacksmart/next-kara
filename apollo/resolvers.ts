@@ -89,9 +89,7 @@ const resolvers = {
     },
     async updateExperience(
       _: unknown,
-      {
-        input,
-      }: { input: Partial<ExperienceEntry> & TalentAssetEntry & BaseEntity },
+      { input }: { input: Partial<Experience> & TalentAssetEntry & BaseEntity },
     ): Promise<ExperienceEntry | null> {
       return await helpers.updateExperience(input);
     },

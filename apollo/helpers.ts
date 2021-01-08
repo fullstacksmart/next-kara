@@ -10,13 +10,18 @@ import {
   BaseEntity,
   ExperienceEntry,
   TalentEntry,
-  OrganizationEntry,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 
 const handleError = (e: Error): Error => {
   console.error(e); //eslint-disable-line no-console
   return e;
+};
+
+//eslint-disable-next-line @typescript-eslint/ban-types
+const updateObject = (object: object, update: object | undefined): object => {
+  if (!update) return object;
+  return { ...object, ...update };
 };
 
 const getExperienceById = (
@@ -105,7 +110,7 @@ export const addExperience = async (
 };
 
 export const updateExperience = async (
-  input: Partial<ExperienceEntry> & TalentAssetEntry & BaseEntity,
+  input: Partial<Experience> & TalentAssetEntry & BaseEntity,
 ): Promise<ExperienceEntry | null> => {
   let talent: TalentEntry | undefined;
   try {
@@ -121,7 +126,7 @@ export const updateExperience = async (
   const updatedExperience = {
     ...oldExperience,
     lineOfWork: input.lineOfWork,
-    employer: input.employer,
+    employer: await getOrCreateOrganizationId(input.employer),
     duration: input.duration,
     description: input.description,
   };
@@ -147,12 +152,12 @@ export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
   if (!existingTalent)
     throw new Error(`no user with id ${input.id} in database`);
   let updatedTalent;
-  const updatedAddress = { ...existingTalent.address, ...input.address };
-  const updatedName = { ...existingTalent.name, ...input.name };
+  // const updatedAddress = { ...existingTalent.address, ...input.address };
+  // const updatedName = { ...existingTalent.name, ...input.name };
   const enrichedInput = {
     ...input,
-    address: updatedAddress,
-    name: updatedName,
+    address: updateObject(existingTalent.address, input.address),
+    name: updateObject(existingTalent.name, input.name),
   };
   try {
     updatedTalent = await models.Talent.updateOne(
