@@ -10,6 +10,7 @@ import {
 } from '../../../components/experience-section';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
+import { filterById } from '../../../lib/utils/arrays';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -146,18 +147,6 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
     setModal({ type: ModalType.NONE });
   };
 
-  const filterById = (
-    arr: Experience[],
-    id?: string,
-  ): Experience | undefined => {
-    if (!id) return;
-    const experienceArr = experiences.filter(
-      (experience) => experience.id === id,
-    );
-    if (experienceArr.length > 0) return experienceArr[0];
-    throw new Error(`no array element with id ${id}`);
-  };
-
   return (
     <Layout title={['profile', `Talent ${id}`]}>
       <h1>Profile Page for Talent {basicInfo.fullName}</h1>
@@ -182,7 +171,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       />
       <ExperienceEdit
         t={t}
-        experience={filterById(experiences, modal.id)}
+        experience={filterById(experiences, modal.id) as Experience}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
       />
