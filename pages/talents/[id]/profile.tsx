@@ -171,10 +171,10 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       />
       <ExperienceEdit
         t={t}
+        talent={basicInfo}
         experience={filterById(experiences, modal.id) as Experience}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
-        gender={basicInfo.gender}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

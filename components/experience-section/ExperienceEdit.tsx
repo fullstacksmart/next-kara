@@ -1,26 +1,32 @@
 import { EditPopup } from '../edit-popup/EditPopup';
 import { TFunction } from 'next-i18next';
-import { Experience, Gender } from '../../lib/types';
+import { Experience, Talent } from '../../lib/types';
 import { DialogProps } from '@material-ui/core';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 
 interface ExperienceEditProps extends DialogProps {
   t: TFunction;
-  gender: Gender;
   experience?: Experience;
+  talent: Talent;
   onClose: () => void;
 }
 
 export const ExperienceEdit = ({
-  experience,
+  talent,
+  experience = {
+    id: '',
+    talent,
+    lineOfWork: 'NURSE',
+    isComplete: false,
+  },
   t,
-  gender,
   ...props
 }: ExperienceEditProps): React.ReactElement => {
-  const [updatedExperience, setUpdatedExperience] = useState(experience);
-  console.log(updatedExperience, experience);
+  const [updatedExperience, setUpdatedExperience] = useState<
+    Partial<Experience>
+  >(experience);
   return (
     <EditPopup
       t={t}
@@ -32,17 +38,17 @@ export const ExperienceEdit = ({
       <ProfessionRadio
         t={t}
         input={experience?.lineOfWork}
-        updateFunction={
-          setUpdatedExperience as Dispatch<SetStateAction<object>> // eslint-disable-line @typescript-eslint/ban-types
-        }
-        gender={gender}
+        updateFunction={setUpdatedExperience}
+        gender={talent.gender}
         isExtended={true}
         propName="lineOfWork"
       />
       <InputField
-        label={t('labels.position')}
-        id="position"
-        value={experience?.lineOfWork}
+        label={t('labels.employer')}
+        id="name"
+        value={experience?.employer?.name}
+        nesting="employer"
+        setValue={setUpdatedExperience}
       />
     </EditPopup>
   );
