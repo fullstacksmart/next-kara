@@ -123,24 +123,21 @@ export const BasicInfoEdit = ({
       <Box component="div">
         <InputField
           label={t('fullName.firstName')}
-          id="firstName"
-          nesting="name"
+          propName={['name', 'firstName']}
           value={updatedInfo.name?.firstName}
           setValue={setUpdatedInfo}
           fullWidth={false}
         />
         <InputField
           label={t('fullName.middleName')}
-          id="middleName"
-          nesting="name"
+          propName={['name', 'middleName']}
           value={updatedInfo.name?.middleName}
           setValue={setUpdatedInfo}
           fullWidth={false}
         />
         <InputField
           label={t('fullName.lastName')}
-          id="lastName"
-          nesting="name"
+          propName={['name', 'lastName']}
           value={updatedInfo.name?.lastName}
           setValue={setUpdatedInfo}
           fullWidth={false}
@@ -155,15 +152,14 @@ export const BasicInfoEdit = ({
       />
       <InputField
         label={t('profilePic')}
-        id="profilePic"
+        propName="profilePic"
         value={updatedInfo.profilePic}
         setValue={setUpdatedInfo}
       />
       <Box component="div">
         <InputField
           label={t('address.city')}
-          id="city"
-          nesting="address"
+          propName={['address', 'city']}
           value={updatedInfo.address?.city}
           setValue={setUpdatedInfo}
           fullWidth={false}
@@ -177,7 +173,7 @@ export const BasicInfoEdit = ({
       </Box>
       <InputField
         label={t('description')}
-        id="description"
+        propName="description"
         value={updatedInfo.description}
         setValue={setUpdatedInfo}
         multiline={true}

@@ -1,7 +1,7 @@
 import { EditPopup } from '../edit-popup/EditPopup';
 import { TFunction } from 'next-i18next';
 import { Experience, Talent } from '../../lib/types';
-import { DialogProps } from '@material-ui/core';
+import { DialogProps, Box } from '@material-ui/core';
 import { useState } from 'react';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
@@ -19,6 +19,14 @@ export const ExperienceEdit = ({
     id: '',
     talent,
     lineOfWork: 'NURSE',
+    employer: {
+      id: '',
+      name: '',
+      address: {
+        city: '',
+        isoCode: 'NONE',
+      },
+    },
     isComplete: false,
   },
   t,
@@ -45,11 +53,19 @@ export const ExperienceEdit = ({
       />
       <InputField
         label={t('labels.employer')}
-        id="name"
-        value={experience?.employer?.name}
-        nesting="employer"
+        value={updatedExperience?.employer?.name}
+        propName={['employer', 'name']}
         setValue={setUpdatedExperience}
       />
+      <Box component="div">
+        <InputField
+          label={t('address.city')}
+          id="city"
+          value={updatedExperience?.employer?.address.city}
+          propName={['employer', 'address', 'city']}
+          setValue={setUpdatedExperience}
+        />
+      </Box>
     </EditPopup>
   );
 };
