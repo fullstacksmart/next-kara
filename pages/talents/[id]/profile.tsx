@@ -103,7 +103,6 @@ const GET_ALL_INFO = gql`
           id
           gender
         }
-        title
         lineOfWork
         employer {
           id
