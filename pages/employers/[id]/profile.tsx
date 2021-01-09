@@ -23,6 +23,7 @@ const GET_BASIC_INFO = gql`
         city
         postalCode
       }
+      profilePic
       description
       website
       name {
@@ -36,7 +37,7 @@ const GET_BASIC_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
+const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   const { data, loading, error } = useQuery(GET_BASIC_INFO, {
     variables: {
       id,
@@ -47,19 +48,16 @@ const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
 
-  const basicInfo = data?.getEmployerById;
+  const basicInfoEmployer = data?.getEmployerById;
 
   return (
     <Layout title={['profile', `Employer ${id}`]}>
-      <h1>Profile Page for {basicInfo.company}</h1>
-      <p>
-        {basicInfo.address.street} {basicInfo.address.streetNo},{' '}
-        {basicInfo.address.postalCode}, {basicInfo.address.city}
-      </p>
-      <p>{basicInfo.website}</p>
-      <p>Legal representative: {basicInfo.fullName}</p>
-      <h3>{basicInfo.description}</h3>
-
+      <h1>Profile Page for {basicInfoEmployer.company}</h1>
+      <BasicInfo
+        t={t}
+        basicInfoEmployer={basicInfoEmployer}
+        handleEdit={() => setModal(ModalType.BASIC_INFO)}
+      />
       <Button href={`/employers/${id}/settings`}>To Settings</Button>
     </Layout>
   );

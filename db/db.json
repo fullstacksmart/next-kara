@@ -104,7 +104,8 @@
       "id": "EA1",
       "email": "cecile@thunder.rs",
       "password": "pass",
-      "company": "Charité – Universitätsmedizin Berlin",
+      "company": "Charité – Universitätsmedizin",
+      "profilePic": "https://img.morgenpost.de/img/incoming/crop231033068/3527653266-w1200-cv16_9-q85/Bis-2030-sind-Investitionen-von-rund-einer-Milliarde-Euro-vorgesehen-bis-2050-wird-mit-mehr-als-sechs-Milliarden-Euro-gerechnet-um-alle-Plaene-der-Charite-Berlin-zu-realisieren.jpg",
       "address": {
         "street": "Charitestrasse",
         "streetNo": "2",
@@ -112,7 +113,7 @@
         "postalCode": "11000"
       },
       "website": "https://www.charite.de/en/",
-      "description": "We are a hospital. Etiam dictum ex eget magna feugiat consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo.",
+      "description": "We are a hospital. Etiam dictum ex eget magna feugiat consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt.",
       "name": {
         "firstName": "Cecile",
         "lastName": "Thunder",

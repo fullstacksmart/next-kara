@@ -138,6 +138,7 @@ const typeDefs = gql`
     type: UserType!
     name: FullName!
     fullName: String!
+    profilePic: String
     address: Address
     description: String
     website: String
