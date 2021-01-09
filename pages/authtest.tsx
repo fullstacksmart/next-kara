@@ -1,12 +1,32 @@
-import FirebaseAuth from '../components/firebase/FirebaseAuth';
+import {Button} from '../components/buttons';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import initFirebase from '../lib/auth/initFirebase';
+import { setUserCookie } from '../lib/auth/userCookies';
+import { mapUserData } from '../lib/auth/mapUserData';
 
-const Auth = () => {
+// Init the Firebase app.
+initFirebase();
+
+const Auth = (): React.ReactElement => {
+
+const handleClick = () => firebase.auth().createUserWithEmailAndPassword('testemaildefw@tgkmng.de', 'testpassword')
+  .then((user) => {
+    console.log(user)
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(error)
+    // ..
+});
+
   return (
     <div>
       <p>Sign in</p>
-      <div>
-        <FirebaseAuth />
-      </div>
+      <Button onClick={handleClick}>
+        Sign in here
+      </Button>
     </div>
   )
 }
