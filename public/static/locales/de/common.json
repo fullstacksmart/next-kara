@@ -71,7 +71,10 @@
     "NURSE-OTHER": "Krankenpfleger",
     "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
     "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
-    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
+    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal",
+    "OTHER_NON_MEDICAL-FEMALE": "Nichtmedizinisches Personal",
+    "OTHER_NON_MEDICAL-MALE": "Nichtmedizinisches Personal",
+    "OTHER_NON_MEDICAL-OTHER": "Nichtmedizinisches Personal"
   },
   "profilePic": "URL Deines Profilbildes",
   "repeatPassword": "Passwort wiederholen",

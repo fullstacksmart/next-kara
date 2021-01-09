@@ -149,7 +149,7 @@ export const BasicInfoEdit = ({
       </Box>
       <ProfessionRadio
         t={t}
-        input={basicInfo.profession}
+        input={updatedInfo.profession}
         updateFunction={setUpdatedInfo}
         gender={updatedInfo.gender}
       />

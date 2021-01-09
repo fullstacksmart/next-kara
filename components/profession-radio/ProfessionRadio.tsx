@@ -4,13 +4,15 @@ import {
   OptionsRadioOption,
   OptionsRadioProps,
 } from '../options-radio/OptionsRadio';
-import { Gender, Profession, Talent } from '../../lib/types';
+import { Gender, Profession } from '../../lib/types';
 
 export interface GenderRadioProps extends Partial<OptionsRadioProps> {
-  updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
+  updateFunction: React.Dispatch<React.SetStateAction<object>>; //eslint-disable-line @typescript-eslint/ban-types
   t: TFunction;
   input?: Profession;
   gender?: Gender;
+  isExtended?: boolean;
+  propName?: string;
 }
 
 export const ProfessionRadio = ({
@@ -18,6 +20,8 @@ export const ProfessionRadio = ({
   updateFunction,
   input,
   gender = 'OTHER',
+  isExtended = false,
+  propName = 'profession',
 }: GenderRadioProps): React.ReactElement => {
   const options: OptionsRadioOption[] = [
     {
@@ -36,6 +40,13 @@ export const ProfessionRadio = ({
       labelPlacement: 'top',
     },
   ];
+  if (isExtended) {
+    options.push({
+      value: 'OTHER_NON_MEDICAL',
+      label: t(`profession.OTHER_NON_MEDICAL-${gender}`),
+      labelPlacement: 'top',
+    });
+  }
   return (
     <OptionsRadio
       row
@@ -45,9 +56,8 @@ export const ProfessionRadio = ({
       name="gender"
       defaultValue={input}
       setUpdate={(value) => {
-        const profession = value as Profession;
         updateFunction((oldValues) => {
-          return { ...oldValues, profession } as Partial<Talent>;
+          return { ...oldValues, [propName]: value };
         });
       }}
     />

@@ -51,10 +51,10 @@
     "SRB": "Serbia"
   },
   "labels": {
-    "position": "Position",
     "duration": "Duration",
     "employer": "Employer / Company",
-    "experienceDescription": "Line of Work / Description"
+    "experienceDescription": "Line of Work / Description",
+    "position": "Position"
   },
   "pages": {
     "signup": {
@@ -71,7 +71,10 @@
     "NURSE-OTHER": "Nurse",
     "OTHER_MEDICAL-FEMALE": "Other Medical Personnel",
     "OTHER_MEDICAL-MALE": "Other Medical Personnel",
-    "OTHER_MEDICAL-OTHER": "Other Medical Personnel"
+    "OTHER_MEDICAL-OTHER": "Other Medical Personnel",
+    "OTHER_NON_MEDICAL-FEMALE": "Non-medical Personnel",
+    "OTHER_NON_MEDICAL-MALE": "Non-medical Personnel",
+    "OTHER_NON_MEDICAL-OTHER": "Non-medical Personnel"
   },
   "profilePic": "URL to profile pic",
   "repeatPassword": "please reenter password",
