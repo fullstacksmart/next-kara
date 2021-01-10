@@ -172,6 +172,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       <ExperienceEdit
         t={t}
         talent={basicInfo}
+        id={modal.id}
         experience={filterById(experiences, modal.id) as Experience}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}

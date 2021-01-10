@@ -2,12 +2,13 @@ import { EditPopup } from '../edit-popup/EditPopup';
 import { TFunction } from 'next-i18next';
 import { Experience, Talent } from '../../lib/types';
 import { DialogProps, Box } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 
 interface ExperienceEditProps extends DialogProps {
   t: TFunction;
+  id?: string;
   experience?: Experience;
   talent: Talent;
   onClose: () => void;
@@ -15,6 +16,7 @@ interface ExperienceEditProps extends DialogProps {
 
 export const ExperienceEdit = ({
   talent,
+  id,
   experience = {
     id: '',
     talent,
@@ -35,6 +37,10 @@ export const ExperienceEdit = ({
   const [updatedExperience, setUpdatedExperience] = useState<
     Partial<Experience>
   >(experience);
+  // TODO find better solution
+  useEffect(() => {
+    setUpdatedExperience(() => experience);
+  }, [id]);
   return (
     <EditPopup
       t={t}
