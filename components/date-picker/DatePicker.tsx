@@ -24,15 +24,12 @@ export const DatePicker = ({
   return (
     <Original
       {...props}
-      clearable
       format="MM/yyyy"
       label={label}
       views={['year', 'month', 'date']}
-      value={new Date(parseInt(input))}
+      value={input ? new Date(parseInt(input)) : new Date(Date.now())}
       onChange={(date) => {
-        const newDateString: string = date
-          ? date.getTime().toString()
-          : Date.now().toString();
+        const newDateString: string = date ? date.getTime().toString() : '';
         updateFunction((oldValues) => ({
           ...oldValues,
           ...computeNestedValue(oldValues, propNameArray, newDateString),

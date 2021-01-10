@@ -50,7 +50,7 @@ interface Date {
 
 export interface Duration {
   from: Date;
-  to?: Date;
+  to: Date;
 }
 
 export interface Organization extends BaseEntity {
