@@ -18,6 +18,7 @@ interface EditPopupProps extends PropsWithChildren<DialogProps> {
   formId: string;
   mutate?: MutationFunction;
   reset: () => void;
+  onSave?: () => void;
 }
 
 export const EditPopup = ({
@@ -25,6 +26,7 @@ export const EditPopup = ({
   title,
   children,
   onClose,
+  onSave,
   formId = nanoid(),
   mutate,
   reset,
@@ -33,6 +35,7 @@ export const EditPopup = ({
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     if (mutate) await mutate();
+    if (onSave) onSave();
     onClose();
   };
   const handleClose = (): void => {

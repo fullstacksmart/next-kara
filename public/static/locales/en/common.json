@@ -16,7 +16,10 @@
       "label": "Country"
     },
     "experienceEdit": {
-      "title": "Edit your job experiences"
+      "title": {
+        "new": "Create a new job experience entry",
+        "old": "Edit your job experience"
+      }
     },
     "experienceSection": {
       "title": "Job Experience"

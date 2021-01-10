@@ -16,7 +16,10 @@
       "label": "Land"
     },
     "experienceEdit": {
-      "title": "Bearbeite Deine Berufserfahrung"
+      "title": {
+        "old": "Bearbeite Deine Berufserfahrung",
+        "new": "Erstelle einen neuen Berufserfahrungseintrag"
+      }
     },
     "experienceSection": {
       "title": "Berufserfahrung"
