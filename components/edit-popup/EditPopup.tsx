@@ -38,7 +38,7 @@ export const EditPopup = ({
       try {
         await mutate();
       } catch (e) {
-        console.error(e);
+        console.error(e); //eslint-disable-line no-console
       }
     }
     if (onSave) onSave();

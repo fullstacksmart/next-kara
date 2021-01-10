@@ -82,6 +82,14 @@ export const ExperienceEdit = ({
         isoCode: 'NONE',
       },
     },
+    duration: {
+      from: {
+        timeStamp: '',
+      },
+      to: {
+        timeStamp: '',
+      },
+    },
     isComplete: false,
   },
   t,
@@ -108,16 +116,37 @@ export const ExperienceEdit = ({
           from: {
             timeStamp: updatedExperience.duration?.from.timeStamp,
           },
-          to: updatedExperience.duration?.to
-            ? { timeStamp: updatedExperience.duration.to.timeStamp }
-            : null,
+          to: {
+            timeStamp: updatedExperience.duration?.to.timeStamp,
+          },
         },
         description: updatedExperience.description,
       },
     },
   });
   const [add] = useMutation(ADD_EXPERIENCE, {
-    variables: { input: updatedExperience },
+    variables: {
+      input: {
+        talent: updatedExperience.talent?.id,
+        lineOfWork: updatedExperience.lineOfWork,
+        employer: {
+          name: updatedExperience.employer?.name,
+          address: {
+            city: updatedExperience.employer?.address.city,
+            isoCode: updatedExperience.employer?.address.isoCode,
+          },
+        },
+        duration: {
+          from: {
+            timeStamp: updatedExperience.duration?.from.timeStamp,
+          },
+          to: {
+            timeStamp: updatedExperience.duration?.to.timeStamp,
+          },
+        },
+        description: updatedExperience.description,
+      },
+    },
   });
 
   // TODO find better solution

@@ -240,7 +240,7 @@ const typeDefs = gql`
     talent: String!
     lineOfWork: Profession
     employer: OrganizationInput
-    duration: String
+    duration: DurationInput
     description: String
   }
 
