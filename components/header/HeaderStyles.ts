@@ -3,27 +3,27 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: '1rem',
-      marginBottom: '1rem',
+      marginTop: '2rem',
+      marginBottom: '2rem',
     },
     textContainer: {
-      marginLeft: '3rem',
+      marginLeft: '3.5rem',
     },
     mainText: {
-      margin: '3rem 0 2rem 2rem',
-      fontSize: '2rem',
+      margin: '3rem 0 2.5rem 2.4rem',
+      fontSize: '3.5rem',
       fontWeight: 'bold',
     },
     secondaryText: {
       color: 'rgb(255, 255, 255)',
       fontWeight: 'bold',
-      fontSize: '1.25rem',
+      fontSize: '1.8rem',
       lineHeight: '1.5',
     },
     leftColoredDiv: {
       borderRadius: '100px',
       background: theme.palette.primary.main,
-      padding: '1rem 5rem',
+      padding: '2.5rem 6rem',
     },
     rightColoredDiv: {
       width: '300px',
