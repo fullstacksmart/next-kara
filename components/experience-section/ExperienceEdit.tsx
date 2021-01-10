@@ -72,7 +72,6 @@ export const ExperienceEdit = ({
       <Box component="div">
         <InputField
           label={t('address.city')}
-          id="city"
           value={updatedExperience?.employer?.address.city}
           propName={['employer', 'address', 'city']}
           setValue={setUpdatedExperience}
@@ -84,6 +83,13 @@ export const ExperienceEdit = ({
           propName={['employer', 'address', 'isoCode']}
         />
       </Box>
+      <InputField
+        label={t('labels.experienceDescription')}
+        propName="description"
+        value={updatedExperience.description}
+        setValue={setUpdatedExperience}
+        multiline={true}
+      />
     </EditPopup>
   );
 };
