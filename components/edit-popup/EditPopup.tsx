@@ -34,7 +34,13 @@ export const EditPopup = ({
 }: EditPopupProps): React.ReactElement => {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    if (mutate) await mutate();
+    if (mutate) {
+      try {
+        await mutate();
+      } catch (e) {
+        console.error(e);
+      }
+    }
     if (onSave) onSave();
     onClose();
   };

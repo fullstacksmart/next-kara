@@ -7,6 +7,57 @@ import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 import CountrySelector from '../country-selector/CountrySelector';
 import { DatePicker } from '../date-picker/DatePicker';
+import { gql, MutationFunction, useMutation } from '@apollo/client';
+
+const UPDATE_EXPERIENCE = gql`
+  mutation Update_Experience($input: ExperienceUpdate!) {
+    updateExperience(input: $input) {
+      id
+      lineOfWork
+      employer {
+        name
+        address {
+          city
+          isoCode
+        }
+      }
+      duration {
+        from {
+          timeStamp
+        }
+        to {
+          timeStamp
+        }
+      }
+      description
+    }
+  }
+`;
+
+const ADD_EXPERIENCE = gql`
+  mutation Add_Experience($input: NewExperience!) {
+    addExperience(input: $input) {
+      id
+      employer {
+        id
+        name
+        address {
+          city
+          isoCode
+        }
+      }
+      duration {
+        from {
+          timeStamp
+        }
+        to {
+          timeStamp
+        }
+      }
+      description
+    }
+  }
+`;
 
 interface ExperienceEditProps extends DialogProps {
   t: TFunction;
@@ -39,6 +90,36 @@ export const ExperienceEdit = ({
   const [updatedExperience, setUpdatedExperience] = useState<
     Partial<Experience>
   >(experience);
+
+  const [update] = useMutation(UPDATE_EXPERIENCE, {
+    variables: {
+      input: {
+        id: updatedExperience.id,
+        talent: updatedExperience.talent?.id,
+        lineOfWork: updatedExperience.lineOfWork,
+        employer: {
+          name: updatedExperience.employer?.name,
+          address: {
+            city: updatedExperience.employer?.address.city,
+            isoCode: updatedExperience.employer?.address.isoCode,
+          },
+        },
+        duration: {
+          from: {
+            timeStamp: updatedExperience.duration?.from.timeStamp,
+          },
+          to: updatedExperience.duration?.to
+            ? { timeStamp: updatedExperience.duration.to.timeStamp }
+            : null,
+        },
+        description: updatedExperience.description,
+      },
+    },
+  });
+  const [add] = useMutation(ADD_EXPERIENCE, {
+    variables: { input: updatedExperience },
+  });
+
   // TODO find better solution
   useEffect(() => {
     setUpdatedExperience(() => experience);
@@ -54,6 +135,7 @@ export const ExperienceEdit = ({
       formId="experienceForm"
       reset={() => setUpdatedExperience(experience)}
       onSave={() => console.log('saving', updatedExperience)}
+      mutate={(id ? update : add) as MutationFunction}
       {...props}
     >
       <ProfessionRadio
@@ -71,6 +153,7 @@ export const ExperienceEdit = ({
       />
       {/* TODO Decide how to handle 'till present'*/}
       <DatePicker
+        clearable
         label={t('labels.duration.to')}
         updateFunction={setUpdatedExperience}
         input={updatedExperience.duration?.to?.timeStamp}
