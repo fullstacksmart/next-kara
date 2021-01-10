@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 import CountrySelector from '../country-selector/CountrySelector';
+import { DatePicker } from '../date-picker/DatePicker';
 
 interface ExperienceEditProps extends DialogProps {
   t: TFunction;
@@ -62,6 +63,18 @@ export const ExperienceEdit = ({
         gender={talent.gender}
         isExtended={true}
         propName="lineOfWork"
+      />
+      <DatePicker
+        label={t('labels.duration.from')}
+        updateFunction={setUpdatedExperience}
+        input={updatedExperience.duration?.from.timeStamp}
+      />
+      {/* TODO Decide how to handle 'till present'*/}
+      <DatePicker
+        label={t('labels.duration.to')}
+        updateFunction={setUpdatedExperience}
+        input={updatedExperience.duration?.to?.timeStamp}
+        propName={['duration', 'to', 'timeStamp']}
       />
       <InputField
         label={t('labels.employer')}

@@ -32,7 +32,10 @@ export const ExperienceItem = ({
         label={t('labels.position')}
         value={t(`profession.${experience.lineOfWork}-${gender}`)}
       />
-      <FieldDisplay label={t('labels.duration')} value={formatedDuration} />
+      <FieldDisplay
+        label={t('labels.duration.complete')}
+        value={formatedDuration}
+      />
       <FieldDisplay
         label={t('labels.employer')}
         value={experience.employer?.name}

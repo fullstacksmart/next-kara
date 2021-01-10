@@ -54,7 +54,11 @@
     "SRB": "Serbia"
   },
   "labels": {
-    "duration": "Duration",
+    "duration": {
+      "complete": "duration",
+      "from": "from",
+      "to": "to"
+    },
     "employer": "Employer / Company",
     "experienceDescription": "Line of Work / Description",
     "position": "Position"

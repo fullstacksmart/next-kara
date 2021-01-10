@@ -55,7 +55,11 @@
   },
   "labels": {
     "position": "Position",
-    "duration": "Zeitraum",
+    "duration": {
+      "complete": "Zeitraum",
+      "from": "von",
+      "to": "bis"
+    },
     "employer": "Arbeitgeber / Unternehmen",
     "experienceDescription": "Tätigkeit / Beschreibung"
   },
