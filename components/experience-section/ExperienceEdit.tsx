@@ -163,7 +163,6 @@ export const ExperienceEdit = ({
       }
       formId="experienceForm"
       reset={() => setUpdatedExperience(experience)}
-      onSave={() => console.log('saving', updatedExperience)}
       mutate={(id ? update : add) as MutationFunction}
       {...props}
     >
@@ -179,6 +178,7 @@ export const ExperienceEdit = ({
         label={t('labels.duration.from')}
         updateFunction={setUpdatedExperience}
         input={updatedExperience.duration?.from.timeStamp}
+        required
       />
       {/* TODO Decide how to handle 'till present'*/}
       <DatePicker
@@ -193,6 +193,7 @@ export const ExperienceEdit = ({
         value={updatedExperience?.employer?.name}
         propName={['employer', 'name']}
         setValue={setUpdatedExperience}
+        required
       />
       <Box component="div">
         <InputField
