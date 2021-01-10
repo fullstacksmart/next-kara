@@ -3,9 +3,11 @@ import OptionsSelector, {
 } from '../options-selector/OptionsSelector';
 import { TFunction } from 'next-i18next';
 import { IsoCode, Talent } from '../../lib/types';
+import { computeNestedValue } from '../../lib/utils/arrays';
 
 export interface CountrySelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
+  propName?: string | string[];
   defaultValue?: IsoCode | 'NONE';
   updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
 }
@@ -14,20 +16,21 @@ const CountrySelector = ({
   t,
   defaultValue = 'NONE',
   updateFunction,
+  propName = ['address', 'isoCode'],
   ...props
 }: CountrySelectorProps): React.ReactElement => {
   const isoCodes: IsoCode[] = ['SRB', 'AUT', 'DEU', 'CRO', 'POL'];
+  const propNameArray = Array.isArray(propName) ? propName : [propName];
 
   const handleChange = (value: string | undefined): void => {
     if (value !== undefined) {
       const newAddress: IsoCode | 'NONE' =
         value !== '' ? (value as IsoCode) : 'NONE';
       updateFunction((oldValues) => {
-        const address = {
-          ...oldValues.address,
-          isoCode: newAddress,
+        return {
+          ...oldValues,
+          ...computeNestedValue(oldValues, propNameArray, newAddress),
         };
-        return { ...oldValues, address };
       });
     }
   };
