@@ -1,9 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+// import { GetStaticPaths, GetStaticProps } from 'next';
 import { ModalType, PageProps } from '../../../lib/types';
 import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
+import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
 
 export interface ProfilePageProps {
@@ -16,7 +18,7 @@ const GET_BASIC_INFO = gql`
   query GetEmployer($id: String!) {
     getEmployerById(id: $id) {
       id
-      company
+      companyName
       address {
         street
         streetNo
@@ -37,7 +39,8 @@ const GET_BASIC_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
+const ProfilePage = ({ t }: PageProps): React.ReactElement => {
+  const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_BASIC_INFO, {
     variables: {
       id,
@@ -58,30 +61,35 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
         basicInfoEmployer={basicInfoEmployer}
         handleEdit={() => setModal(ModalType.BASIC_INFO)}
       />
+
       <Button href={`/employers/${id}/settings`}>To Settings</Button>
     </Layout>
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          id: 'EA1',
-        },
-      },
-    ],
-    fallback: false,
-  };
-};
+ProfilePage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  return {
-    props: {
-      id: params?.id,
-    },
-  };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [
+//       {
+//         params: {
+//           id: 'EA1',
+//         },
+//       },
+//     ],
+//     fallback: false,
+//   };
+// };
 
-export default ProfilePage;
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   return {
+//     props: {
+//       id: params?.id,
+//     },
+//   };
+// };
+
+export default withTranslation('common')(ProfilePage);

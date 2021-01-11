@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-micro';
 
 const typeDefs = gql`
-  enum ProfessionType {
+  enum Profession {
     NURSE
     DOCTOR
     OTHER_MEDICAL
@@ -73,7 +73,6 @@ const typeDefs = gql`
     id: ID!
     name: FullName!
     gender: Gender!
-    fullName: String!
     email: String!
     password: String!
     type: UserType!
@@ -115,9 +114,8 @@ const typeDefs = gql`
     gender: Gender!
     type: UserType!
     name: FullName!
-    fullName: String!
     profilePic: String
-    profession: ProfessionType
+    profession: Profession
     address: Address
     description: String
     experiences: [Experience]
@@ -126,12 +124,24 @@ const typeDefs = gql`
     documents: [Document]
     languages: [LanguageSkill]
     otherSkills: [OtherSkill]
+    basicInfo: BasicInfo!
+  }
+
+  type BasicInfo {
+    id: ID!
+    gender: Gender!
+    name: FullName!
+    fullName: String
+    profilePic: String
+    profession: Profession
+    address: Address
+    description: String
     isBasicInfoComplete: Boolean!
   }
 
   type Employer implements User {
     id: ID!
-    company: String!
+    companyName: String!
     email: String!
     password: String!
     gender: Gender!
@@ -147,11 +157,11 @@ const typeDefs = gql`
   type Experience {
     id: ID!
     talent: Talent!
-    title: String!
-    lineOfWork: ProfessionType
+    lineOfWork: Profession
     employer: Organization
     duration: Duration
     description: String
+    isComplete: Boolean
   }
 
   type Qualification {
@@ -218,13 +228,43 @@ const typeDefs = gql`
     type: UserType!
   }
 
+  input OrganizationInput {
+    name: String
+    address: AddressInput
+  }
+
+  input DateInput {
+    timeStamp: String
+  }
+  input DurationInput {
+    from: DateInput
+    to: DateInput
+  }
+
   input TalentUpdate {
     id: ID!
     name: NameInput
     gender: Gender
     address: AddressInput
     profilePic: String
-    profession: ProfessionType
+    profession: Profession
+    description: String
+  }
+
+  input NewExperience {
+    talent: ID!
+    lineOfWork: Profession
+    employer: OrganizationInput
+    duration: DurationInput
+    description: String
+  }
+
+  input ExperienceUpdate {
+    id: ID!
+    talent: ID!
+    lineOfWork: Profession
+    employer: OrganizationInput
+    duration: DurationInput
     description: String
   }
 
@@ -239,6 +279,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
+    addExperience(input: NewExperience!): Experience
+    updateExperience(input: ExperienceUpdate!): Experience
   }
 `;
 export default typeDefs;

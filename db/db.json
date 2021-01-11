@@ -1,110 +1,10 @@
 {
-  "talents": [
-    {
-      "id": "yasbiuycdbucoiuscboiucsiousc!@",
-      "email": "galina@cimpric.rs",
-      "password": "pass",
-      "name": {
-        "firstName": "Galina",
-        "lastName": "Cimpriç",
-        "middleName": ""
-      },
-      "gender": "FEMALE",
-      "profilePic": "https://www.unitex.com/wp-content/uploads/2018/04/Unitex-Nursing-Shortage-1.jpg",
-      "profession": "NURSE",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus.",
-      "experiences": [
-        {
-          "id": 1,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "title": "Internship",
-          "lineOfWork": "NURSE",
-          "employer": "iasuxoaiubcoaiudbci",
-          "duration": {
-            "from": {
-              "timeStamp": 1546336800
-            },
-            "to": {
-              "timeStamp": 1549015200
-            }
-          },
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum."
-        },
-        {
-          "id": 2,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "title": "Bring your kid to work day",
-          "lineOfWork": "DOCTOR",
-          "employer": "iasuxoaiubcoaiudbci",
-          "duration": {
-            "from": {
-              "timeStamp": 1433145600
-            },
-            "to": {
-              "timeStamp": 1433160000
-            }
-          },
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum."
-        }
-      ],
-      "qualifications": [
-        {
-          "id": 1,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "fieldOfEducation": "Nursing",
-          "degree": "Certificate of Nursing",
-          "institution": "isbdiusdbcsd",
-          "duration": {
-            "from": 1506852000,
-            "to": 1533060000
-          },
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus."
-        }
-      ],
-      "approbations": [
-        {
-          "id": 1,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "status": "ONGOING",
-          "state": "RP"
-        }
-      ],
-      "documents": [],
-      "languages": [
-        {
-          "id": 1,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "language": "Serbian",
-          "level": "MOTHER_TONGUE"
-        },
-        {
-          "id": 2,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "language": "German",
-          "level": "BASIC"
-        }
-      ],
-      "otherSkills": [
-        {
-          "id": 1,
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "name": "Old People",
-          "level": "MASTER",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus."
-        }
-      ],
-      "address": {
-        "city": "Belgrad",
-        "isoCode": "SRB"
-      }
-    }
-  ],
   "employers": [
     {
       "id": "EA1",
       "email": "cecile@thunder.rs",
       "password": "pass",
-      "company": "Charité – Universitätsmedizin",
+      "companyName": "Charité – Universitätsmedizin",
       "profilePic": "https://img.morgenpost.de/img/incoming/crop231033068/3527653266-w1200-cv16_9-q85/Bis-2030-sind-Investitionen-von-rund-einer-Milliarde-Euro-vorgesehen-bis-2050-wird-mit-mehr-als-sechs-Milliarden-Euro-gerechnet-um-alle-Plaene-der-Charite-Berlin-zu-realisieren.jpg",
       "address": {
         "street": "Charitestrasse",
@@ -125,35 +25,141 @@
   ],
   "organizations": [
     {
-      "id": "iasuxoaiubcoaiudbci",
-      "name": "Clinical Center of Serbia",
       "address": {
-        "street": "Pasterova",
-        "streetNo": "2",
         "city": "Belgrade",
+        "isoCode": "SRB",
         "postalCode": "11000",
-        "isoCode": "SRB"
-      }
-    },
-    {
+        "street": "Pasterova",
+        "streetNo": "2"
+      },
       "id": "iasuxoaiubcoaiudbci",
-      "name": "Sante Plus Hospitals Belgrade",
-      "address": {
-        "street": "Kralja Milutina",
-        "streetNo": "40",
-        "city": "Belgrade",
-        "isoCode": "SRB"
-      }
+      "name": "Clinical Center of Serbia"
     },
     {
-      "id": "isbdiusdbcsd",
-      "name": "Srednja medicinska škola Milutin Milanković",
       "address": {
-        "street": "Crnotravska",
-        "streetNo": "27",
         "city": "Belgrade",
+        "isoCode": "SRB",
+        "street": "Kralja Milutina",
+        "streetNo": "40"
+      },
+      "id": "iasuxoaiubcoaiudbca",
+      "name": "Sante Plus Hospitals Belgrade"
+    },
+    {
+      "address": {
+        "city": "Belgrade",
+        "isoCode": "SRB",
+        "street": "Crnotravska",
+        "streetNo": "27"
+      },
+      "id": "isbdiusdbcsd",
+      "name": "Srednja medicinska škola Milutin Milanković"
+    },
+    {
+      "address": {
+        "city": "Grazio",
         "isoCode": "SRB"
-      }
+      },
+      "createdAt": 1610133780072,
+      "id": "-OKXZd5_BKEbRyNQ0jW_W",
+      "name": "Hospitalo"
+    }
+  ],
+  "talents": [
+    {
+      "address": {
+        "city": "Belgrad",
+        "isoCode": "SRB"
+      },
+      "approbations": [
+        {
+          "id": 1,
+          "state": "RP",
+          "status": "ONGOING",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus.",
+      "documents": [],
+      "email": "galina@cimpric.rs",
+      "experiences": [
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum.",
+          "duration": {
+            "from": {
+              "timeStamp": 211546336800
+            },
+            "to": {
+              "timeStamp": 311549015200
+            }
+          },
+          "employer": "iasuxoaiubcoaiudbci",
+          "id": 1,
+          "lineOfWork": "NURSE",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
+          "title": "Internship"
+        },
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce arcu odio, mollis consectetur mollis sed, blandit laoreet mi. Aliquam pellentesque maximus ipsum id tincidunt. Donec id mattis dolor. Cras eget nibh dolor. Proin suscipit aliquam turpis nec commodo. Duis mattis accumsan pulvinar. Duis convallis lorem arcu, id condimentum mi fermentum.",
+          "duration": {
+            "from": {
+              "timeStamp": 311549015200
+            },
+            "to": {
+              "timeStamp": ""
+            }
+          },
+          "employer": "iasuxoaiubcoaiudbca",
+          "id": 2,
+          "lineOfWork": "DOCTOR",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
+          "title": "Bring your kid to work day"
+        },
+        {
+          "duration": {
+            "from": {
+              "timeStamp": 411549015200
+            },
+            "to": {
+              "timeStamp": ""
+            }
+          },
+          "employer": "-OKXZd5_BKEbRyNQ0jW_W",
+          "id": "PWtv6n_gWeAkTzKeWc1k8",
+          "lineOfWork": "DOCTOR",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+        }
+      ],
+      "gender": "FEMALE",
+      "id": "yasbiuycdbucoiuscboiucsiousc!@",
+      "languages": [
+        {
+          "id": 1,
+          "language": "Serbian",
+          "level": "MOTHER_TONGUE",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+        },
+        {
+          "id": 2,
+          "language": "German",
+          "level": "BASIC",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+        }
+      ],
+      "name": {
+        "firstName": "Galina",
+        "lastName": "Cimpriç",
+        "middleName": ""
+      },
+      "otherSkills": [
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus.",
+          "id": 1,
+          "level": "MASTER",
+          "name": "Old People",
+          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+        }
+      ]
     }
   ]
 }

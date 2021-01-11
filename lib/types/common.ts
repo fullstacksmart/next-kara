@@ -1,5 +1,4 @@
 import { I18n, TFunction } from 'next-i18next';
-import { Dispatch, SetStateAction } from 'react';
 
 export type SupportedLanguage = 'GERMAN' | 'ENGLISH';
 

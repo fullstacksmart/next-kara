@@ -1,12 +1,16 @@
 import {
   User,
   Organization,
-  ExperienceInput,
-  QualificationInput,
+  ExperienceEntry,
+  QualificationEntry,
   Talent,
   Employer,
+  TalentAssetEntry,
   UserInput,
   TalentUpdate,
+  BasicInfo,
+  Experience,
+  BaseEntity,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -20,24 +24,18 @@ const resolvers = {
     type(): string {
       return 'TALENT';
     },
-    fullName(talent: Talent): string {
-      return `${talent.name.firstName} ${
-        talent.name.middleName ? talent.name.middleName + ' ' : ''
-      }${talent.name.lastName}`;
-    },
-    isBasicInfoComplete(talent: Talent): boolean {
-      return Boolean(
-        talent.name?.lastName &&
-          talent.name?.lastName !== '' &&
-          talent.address?.city !== '' &&
-          talent.address?.city &&
-          talent.address?.isoCode &&
-          talent.address?.isoCode !== null &&
-          talent.description &&
-          talent.description !== '' &&
-          talent.profilePic &&
-          talent.profilePic !== '',
-      );
+    basicInfo(talent: Talent): BasicInfo {
+      return {
+        id: talent.id,
+        name: talent.name,
+        fullName: helpers.getFullName(talent),
+        gender: talent.gender,
+        profilePic: talent.profilePic,
+        profession: talent.profession,
+        address: talent.address,
+        description: talent.description,
+        isBasicInfoComplete: helpers.isBasicInfoComplete(talent),
+      };
     },
   },
   Employer: {
@@ -51,17 +49,25 @@ const resolvers = {
     },
   },
   Experience: {
-    async employer(experience: ExperienceInput): Promise<Organization> {
+    async talent(experience: ExperienceEntry): Promise<Talent> {
+      return helpers.getTalentById(experience.talent);
+    },
+    async employer(experience: ExperienceEntry): Promise<Organization | null> {
+      if (!experience.employer) return null;
       return await helpers.getOrganizationById(experience.employer);
+    },
+    async isComplete(experience: Experience): Promise<boolean> {
+      return await helpers.isExperienceComplete(experience);
     },
   },
   Qualification: {
     async institution(
-      qualification: QualificationInput,
+      qualification: QualificationEntry,
     ): Promise<Organization> {
       return await helpers.getOrganizationById(qualification.institution);
     },
   },
+
   Query: {
     getAllTalentIds(): string[] {
       return helpers.getAllTalentIds();
@@ -98,6 +104,18 @@ const resolvers = {
     // ): Promise<Employer> {
     //   return await helpers.updateEmployer(input);
     // },
+    async addExperience(
+      _: unknown,
+      { input }: { input: Partial<Experience> & TalentAssetEntry },
+    ): Promise<ExperienceEntry | null> {
+      return await helpers.addExperience(input);
+    },
+    async updateExperience(
+      _: unknown,
+      { input }: { input: Partial<Experience> & TalentAssetEntry & BaseEntity },
+    ): Promise<ExperienceEntry | null> {
+      return await helpers.updateExperience(input);
+    },
   },
 };
 

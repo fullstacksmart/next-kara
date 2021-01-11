@@ -15,14 +15,26 @@
     "countrySelector": {
       "label": "Land"
     },
+    "experienceEdit": {
+      "title": {
+        "old": "Bearbeite Deine Berufserfahrung",
+        "new": "Erstelle einen neuen Berufserfahrungseintrag"
+      }
+    },
+    "experienceSection": {
+      "title": "Berufserfahrung"
+    },
     "genderSelector": {
       "label": "Anrede"
     },
     "layout": {
-      "backHome": "Zurück zur Homepage"
+      "backHome": "zurück zur Homepage"
     }
   },
   "description": "Über mich",
+  "duration": {
+    "now": "jetzt"
+  },
   "email": "Email",
   "fullName": {
     "firstName": "Vorname",
@@ -41,6 +53,16 @@
     "POL": "Poland",
     "SRB": "Serbien"
   },
+  "labels": {
+    "position": "Position",
+    "duration": {
+      "complete": "Zeitraum",
+      "from": "von",
+      "to": "bis"
+    },
+    "employer": "Arbeitgeber / Unternehmen",
+    "experienceDescription": "Tätigkeit / Beschreibung"
+  },
   "pages": {
     "signup": {
       "header": "Erstelle Dein Profil"
@@ -56,7 +78,10 @@
     "NURSE-OTHER": "Krankenpfleger",
     "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
     "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
-    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
+    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal",
+    "OTHER_NON_MEDICAL-FEMALE": "Nichtmedizinisches Personal",
+    "OTHER_NON_MEDICAL-MALE": "Nichtmedizinisches Personal",
+    "OTHER_NON_MEDICAL-OTHER": "Nichtmedizinisches Personal"
   },
   "profilePic": "URL Deines Profilbildes",
   "repeatPassword": "Passwort wiederholen",

@@ -66,12 +66,12 @@ export const BasicInfo = ({
             <img
               className={styles.ProfilePic}
               src={basicInfoEmployer.profilePic}
-              alt={basicInfoEmployer.company}
+              alt={basicInfoEmployer.companyName}
             />
           )}
           <div className={styles.Details}>
             <CheckedTitle
-              title={basicInfoEmployer.company}
+              title={basicInfoEmployer.companyName}
               done={basicInfoEmployer.isBasicInfoComplete}
             />
             <Typography variant="h4">
