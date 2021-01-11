@@ -5,11 +5,8 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import initFirebase from '../lib/auth/initFirebase';
+import firebase from '../components/firebase'
 
-initFirebase();
 const firebaseAuth = firebase.auth();
 
 const getIdToken = async (): Promise<any> => {
