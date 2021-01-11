@@ -9,7 +9,6 @@ import {
   TalentAssetEntry,
   BaseEntity,
   ExperienceEntry,
-  TalentEntry,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
@@ -26,7 +25,7 @@ const updateObject = (object: object, update: object | undefined): object => {
 };
 
 const getExperienceById = (
-  talent: TalentEntry | undefined,
+  talent: Talent | undefined,
   id: string,
 ): ExperienceEntry | null => {
   if (!talent) return null;
@@ -87,7 +86,7 @@ const getOrCreateOrganizationId = async (
 
 export const addExperience = async (
   input: Partial<Experience> & TalentAssetEntry,
-): Promise<ExperienceEntry | null> => {
+): Promise<Talent | null> => {
   const talent = await models.Talent.findOne({ id: input.talent });
   if (!talent) throw new Error(`no user with id ${input.talent}`);
   const id = nanoid();
@@ -96,7 +95,7 @@ export const addExperience = async (
     ...input,
     employer: await getOrCreateOrganizationId(input.employer),
   };
-  let updatedTalent: TalentEntry | undefined;
+  let updatedTalent: Talent | undefined;
   try {
     updatedTalent = await models.Talent.updateOne(
       { id: talent.id },
@@ -105,13 +104,13 @@ export const addExperience = async (
   } catch (e) {
     handleError(e);
   }
-  return getExperienceById(updatedTalent, id);
+  return updatedTalent || null;
 };
 
 export const updateExperience = async (
   input: Partial<Experience> & TalentAssetEntry & BaseEntity,
-): Promise<ExperienceEntry | null> => {
-  let talent: TalentEntry | undefined;
+): Promise<Talent | null> => {
+  let talent: Talent | undefined;
   try {
     talent = await models.Talent.findOne({ id: input.talent });
   } catch (e) {
@@ -134,14 +133,14 @@ export const updateExperience = async (
     [];
   const updatedExperiences = [...otherExperiences, updatedExperience];
   try {
-    await models.Talent.updateOne(
+    talent = await models.Talent.updateOne(
       { id: input.talent },
       { ...talent, experiences: updatedExperiences },
     );
   } catch (e) {
     handleError(e);
   }
-  return updatedExperience;
+  return talent || null;
 };
 
 export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {

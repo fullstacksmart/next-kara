@@ -84,13 +84,13 @@ const resolvers = {
     async addExperience(
       _: unknown,
       { input }: { input: Partial<Experience> & TalentAssetEntry },
-    ): Promise<ExperienceEntry | null> {
+    ): Promise<Talent | null> {
       return await helpers.addExperience(input);
     },
     async updateExperience(
       _: unknown,
       { input }: { input: Partial<Experience> & TalentAssetEntry & BaseEntity },
-    ): Promise<ExperienceEntry | null> {
+    ): Promise<Talent | null> {
       return await helpers.updateExperience(input);
     },
   },

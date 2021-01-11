@@ -13,23 +13,26 @@ const UPDATE_EXPERIENCE = gql`
   mutation Update_Experience($input: ExperienceUpdate!) {
     updateExperience(input: $input) {
       id
-      lineOfWork
-      employer {
-        name
-        address {
-          city
-          isoCode
+      experiences {
+        id
+        lineOfWork
+        employer {
+          name
+          address {
+            city
+            isoCode
+          }
         }
+        duration {
+          from {
+            timeStamp
+          }
+          to {
+            timeStamp
+          }
+        }
+        description
       }
-      duration {
-        from {
-          timeStamp
-        }
-        to {
-          timeStamp
-        }
-      }
-      description
     }
   }
 `;
@@ -38,23 +41,26 @@ const ADD_EXPERIENCE = gql`
   mutation Add_Experience($input: NewExperience!) {
     addExperience(input: $input) {
       id
-      employer {
+      experiences {
         id
-        name
-        address {
-          city
-          isoCode
+        employer {
+          id
+          name
+          address {
+            city
+            isoCode
+          }
         }
+        duration {
+          from {
+            timeStamp
+          }
+          to {
+            timeStamp
+          }
+        }
+        description
       }
-      duration {
-        from {
-          timeStamp
-        }
-        to {
-          timeStamp
-        }
-      }
-      description
     }
   }
 `;

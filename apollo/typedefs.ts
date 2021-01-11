@@ -263,8 +263,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
-    addExperience(input: NewExperience!): Experience
-    updateExperience(input: ExperienceUpdate!): Experience
+    addExperience(input: NewExperience!): Talent!
+    updateExperience(input: ExperienceUpdate!): Talent!
   }
 `;
 export default typeDefs;
