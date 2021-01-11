@@ -10,7 +10,7 @@ initFirebase();
 
 const Auth = (): React.ReactElement => {
 
-const handleClick = () => firebase.auth().createUserWithEmailAndPassword('testemaildefw@tgkmng.de', 'testpassword')
+const handleClick = () => firebase.auth().createUserWithEmailAndPassword('testemail2@web.de', 'testpassword')
   .then((user) => {
     console.log(user)
   })
