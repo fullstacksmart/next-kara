@@ -3,15 +3,20 @@ import { Card, CardContent, Typography, Container } from '@material-ui/core';
 import { Layout } from '../../containers/layout';
 import InputField from '../../components/input-field/InputField';
 import { useState } from 'react';
-import { PageProps } from '../../lib/types';
+import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from '../../i18n';
 import firebase from '../../components/firebase';
 import styles from './Signin.module.css';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<Partial<UserInput>>({
+    name: {
+      lastName: '',
+    },
+    gender: 'OTHER',
     email: '',
     password: '',
+    type: 'TALENT',
   });
   const handleSubmit = () => {
     firebase
