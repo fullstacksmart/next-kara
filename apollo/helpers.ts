@@ -12,6 +12,7 @@ import {
   TalentEntry,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
+import { filterById } from '../lib/utils/arrays';
 
 const handleError = (e: Error): Error => {
   console.error(e); //eslint-disable-line no-console
@@ -30,11 +31,9 @@ const getExperienceById = (
 ): ExperienceEntry | null => {
   if (!talent) return null;
   if (!talent.experiences.length) return null;
-  const experiences = talent.experiences.filter(
-    (experience) => experience.id === id,
+  return (
+    (filterById(talent.experiences, id) as ExperienceEntry | undefined) || null
   );
-  if (!experiences.length) return null;
-  return experiences[0];
 };
 
 export const getAllTalentIds = (): string[] =>
