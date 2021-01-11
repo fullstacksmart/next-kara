@@ -7,30 +7,30 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import initFirebase from '../lib/auth/initFirebase';
 
+initFirebase();
+const firebaseAuth = firebase.auth();
+
+const getIdToken = async (): Promise<any> => {
+  if (firebaseAuth.currentUser) {
+    return await firebaseAuth.currentUser.getIdToken(true).then((idToken) => idToken).catch((err) => console.error(err))
+  } else {
+    return await Promise.resolve('no token')
+  }
+}
 
 const httpLink = createHttpLink({
   uri: '/api/graphql',
 });
 
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token');
-  if(firebase) {
-    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-      console.log(idToken)
-      // Send token to your backend via HTTPS
-      // ...
-    }).catch(function(error) {
-      console.error('error in apollo client firebase', error)
-      // Handle error
-    });
-  }
-  // return the headers to the context so httpLink can read them
+const authLink = setContext(async (_, { headers }) => {
+  const idToken = await getIdToken();
+  console.log(idToken);
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: idToken ? `Bearer ${idToken}` : "",
     }
   }
 });
