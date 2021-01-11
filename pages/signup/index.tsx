@@ -69,12 +69,15 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         .auth()
         .createUserWithEmailAndPassword(formValues.email, formValues.password)
         .then((response) => {
-          console.log(response);
-          createUser({
-            variables: {
-              input: formValues,
-            },
-          });
+          if(response.user) {
+            createUser({
+              variables: {
+                input: {id: response.user.uid, ...formValues},
+              },
+            })
+          } else {
+            Promise.reject('no user received in firebase response')
+          }
         })
         .catch((error) => {
           const errorCode = error.code;
