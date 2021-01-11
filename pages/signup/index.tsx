@@ -15,6 +15,7 @@ import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
+import firebase from '../../components/firebase';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -58,18 +59,33 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     ) : null;
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    try {
-      await createUser({
-        variables: {
-          input: formValues,
-        },
-      });
-    } catch (e) {
-      console.error('user already exists: ', e.message); //eslint-disable-line no-console
+    // const newUser = {
+    //   name: formValues.name,
+    //   email: formValues.email,
+    //   password: formValues.password,
+    //   type: formValues.type,
+    // };
+    // if (formValues.company) newUser.company = formValues.company;
+    console.log(formValues);
+    if (formValues.email && formValues.password) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(formValues.email, formValues.password)
+        .then((response) => {
+          console.log(response);
+          createUser({
+            variables: {
+              input: formValues,
+            },
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error(error);
+        });
     }
   };
 
