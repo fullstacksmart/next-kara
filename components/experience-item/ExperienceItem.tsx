@@ -31,27 +31,33 @@ export const ExperienceItem = ({
       <FieldDisplay
         label={t('labels.position')}
         value={t(`profession.${experience.lineOfWork}-${gender}`)}
+        enabled={Boolean(experience.lineOfWork)}
       />
       <FieldDisplay
         label={t('labels.duration.complete')}
         value={formatedDuration}
+        enabled={Boolean(formatedDuration)}
       />
       <FieldDisplay
         label={t('labels.employer')}
         value={experience.employer?.name}
+        enabled={Boolean(experience.employer?.name)}
       />
       <Box component="div">
         <FieldDisplay
           label={t('address.city')}
           value={experience.employer?.address.city}
+          enabled={Boolean(experience.employer?.address.city)}
         />
         <FieldDisplay
           label={t('address.country')}
           value={t(`iso.${experience.employer?.address.isoCode}`)}
+          enabled={Boolean(experience.employer?.address.isoCode)}
         />
         <FieldDisplay
           label={t('labels.experienceDescription')}
           value={experience.description}
+          enabled={Boolean(experience.description)}
         />
       </Box>
     </SectionItem>
