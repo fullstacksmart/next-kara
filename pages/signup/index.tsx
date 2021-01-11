@@ -59,18 +59,13 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     ) : null;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> | null => {
     e.preventDefault();
-    // const newUser = {
-    //   name: formValues.name,
-    //   email: formValues.email,
-    //   password: formValues.password,
-    //   type: formValues.type,
-    // };
-    // if (formValues.company) newUser.company = formValues.company;
     console.log(formValues);
     if (formValues.email && formValues.password) {
-      firebase
+      return firebase
         .auth()
         .createUserWithEmailAndPassword(formValues.email, formValues.password)
         .then((response) => {
@@ -86,6 +81,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
           const errorMessage = error.message;
           console.error(error);
         });
+    } else {
+      return null;
     }
   };
 
