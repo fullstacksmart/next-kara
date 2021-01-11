@@ -25,5 +25,5 @@ export interface Address {
   streetNo?: string;
   city?: string;
   postalCode?: string;
-  isoCode?: IsoCode | 'NONE';
+  isoCode?: IsoCode | null;
 }
