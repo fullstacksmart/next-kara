@@ -85,7 +85,7 @@ export const ExperienceEdit = ({
       name: '',
       address: {
         city: '',
-        isoCode: 'NONE',
+        isoCode: null,
       },
     },
     duration: {
@@ -210,7 +210,7 @@ export const ExperienceEdit = ({
         />
         <CountrySelector
           t={t}
-          defaultValue={updatedExperience.employer?.address.isoCode}
+          value={updatedExperience.employer?.address.isoCode}
           updateFunction={setUpdatedExperience}
           propName={['employer', 'address', 'isoCode']}
         />

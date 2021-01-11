@@ -66,11 +66,9 @@ export const BasicInfoEdit = ({
         },
         address: {
           city: updatedInfo.address?.city,
-          isoCode:
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
-              ? updatedInfo.address.isoCode
-              : null,
+          isoCode: updatedInfo.address?.isoCode
+            ? updatedInfo.address.isoCode
+            : null,
         },
         profilePic: updatedInfo.profilePic,
         profession: updatedInfo.profession,
@@ -90,11 +88,9 @@ export const BasicInfoEdit = ({
         },
         address: {
           city: updatedInfo.address?.city,
-          isoCode:
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
-              ? updatedInfo.address.isoCode
-              : null,
+          isoCode: updatedInfo.address?.isoCode
+            ? updatedInfo.address.isoCode
+            : null,
           __typename: 'Address',
         },
         profilePic: updatedInfo.profilePic,
@@ -116,7 +112,7 @@ export const BasicInfoEdit = ({
       reset={() => setUpdatedInfo(basicInfo)}
     >
       <GenderSelector
-        defaultValue={basicInfo.gender}
+        value={basicInfo.gender}
         updateFunction={setUpdatedInfo}
         t={t}
       />
@@ -167,7 +163,7 @@ export const BasicInfoEdit = ({
         <CountrySelector
           t={t}
           updateFunction={setUpdatedInfo}
-          defaultValue={basicInfo.address?.isoCode}
+          value={basicInfo.address?.isoCode}
           fullWidth={false}
         />
       </Box>

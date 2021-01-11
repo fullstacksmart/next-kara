@@ -21,14 +21,14 @@ export interface OptionsSelectorProps extends SelectProps {
 }
 
 const OptionsSelector = ({
-  defaultValue,
+  value,
   setUpdate,
   inputLabel,
   inputLabelId = inputLabel,
   options,
   ...props
 }: OptionsSelectorProps): React.ReactElement => {
-  const [selectedOption, setSelectedOption] = useState(defaultValue);
+  const [selectedOption, setSelectedOption] = useState(value);
 
   const handleChange = (
     e: ChangeEvent<{
