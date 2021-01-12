@@ -186,7 +186,7 @@ export const ExperienceEdit = ({
   // TODO find better solution
   useEffect(() => {
     setUpdatedExperience(() => experience);
-  }, [id]);
+  }, [id]); //eslint-disable-line
   return (
     <EditPopup
       t={t}

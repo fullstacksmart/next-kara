@@ -1,7 +1,7 @@
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
 import CountrySelector from '../country-selector/CountrySelector';
 import { EditPopup } from '../edit-popup/EditPopup';
