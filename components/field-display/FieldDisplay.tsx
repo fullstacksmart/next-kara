@@ -11,7 +11,7 @@ export const FieldDisplay = ({
   value,
   enabled = true,
 }: FieldDisplayProps): React.ReactElement | null => {
-  return enabled ? (
+  return Boolean(value) && enabled ? (
     <Box component="div">
       <Typography variant="h6">{label}</Typography>
       <Typography id={`bodyFor${label}`} variant="body1">

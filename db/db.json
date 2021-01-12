@@ -85,6 +85,24 @@
       },
       "createdAt": 1610462467026,
       "id": "xe3UTNBiAdmO9XO7ZtUXo"
+    },
+    {
+      "name": "LKH",
+      "address": {
+        "city": "Graz",
+        "isoCode": null
+      },
+      "createdAt": 1610469706268,
+      "id": "EagcTd2QGlNn8zL2GvOWx"
+    },
+    {
+      "name": "LKH",
+      "address": {
+        "city": "",
+        "isoCode": null
+      },
+      "createdAt": 1610469755687,
+      "id": "4djs-d1B73RQ7wNaIpaH2"
     }
   ],
   "talents": [
