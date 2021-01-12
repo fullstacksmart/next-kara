@@ -8,7 +8,6 @@ import {
   Experience,
   TalentAssetEntry,
   BaseEntity,
-  ExperienceEntry,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
@@ -27,12 +26,10 @@ const updateObject = (object: object, update: object | undefined): object => {
 const getExperienceById = (
   talent: Talent | undefined,
   id: string,
-): ExperienceEntry | null => {
+): Experience | null => {
   if (!talent) return null;
   if (!talent.experiences.length) return null;
-  return (
-    (filterById(talent.experiences, id) as ExperienceEntry | undefined) || null
-  );
+  return (filterById(talent.experiences, id) as Experience | undefined) || null;
 };
 
 export const getAllTalentIds = (): string[] =>
@@ -116,10 +113,7 @@ export const updateExperience = async (
   } catch (e) {
     handleError(e);
   }
-  const oldExperience: ExperienceEntry | null = getExperienceById(
-    talent,
-    input.id,
-  );
+  const oldExperience: Experience | null = getExperienceById(talent, input.id);
   if (!oldExperience) return null;
   const updatedExperience = {
     ...oldExperience,
@@ -131,7 +125,10 @@ export const updateExperience = async (
   const otherExperiences =
     talent?.experiences.filter((experience) => experience.id !== input.id) ||
     [];
-  const updatedExperiences = [...otherExperiences, updatedExperience];
+  const updatedExperiences = [
+    ...otherExperiences,
+    updatedExperience,
+  ] as Experience[];
   try {
     talent = await models.Talent.updateOne(
       { id: input.talent },

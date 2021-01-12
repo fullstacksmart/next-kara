@@ -1,3 +1,4 @@
+import { Experience, Qualification } from '../types';
 import { BaseEntity } from '../types/common';
 
 export const filterById = (
@@ -5,7 +6,7 @@ export const filterById = (
   id?: string,
 ): BaseEntity | undefined => {
   if (!id) return;
-  const itemsWithId = arr.filter((experience) => experience.id === id);
+  const itemsWithId = arr.filter((item) => item.id === id);
   if (itemsWithId.length > 0) return itemsWithId[0];
   throw new Error(`no array element with id ${id}`);
 };
@@ -30,4 +31,15 @@ export const computeNestedValue = (
       newValue,
     ),
   };
+};
+
+export const sortByFrom = (
+  a: Experience | Qualification,
+  b: Experience | Qualification,
+): number => {
+  const fromTimestampA = parseInt(a.duration?.from.timeStamp || '');
+  const fromTimestampB = parseInt(b.duration?.from.timeStamp || '');
+  if (Number.isNaN(fromTimestampA)) return -1;
+  if (Number.isNaN(fromTimestampB)) return 1;
+  return fromTimestampB - fromTimestampA;
 };
