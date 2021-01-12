@@ -12,6 +12,14 @@ export interface ExperienceSectionProps {
   handleEdit: (id?: string) => void;
 }
 
+const sortByFrom = (a: Experience, b: Experience): number => {
+  const fromTimestampA = parseInt(a.duration?.from.timeStamp || '');
+  const fromTimestampB = parseInt(b.duration?.from.timeStamp || '');
+  if (Number.isNaN(fromTimestampA)) return -1;
+  if (Number.isNaN(fromTimestampB)) return 1;
+  return fromTimestampB - fromTimestampA;
+};
+
 export const ExperienceSection = ({
   t,
   gender = 'OTHER',
@@ -19,20 +27,23 @@ export const ExperienceSection = ({
   handleEdit,
   ...props
 }: ExperienceSectionProps): React.ReactElement => {
-  const experienceItems = experiences.map((experience, i, arr) => {
-    const divider = i < arr.length - 1 ? <ItemDivider /> : null;
-    return (
-      <div key={`experience${experience.talent?.id}-${experience.id}`}>
-        <ExperienceItem
-          experience={experience}
-          t={t}
-          gender={gender}
-          handleEdit={handleEdit}
-        />
-        {divider}
-      </div>
-    );
-  });
+  const experienceItems = experiences
+    .slice()
+    .sort(sortByFrom)
+    .map((experience, i, arr) => {
+      const divider = i < arr.length - 1 ? <ItemDivider /> : null;
+      return (
+        <div key={`experience${experience.talent?.id}-${experience.id}`}>
+          <ExperienceItem
+            experience={experience}
+            t={t}
+            gender={gender}
+            handleEdit={handleEdit}
+          />
+          {divider}
+        </div>
+      );
+    });
 
   return (
     <Section handleAdd={() => handleEdit()} {...props}>
