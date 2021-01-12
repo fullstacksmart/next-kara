@@ -199,3 +199,26 @@ export const isExperienceComplete = async (
       experience.lineOfWork,
   );
 };
+
+export const deleteExperience = async ({
+  talent: talentId,
+  id,
+}: {
+  talent: string;
+  id: string;
+}): Promise<Talent | null> => {
+  let talent: Talent | null = null;
+  try {
+    const oldTalent: Talent = await models.Talent.findOne({ id: talentId });
+    const newExperiences = oldTalent?.experiences.filter(
+      (experience) => experience.id !== id,
+    );
+    talent = await models.Talent.updateOne(
+      { id: talentId },
+      { experiences: newExperiences },
+    );
+  } catch (e) {
+    handleError(e);
+  }
+  return talent;
+};

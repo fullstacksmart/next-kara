@@ -9,6 +9,17 @@ import CountrySelector from '../country-selector/CountrySelector';
 import { DatePicker } from '../date-picker/DatePicker';
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 
+const DELETE_EXPERIENCE = gql`
+  mutation Delete_Experience($input: DeleteExperience!) {
+    deleteExperience(input: $input) {
+      id
+      experiences {
+        id
+      }
+    }
+  }
+`;
+
 const UPDATE_EXPERIENCE = gql`
   mutation Update_Experience($input: ExperienceUpdate!) {
     updateExperience(input: $input) {
@@ -163,6 +174,15 @@ export const ExperienceEdit = ({
     },
   });
 
+  const [onDelete] = useMutation(DELETE_EXPERIENCE, {
+    variables: {
+      input: {
+        talent: experience.talent.id,
+        id,
+      },
+    },
+  });
+
   // TODO find better solution
   useEffect(() => {
     setUpdatedExperience(() => experience);
@@ -178,11 +198,7 @@ export const ExperienceEdit = ({
       formId="experienceForm"
       reset={() => setUpdatedExperience(experience)}
       mutate={(id ? update : add) as MutationFunction}
-      onDelete={
-        (() => {
-          console.log('delete', id);
-        }) as MutationFunction
-      }
+      onDelete={onDelete as MutationFunction}
       {...props}
     >
       <ProfessionRadio

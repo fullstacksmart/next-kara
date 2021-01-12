@@ -93,6 +93,12 @@ const resolvers = {
     ): Promise<Talent | null> {
       return await helpers.updateExperience(input);
     },
+    async deleteExperience(
+      _: unknown,
+      { input }: { input: { talent: string; id: string } },
+    ): Promise<Talent | null> {
+      return await helpers.deleteExperience(input);
+    },
   },
 };
 

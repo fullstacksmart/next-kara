@@ -252,6 +252,10 @@ const typeDefs = gql`
     duration: DurationInput
     description: String
   }
+  input DeleteExperience {
+    talent: ID!
+    id: ID!
+  }
 
   type Query {
     getAllTalentIds: [ID]!
@@ -265,6 +269,7 @@ const typeDefs = gql`
     updateTalent(input: TalentUpdate!): Talent!
     addExperience(input: NewExperience!): Talent!
     updateExperience(input: ExperienceUpdate!): Talent!
+    deleteExperience(input: DeleteExperience): Talent!
   }
 `;
 export default typeDefs;

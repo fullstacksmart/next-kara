@@ -40,6 +40,15 @@
       "createdAt": 1610133780072,
       "id": "-OKXZd5_BKEbRyNQ0jW_W",
       "name": "Hospitalo"
+    },
+    {
+      "name": "LKH",
+      "address": {
+        "city": "Graz",
+        "isoCode": "AUT"
+      },
+      "createdAt": 1610449505397,
+      "id": "gjNz4u-DXSG1J-hlJxZb6"
     }
   ],
   "talents": [
@@ -91,20 +100,6 @@
           "lineOfWork": "DOCTOR",
           "talent": "yasbiuycdbucoiuscboiucsiousc!@",
           "title": "Bring your kid to work day"
-        },
-        {
-          "duration": {
-            "from": {
-              "timeStamp": 411549015200
-            },
-            "to": {
-              "timeStamp": ""
-            }
-          },
-          "employer": "-OKXZd5_BKEbRyNQ0jW_W",
-          "id": "PWtv6n_gWeAkTzKeWc1k8",
-          "lineOfWork": "DOCTOR",
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
         }
       ],
       "gender": "FEMALE",
