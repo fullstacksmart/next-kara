@@ -128,8 +128,17 @@ const GET_ALL_INFO = gql`
   }
 `;
 
+const GET_TALENT_IDS = gql`
+  query GetTalentIds {
+    getAllTalentIds
+  }
+`;
+
 const ProfilePage = ({ t }: PageProps): React.ReactElement => {
-  const id = useRouter().query.id;
+  const id = useRouter().query.id as string;
+  const { data: ids, loading: idsLoading, error: idError } = useQuery(
+    GET_TALENT_IDS,
+  );
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
       id,
@@ -138,6 +147,11 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+  if (idsLoading) return <h1>Loading</h1>;
+  if (idError) return <h1>Error: {idError.message}</h1>;
+  if (id && !(ids.getAllTalentIds as string[]).includes(id)) {
+    return <h1>404 - No talent with id {id}</h1>;
+  }
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
   const basicInfo = data?.getTalentById.basicInfo;
