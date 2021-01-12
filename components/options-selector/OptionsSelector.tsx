@@ -9,7 +9,7 @@ import {
 import { ChangeEvent, useState } from 'react';
 
 export interface OptionsSelectorOption extends Partial<MenuItemProps> {
-  value: string;
+  value?: string;
   label?: React.ReactNode;
 }
 
@@ -21,14 +21,14 @@ export interface OptionsSelectorProps extends SelectProps {
 }
 
 const OptionsSelector = ({
-  defaultValue,
+  value,
   setUpdate,
   inputLabel,
   inputLabelId = inputLabel,
   options,
   ...props
 }: OptionsSelectorProps): React.ReactElement => {
-  const [selectedOption, setSelectedOption] = useState(defaultValue);
+  const [selectedOption, setSelectedOption] = useState(value);
 
   const handleChange = (
     e: ChangeEvent<{
@@ -41,7 +41,7 @@ const OptionsSelector = ({
   };
   const menuItems = options.map((option) => {
     return (
-      <MenuItem key={option.value} value={option.value}>
+      <MenuItem key={option.value || 'null'} value={option.value}>
         {option.label === undefined ? option.value : option.label}
       </MenuItem>
     );

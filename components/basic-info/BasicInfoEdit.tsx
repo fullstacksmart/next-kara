@@ -1,7 +1,7 @@
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
 import CountrySelector from '../country-selector/CountrySelector';
 import { EditPopup } from '../edit-popup/EditPopup';
@@ -67,8 +67,8 @@ export const BasicInfoEdit = ({
         address: {
           city: updatedInfo.address?.city,
           isoCode:
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address?.isoCode !== undefined &&
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
         },
@@ -91,8 +91,8 @@ export const BasicInfoEdit = ({
         address: {
           city: updatedInfo.address?.city,
           isoCode:
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address?.isoCode !== undefined &&
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
           __typename: 'Address',
@@ -104,7 +104,6 @@ export const BasicInfoEdit = ({
       },
     },
   });
-
   return (
     <EditPopup
       {...props}
@@ -116,7 +115,7 @@ export const BasicInfoEdit = ({
       reset={() => setUpdatedInfo(basicInfo)}
     >
       <GenderSelector
-        defaultValue={basicInfo.gender}
+        value={basicInfo.gender}
         updateFunction={setUpdatedInfo}
         t={t}
       />
@@ -167,7 +166,7 @@ export const BasicInfoEdit = ({
         <CountrySelector
           t={t}
           updateFunction={setUpdatedInfo}
-          defaultValue={basicInfo.address?.isoCode}
+          value={basicInfo.address?.isoCode || ''}
           fullWidth={false}
         />
       </Box>

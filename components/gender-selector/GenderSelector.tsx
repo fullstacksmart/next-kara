@@ -7,12 +7,12 @@ import OptionsSelector, {
 interface GenderSelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
   updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
-  defaultValue?: Gender;
+  value?: Gender;
 }
 
 export const GenderSelector = ({
   t,
-  defaultValue = 'OTHER',
+  value = 'OTHER',
   updateFunction,
   ...props
 }: GenderSelectorProps): React.ReactElement => {
@@ -42,7 +42,7 @@ export const GenderSelector = ({
       {...props}
       options={options}
       setUpdate={handleChange}
-      defaultValue={defaultValue}
+      value={value}
       inputLabelId="gender"
       inputLabel={t('components.genderSelector.label')}
     />

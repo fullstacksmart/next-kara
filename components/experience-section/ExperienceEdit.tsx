@@ -85,12 +85,12 @@ export const ExperienceEdit = ({
       name: '',
       address: {
         city: '',
-        isoCode: 'NONE',
+        isoCode: '',
       },
     },
     duration: {
       from: {
-        timeStamp: '',
+        timeStamp: Date.now().toString(),
       },
       to: {
         timeStamp: '',
@@ -115,7 +115,11 @@ export const ExperienceEdit = ({
           name: updatedExperience.employer?.name,
           address: {
             city: updatedExperience.employer?.address.city,
-            isoCode: updatedExperience.employer?.address.isoCode,
+            isoCode:
+              updatedExperience.employer?.address?.isoCode !== undefined &&
+              updatedExperience.employer?.address.isoCode !== ''
+                ? updatedExperience.employer?.address.isoCode
+                : null,
           },
         },
         duration: {
@@ -139,7 +143,11 @@ export const ExperienceEdit = ({
           name: updatedExperience.employer?.name,
           address: {
             city: updatedExperience.employer?.address.city,
-            isoCode: updatedExperience.employer?.address.isoCode,
+            isoCode:
+              updatedExperience.employer?.address?.isoCode !== undefined &&
+              updatedExperience.employer?.address.isoCode !== ''
+                ? updatedExperience.employer?.address.isoCode
+                : null,
           },
         },
         duration: {
@@ -210,7 +218,7 @@ export const ExperienceEdit = ({
         />
         <CountrySelector
           t={t}
-          defaultValue={updatedExperience.employer?.address.isoCode}
+          value={updatedExperience.employer?.address.isoCode}
           updateFunction={setUpdatedExperience}
           propName={['employer', 'address', 'isoCode']}
         />
