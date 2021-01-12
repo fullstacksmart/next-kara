@@ -36,6 +36,11 @@ type FederalState =
   | 'OTHER';
 
 interface TalentAsset extends BaseEntity {
+  talent: Talent;
+  isComplete: boolean;
+}
+
+export interface TalentAssetEntry {
   talent: string;
 }
 
@@ -43,12 +48,17 @@ interface Date {
   timeStamp: string;
 }
 
-interface Duration {
+export interface Duration {
   from: Date;
   to: Date;
 }
 
 export interface Organization extends BaseEntity {
+  name: string;
+  address: Address;
+}
+
+export interface OrganizationEntry {
   name: string;
   address: Address;
 }
@@ -67,23 +77,48 @@ export interface Talent extends User {
   isBasicInfoComplete: boolean;
 }
 
-interface Experience extends TalentAsset {
-  title: string;
+export interface TalentEntry {
+  id: string;
+  profilePic: string;
+  profession: Profession;
+  address: Address;
+  description: string;
+  experiences: (ExperienceEntry & BaseEntity)[];
+  qualifications: QualificationEntry[];
+  approbations: Approbation[];
+  documents: Document[];
+  languages: LanguageSkill[];
+  otherSkills: OtherSkill[];
+  isBasicInfoComplete: boolean;
+}
+
+export interface BasicInfo {
+  id: string;
+  name: FullName;
+  fullName: string;
+  gender: Gender;
+  profilePic: string;
+  profession: Profession;
+  address: Address;
+  description: string;
+  isBasicInfoComplete: boolean;
+}
+
+export interface Experience extends TalentAsset {
   lineOfWork: Profession;
   employer?: Organization;
   duration?: Duration;
   description?: string;
 }
 
-export interface ExperienceInput extends TalentAsset {
-  title: string;
-  lineOfWork: Profession;
-  employer: string;
+export interface ExperienceEntry extends TalentAssetEntry {
+  lineOfWork?: Profession;
+  employer?: string;
   duration?: Duration;
   description?: string;
 }
 
-interface Qualification extends TalentAsset {
+export interface Qualification extends TalentAsset {
   fieldOfEducation: string;
   degree: string;
   institution: Organization;
@@ -91,7 +126,7 @@ interface Qualification extends TalentAsset {
   description: string;
 }
 
-export interface QualificationInput extends TalentAsset {
+export interface QualificationEntry extends TalentAsset {
   fieldOfEducation: string;
   degree: string;
   institution: string;
@@ -121,7 +156,7 @@ interface OtherSkill extends TalentAsset {
   description: string;
 }
 
-export interface BasicInfoInput {
+export interface BasicInfoEntry {
   name?: FullName;
   gender?: Gender;
   address?: Address;
@@ -130,4 +165,4 @@ export interface BasicInfoInput {
   description?: string;
 }
 
-export type TalentUpdate = BaseEntity & BasicInfoInput;
+export type TalentUpdate = BaseEntity & BasicInfoEntry;

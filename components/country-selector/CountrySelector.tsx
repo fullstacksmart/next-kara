@@ -3,33 +3,34 @@ import OptionsSelector, {
 } from '../options-selector/OptionsSelector';
 import { TFunction } from 'next-i18next';
 import { IsoCode, Talent } from '../../lib/types';
+import { computeNestedValue } from '../../lib/utils/arrays';
 
 export interface CountrySelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
-  defaultValue?: IsoCode | 'NONE';
+  propName?: string | string[];
+  value?: IsoCode | '';
   updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
 }
 
 const CountrySelector = ({
   t,
-  defaultValue = 'NONE',
+  value = '',
   updateFunction,
+  propName = ['address', 'isoCode'],
   ...props
 }: CountrySelectorProps): React.ReactElement => {
   const isoCodes: IsoCode[] = ['SRB', 'AUT', 'DEU', 'CRO', 'POL'];
+  const propNameArray = Array.isArray(propName) ? propName : [propName];
 
   const handleChange = (value: string | undefined): void => {
-    if (value !== undefined) {
-      const newAddress: IsoCode | 'NONE' =
-        value !== '' ? (value as IsoCode) : 'NONE';
-      updateFunction((oldValues) => {
-        const address = {
-          ...oldValues.address,
-          isoCode: newAddress,
-        };
-        return { ...oldValues, address };
-      });
-    }
+    const newAddress: IsoCode | '' =
+      value !== undefined ? (value as IsoCode) : '';
+    updateFunction((oldValues) => {
+      return {
+        ...oldValues,
+        ...computeNestedValue(oldValues, propNameArray, newAddress),
+      };
+    });
   };
 
   const options = isoCodes.map((code) => {
@@ -39,12 +40,12 @@ const CountrySelector = ({
     };
   });
 
-  const enrichedOptions = [{ value: 'NONE', label: '' }, ...options];
+  const enrichedOptions = [{ value: '', label: '' }, ...options];
 
   return (
     <OptionsSelector
       {...props}
-      defaultValue={defaultValue}
+      value={value}
       options={enrichedOptions}
       setUpdate={handleChange}
       inputLabelId="country-selector-label"

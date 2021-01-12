@@ -1,28 +1,36 @@
 {
   "address": {
-    "city": "city",
-    "country": "country"
+    "city": "City",
+    "country": "Country"
   },
-  "buttonLabels": {
-    "cancel": "cancel",
-    "save": "save"
-  },
-  "companyName": "company name",
+  "companyName": "Company Name",
   "components": {
     "basicInfo": {
-      "title": "edit your personal information"
+      "title": "Edit your personal information"
     },
     "countrySelector": {
-      "label": "country"
+      "label": "Country"
+    },
+    "experienceEdit": {
+      "title": {
+        "new": "Create a new job experience entry",
+        "old": "Edit your job experience"
+      }
+    },
+    "experienceSection": {
+      "title": "Job Experience"
     },
     "genderSelector": {
-      "label": "designation"
+      "label": "Designation"
     },
     "layout": {
-      "backHome": "Take me back home"
+      "backHome": "take me back home"
     }
   },
-  "description": "about me",
+  "description": "About Me",
+  "duration": {
+    "now": "now"
+  },
   "email": "email",
   "fullName": {
     "firstName": "first name",
@@ -41,6 +49,21 @@
     "POL": "Poland",
     "SRB": "Serbia"
   },
+  "labels": {
+    "buttons": {
+      "cancel": "cancel",
+      "delete": "delete",
+      "save": "save"
+    },
+    "duration": {
+      "complete": "duration",
+      "from": "from",
+      "to": "to"
+    },
+    "employer": "Employer / Company",
+    "experienceDescription": "Line of Work / Description",
+    "position": "Position"
+  },
   "pages": {
     "signup": {
       "header": "Create your profile"
@@ -48,15 +71,18 @@
   },
   "password": "password",
   "profession": {
-    "DOCTOR-FEMALE": "doctor",
-    "DOCTOR-MALE": "doctor",
-    "DOCTOR-OTHER": "doctor",
-    "NURSE-FEMALE": "nurse",
-    "NURSE-MALE": "nurse",
-    "NURSE-OTHER": "nurse",
-    "OTHER_MEDICAL-FEMALE": "other medical personnel",
-    "OTHER_MEDICAL-MALE": "other medical personnel",
-    "OTHER_MEDICAL-OTHER": "other medical personnel"
+    "DOCTOR-FEMALE": "Doctor",
+    "DOCTOR-MALE": "Doctor",
+    "DOCTOR-OTHER": "Doctor",
+    "NURSE-FEMALE": "Nurse",
+    "NURSE-MALE": "Nurse",
+    "NURSE-OTHER": "Nurse",
+    "OTHER_MEDICAL-FEMALE": "Other Medical Personnel",
+    "OTHER_MEDICAL-MALE": "Other Medical Personnel",
+    "OTHER_MEDICAL-OTHER": "Other Medical Personnel",
+    "OTHER_NON_MEDICAL-FEMALE": "Non-medical Personnel",
+    "OTHER_NON_MEDICAL-MALE": "Non-medical Personnel",
+    "OTHER_NON_MEDICAL-OTHER": "Non-medical Personnel"
   },
   "profilePic": "URL to profile pic",
   "repeatPassword": "please reenter password",

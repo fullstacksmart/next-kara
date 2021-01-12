@@ -3,10 +3,6 @@
     "city": "Stadt",
     "country": "Land"
   },
-  "buttonLabels": {
-    "cancel": "abbrechen",
-    "save": "speichern"
-  },
   "companyName": "Firmenname",
   "components": {
     "basicInfo": {
@@ -15,14 +11,26 @@
     "countrySelector": {
       "label": "Land"
     },
+    "experienceEdit": {
+      "title": {
+        "new": "Erstelle einen neuen Berufserfahrungseintrag",
+        "old": "Bearbeite Deine Berufserfahrung"
+      }
+    },
+    "experienceSection": {
+      "title": "Berufserfahrung"
+    },
     "genderSelector": {
       "label": "Anrede"
     },
     "layout": {
-      "backHome": "Zurück zur Homepage"
+      "backHome": "zurück zur Homepage"
     }
   },
   "description": "Über mich",
+  "duration": {
+    "now": "jetzt"
+  },
   "email": "Email",
   "fullName": {
     "firstName": "Vorname",
@@ -38,8 +46,23 @@
     "AUT": "Österreich",
     "CRO": "Kroatien",
     "DEU": "Deutschland",
-    "POL": "Poland",
+    "POL": "Polen",
     "SRB": "Serbien"
+  },
+  "labels": {
+    "buttons": {
+      "cancel": "abbrechen",
+      "delete": "löschen",
+      "save": "speichern"
+    },
+    "duration": {
+      "complete": "Zeitraum",
+      "from": "von",
+      "to": "bis"
+    },
+    "employer": "Arbeitgeber / Unternehmen",
+    "experienceDescription": "Tätigkeit / Beschreibung",
+    "position": "Position"
   },
   "pages": {
     "signup": {
@@ -56,7 +79,10 @@
     "NURSE-OTHER": "Krankenpfleger",
     "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",
     "OTHER_MEDICAL-MALE": "Sonstiges Medizinisches Personal",
-    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal"
+    "OTHER_MEDICAL-OTHER": "Sonstiges Medizinisches Personal",
+    "OTHER_NON_MEDICAL-FEMALE": "Nichtmedizinisches Personal",
+    "OTHER_NON_MEDICAL-MALE": "Nichtmedizinisches Personal",
+    "OTHER_NON_MEDICAL-OTHER": "Nichtmedizinisches Personal"
   },
   "profilePic": "URL Deines Profilbildes",
   "repeatPassword": "Passwort wiederholen",

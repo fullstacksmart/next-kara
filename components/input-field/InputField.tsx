@@ -1,40 +1,40 @@
 import { TextField, TextFieldProps } from '@material-ui/core';
 import { Dispatch, SetStateAction } from 'react';
+import { computeNestedValue } from '../../lib/utils/arrays';
 
-// TODO make component reusable by generalizing types
 type InputFieldProps = TextFieldProps & {
   setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
-  nesting?: string;
-  id: string;
+  propName: string | string[];
 };
 
 const InputField = ({
   label,
   setValue,
-  nesting,
-  id,
+  propName,
   value,
   ...props
 }: InputFieldProps): React.ReactElement => {
   const labelText = label?.toString();
+  let id: string;
+  let propArray: string[];
+  if (Array.isArray(propName)) {
+    id = propName[propName.length - 1];
+    propArray = propName;
+  } else {
+    id = propName;
+    propArray = [propName];
+  }
   const handleChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {
-    if (setValue)
-      if (!nesting) {
-        setValue((oldValues) => ({
+    if (setValue) {
+      setValue((oldValues) => {
+        return {
           ...oldValues,
-          [id]: event.target.value,
-        }));
-      } else {
-        setValue((oldValues) => ({
-          ...oldValues,
-          [nesting]: {
-            ...(oldValues[nesting] as Record<string, unknown>),
-            [id]: event.target.value,
-          },
-        }));
-      }
+          ...computeNestedValue(oldValues, propArray, event.target.value),
+        };
+      });
+    }
   };
   return (
     <TextField

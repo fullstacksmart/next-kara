@@ -10,6 +10,9 @@ import { ApolloProvider } from '@apollo/client';
 import client from '../apollo/client';
 import { Router } from 'next/dist/client/router';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
@@ -31,8 +34,10 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
         />
       </Head>
       <ThemeProvider theme={baseTheme}>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </MuiPickersUtilsProvider>
       </ThemeProvider>
     </ApolloProvider>
   );

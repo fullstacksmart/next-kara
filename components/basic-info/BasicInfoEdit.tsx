@@ -1,17 +1,10 @@
-import { gql, useMutation } from '@apollo/client';
-import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogProps,
-  DialogTitle,
-} from '@material-ui/core';
+import { gql, MutationFunction, useMutation } from '@apollo/client';
+import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
 import { TalentUpdate } from '../../lib/types';
-import { Button } from '../buttons';
 import CountrySelector from '../country-selector/CountrySelector';
+import { EditPopup } from '../edit-popup/EditPopup';
 import { GenderSelector } from '../gender-selector/GenderSelector';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
@@ -19,21 +12,28 @@ import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 const UPDATE_TALENT = gql`
   mutation UpdateTalent($input: TalentUpdate!) {
     updateTalent(input: $input) {
-      id
-      fullName
-      name {
-        firstName
-        middleName
-        lastName
+      basicInfo {
+        id
+        name {
+          firstName
+          middleName
+          lastName
+        }
+        fullName
+        gender
+        profession
+        address {
+          city
+          isoCode
+        }
+        description
+        isBasicInfoComplete
       }
-      gender
-      profession
-      address {
-        city
-        isoCode
+      experiences {
+        talent {
+          gender
+        }
       }
-      description
-      isBasicInfoComplete
     }
   }
 `;
@@ -53,10 +53,6 @@ export const BasicInfoEdit = ({
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
     basicInfo,
   );
-  const handleClose = (): void => {
-    setUpdatedInfo(basicInfo);
-    onClose();
-  };
 
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
@@ -71,8 +67,8 @@ export const BasicInfoEdit = ({
         address: {
           city: updatedInfo.address?.city,
           isoCode:
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address?.isoCode !== undefined &&
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
         },
@@ -95,8 +91,8 @@ export const BasicInfoEdit = ({
         address: {
           city: updatedInfo.address?.city,
           isoCode:
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address?.isoCode !== undefined &&
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
           __typename: 'Address',
@@ -108,94 +104,79 @@ export const BasicInfoEdit = ({
       },
     },
   });
-  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    const result = await mutate();
-    console.log(result);
-    onClose();
-  };
-
   return (
-    // TODO Decide whether to discard input on outside click (perhaps not?)
-    <Dialog {...props} onClose={onClose}>
-      <DialogTitle>{t('components.basicInfo.title')}</DialogTitle>
-      <DialogContent>
-        <form id="basicInfoForm" onSubmit={handleSubmit}>
-          <GenderSelector
-            defaultValue={basicInfo.gender}
-            updateFunction={setUpdatedInfo}
-            t={t}
-          />
-          <Box component="div">
-            <InputField
-              label={t('fullName.firstName')}
-              id="firstName"
-              nesting="name"
-              value={updatedInfo.name?.firstName}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-            />
-            <InputField
-              label={t('fullName.middleName')}
-              id="middleName"
-              nesting="name"
-              value={updatedInfo.name?.middleName}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-            />
-            <InputField
-              label={t('fullName.lastName')}
-              id="lastName"
-              nesting="name"
-              value={updatedInfo.name?.lastName}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-              required
-            />
-          </Box>
-          <ProfessionRadio
-            t={t}
-            input={basicInfo.profession}
-            updateFunction={setUpdatedInfo}
-            gender={updatedInfo.gender}
-          />
-          <InputField
-            label={t('profilePic')}
-            id="profilePic"
-            value={updatedInfo.profilePic}
-            setValue={setUpdatedInfo}
-          />
-          <Box component="div">
-            <InputField
-              label={t('address.city')}
-              id="city"
-              nesting="address"
-              value={updatedInfo.address?.city}
-              setValue={setUpdatedInfo}
-              fullWidth={false}
-            />
-            <CountrySelector
-              t={t}
-              updateFunction={setUpdatedInfo}
-              defaultValue={basicInfo.address?.isoCode}
-              fullWidth={false}
-            />
-          </Box>
-          <InputField
-            label={t('description')}
-            id="description"
-            value={updatedInfo.description}
-            setValue={setUpdatedInfo}
-            multiline={true}
-          />
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
-        <Button type="submit" form="basicInfoForm">
-          {t('buttonLabels.save')}
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <EditPopup
+      {...props}
+      t={t}
+      title={t('components.basicInfo.title')}
+      onClose={onClose}
+      formId="basicInfoForm"
+      mutate={mutate as MutationFunction}
+      reset={() => setUpdatedInfo(basicInfo)}
+    >
+      <GenderSelector
+        value={basicInfo.gender}
+        updateFunction={setUpdatedInfo}
+        t={t}
+      />
+      <Box component="div">
+        <InputField
+          label={t('fullName.firstName')}
+          propName={['name', 'firstName']}
+          value={updatedInfo.name?.firstName}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+        />
+        <InputField
+          label={t('fullName.middleName')}
+          propName={['name', 'middleName']}
+          value={updatedInfo.name?.middleName}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+        />
+        <InputField
+          label={t('fullName.lastName')}
+          propName={['name', 'lastName']}
+          value={updatedInfo.name?.lastName}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+          required
+        />
+      </Box>
+      <ProfessionRadio
+        t={t}
+        input={updatedInfo.profession}
+        updateFunction={setUpdatedInfo}
+        gender={updatedInfo.gender}
+      />
+      <InputField
+        label={t('profilePic')}
+        propName="profilePic"
+        value={updatedInfo.profilePic}
+        setValue={setUpdatedInfo}
+      />
+      <Box component="div">
+        <InputField
+          label={t('address.city')}
+          propName={['address', 'city']}
+          value={updatedInfo.address?.city}
+          setValue={setUpdatedInfo}
+          fullWidth={false}
+        />
+        <CountrySelector
+          t={t}
+          updateFunction={setUpdatedInfo}
+          value={basicInfo.address?.isoCode || ''}
+          fullWidth={false}
+        />
+      </Box>
+      <InputField
+        label={t('description')}
+        propName="description"
+        value={updatedInfo.description}
+        setValue={setUpdatedInfo}
+        multiline={true}
+      />
+    </EditPopup>
   );
 };

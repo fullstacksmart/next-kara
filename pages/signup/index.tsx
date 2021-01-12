@@ -50,7 +50,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const company =
     formValues.type === 'EMPLOYER' ? (
       <InputField
-        id="company"
+        propName="company"
         value={formValues.company}
         label={t('companyName')}
         setValue={setFormValues}
@@ -62,14 +62,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     e.preventDefault();
-    // const newUser = {
-    //   name: formValues.name,
-    //   email: formValues.email,
-    //   password: formValues.password,
-    //   type: formValues.type,
-    // };
-    // if (formValues.company) newUser.company = formValues.company;
-    console.log(formValues);
     try {
       await createUser({
         variables: {
@@ -77,13 +69,13 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         },
       });
     } catch (e) {
-      console.error('user already exists: ', e.message);
+      console.error('user already exists: ', e.message); //eslint-disable-line no-console
     }
   };
 
   useEffect(() => {
     if (newUser.data) {
-      console.log('new User:', newUser);
+      console.log('new User:', newUser); //eslint-disable-line no-console
     }
   }, [newUser]);
 
@@ -110,17 +102,15 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               <Box component="div">
                 <GenderSelector t={t} updateFunction={setFormValues} />
                 <InputField
-                  id="firstName"
+                  propName={['name', 'firstName']}
                   value={formValues.name?.firstName}
-                  nesting="name"
                   label={t('fullName.firstName')}
                   fullWidth={false}
                   setValue={setFormValues}
                 />
                 <InputField
-                  id="lastName"
+                  propName={['name', 'lastName']}
                   value={formValues.name?.lastName}
-                  nesting="name"
                   label={t('fullName.lastName')}
                   fullWidth={false}
                   setValue={setFormValues}
@@ -129,7 +119,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               </Box>
               {company}
               <InputField
-                id="email"
+                propName="email"
                 type="email"
                 value={formValues.email}
                 label={t('email')}
@@ -138,7 +128,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 required
               />
               <InputField
-                id="password"
+                propName="password"
                 value={formValues.password}
                 label={t('password')}
                 setValue={setFormValues}
@@ -146,7 +136,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 required
               />
               <InputField
-                id="passwordConfirm"
+                propName="passwordConfirm"
                 label={t('repeatPassword')}
                 onChange={handlePasswordRepeat}
                 type="password"
