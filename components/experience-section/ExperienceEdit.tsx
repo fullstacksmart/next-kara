@@ -178,6 +178,11 @@ export const ExperienceEdit = ({
       formId="experienceForm"
       reset={() => setUpdatedExperience(experience)}
       mutate={(id ? update : add) as MutationFunction}
+      onDelete={
+        (() => {
+          console.log('delete', id);
+        }) as MutationFunction
+      }
       {...props}
     >
       <ProfessionRadio

@@ -3,10 +3,6 @@
     "city": "City",
     "country": "Country"
   },
-  "buttonLabels": {
-    "cancel": "cancel",
-    "save": "save"
-  },
   "companyName": "Company Name",
   "components": {
     "basicInfo": {
@@ -54,6 +50,11 @@
     "SRB": "Serbia"
   },
   "labels": {
+    "buttons": {
+      "cancel": "cancel",
+      "delete": "delete",
+      "save": "save"
+    },
     "duration": {
       "complete": "duration",
       "from": "from",

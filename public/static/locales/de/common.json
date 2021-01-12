@@ -3,10 +3,6 @@
     "city": "Stadt",
     "country": "Land"
   },
-  "buttonLabels": {
-    "cancel": "abbrechen",
-    "save": "speichern"
-  },
   "companyName": "Firmenname",
   "components": {
     "basicInfo": {
@@ -17,8 +13,8 @@
     },
     "experienceEdit": {
       "title": {
-        "old": "Bearbeite Deine Berufserfahrung",
-        "new": "Erstelle einen neuen Berufserfahrungseintrag"
+        "new": "Erstelle einen neuen Berufserfahrungseintrag",
+        "old": "Bearbeite Deine Berufserfahrung"
       }
     },
     "experienceSection": {
@@ -50,18 +46,23 @@
     "AUT": "Österreich",
     "CRO": "Kroatien",
     "DEU": "Deutschland",
-    "POL": "Poland",
+    "POL": "Polen",
     "SRB": "Serbien"
   },
   "labels": {
-    "position": "Position",
+    "buttons": {
+      "cancel": "abbrechen",
+      "delete": "löschen",
+      "save": "speichern"
+    },
     "duration": {
       "complete": "Zeitraum",
       "from": "von",
       "to": "bis"
     },
     "employer": "Arbeitgeber / Unternehmen",
-    "experienceDescription": "Tätigkeit / Beschreibung"
+    "experienceDescription": "Tätigkeit / Beschreibung",
+    "position": "Position"
   },
   "pages": {
     "signup": {
