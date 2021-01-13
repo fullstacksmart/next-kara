@@ -157,6 +157,7 @@ const typeDefs = gql`
     institution: Organization
     duration: Duration
     description: String
+    isComplete: Boolean
   }
 
   type Approbation {

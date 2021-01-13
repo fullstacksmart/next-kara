@@ -2,7 +2,12 @@ import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
-import { Experience, ModalType, PageProps } from '../../../lib/types';
+import {
+  Experience,
+  ModalType,
+  PageProps,
+  Qualification,
+} from '../../../lib/types';
 import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
 import {
   ExperienceSection,
@@ -10,6 +15,7 @@ import {
 } from '../../../components/experience-section';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
+import { QualificationSection } from '../../../components/qualification-section/QualificationSection';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -124,6 +130,31 @@ const GET_ALL_INFO = gql`
         description
         isComplete
       }
+      qualifications {
+        id
+        talent {
+          id
+        }
+        fieldOfEducation
+        degree
+        institution {
+          id
+          name
+          address {
+            city
+            isoCode
+          }
+        }
+        duration {
+          from {
+            timeStamp
+          }
+          to {
+            timeStamp
+          }
+        }
+        description
+      }
     }
   }
 `;
@@ -146,6 +177,8 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
 
   const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
+  const qualifications: Qualification[] = data.getTalentById.qualifications;
+  console.log(qualifications);
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -180,6 +213,13 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
         experiences={experiences}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
+      />
+      <QualificationSection
+        t={t}
+        qualifications={qualifications}
+        handleEdit={(id?: string) => {
+          setModal({ type: ModalType.QUALIFICATION, id });
+        }}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

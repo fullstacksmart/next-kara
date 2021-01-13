@@ -10,6 +10,7 @@ import {
   BasicInfo,
   Experience,
   BaseEntity,
+  Qualification,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -50,10 +51,16 @@ const resolvers = {
     },
   },
   Qualification: {
+    async talent(qualification: QualificationEntry): Promise<Talent> {
+      return helpers.getTalentById(qualification.talent);
+    },
     async institution(
       qualification: QualificationEntry,
     ): Promise<Organization> {
       return await helpers.getOrganizationById(qualification.institution);
+    },
+    async isComplete(qualification: Qualification): Promise<boolean> {
+      return await helpers.isQualificationComplete(qualification);
     },
   },
 

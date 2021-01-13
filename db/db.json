@@ -51,58 +51,58 @@
       "name": "LKH"
     },
     {
-      "name": "Clinical Center of Serbia",
       "address": {
         "city": "Belgrad",
         "isoCode": "SRB"
       },
       "createdAt": 1610462425317,
-      "id": "hLDY65C2dSQcU452wpEKe"
+      "id": "hLDY65C2dSQcU452wpEKe",
+      "name": "Clinical Center of Serbia"
     },
     {
-      "name": "Sante Plus Hospitals Belgrade",
       "address": {
         "city": "Belgrad",
         "isoCode": "SRB"
       },
       "createdAt": 1610462434902,
-      "id": "7X5bwUNHDtsayDb-DHn0P"
+      "id": "7X5bwUNHDtsayDb-DHn0P",
+      "name": "Sante Plus Hospitals Belgrade"
     },
     {
-      "name": "Sante Plus Hospitals Belgrade",
       "address": {
         "city": "Belgrad",
         "isoCode": null
       },
       "createdAt": 1610462449045,
-      "id": "tgB73PyjLz3p2OdYMYZW_"
+      "id": "tgB73PyjLz3p2OdYMYZW_",
+      "name": "Sante Plus Hospitals Belgrade"
     },
     {
-      "name": "Clinical Center of Serbia",
       "address": {
         "city": "Graz",
         "isoCode": "SRB"
       },
       "createdAt": 1610462467026,
-      "id": "xe3UTNBiAdmO9XO7ZtUXo"
+      "id": "xe3UTNBiAdmO9XO7ZtUXo",
+      "name": "Clinical Center of Serbia"
     },
     {
-      "name": "LKH",
       "address": {
         "city": "Graz",
         "isoCode": null
       },
       "createdAt": 1610469706268,
-      "id": "EagcTd2QGlNn8zL2GvOWx"
+      "id": "EagcTd2QGlNn8zL2GvOWx",
+      "name": "LKH"
     },
     {
-      "name": "LKH",
       "address": {
         "city": "",
         "isoCode": null
       },
       "createdAt": 1610469755687,
-      "id": "4djs-d1B73RQ7wNaIpaH2"
+      "id": "4djs-d1B73RQ7wNaIpaH2",
+      "name": "LKH"
     }
   ],
   "talents": [
@@ -194,8 +194,12 @@
           "degree": "Certificate of Nursing",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis ac turpis vitae commodo. Suspendisse risus ante, pretium sit amet volutpat eu, iaculis vitae dolor. Etiam dictum ex eget magna feugiat, et suscipit justo tincidunt. Vestibulum ac justo sed est venenatis maximus nec non dolor. Aliquam non felis maximus, luctus purus non, sodales elit. Etiam quis cursus turpis, sit amet feugiat est. Donec maximus at erat id fringilla. Integer eget orci quis ex vestibulum vehicula. Phasellus consectetur leo ut orci feugiat posuere sit amet in sapien. Vivamus condimentum pharetra risus, sit amet commodo augue. Donec ultrices risus diam, quis lacinia lacus aliquet eu. Morbi hendrerit, dui ut mollis vulputate, mi ex tristique lectus, ut vulputate nibh dolor eu augue. Phasellus id sapien non nunc posuere tempor malesuada quis sapien. Proin venenatis finibus erat, in vestibulum lacus dignissim quis. Quisque eget venenatis dui. Sed luctus, nisi at dapibus facilisis, turpis metus.",
           "duration": {
-            "from": 1506852000,
-            "to": 1533060000
+            "from": {
+              "timeStamp": "1506852000"
+            },
+            "to": {
+              "timeStamp": "1533060000"
+            }
           },
           "fieldOfEducation": "Nursing",
           "id": "1",

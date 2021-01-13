@@ -8,6 +8,7 @@ import {
   Experience,
   TalentAssetEntry,
   BaseEntity,
+  Qualification,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
@@ -197,14 +198,23 @@ export const getFullName = (talent: Talent): string => {
   }${talent.name.lastName}`;
 };
 
-export const isExperienceComplete = async (
-  experience: Experience,
-): Promise<boolean> => {
+export const isExperienceComplete = (experience: Experience): boolean => {
   return Boolean(
     experience.description &&
       experience.duration &&
       experience.employer &&
       experience.lineOfWork,
+  );
+};
+
+export const isQualificationComplete = (
+  qualification: Qualification,
+): boolean => {
+  return Boolean(
+    qualification.description &&
+      qualification.duration &&
+      qualification.institution &&
+      qualification.fieldOfEducation,
   );
 };
 

@@ -25,6 +25,9 @@
     },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "qualificationSection": {
+      "title": "Ausbildung"
     }
   },
   "description": "Über mich",
@@ -55,6 +58,8 @@
       "delete": "löschen",
       "save": "speichern"
     },
+    "degree": "Abschluss",
+    "description": "Beschreibung",
     "duration": {
       "complete": "Zeitraum",
       "from": "von",
@@ -62,6 +67,8 @@
     },
     "employer": "Arbeitgeber / Unternehmen",
     "experienceDescription": "Tätigkeit / Beschreibung",
+    "fieldOfEducation": "Ausbildungsgebiet",
+    "institution": "Schule / Institution",
     "position": "Position"
   },
   "pages": {
