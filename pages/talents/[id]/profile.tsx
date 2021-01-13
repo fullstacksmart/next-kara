@@ -10,7 +10,6 @@ import {
 } from '../../../components/experience-section';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
-import { filterById } from '../../../lib/utils/arrays';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -76,6 +75,7 @@ import { filterById } from '../../../lib/utils/arrays';
 //     }
 //   }
 // `;
+
 const GET_ALL_INFO = gql`
   query GetTalentById($id: String!) {
     getTalentById(id: $id) {
@@ -177,7 +177,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
         t={t}
         talent={basicInfo}
         id={modal.id}
-        experience={filterById(experiences, modal.id) as Experience}
+        experiences={experiences}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
       />
