@@ -139,7 +139,11 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
     type: ModalType.NONE,
   });
   if (loading) return <h1>Loading</h1>;
-  if (error) return <h1>Error: {error.message}</h1>;
+  if (error) {
+    if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
+    return <h1>Error: {error.message}</h1>;
+  }
+
   const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
 

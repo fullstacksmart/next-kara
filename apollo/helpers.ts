@@ -11,6 +11,7 @@ import {
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
+import { ApolloError } from '@apollo/client';
 
 const handleError = (e: Error): Error => {
   console.error(e); //eslint-disable-line no-console
@@ -45,7 +46,17 @@ export const getAllUserIds = (): string[] => {
 };
 
 export const getTalentById = async (id: string): Promise<Talent> => {
-  return await models.Talent.findOne({ id });
+  let talent: Talent | null = null;
+  try {
+    talent = await models.Talent.findOne({ id });
+  } catch (e) {
+    handleError(e);
+  }
+  if (!talent)
+    throw new ApolloError({
+      errorMessage: `404: No user with id ${id} found in db`,
+    });
+  return talent;
 };
 
 export const getOrganizationById = async (
