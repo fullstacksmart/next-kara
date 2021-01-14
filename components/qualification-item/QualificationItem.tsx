@@ -30,6 +30,7 @@ export const QualificationItem = ({
         label={t('labels.fieldOfEducation')}
         value={qualification.fieldOfEducation}
       />
+      <FieldDisplay label={t('labels.degree')} value={qualification.degree} />
       <FieldDisplay
         label={t('labels.duration.complete')}
         value={formatedDuration}

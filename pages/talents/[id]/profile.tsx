@@ -1,6 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import {
   Experience,
@@ -8,14 +7,17 @@ import {
   PageProps,
   Qualification,
 } from '../../../lib/types';
-import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
-import {
-  ExperienceSection,
-  ExperienceEdit,
-} from '../../../components/experience-section';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
-import { QualificationSection } from '../../../components/qualification-section/QualificationSection';
+import {
+  BasicInfo,
+  BasicInfoEdit,
+  ExperienceSection,
+  ExperienceEdit,
+  QualificationSection,
+  QualificationEdit,
+  Button,
+} from '../../../components';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -178,7 +180,6 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
   const qualifications: Qualification[] = data.getTalentById.qualifications;
-  console.log(qualifications);
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -220,6 +221,14 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
         handleEdit={(id?: string) => {
           setModal({ type: ModalType.QUALIFICATION, id });
         }}
+      />
+      <QualificationEdit
+        t={t}
+        talent={basicInfo}
+        id={modal.id}
+        qualifications={qualifications}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.QUALIFICATION}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

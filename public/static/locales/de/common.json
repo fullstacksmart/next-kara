@@ -17,6 +17,12 @@
         "old": "Bearbeite Deine Berufserfahrung"
       }
     },
+    "qualificationEdit": {
+      "title": {
+        "new": "Erstelle einen neuen Ausbildungseintrag",
+        "old": "Bearbeite Deine Ausbildung"
+      }
+    },
     "experienceSection": {
       "title": "Berufserfahrung"
     },

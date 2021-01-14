@@ -92,6 +92,12 @@
     "OTHER_NON_MEDICAL-OTHER": "Non-medical Personnel"
   },
   "profilePic": "URL to profile pic",
+  "qualificationEdit": {
+    "title": {
+      "new": "Create a new qualification entry",
+      "old": "Edit your qualification"
+    }
+  },
   "repeatPassword": "please reenter password",
   "signin": "sign in dude!",
   "signup": "sign up",
