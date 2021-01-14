@@ -273,7 +273,12 @@ const typeDefs = gql`
     description: String
   }
 
-  input DeleteAsset {
+  input DeleteExperience {
+    talent: ID!
+    id: ID!
+  }
+
+  input DeleteQualification {
     talent: ID!
     id: ID!
   }
@@ -290,10 +295,10 @@ const typeDefs = gql`
     updateTalent(input: TalentUpdate!): Talent!
     addExperience(input: NewExperience!): Talent!
     updateExperience(input: ExperienceUpdate!): Talent!
-    deleteExperience(input: DeleteAsset): Talent!
+    deleteExperience(input: DeleteExperience): Talent!
     addQualification(input: NewQualification!): Talent!
     updateQualification(input: QualificationUpdate!): Talent!
-    deleteQualification(input: DeleteAsset): Talent!
+    deleteQualification(input: DeleteQualification): Talent!
   }
 `;
 export default typeDefs;
