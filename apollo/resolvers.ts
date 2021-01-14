@@ -92,7 +92,7 @@ const resolvers = {
       _: unknown,
       { input }: { input: Partial<Experience> & TalentAssetEntry },
     ): Promise<Talent | null> {
-      return await helpers.addExperience(input);
+      return await helpers.addItem('EXPERIENCES', input);
     },
     async updateExperience(
       _: unknown,
@@ -104,7 +104,27 @@ const resolvers = {
       _: unknown,
       { input }: { input: { talent: string; id: string } },
     ): Promise<Talent | null> {
-      return await helpers.deleteExperience(input);
+      return await helpers.deleteItem('EXPERIENCES', input);
+    },
+    async addQualification(
+      _: unknown,
+      { input }: { input: Partial<Qualification> & TalentAssetEntry },
+    ): Promise<Talent | null> {
+      return await helpers.addItem('QUALIFICATIONS', input);
+    },
+    async updateQualification(
+      _: unknown,
+      {
+        input,
+      }: { input: Partial<Qualification> & TalentAssetEntry & BaseEntity },
+    ): Promise<Talent | null> {
+      return await helpers.updateQualification(input);
+    },
+    async deleteQualification(
+      _: unknown,
+      { input }: { input: { talent: string; id: string } },
+    ): Promise<Talent | null> {
+      return await helpers.deleteItem('QUALIFICATIONS', input);
     },
   },
 };

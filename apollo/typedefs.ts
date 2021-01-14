@@ -253,7 +253,27 @@ const typeDefs = gql`
     duration: DurationInput
     description: String
   }
-  input DeleteExperience {
+
+  input NewQualification {
+    talent: ID!
+    fieldOfEducation: String
+    degree: String
+    institution: OrganizationInput
+    duration: DurationInput
+    description: String
+  }
+
+  input QualificationUpdate {
+    id: ID!
+    talent: ID!
+    fieldOfEducation: String
+    degree: String
+    institution: OrganizationInput
+    duration: DurationInput
+    description: String
+  }
+
+  input DeleteAsset {
     talent: ID!
     id: ID!
   }
@@ -270,7 +290,10 @@ const typeDefs = gql`
     updateTalent(input: TalentUpdate!): Talent!
     addExperience(input: NewExperience!): Talent!
     updateExperience(input: ExperienceUpdate!): Talent!
-    deleteExperience(input: DeleteExperience): Talent!
+    deleteExperience(input: DeleteAsset): Talent!
+    addQualification(input: NewQualification!): Talent!
+    updateQualification(input: QualificationUpdate!): Talent!
+    deleteQualification(input: DeleteAsset): Talent!
   }
 `;
 export default typeDefs;

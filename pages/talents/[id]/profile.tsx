@@ -210,7 +210,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       <ExperienceEdit
         t={t}
         talent={basicInfo}
-        id={modal.id}
+        id={modal.type === ModalType.EXPERIENCE ? modal.id : ''}
         experiences={experiences}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
@@ -225,7 +225,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       <QualificationEdit
         t={t}
         talent={basicInfo}
-        id={modal.id}
+        id={modal.type === ModalType.QUALIFICATION ? modal.id : ''}
         qualifications={qualifications}
         onClose={handleModalClose}
         open={modal.type === ModalType.QUALIFICATION}

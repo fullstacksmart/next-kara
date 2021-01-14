@@ -52,7 +52,10 @@ export const EditPopup = ({
   };
 
   const handleDelete = (): void => {
-    if (onDelete) onDelete();
+    if (onDelete) {
+      console.log('onDelete passed');
+      onDelete();
+    }
     handleClose();
   };
 

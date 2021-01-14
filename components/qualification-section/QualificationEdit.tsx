@@ -128,7 +128,7 @@ export const QualificationEdit = ({
         id: updatedQualification.id,
         talent: updatedQualification.talent?.id,
         fieldOfEducation: updatedQualification.fieldOfEducation,
-        degree: updatedQualification.description,
+        degree: updatedQualification.degree,
         institution: {
           name: updatedQualification.institution?.name,
           address: {
@@ -196,6 +196,10 @@ export const QualificationEdit = ({
   useEffect(() => {
     setUpdatedQualification(filterById(qualifications, id) || newQualification);
   }, [id, qualifications, newQualification]);
+  const handleDelete = (): void => {
+    console.log('delete', id, updatedQualification.talent?.id);
+    onDelete();
+  };
   return (
     <EditPopup
       t={t}

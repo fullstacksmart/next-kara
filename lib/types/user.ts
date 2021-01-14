@@ -1,4 +1,3 @@
-import { Address } from 'cluster';
 import { BaseEntity } from '.';
 
 export type UserType = 'TALENT' | 'EMPLOYER' | 'AGENCY';
