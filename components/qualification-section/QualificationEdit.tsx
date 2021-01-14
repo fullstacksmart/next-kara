@@ -196,10 +196,6 @@ export const QualificationEdit = ({
   useEffect(() => {
     setUpdatedQualification(filterById(qualifications, id) || newQualification);
   }, [id, qualifications, newQualification]);
-  const handleDelete = (): void => {
-    console.log('delete', id, updatedQualification.talent?.id);
-    onDelete();
-  };
   return (
     <EditPopup
       t={t}
@@ -266,7 +262,7 @@ export const QualificationEdit = ({
         />
       </Box>
       <InputField
-        label={t('labels.experienceDescription')}
+        label={t('labels.description')}
         propName="description"
         value={updatedQualification.description}
         setValue={setUpdatedQualification}

@@ -156,6 +156,7 @@ const GET_ALL_INFO = gql`
           }
         }
         description
+        isComplete
       }
     }
   }

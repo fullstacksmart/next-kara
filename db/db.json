@@ -208,21 +208,6 @@
           "lineOfWork": "NURSE",
           "talent": "yasbiuycdbucoiuscboiucsiousc!@",
           "title": "Internship"
-        },
-        {
-          "id": "QCfV3EKl21lxXKyF82MlF",
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@",
-          "lineOfWork": "DOCTOR",
-          "employer": "ShERHi9MStQfCsYHbkq9X",
-          "duration": {
-            "from": {
-              "timeStamp": "12345"
-            },
-            "to": {
-              "timeStamp": "123456"
-            }
-          },
-          "description": "lorem ipsum"
         }
       ],
       "gender": "FEMALE",

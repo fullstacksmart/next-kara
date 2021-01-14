@@ -246,7 +246,7 @@ export const ExperienceEdit = ({
         />
         <CountrySelector
           t={t}
-          value={updatedExperience.employer?.address.isoCode}
+          value={updatedExperience.employer?.address.isoCode || ''}
           updateFunction={setUpdatedExperience}
           propName={['employer', 'address', 'isoCode']}
         />
