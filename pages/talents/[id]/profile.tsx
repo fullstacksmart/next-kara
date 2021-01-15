@@ -18,7 +18,7 @@ import {
   QualificationEdit,
   Button,
 } from '../../../components';
-import { getFullName } from '../../../apollo/helpers';
+import { getShortName } from '../../../lib/utils/strings';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -186,13 +186,9 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
   };
-  const tabTitle =
-    (basicInfo.name.firstName
-      ? ' ' + (basicInfo.name.firstName as string).trim().charAt(0) + '.'
-      : '') + (basicInfo.name.lastName ? ' ' + basicInfo.name.lastName : '');
 
   return (
-    <Layout title={['profile', tabTitle]}>
+    <Layout title={['profile', getShortName(basicInfo.name)]}>
       <h1>Profile Page for Talent {basicInfo.fullName}</h1>
       <BasicInfo
         t={t}
