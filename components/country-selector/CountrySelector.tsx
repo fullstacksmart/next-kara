@@ -14,7 +14,7 @@ export interface CountrySelectorProps extends Partial<OptionsSelectorProps> {
 
 const CountrySelector = ({
   t,
-  value = '',
+  value,
   updateFunction,
   propName = ['address', 'isoCode'],
   ...props
@@ -23,8 +23,7 @@ const CountrySelector = ({
   const propNameArray = Array.isArray(propName) ? propName : [propName];
 
   const handleChange = (value: string | undefined): void => {
-    const newAddress: IsoCode | '' =
-      value !== undefined ? (value as IsoCode) : '';
+    const newAddress: IsoCode | '' = value ? (value as IsoCode) : '';
     updateFunction((oldValues) => {
       return {
         ...oldValues,
@@ -45,7 +44,7 @@ const CountrySelector = ({
   return (
     <OptionsSelector
       {...props}
-      value={value}
+      value={value || ''}
       options={enrichedOptions}
       setUpdate={handleChange}
       inputLabelId="country-selector-label"

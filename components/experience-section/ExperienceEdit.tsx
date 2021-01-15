@@ -2,12 +2,13 @@ import { EditPopup } from '../edit-popup/EditPopup';
 import { TFunction } from 'next-i18next';
 import { Experience, Talent } from '../../lib/types';
 import { DialogProps, Box } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 import CountrySelector from '../country-selector/CountrySelector';
 import { DatePicker } from '../date-picker/DatePicker';
 import { gql, MutationFunction, useMutation } from '@apollo/client';
+import { filterById } from '../../lib/utils/arrays';
 
 const DELETE_EXPERIENCE = gql`
   mutation Delete_Experience($input: DeleteExperience!) {
@@ -79,42 +80,47 @@ const ADD_EXPERIENCE = gql`
 interface ExperienceEditProps extends DialogProps {
   t: TFunction;
   id?: string;
-  experience?: Experience;
+  experiences: Experience[];
   talent: Talent;
   onClose: () => void;
 }
 
 export const ExperienceEdit = ({
   talent,
-  id,
-  experience = {
-    id: '',
-    talent,
-    lineOfWork: 'NURSE',
-    employer: {
-      id: '',
-      name: '',
-      address: {
-        city: '',
-        isoCode: '',
-      },
-    },
-    duration: {
-      from: {
-        timeStamp: Date.now().toString(),
-      },
-      to: {
-        timeStamp: '',
-      },
-    },
-    isComplete: false,
-  },
+  id = '',
+  experiences = [],
   t,
   ...props
 }: ExperienceEditProps): React.ReactElement => {
+  const newExperience: Experience = useMemo(
+    () => ({
+      id,
+      lineOfWork: 'NURSE',
+      talent,
+      isComplete: false,
+      duration: {
+        from: {
+          timeStamp: Date.now().toString(),
+        },
+        to: {
+          timeStamp: '',
+        },
+      },
+      description: '',
+      employer: {
+        id: '',
+        name: '',
+        address: {
+          city: '',
+          isoCode: '',
+        },
+      },
+    }),
+    [id, talent],
+  );
   const [updatedExperience, setUpdatedExperience] = useState<
     Partial<Experience>
-  >(experience);
+  >(newExperience);
 
   const [update] = useMutation(UPDATE_EXPERIENCE, {
     variables: {
@@ -177,16 +183,15 @@ export const ExperienceEdit = ({
   const [onDelete] = useMutation(DELETE_EXPERIENCE, {
     variables: {
       input: {
-        talent: experience.talent.id,
+        talent: updatedExperience.talent?.id,
         id,
       },
     },
   });
 
-  // TODO find better solution
   useEffect(() => {
-    setUpdatedExperience(() => experience);
-  }, [id]); //eslint-disable-line
+    setUpdatedExperience(filterById(experiences, id) || newExperience);
+  }, [id, experiences, newExperience]);
   return (
     <EditPopup
       t={t}
@@ -196,14 +201,16 @@ export const ExperienceEdit = ({
           : t('components.experienceEdit.title.new')
       }
       formId="experienceForm"
-      reset={() => setUpdatedExperience(experience)}
+      reset={() =>
+        setUpdatedExperience(filterById(experiences, id) || newExperience)
+      }
       mutate={(id ? update : add) as MutationFunction}
       onDelete={onDelete as MutationFunction}
       {...props}
     >
       <ProfessionRadio
         t={t}
-        input={experience?.lineOfWork}
+        input={updatedExperience?.lineOfWork}
         updateFunction={setUpdatedExperience}
         gender={talent.gender}
         isExtended={true}
@@ -239,7 +246,7 @@ export const ExperienceEdit = ({
         />
         <CountrySelector
           t={t}
-          value={updatedExperience.employer?.address.isoCode}
+          value={updatedExperience.employer?.address.isoCode || ''}
           updateFunction={setUpdatedExperience}
           propName={['employer', 'address', 'isoCode']}
         />

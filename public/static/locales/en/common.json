@@ -25,6 +25,9 @@
     },
     "layout": {
       "backHome": "take me back home"
+    },
+    "qualificationSection": {
+      "title": "Qualifications"
     }
   },
   "description": "About Me",
@@ -55,6 +58,8 @@
       "delete": "delete",
       "save": "save"
     },
+    "degree": "Degree",
+    "description": "Description",
     "duration": {
       "complete": "duration",
       "from": "from",
@@ -62,6 +67,8 @@
     },
     "employer": "Employer / Company",
     "experienceDescription": "Line of Work / Description",
+    "fieldOfEducation": "Field of Education",
+    "institution": "School / Institution",
     "position": "Position"
   },
   "pages": {
@@ -85,6 +92,12 @@
     "OTHER_NON_MEDICAL-OTHER": "Non-medical Personnel"
   },
   "profilePic": "URL to profile pic",
+  "qualificationEdit": {
+    "title": {
+      "new": "Create a new qualification entry",
+      "old": "Edit your qualification"
+    }
+  },
   "repeatPassword": "please reenter password",
   "signin": "sign in dude!",
   "signup": "sign up",

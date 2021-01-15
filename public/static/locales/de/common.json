@@ -25,6 +25,15 @@
     },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "qualificationEdit": {
+      "title": {
+        "new": "Erstelle eine neuen Ausbildungseintrag",
+        "old": "Bearbeite Deine Ausbildung"
+      }
+    },
+    "qualificationSection": {
+      "title": "Ausbildung"
     }
   },
   "description": "Über mich",
@@ -55,6 +64,8 @@
       "delete": "löschen",
       "save": "speichern"
     },
+    "degree": "Abschluss",
+    "description": "Beschreibung",
     "duration": {
       "complete": "Zeitraum",
       "from": "von",
@@ -62,6 +73,8 @@
     },
     "employer": "Arbeitgeber / Unternehmen",
     "experienceDescription": "Tätigkeit / Beschreibung",
+    "fieldOfEducation": "Bereich",
+    "institution": "Schule / Institution",
     "position": "Position"
   },
   "pages": {
