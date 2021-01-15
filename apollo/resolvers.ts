@@ -8,7 +8,9 @@ import {
   TalentAssetEntry,
   UserInput,
   TalentUpdate,
+  EmployerUpdate,
   BasicInfo,
+  BasicInfoEmployer,
   Experience,
   BaseEntity,
 } from '../lib/types';
@@ -41,6 +43,21 @@ const resolvers = {
   Employer: {
     type(): string {
       return 'EMPLOYER';
+    },
+    basicInfoEmployer(employer: Employer): BasicInfoEmployer {
+      return {
+        id: employer.id,
+        name: employer.name,
+        companyName: employer.companyName,
+        fullName: helpers.getFullNameEmployer(employer),
+        gender: employer.gender,
+        profilePic: employer.profilePic,
+        address: employer.address,
+        description: employer.description,
+        website: employer.website,
+        // add type and sector
+        isBasicInfoComplete: helpers.isBasicInfoEmployerComplete(employer),
+      };
     },
     fullName(employer: Employer): string {
       return `${employer.name.firstName} ${
@@ -98,12 +115,12 @@ const resolvers = {
     ): Promise<Talent> {
       return await helpers.updateTalent(input);
     },
-    // async updateEmployer(
-    //   _: unknown,
-    //   { input }: { input: EmployerUpdate },
-    // ): Promise<Employer> {
-    //   return await helpers.updateEmployer(input);
-    // },
+    async updateEmployer(
+      _: unknown,
+      { input }: { input: EmployerUpdate },
+    ): Promise<Employer> {
+      return await helpers.updateEmployer(input);
+    },
     async addExperience(
       _: unknown,
       { input }: { input: Partial<Experience> & TalentAssetEntry },

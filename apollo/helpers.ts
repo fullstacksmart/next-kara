@@ -6,6 +6,7 @@ import {
   Employer,
   Organization,
   TalentUpdate,
+  EmployerUpdate,
   Experience,
   TalentAssetEntry,
   BaseEntity,
@@ -174,32 +175,33 @@ export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
   return updatedTalent;
 };
 
-// export const updateEmployer = async (
-//   input: EmployerUpdate,
-// ): Promise<Employer> => {
-//   const existingEmployer = models.Employer.findOne({
-//     id: input.id,
-//   });
-//   if (!existingEmployer)
-//     throw new Error(`no user with id ${input.id} in database`);
-//   let updatedEmployer;
-//   const updatedAddress = { ...existingEmployer.address, ...input.address };
-//   const updatedName = { ...existingEmployer.name, ...input.company };
-//   const enrichedInput = {
-//     ...input,
-//     address: updatedAddress,
-//     company: updatedName,
-//   };
-//   try {
-//     updatedEmployer = await models.Employer.updateOne(
-//       { id: input.id },
-//       enrichedInput,
-//     );
-//   } catch (err) {
-//     console.error(err);
-//   }
-//   return updatedEmployer;
-// };
+export const updateEmployer = async (
+  input: EmployerUpdate,
+): Promise<Employer> => {
+  const existingEmployer = models.Employer.findOne({
+    id: input.id,
+  });
+  if (!existingEmployer)
+    throw new Error(`no user with id ${input.id} in database`);
+  let updatedEmployer;
+  // const updatedAddress = { ...existingTalent.address, ...input.address };
+  // const updatedName = { ...existingTalent.name, ...input.name };
+  const enrichedInput = {
+    ...input,
+    address: updateObject(existingEmployer.address, input.address),
+    name: updateObject(existingEmployer.name, input.name),
+  };
+  try {
+    updatedEmployer = await models.Employer.updateOne(
+      { id: input.id },
+      enrichedInput,
+    );
+  } catch (err) {
+    handleError(err);
+  }
+  return updatedEmployer;
+};
+
 export const isBasicInfoComplete = (talent: Talent): boolean => {
   return Boolean(
     talent.name?.lastName &&
@@ -215,10 +217,33 @@ export const isBasicInfoComplete = (talent: Talent): boolean => {
   );
 };
 
+export const isBasicInfoEmployerComplete = (employer: Employer): boolean => {
+  return Boolean(
+    employer.companyName &&
+      employer.companyName !== '' &&
+      employer.name?.lastName &&
+      employer.name?.lastName !== '' &&
+      employer.address?.city !== '' &&
+      employer.address?.city &&
+      employer.address?.isoCode &&
+      employer.address?.isoCode !== null &&
+      employer.description &&
+      employer.description !== '' &&
+      employer.profilePic &&
+      employer.profilePic !== '',
+  );
+};
+
 export const getFullName = (talent: Talent): string => {
   return `${talent.name.firstName} ${
     talent.name.middleName ? talent.name.middleName + ' ' : ''
   }${talent.name.lastName}`;
+};
+
+export const getFullNameEmployer = (employer: Employer): string => {
+  return `${employer.name.firstName} ${
+    employer.name.middleName ? employer.name.middleName + ' ' : ''
+  }${employer.name.lastName}`;
 };
 
 export const isExperienceComplete = async (

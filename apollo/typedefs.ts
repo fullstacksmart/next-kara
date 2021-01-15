@@ -152,6 +152,20 @@ const typeDefs = gql`
     address: Address
     description: String
     website: String
+    basicInfoEmployer: BasicInfoEmployer!
+  }
+
+  type BasicInfoEmployer {
+    id: ID!
+    gender: Gender!
+    companyName: String!
+    name: FullName!
+    fullName: String
+    profilePic: String
+    website: String
+    address: Address
+    description: String
+    isBasicInfoComplete: Boolean!
   }
 
   type Experience {
@@ -251,6 +265,17 @@ const typeDefs = gql`
     description: String
   }
 
+  input EmployerUpdate {
+    id: ID!
+    name: NameInput
+    companyName: String
+    website: String
+    gender: Gender
+    address: AddressInput
+    profilePic: String
+    description: String
+  }
+
   input NewExperience {
     talent: ID!
     lineOfWork: Profession
@@ -279,6 +304,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
+    updateEmployer(input: EmployerUpdate!): Employer!
     addExperience(input: NewExperience!): Experience
     updateExperience(input: ExperienceUpdate!): Experience
   }

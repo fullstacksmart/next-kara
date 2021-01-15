@@ -1,4 +1,5 @@
 import { BasicInfo } from './BasicInfo';
-import { BasicInfoEdit } from './BasicInfoEdit';
+import { BasicInfoEdit, BasicInfoEditEmployer } from './BasicInfoEdit';
+// import { BasicInfoEditEmployer } from './BasicInfoEditEmployer';
 
-export { BasicInfo, BasicInfoEdit };
+export { BasicInfo, BasicInfoEdit, BasicInfoEditEmployer };

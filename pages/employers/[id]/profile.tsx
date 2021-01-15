@@ -2,7 +2,10 @@ import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 // import { GetStaticPaths, GetStaticProps } from 'next';
 import { ModalType, PageProps } from '../../../lib/types';
-import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
+import {
+  BasicInfo,
+  BasicInfoEditEmployer,
+} from '../../../components/basic-info';
 import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
 import { withTranslation } from '../../../i18n';
@@ -14,54 +17,68 @@ export interface ProfilePageProps {
   id: string;
 }
 
-const GET_BASIC_INFO = gql`
-  query GetEmployer($id: String!) {
+const GET_ALL_INFO = gql`
+  query GetEmployerById($id: String!) {
     getEmployerById(id: $id) {
       id
-      companyName
-      address {
-        street
-        streetNo
-        city
-        postalCode
+      basicInfoEmployer {
+        id
+        companyName
+        address {
+          street
+          streetNo
+          city
+          postalCode
+        }
+        name {
+          firstName
+          middleName
+          lastName
+        }
+        profilePic
+        description
+        website
+        gender
+        fullName
       }
-      profilePic
-      description
-      website
-      name {
-        firstName
-        middleName
-        lastName
-      }
-      gender
-      fullName
     }
   }
 `;
 
 const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const id = useRouter().query.id;
-  const { data, loading, error } = useQuery(GET_BASIC_INFO, {
+  const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
       id,
     },
   });
 
-  const [modal, setModal] = useState<ModalType>(ModalType.NONE);
+  const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
+    type: ModalType.NONE,
+  });
+
   if (loading) return <h1>Loading</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
+  const basicInfo = data?.getEmployerById.basicInfoEmployer;
 
-  const basicInfoEmployer = data?.getEmployerById;
+  const handleModalClose = (): void => {
+    setModal({ type: ModalType.NONE });
+  };
 
   return (
     <Layout title={['profile', `Employer ${id}`]}>
-      <h1>Profile Page for {basicInfoEmployer.company}</h1>
+      <h1>Profile Page for {basicInfo.companyName}</h1>
       <BasicInfo
         t={t}
-        basicInfoEmployer={basicInfoEmployer}
-        handleEdit={() => setModal(ModalType.BASIC_INFO)}
+        basicInfoEmployer={basicInfo}
+        handleEdit={() => setModal({ type: ModalType.BASIC_INFO })}
       />
-
+      <BasicInfoEditEmployer
+        t={t}
+        basicInfo={basicInfo}
+        open={modal.type === ModalType.BASIC_INFO}
+        onClose={handleModalClose}
+      />
       <Button href={`/employers/${id}/settings`}>To Settings</Button>
     </Layout>
   );
