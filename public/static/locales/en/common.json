@@ -72,6 +72,9 @@
     "position": "Position"
   },
   "pages": {
+    "profile": {
+      "greeting": "Great that you're here"
+    },
     "signup": {
       "header": "Create your profile"
     }

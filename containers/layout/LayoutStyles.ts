@@ -12,9 +12,17 @@ const useStyles = makeStyles(() =>
     },
     header: {
       display: 'flex',
-      justifyContent: 'flex-end',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      padding: '0 2rem',
+      height: '8rem',
       width: '100%',
     },
+    text: {
+      flex: 1,
+    },
+    buttons: {},
     main: {
       flex: 1,
       display: 'flex',

@@ -188,8 +188,14 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   };
 
   return (
-    <Layout title={['profile', getShortName(basicInfo.name)]}>
-      <h1>Profile Page for Talent {basicInfo.fullName}</h1>
+    <Layout
+      title={['profile', getShortName(basicInfo.name)]}
+      heading={
+        t('pages.profile.greeting') +
+        (basicInfo.name?.firstName ? ', ' + basicInfo.name.firstName : '') +
+        '!'
+      }
+    >
       <BasicInfo
         t={t}
         basicInfo={basicInfo}

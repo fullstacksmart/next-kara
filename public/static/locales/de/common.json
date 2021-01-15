@@ -78,6 +78,9 @@
     "position": "Position"
   },
   "pages": {
+    "profile": {
+      "greeting": "Schön, dass Du hier bist"
+    },
     "signup": {
       "header": "Erstelle Dein Profil"
     }
