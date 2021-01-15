@@ -11,11 +11,10 @@ import { Layout } from '../../../containers/layout';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
 
-export interface ProfilePageProps {
-  //extends PageProps
-
-  id: string;
-}
+// export interface ProfilePageProps {
+//   //extends PageProps
+//   id: string;
+// }
 
 const GET_ALL_INFO = gql`
   query GetEmployerById($id: String!) {
@@ -75,7 +74,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       />
       <BasicInfoEditEmployer
         t={t}
-        basicInfo={basicInfo}
+        basicInfoEmployer={basicInfo}
         open={modal.type === ModalType.BASIC_INFO}
         onClose={handleModalClose}
       />

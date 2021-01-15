@@ -41,7 +41,7 @@ const UPDATE_TALENT = gql`
 const UPDATE_EMPLOYER = gql`
   mutation UpdateEmployer($input: EmployerUpdate!) {
     updateEmployer(input: $input) {
-      basicInfo {
+      basicInfoEmployer {
         id
         companyName
         name {
@@ -56,6 +56,7 @@ const UPDATE_EMPLOYER = gql`
           isoCode
         }
         description
+        companyName
         isBasicInfoComplete
       }
     }
@@ -63,21 +64,32 @@ const UPDATE_EMPLOYER = gql`
 `;
 
 interface BasicInfoEditProps extends DialogProps {
-  basicInfo: TalentUpdate;
+  // basicInfo: TalentUpdate;
   t: TFunction;
   onClose: () => void;
 }
+
+interface BasicInfoTalent extends BasicInfoEditProps {
+  basicInfo: TalentUpdate;
+}
+
+interface BasicInfoEmployer extends BasicInfoEditProps {
+  basicInfoEmployer: EmployerUpdate;
+}
+
+type BasicInfoProps = BasicInfoTalent | BasicInfoEmployer;
 
 export const BasicInfoEdit = ({
   basicInfo,
   t,
   onClose,
   ...props
-}: BasicInfoEditProps): React.ReactElement => {
+}: BasicInfoProps): React.ReactElement => {
   const [updatedInfo, setUpdatedInfo] = useState<Partial<TalentUpdate>>(
     basicInfo,
   );
 
+  console.log(basicInfo);
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
       input: {
@@ -208,20 +220,22 @@ export const BasicInfoEdit = ({
 };
 
 export const BasicInfoEditEmployer = ({
-  basicInfo,
+  basicInfoEmployer,
   t,
   onClose,
   ...props
-}: BasicInfoEditProps): React.ReactElement => {
+}: BasicInfoProps): React.ReactElement => {
   const [updatedInfo, setUpdatedInfo] = useState<Partial<EmployerUpdate>>(
-    basicInfo,
+    basicInfoEmployer,
   );
+  console.log(basicInfoEmployer);
 
   const [mutateEmployer] = useMutation(UPDATE_EMPLOYER, {
     variables: {
       input: {
         id: updatedInfo.id,
         gender: updatedInfo.gender,
+        companyName: updatedInfo.companyName,
         name: {
           firstName: updatedInfo.name?.firstName,
           middleName: updatedInfo.name?.middleName,
@@ -276,12 +290,12 @@ export const BasicInfoEditEmployer = ({
       t={t}
       title={t('components.basicInfo.title')}
       onClose={onClose}
-      formId="basicInfoForm"
+      formId="basicInfoEmployerForm"
       mutate={mutateEmployer as MutationFunction}
-      reset={() => setUpdatedInfo(basicInfo)}
+      reset={() => setUpdatedInfo(basicInfoEmployer)}
     >
       <GenderSelector
-        value={basicInfo.gender}
+        value={basicInfoEmployer.gender}
         updateFunction={setUpdatedInfo}
         t={t}
       />
@@ -309,12 +323,7 @@ export const BasicInfoEditEmployer = ({
           required
         />
       </Box>
-      {/* <ProfessionRadio
-        t={t}
-        input={updatedInfo.profession}
-        updateFunction={setUpdatedInfo}
-        gender={updatedInfo.gender}
-      /> */}
+
       <InputField
         label={t('companyName')}
         propName="companyName"
@@ -338,7 +347,7 @@ export const BasicInfoEditEmployer = ({
         <CountrySelector
           t={t}
           updateFunction={setUpdatedInfo}
-          value={basicInfo.address?.isoCode || ''}
+          value={basicInfoEmployer.address?.isoCode || ''}
           fullWidth={false}
         />
       </Box>

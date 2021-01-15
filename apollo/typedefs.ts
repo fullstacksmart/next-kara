@@ -158,7 +158,7 @@ const typeDefs = gql`
   type BasicInfoEmployer {
     id: ID!
     gender: Gender!
-    companyName: String!
+    companyName: String
     name: FullName!
     fullName: String
     profilePic: String
