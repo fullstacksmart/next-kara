@@ -163,7 +163,7 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ t }: PageProps): React.ReactElement => {
+const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
@@ -189,12 +189,14 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
 
   return (
     <Layout
+      t={t}
       title={['profile', getShortName(basicInfo.name)]}
       heading={
         t('pages.profile.greeting') +
         (basicInfo.name?.firstName ? ', ' + basicInfo.name.firstName : '') +
         '!'
       }
+      i18n={i18n}
     >
       <BasicInfo
         t={t}

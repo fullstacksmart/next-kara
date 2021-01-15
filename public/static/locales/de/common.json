@@ -62,6 +62,7 @@
     "buttons": {
       "cancel": "abbrechen",
       "delete": "löschen",
+      "home": "bring mich heim",
       "save": "speichern"
     },
     "degree": "Abschluss",

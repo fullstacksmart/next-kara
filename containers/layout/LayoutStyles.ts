@@ -22,7 +22,13 @@ const useStyles = makeStyles(() =>
     text: {
       flex: 1,
     },
-    buttons: {},
+    buttons: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    languageButton: {
+      marginLeft: '2rem',
+    },
     main: {
       flex: 1,
       display: 'flex',

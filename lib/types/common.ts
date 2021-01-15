@@ -1,6 +1,6 @@
 import { I18n, TFunction } from 'next-i18next';
 
-export type SupportedLanguage = 'GERMAN' | 'ENGLISH';
+export type SupportedLanguage = 'de' | 'en';
 
 export type AssetType = 'EXPERIENCES' | 'QUALIFICATIONS';
 
