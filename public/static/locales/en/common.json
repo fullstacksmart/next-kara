@@ -3,7 +3,7 @@
     "city": "City",
     "country": "Country"
   },
-  "companyName": "Company Name",
+  "companyName": "Hospital / Company",
   "components": {
     "basicInfo": {
       "title": "Edit your personal information"
@@ -79,11 +79,11 @@
     "degree": "Degree",
     "description": "Description",
     "duration": {
-      "complete": "duration",
+      "complete": "Duration",
       "from": "from",
       "to": "to"
     },
-    "employer": "Employer / Company",
+    "employer": "Employer",
     "experienceDescription": "Line of Work / Description",
     "fieldOfEducation": "Field of Education",
     "institution": "School / Institution",
@@ -120,10 +120,10 @@
     }
   },
   "repeatPassword": "please reenter password",
-  "signin": "sign in dude!",
+  "signin": "sign in",
   "signup": "sign up",
   "type": {
-    "employer": "employer",
-    "talent": "talent"
+    "employer": "Employer",
+    "talent": "Talent"
   }
 }

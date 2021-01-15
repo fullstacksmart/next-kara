@@ -3,7 +3,7 @@
     "city": "Stadt",
     "country": "Land"
   },
-  "companyName": "Firmenname",
+  "companyName": "Klinik / Unternehmen",
   "components": {
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
@@ -83,7 +83,7 @@
       "from": "von",
       "to": "bis"
     },
-    "employer": "Arbeitgeber / Unternehmen",
+    "employer": "Arbeitgeber",
     "experienceDescription": "Tätigkeit / Beschreibung",
     "fieldOfEducation": "Bereich",
     "institution": "Schule / Institution",
