@@ -13,7 +13,7 @@ const InputField = ({
   setValue,
   propName,
   value,
-  trim = true,
+  trim = false,
   ...props
 }: InputFieldProps): React.ReactElement => {
   const labelText = label?.toString();
