@@ -16,7 +16,7 @@ const useStyles = makeStyles(() =>
       justifyContent: 'space-around',
       alignItems: 'center',
       padding: '0 2rem',
-      height: '8rem',
+      height: '10rem',
       width: '100%',
     },
     text: {

@@ -269,6 +269,7 @@ export const QualificationEdit = ({
         value={updatedQualification.description}
         setValue={setUpdatedQualification}
         multiline={true}
+        placeholder={t('components.qualificationEdit.description.placeholder')}
       />
     </EditPopup>
   );

@@ -8,10 +8,18 @@
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
     },
+    "basicInfoEdit": {
+      "description": {
+        "placeholder": "Hier ist Platz für Infos über dich. Beantworte einfach diese Fragen, dann hast du einen tollen Text: Wo hast du studiert? Welche Ausbildung und Qualifikationen bringst du mit? Wie viele Jahre Berufserfahrung hast du? Und warum suchst du einen neuen Job? In welchem Bundesland suchst du eine Stelle?"
+      }
+    },
     "countrySelector": {
       "label": "Land"
     },
     "experienceEdit": {
+      "description": {
+        "placeholder": "Welche Aufgaben hast du übernommen? Zum Beispiel: Intensivmedizinische Versorgung von Patienten. Selbstständige und fachgerechte Pflege. Assistenz bei Eingriffen. Erfahrung mit Beatmungsgeräten."
+      },
       "title": {
         "new": "Erstelle einen neuen Berufserfahrungseintrag",
         "old": "Bearbeite Deine Berufserfahrung"
@@ -27,6 +35,9 @@
       "backHome": "zurück zur Homepage"
     },
     "qualificationEdit": {
+      "description": {
+        "placeholder": "Bla di blub"
+      },
       "title": {
         "new": "Erstelle eine neuen Ausbildungseintrag",
         "old": "Bearbeite Deine Ausbildung"

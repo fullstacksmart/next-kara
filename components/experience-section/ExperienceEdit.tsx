@@ -255,6 +255,7 @@ export const ExperienceEdit = ({
       </Box>
       <InputField
         label={t('labels.experienceDescription')}
+        placeholder={t('components.experienceEdit.description.placeholder')}
         propName="description"
         value={updatedExperience.description}
         setValue={setUpdatedExperience}

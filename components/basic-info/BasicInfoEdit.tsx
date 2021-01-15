@@ -176,6 +176,7 @@ export const BasicInfoEdit = ({
       </Box>
       <InputField
         label={t('description')}
+        placeholder={t('components.basicInfoEdit.description.placeholder')}
         propName="description"
         value={updatedInfo.description}
         setValue={setUpdatedInfo}
