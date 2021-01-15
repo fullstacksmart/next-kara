@@ -9,6 +9,7 @@ import CountrySelector from '../country-selector/CountrySelector';
 import { DatePicker } from '../date-picker/DatePicker';
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { filterById } from '../../lib/utils/arrays';
+import { formatForDb } from '../../lib/utils/strings';
 
 const DELETE_EXPERIENCE = gql`
   mutation Delete_Experience($input: DeleteExperience!) {
@@ -129,9 +130,9 @@ export const ExperienceEdit = ({
         talent: updatedExperience.talent?.id,
         lineOfWork: updatedExperience.lineOfWork,
         employer: {
-          name: updatedExperience.employer?.name,
+          name: formatForDb(updatedExperience.employer?.name),
           address: {
-            city: updatedExperience.employer?.address.city,
+            city: formatForDb(updatedExperience.employer?.address.city),
             isoCode:
               updatedExperience.employer?.address?.isoCode !== undefined &&
               updatedExperience.employer?.address.isoCode !== ''
@@ -147,7 +148,7 @@ export const ExperienceEdit = ({
             timeStamp: updatedExperience.duration?.to.timeStamp,
           },
         },
-        description: updatedExperience.description,
+        description: formatForDb(updatedExperience.description),
       },
     },
   });
@@ -157,9 +158,9 @@ export const ExperienceEdit = ({
         talent: updatedExperience.talent?.id,
         lineOfWork: updatedExperience.lineOfWork,
         employer: {
-          name: updatedExperience.employer?.name,
+          name: formatForDb(updatedExperience.employer?.name),
           address: {
-            city: updatedExperience.employer?.address.city,
+            city: formatForDb(updatedExperience.employer?.address.city),
             isoCode:
               updatedExperience.employer?.address?.isoCode !== undefined &&
               updatedExperience.employer?.address.isoCode !== ''
@@ -175,7 +176,7 @@ export const ExperienceEdit = ({
             timeStamp: updatedExperience.duration?.to.timeStamp,
           },
         },
-        description: updatedExperience.description,
+        description: formatForDb(updatedExperience.description),
       },
     },
   });
@@ -243,6 +244,7 @@ export const ExperienceEdit = ({
           value={updatedExperience?.employer?.address.city}
           propName={['employer', 'address', 'city']}
           setValue={setUpdatedExperience}
+          trim={true}
         />
         <CountrySelector
           t={t}
