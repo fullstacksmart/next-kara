@@ -5,6 +5,7 @@ import { computeNestedValue } from '../../lib/utils/arrays';
 type InputFieldProps = TextFieldProps & {
   setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
   propName: string | string[];
+  trim?: boolean;
 };
 
 const InputField = ({
@@ -12,6 +13,7 @@ const InputField = ({
   setValue,
   propName,
   value,
+  trim = true,
   ...props
 }: InputFieldProps): React.ReactElement => {
   const labelText = label?.toString();
@@ -29,9 +31,10 @@ const InputField = ({
   ): void => {
     if (setValue) {
       setValue((oldValues) => {
+        const newValue = trim ? event.target.value.trim() : event.target.value;
         return {
           ...oldValues,
-          ...computeNestedValue(oldValues, propArray, event.target.value),
+          ...computeNestedValue(oldValues, propArray, newValue),
         };
       });
     }
