@@ -73,3 +73,8 @@ export const getFormatedDuration = (
   const toString = `${toMonth} ${toYear}`;
   return fromTo(fromString, toString);
 };
+
+export const formatForDb = (input: string | undefined): string | undefined => {
+  if (!input) return input;
+  return input.trim();
+};

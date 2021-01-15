@@ -5,6 +5,7 @@ import { DialogProps, Box } from '@material-ui/core';
 import { useEffect, useMemo, useState } from 'react';
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { filterById } from '../../lib/utils/arrays';
+import { formatForDb } from '../../lib/utils/strings';
 
 const DELETE_QUALIFICATION = gql`
   mutation Delete_Qualification($input: DeleteQualification!) {
@@ -127,12 +128,12 @@ export const QualificationEdit = ({
       input: {
         id: updatedQualification.id,
         talent: updatedQualification.talent?.id,
-        fieldOfEducation: updatedQualification.fieldOfEducation,
-        degree: updatedQualification.degree,
+        fieldOfEducation: formatForDb(updatedQualification.fieldOfEducation),
+        degree: formatForDb(updatedQualification.degree),
         institution: {
-          name: updatedQualification.institution?.name,
+          name: formatForDb(updatedQualification.institution?.name),
           address: {
-            city: updatedQualification.institution?.address.city,
+            city: formatForDb(updatedQualification.institution?.address.city),
             isoCode:
               updatedQualification.institution?.address?.isoCode !==
                 undefined &&
@@ -149,7 +150,7 @@ export const QualificationEdit = ({
             timeStamp: updatedQualification.duration?.to.timeStamp,
           },
         },
-        description: updatedQualification.description,
+        description: formatForDb(updatedQualification.description),
       },
     },
   });
@@ -157,12 +158,12 @@ export const QualificationEdit = ({
     variables: {
       input: {
         talent: updatedQualification.talent?.id,
-        fieldOfEducation: updatedQualification.fieldOfEducation,
-        degree: updatedQualification.degree,
+        fieldOfEducation: formatForDb(updatedQualification.fieldOfEducation),
+        degree: formatForDb(updatedQualification.degree),
         institution: {
-          name: updatedQualification.institution?.name,
+          name: formatForDb(updatedQualification.institution?.name),
           address: {
-            city: updatedQualification.institution?.address.city,
+            city: formatForDb(updatedQualification.institution?.address.city),
             isoCode:
               updatedQualification.institution?.address?.isoCode !==
                 undefined &&
@@ -179,7 +180,7 @@ export const QualificationEdit = ({
             timeStamp: updatedQualification.duration?.to.timeStamp,
           },
         },
-        description: updatedQualification.description,
+        description: formatForDb(updatedQualification.description),
       },
     },
   });
