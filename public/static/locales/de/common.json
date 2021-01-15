@@ -17,12 +17,6 @@
         "old": "Bearbeite Deine Berufserfahrung"
       }
     },
-    "qualificationEdit": {
-      "title": {
-        "new": "Erstelle einen neuen Ausbildungseintrag",
-        "old": "Bearbeite Deine Ausbildung"
-      }
-    },
     "experienceSection": {
       "title": "Berufserfahrung"
     },
@@ -31,6 +25,12 @@
     },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "qualificationEdit": {
+      "title": {
+        "new": "Erstelle eine neuen Ausbildungseintrag",
+        "old": "Bearbeite Deine Ausbildung"
+      }
     },
     "qualificationSection": {
       "title": "Ausbildung"
@@ -73,7 +73,7 @@
     },
     "employer": "Arbeitgeber / Unternehmen",
     "experienceDescription": "Tätigkeit / Beschreibung",
-    "fieldOfEducation": "Ausbildungsgebiet",
+    "fieldOfEducation": "Bereich",
     "institution": "Schule / Institution",
     "position": "Position"
   },
