@@ -35,6 +35,14 @@ export const getFullName = (name: FullName): string => {
   return fullName;
 };
 
+export const getShortName = (name: FullName): string => {
+  let shortName = '';
+  if (name.firstName) shortName += name.firstName.trim().charAt(0) + '. ';
+  if (name.middleName) shortName += name.middleName.trim().charAt(0) + '. ';
+  if (name.lastName) shortName += name.lastName;
+  return shortName;
+};
+
 const fromTo = (from: string, to: string): string => {
   if (from === '') return to;
   return `${from} – ${to}`;
@@ -64,4 +72,9 @@ export const getFormatedDuration = (
       : `${fromMonth} ${fromYear}`;
   const toString = `${toMonth} ${toYear}`;
   return fromTo(fromString, toString);
+};
+
+export const formatForDb = (input: string | undefined): string | undefined => {
+  if (!input) return input;
+  return input.trim();
 };

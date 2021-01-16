@@ -157,6 +157,7 @@ const typeDefs = gql`
     institution: Organization
     duration: Duration
     description: String
+    isComplete: Boolean
   }
 
   type Approbation {
@@ -252,7 +253,32 @@ const typeDefs = gql`
     duration: DurationInput
     description: String
   }
+
+  input NewQualification {
+    talent: ID!
+    fieldOfEducation: String
+    degree: String
+    institution: OrganizationInput
+    duration: DurationInput
+    description: String
+  }
+
+  input QualificationUpdate {
+    id: ID!
+    talent: ID!
+    fieldOfEducation: String
+    degree: String
+    institution: OrganizationInput
+    duration: DurationInput
+    description: String
+  }
+
   input DeleteExperience {
+    talent: ID!
+    id: ID!
+  }
+
+  input DeleteQualification {
     talent: ID!
     id: ID!
   }
@@ -270,6 +296,9 @@ const typeDefs = gql`
     addExperience(input: NewExperience!): Talent!
     updateExperience(input: ExperienceUpdate!): Talent!
     deleteExperience(input: DeleteExperience): Talent!
+    addQualification(input: NewQualification!): Talent!
+    updateQualification(input: QualificationUpdate!): Talent!
+    deleteQualification(input: DeleteQualification): Talent!
   }
 `;
 export default typeDefs;

@@ -4,15 +4,17 @@
 // import { Button } from '../components/buttons';
 import { Layout } from '../containers/layout';
 import LandingPage from '../containers/landing/LandingPage';
+import { PageProps } from '../lib/types';
+import { withTranslation } from '../i18n';
 
-const Home = (): React.ReactElement => {
+const Home = ({ t }: PageProps): React.ReactElement => {
   // const handleClick = (): void => {
   //   const newLang = i18n.language === 'en' ? 'de' : 'en'
   //   i18n.changeLanguage(newLang)
   // }
 
   return (
-    <Layout title="Home" home>
+    <Layout title="Home" home t={t}>
       {/* <Button onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true"  color="primary" startIcon={<TranslateIcon />}>
            Switch Language
       </Button>
@@ -31,4 +33,4 @@ Home.getInitialProps = async () => ({
   namespacesRequired: ['common'],
 });
 
-export default Home;
+export default withTranslation('common')(Home);

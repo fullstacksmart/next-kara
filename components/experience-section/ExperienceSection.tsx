@@ -4,6 +4,7 @@ import { CheckedTitle } from '../checked-title/CheckedTitle';
 import { Section } from '../section/Section';
 import { ExperienceItem } from '../experience-item/ExperienceItem';
 import { ItemDivider } from '../item-divider/ItemDivider';
+import { sortByFrom } from '../../lib/utils/arrays';
 
 export interface ExperienceSectionProps {
   t: TFunction;
@@ -11,14 +12,6 @@ export interface ExperienceSectionProps {
   gender: Gender;
   handleEdit: (id?: string) => void;
 }
-
-const sortByFrom = (a: Experience, b: Experience): number => {
-  const fromTimestampA = parseInt(a.duration?.from.timeStamp || '');
-  const fromTimestampB = parseInt(b.duration?.from.timeStamp || '');
-  if (Number.isNaN(fromTimestampA)) return -1;
-  if (Number.isNaN(fromTimestampB)) return 1;
-  return fromTimestampB - fromTimestampA;
-};
 
 export const ExperienceSection = ({
   t,

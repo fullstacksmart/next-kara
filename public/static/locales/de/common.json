@@ -3,15 +3,23 @@
     "city": "Stadt",
     "country": "Land"
   },
-  "companyName": "Firmenname",
+  "companyName": "Klinik / Unternehmen",
   "components": {
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
+    },
+    "basicInfoEdit": {
+      "description": {
+        "placeholder": "Hier ist Platz für Infos über dich. Beantworte einfach diese Fragen, dann hast du einen tollen Text: Wo hast du studiert? Welche Ausbildung und Qualifikationen bringst du mit? Wie viele Jahre Berufserfahrung hast du? Und warum suchst du einen neuen Job? In welchem Bundesland suchst du eine Stelle?"
+      }
     },
     "countrySelector": {
       "label": "Land"
     },
     "experienceEdit": {
+      "description": {
+        "placeholder": "Welche Aufgaben hast du übernommen? Zum Beispiel: Intensivmedizinische Versorgung von Patienten. Selbstständige und fachgerechte Pflege. Assistenz bei Eingriffen. Erfahrung mit Beatmungsgeräten."
+      },
       "title": {
         "new": "Erstelle einen neuen Berufserfahrungseintrag",
         "old": "Bearbeite Deine Berufserfahrung"
@@ -25,6 +33,18 @@
     },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "qualificationEdit": {
+      "description": {
+        "placeholder": "Bla di blub"
+      },
+      "title": {
+        "new": "Erstelle eine neuen Ausbildungseintrag",
+        "old": "Bearbeite Deine Ausbildung"
+      }
+    },
+    "qualificationSection": {
+      "title": "Ausbildung"
     }
   },
   "description": "Über mich",
@@ -53,18 +73,26 @@
     "buttons": {
       "cancel": "abbrechen",
       "delete": "löschen",
+      "home": "bring mich heim",
       "save": "speichern"
     },
+    "degree": "Abschluss",
+    "description": "Beschreibung",
     "duration": {
       "complete": "Zeitraum",
       "from": "von",
       "to": "bis"
     },
-    "employer": "Arbeitgeber / Unternehmen",
+    "employer": "Arbeitgeber",
     "experienceDescription": "Tätigkeit / Beschreibung",
+    "fieldOfEducation": "Bereich",
+    "institution": "Schule / Institution",
     "position": "Position"
   },
   "pages": {
+    "profile": {
+      "greeting": "Schön, dass Du hier bist"
+    },
     "signup": {
       "header": "Erstelle Dein Profil"
     }

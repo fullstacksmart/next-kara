@@ -80,7 +80,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   }, [newUser]);
 
   return (
-    <Layout title="sign up">
+    <Layout title="sign up" t={t}>
       <Card>
         <CardContent>
           <Container>

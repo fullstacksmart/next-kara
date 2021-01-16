@@ -3,15 +3,23 @@
     "city": "City",
     "country": "Country"
   },
-  "companyName": "Company Name",
+  "companyName": "Hospital / Company",
   "components": {
     "basicInfo": {
       "title": "Edit your personal information"
+    },
+    "basicInfoEdit": {
+      "description": {
+        "placeholder": "This is the place to add some personal touches to your profile. Just answer some of the following questions and you'll have a great text to capture the attention of potential employers: Where did you study? Which qualifications do you bring to the job? How long have you worked in the medical sector? Why are you looking for a new challenge? Which federal state do you target in your job search?"
+      }
     },
     "countrySelector": {
       "label": "Country"
     },
     "experienceEdit": {
+      "description": {
+        "placeholder": "What were your duties? For instance: intensive care, experienced in handling ventilators, ..."
+      },
       "title": {
         "new": "Create a new job experience entry",
         "old": "Edit your job experience"
@@ -25,6 +33,18 @@
     },
     "layout": {
       "backHome": "take me back home"
+    },
+    "qualificationEdit": {
+      "description": {
+        "placeholder": "Bla di blub"
+      },
+      "title": {
+        "new": "Create a new qualification",
+        "old": "Edit your qualification"
+      }
+    },
+    "qualificationSection": {
+      "title": "Qualifications"
     }
   },
   "description": "About Me",
@@ -53,18 +73,26 @@
     "buttons": {
       "cancel": "cancel",
       "delete": "delete",
+      "home": "take me back home",
       "save": "save"
     },
+    "degree": "Degree",
+    "description": "Description",
     "duration": {
-      "complete": "duration",
+      "complete": "Duration",
       "from": "from",
       "to": "to"
     },
-    "employer": "Employer / Company",
+    "employer": "Employer",
     "experienceDescription": "Line of Work / Description",
+    "fieldOfEducation": "Field of Education",
+    "institution": "School / Institution",
     "position": "Position"
   },
   "pages": {
+    "profile": {
+      "greeting": "Great that you're here"
+    },
     "signup": {
       "header": "Create your profile"
     }
@@ -85,11 +113,17 @@
     "OTHER_NON_MEDICAL-OTHER": "Non-medical Personnel"
   },
   "profilePic": "URL to profile pic",
+  "qualificationEdit": {
+    "title": {
+      "new": "Create a new qualification entry",
+      "old": "Edit your qualification"
+    }
+  },
   "repeatPassword": "please reenter password",
-  "signin": "sign in dude!",
+  "signin": "sign in",
   "signup": "sign up",
   "type": {
-    "employer": "employer",
-    "talent": "talent"
+    "employer": "Employer",
+    "talent": "Talent"
   }
 }
