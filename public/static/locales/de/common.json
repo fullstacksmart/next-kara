@@ -3,22 +3,26 @@
     "city": "Stadt",
     "country": "Land"
   },
-  "buttonLabels": {
-    "cancel": "abbrechen",
-    "save": "speichern"
-  },
-  "companyName": "Firmenname",
+  "companyName": "Klinik / Unternehmen",
   "components": {
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
+    },
+    "basicInfoEdit": {
+      "description": {
+        "placeholder": "Hier ist Platz für Infos über Dich. Beantworte einfach diese Fragen, dann hast Du einen tollen Text: Wo hast Du studiert? Welche Ausbildung und Qualifikationen bringst Du mit? Wie viele Jahre Berufserfahrung hast Du? Und warum suchst Du einen neuen Job? In welchem Bundesland suchst Du eine Stelle?"
+      }
     },
     "countrySelector": {
       "label": "Land"
     },
     "experienceEdit": {
+      "description": {
+        "placeholder": "Welche Aufgaben hast Du übernommen? Zum Beispiel: Intensivmedizinische Versorgung von Patienten. Selbstständige und fachgerechte Pflege. Assistenz bei medizinischen Eingriffen. Erfahrung mit Beatmungsgeräten."
+      },
       "title": {
-        "old": "Bearbeite Deine Berufserfahrung",
-        "new": "Erstelle einen neuen Berufserfahrungseintrag"
+        "new": "Erstelle einen neuen Berufserfahrungseintrag",
+        "old": "Bearbeite Deine Berufserfahrung"
       }
     },
     "experienceSection": {
@@ -29,6 +33,18 @@
     },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "qualificationEdit": {
+      "description": {
+        "placeholder": "Bla di blub"
+      },
+      "title": {
+        "new": "Erstelle eine neuen Ausbildungseintrag",
+        "old": "Bearbeite Deine Ausbildung"
+      }
+    },
+    "qualificationSection": {
+      "title": "Ausbildung"
     }
   },
   "description": "Über mich",
@@ -50,20 +66,33 @@
     "AUT": "Österreich",
     "CRO": "Kroatien",
     "DEU": "Deutschland",
-    "POL": "Poland",
+    "POL": "Polen",
     "SRB": "Serbien"
   },
   "labels": {
-    "position": "Position",
+    "buttons": {
+      "cancel": "abbrechen",
+      "delete": "löschen",
+      "home": "bring mich heim",
+      "save": "speichern"
+    },
+    "degree": "Abschluss",
+    "description": "Beschreibung",
     "duration": {
       "complete": "Zeitraum",
       "from": "von",
       "to": "bis"
     },
-    "employer": "Arbeitgeber / Unternehmen",
-    "experienceDescription": "Tätigkeit / Beschreibung"
+    "employer": "Arbeitgeber",
+    "experienceDescription": "Tätigkeit / Beschreibung",
+    "fieldOfEducation": "Bereich",
+    "institution": "Schule / Institution",
+    "position": "Position"
   },
   "pages": {
+    "profile": {
+      "greeting": "Schön, dass Du hier bist"
+    },
     "signup": {
       "header": "Erstelle Dein Profil"
     }

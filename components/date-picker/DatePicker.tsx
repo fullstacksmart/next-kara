@@ -27,7 +27,7 @@ export const DatePicker = ({
       format="MM/yyyy"
       label={label}
       views={['year', 'month', 'date']}
-      value={input ? new Date(parseInt(input)) : new Date(Date.now())}
+      value={input !== '' ? new Date(parseInt(input)) : new Date(Date.now())}
       onChange={(date) => {
         const newDateString: string = date ? date.getTime().toString() : '';
         updateFunction((oldValues) => ({

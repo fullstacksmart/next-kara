@@ -1,16 +1,24 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Button } from '../../../components/buttons';
 import { Layout } from '../../../containers/layout';
-import { Experience, ModalType, PageProps } from '../../../lib/types';
-import { BasicInfo, BasicInfoEdit } from '../../../components/basic-info';
 import {
-  ExperienceSection,
-  ExperienceEdit,
-} from '../../../components/experience-section';
+  Experience,
+  ModalType,
+  PageProps,
+  Qualification,
+} from '../../../lib/types';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
-import { filterById } from '../../../lib/utils/arrays';
+import {
+  BasicInfo,
+  BasicInfoEdit,
+  ExperienceSection,
+  ExperienceEdit,
+  QualificationSection,
+  QualificationEdit,
+  Button,
+} from '../../../components';
+import { getShortName } from '../../../lib/utils/strings';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -76,6 +84,7 @@ import { filterById } from '../../../lib/utils/arrays';
 //     }
 //   }
 // `;
+
 const GET_ALL_INFO = gql`
   query GetTalentById($id: String!) {
     getTalentById(id: $id) {
@@ -124,11 +133,37 @@ const GET_ALL_INFO = gql`
         description
         isComplete
       }
+      qualifications {
+        id
+        talent {
+          id
+        }
+        fieldOfEducation
+        degree
+        institution {
+          id
+          name
+          address {
+            city
+            isoCode
+          }
+        }
+        duration {
+          from {
+            timeStamp
+          }
+          to {
+            timeStamp
+          }
+        }
+        description
+        isComplete
+      }
     }
   }
 `;
 
-const ProfilePage = ({ t }: PageProps): React.ReactElement => {
+const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
@@ -139,17 +174,30 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
     type: ModalType.NONE,
   });
   if (loading) return <h1>Loading</h1>;
-  if (error) return <h1>Error: {error.message}</h1>;
+  if (error) {
+    if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
+    return <h1>Error: {error.message}</h1>;
+  }
+
   const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
+  const qualifications: Qualification[] = data.getTalentById.qualifications;
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
   };
 
   return (
-    <Layout title={['profile', `Talent ${id}`]}>
-      <h1>Profile Page for Talent {basicInfo.fullName}</h1>
+    <Layout
+      t={t}
+      title={['profile', getShortName(basicInfo.name)]}
+      heading={
+        t('pages.profile.greeting') +
+        (basicInfo.name?.firstName ? ', ' + basicInfo.name.firstName : '') +
+        '!'
+      }
+      i18n={i18n}
+    >
       <BasicInfo
         t={t}
         basicInfo={basicInfo}
@@ -172,10 +220,25 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
       <ExperienceEdit
         t={t}
         talent={basicInfo}
-        id={modal.id}
-        experience={filterById(experiences, modal.id) as Experience}
+        id={modal.type === ModalType.EXPERIENCE ? modal.id : ''}
+        experiences={experiences}
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
+      />
+      <QualificationSection
+        t={t}
+        qualifications={qualifications}
+        handleEdit={(id?: string) => {
+          setModal({ type: ModalType.QUALIFICATION, id });
+        }}
+      />
+      <QualificationEdit
+        t={t}
+        talent={basicInfo}
+        id={modal.type === ModalType.QUALIFICATION ? modal.id : ''}
+        qualifications={qualifications}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.QUALIFICATION}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

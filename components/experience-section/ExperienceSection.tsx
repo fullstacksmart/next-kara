@@ -4,6 +4,7 @@ import { CheckedTitle } from '../checked-title/CheckedTitle';
 import { Section } from '../section/Section';
 import { ExperienceItem } from '../experience-item/ExperienceItem';
 import { ItemDivider } from '../item-divider/ItemDivider';
+import { sortByFrom } from '../../lib/utils/arrays';
 
 export interface ExperienceSectionProps {
   t: TFunction;
@@ -19,20 +20,23 @@ export const ExperienceSection = ({
   handleEdit,
   ...props
 }: ExperienceSectionProps): React.ReactElement => {
-  const experienceItems = experiences.map((experience, i, arr) => {
-    const divider = i < arr.length - 1 ? <ItemDivider /> : null;
-    return (
-      <div key={`experience${experience.talent?.id}-${experience.id}`}>
-        <ExperienceItem
-          experience={experience}
-          t={t}
-          gender={gender}
-          handleEdit={handleEdit}
-        />
-        {divider}
-      </div>
-    );
-  });
+  const experienceItems = experiences
+    .slice()
+    .sort(sortByFrom)
+    .map((experience, i, arr) => {
+      const divider = i < arr.length - 1 ? <ItemDivider /> : null;
+      return (
+        <div key={`experience${experience.talent?.id}-${experience.id}`}>
+          <ExperienceItem
+            experience={experience}
+            t={t}
+            gender={gender}
+            handleEdit={handleEdit}
+          />
+          {divider}
+        </div>
+      );
+    });
 
   return (
     <Section handleAdd={() => handleEdit()} {...props}>

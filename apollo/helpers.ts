@@ -10,11 +10,12 @@ import {
   Experience,
   TalentAssetEntry,
   BaseEntity,
-  ExperienceEntry,
-  TalentEntry,
+  Qualification,
+  AssetType,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
+import { ApolloError } from '@apollo/client';
 
 const handleError = (e: Error): Error => {
   console.error(e); //eslint-disable-line no-console
@@ -28,14 +29,12 @@ const updateObject = (object: object, update: object | undefined): object => {
 };
 
 const getExperienceById = (
-  talent: TalentEntry | undefined,
+  talent: Talent | undefined,
   id: string,
-): ExperienceEntry | null => {
+): Experience | null => {
   if (!talent) return null;
   if (!talent.experiences.length) return null;
-  return (
-    (filterById(talent.experiences, id) as ExperienceEntry | undefined) || null
-  );
+  return (filterById(talent.experiences, id) as Experience | undefined) || null;
 };
 
 export const getAllTalentIds = (): string[] =>
@@ -51,7 +50,17 @@ export const getAllUserIds = (): string[] => {
 };
 
 export const getTalentById = async (id: string): Promise<Talent> => {
-  return await models.Talent.findOne({ id });
+  let talent: Talent | null = null;
+  try {
+    talent = await models.Talent.findOne({ id });
+  } catch (e) {
+    handleError(e);
+  }
+  if (!talent)
+    throw new ApolloError({
+      errorMessage: `404: No user with id ${id} found in db`,
+    });
+  return talent;
 };
 
 export const getEmployerById = async (id: string): Promise<Employer> => {
@@ -91,42 +100,90 @@ const getOrCreateOrganizationId = async (
   }
 };
 
-export const addExperience = async (
-  input: Partial<Experience> & TalentAssetEntry,
-): Promise<ExperienceEntry | null> => {
+export const addItem = async (
+  type: AssetType,
+  input: TalentAssetEntry & (Partial<Experience> | Partial<Qualification>),
+): Promise<Talent | null> => {
   const talent = await models.Talent.findOne({ id: input.talent });
   if (!talent) throw new Error(`no user with id ${input.talent}`);
   const id = nanoid();
+  const organizationString =
+    type === 'EXPERIENCES' ? 'employer' : 'institution';
+  const organization =
+    'employer' in input
+      ? input.employer
+      : 'institution' in input
+      ? input.institution
+      : undefined;
   const newExperience = {
     id,
     ...input,
-    employer: await getOrCreateOrganizationId(input.employer),
+    [organizationString]: await getOrCreateOrganizationId(organization),
   };
-  let updatedTalent: TalentEntry | undefined;
+  let updatedTalent: Talent | undefined;
   try {
     updatedTalent = await models.Talent.updateOne(
       { id: talent.id },
-      { experiences: [...talent.experiences, newExperience] },
+      { [type.toLowerCase()]: [...talent[type.toLowerCase()], newExperience] },
     );
   } catch (e) {
     handleError(e);
   }
-  return getExperienceById(updatedTalent, id);
+  return updatedTalent || null;
 };
 
-export const updateExperience = async (
-  input: Partial<Experience> & TalentAssetEntry & BaseEntity,
-): Promise<ExperienceEntry | null> => {
-  let talent: TalentEntry | undefined;
+export const updateQualification = async (
+  input: Partial<Qualification> & TalentAssetEntry & BaseEntity,
+): Promise<Talent | null> => {
+  let talent: Talent | undefined;
   try {
     talent = await models.Talent.findOne({ id: input.talent });
   } catch (e) {
     handleError(e);
   }
-  const oldExperience: ExperienceEntry | null = getExperienceById(
-    talent,
+  if (!talent) return null;
+  const oldQualification: BaseEntity | undefined = filterById(
+    talent.qualifications,
     input.id,
   );
+  if (!oldQualification) return null;
+  const updatedQualification = {
+    ...oldQualification,
+    degree: input.degree,
+    fieldOfEducation: input.fieldOfEducation,
+    institution: await getOrCreateOrganizationId(input.institution),
+    duration: input.duration,
+    description: input.description,
+  };
+  const otherQualifications =
+    talent?.qualifications.filter(
+      (qualification) => qualification.id !== input.id,
+    ) || [];
+  const updatedQualifications = [
+    ...otherQualifications,
+    updatedQualification,
+  ] as Qualification[];
+  try {
+    talent = await models.Talent.updateOne(
+      { id: input.talent },
+      { ...talent, qualifications: updatedQualifications },
+    );
+  } catch (e) {
+    handleError(e);
+  }
+  return talent || null;
+};
+
+export const updateExperience = async (
+  input: Partial<Experience> & TalentAssetEntry & BaseEntity,
+): Promise<Talent | null> => {
+  let talent: Talent | undefined;
+  try {
+    talent = await models.Talent.findOne({ id: input.talent });
+  } catch (e) {
+    handleError(e);
+  }
+  const oldExperience: Experience | null = getExperienceById(talent, input.id);
   if (!oldExperience) return null;
   const updatedExperience = {
     ...oldExperience,
@@ -138,16 +195,19 @@ export const updateExperience = async (
   const otherExperiences =
     talent?.experiences.filter((experience) => experience.id !== input.id) ||
     [];
-  const updatedExperiences = [...otherExperiences, updatedExperience];
+  const updatedExperiences = [
+    ...otherExperiences,
+    updatedExperience,
+  ] as Experience[];
   try {
-    await models.Talent.updateOne(
+    talent = await models.Talent.updateOne(
       { id: input.talent },
       { ...talent, experiences: updatedExperiences },
     );
   } catch (e) {
     handleError(e);
   }
-  return updatedExperience;
+  return talent || null;
 };
 
 export const updateTalent = async (input: TalentUpdate): Promise<Talent> => {
@@ -255,4 +315,41 @@ export const isExperienceComplete = async (
       experience.employer &&
       experience.lineOfWork,
   );
+};
+
+export const isQualificationComplete = (
+  qualification: Qualification,
+): boolean => {
+  return Boolean(
+    qualification.description &&
+      qualification.duration &&
+      qualification.institution &&
+      qualification.fieldOfEducation,
+  );
+};
+
+export const deleteItem = async (
+  type: AssetType,
+  {
+    talent: talentId,
+    id,
+  }: {
+    talent: string;
+    id: string;
+  },
+): Promise<Talent | null> => {
+  let talent: Talent | null = null;
+  try {
+    const oldTalent: Talent = await models.Talent.findOne({ id: talentId });
+    const newItems = (oldTalent?.[
+      type.toLowerCase() as keyof Talent
+    ] as BaseEntity[]).filter((item) => item.id !== id);
+    talent = await models.Talent.updateOne(
+      { id: talentId },
+      { [type.toLowerCase()]: newItems },
+    );
+  } catch (e) {
+    handleError(e);
+  }
+  return talent;
 };

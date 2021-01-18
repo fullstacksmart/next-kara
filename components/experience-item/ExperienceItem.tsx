@@ -31,6 +31,7 @@ export const ExperienceItem = ({
       <FieldDisplay
         label={t('labels.position')}
         value={t(`profession.${experience.lineOfWork}-${gender}`)}
+        enabled={Boolean(experience.lineOfWork)}
       />
       <FieldDisplay
         label={t('labels.duration.complete')}
@@ -48,6 +49,7 @@ export const ExperienceItem = ({
         <FieldDisplay
           label={t('address.country')}
           value={t(`iso.${experience.employer?.address.isoCode}`)}
+          enabled={Boolean(experience.employer?.address.isoCode)}
         />
         <FieldDisplay
           label={t('labels.experienceDescription')}

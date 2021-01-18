@@ -19,6 +19,7 @@ interface EditPopupProps extends PropsWithChildren<DialogProps> {
   mutate?: MutationFunction;
   reset: () => void;
   onSave?: () => void;
+  onDelete?: MutationFunction;
 }
 
 export const EditPopup = ({
@@ -30,6 +31,7 @@ export const EditPopup = ({
   formId = nanoid(),
   mutate,
   reset,
+  onDelete,
   ...props
 }: EditPopupProps): React.ReactElement => {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -48,6 +50,20 @@ export const EditPopup = ({
     reset();
     onClose();
   };
+
+  const handleDelete = (): void => {
+    if (onDelete) {
+      onDelete();
+    }
+    handleClose();
+  };
+
+  const deleteButton = onDelete ? (
+    <Button onClick={handleDelete}>{t('labels.buttons.delete')}</Button>
+  ) : (
+    <> </>
+  );
+
   return (
     <Dialog {...props} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
@@ -57,9 +73,10 @@ export const EditPopup = ({
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>{t('buttonLabels.cancel')}</Button>
+        {deleteButton}
+        <Button onClick={handleClose}>{t('labels.buttons.cancel')}</Button>
         <Button type="submit" form={formId}>
-          {t('buttonLabels.save')}
+          {t('labels.buttons.save')}
         </Button>
       </DialogActions>
     </Dialog>

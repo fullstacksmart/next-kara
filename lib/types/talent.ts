@@ -118,7 +118,7 @@ export interface ExperienceEntry extends TalentAssetEntry {
   description?: string;
 }
 
-interface Qualification extends TalentAsset {
+export interface Qualification extends TalentAsset {
   fieldOfEducation: string;
   degree: string;
   institution: Organization;
@@ -126,7 +126,7 @@ interface Qualification extends TalentAsset {
   description: string;
 }
 
-export interface QualificationEntry extends TalentAsset {
+export interface QualificationEntry extends TalentAssetEntry {
   fieldOfEducation: string;
   degree: string;
   institution: string;

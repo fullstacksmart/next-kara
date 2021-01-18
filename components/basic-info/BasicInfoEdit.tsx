@@ -3,6 +3,7 @@ import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
 import { TalentUpdate, EmployerUpdate } from '../../lib/types';
+import { formatForDb } from '../../lib/utils/strings';
 import CountrySelector from '../country-selector/CountrySelector';
 import { EditPopup } from '../edit-popup/EditPopup';
 import { GenderSelector } from '../gender-selector/GenderSelector';
@@ -96,22 +97,21 @@ export const BasicInfoEdit = ({
         id: updatedInfo.id,
         gender: updatedInfo.gender,
         name: {
-          firstName: updatedInfo.name?.firstName,
-          middleName: updatedInfo.name?.middleName,
-          lastName: updatedInfo.name?.lastName,
+          firstName: formatForDb(updatedInfo.name?.firstName),
+          middleName: formatForDb(updatedInfo.name?.middleName),
+          lastName: formatForDb(updatedInfo.name?.lastName),
         },
         address: {
-          city: updatedInfo.address?.city,
+          city: formatForDb(updatedInfo.address?.city),
           isoCode:
             updatedInfo.address?.isoCode !== undefined &&
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
         },
-        profilePic: updatedInfo.profilePic,
+        profilePic: formatForDb(updatedInfo.profilePic),
         profession: updatedInfo.profession,
-        description: updatedInfo.description,
+        description: formatForDb(updatedInfo.description),
       },
     },
     optimisticResponse: {
@@ -120,24 +120,23 @@ export const BasicInfoEdit = ({
         id: updatedInfo.id,
         gender: updatedInfo.gender,
         name: {
-          firstName: updatedInfo.name?.firstName,
-          middleName: updatedInfo.name?.middleName,
-          lastName: updatedInfo.name?.lastName,
+          firstName: formatForDb(updatedInfo.name?.firstName),
+          middleName: formatForDb(updatedInfo.name?.middleName),
+          lastName: formatForDb(updatedInfo.name?.lastName),
           __typename: 'FullName',
         },
         address: {
-          city: updatedInfo.address?.city,
+          city: formatForDb(updatedInfo.address?.city),
           isoCode:
             updatedInfo.address?.isoCode !== undefined &&
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
           __typename: 'Address',
         },
-        profilePic: updatedInfo.profilePic,
+        profilePic: formatForDb(updatedInfo.profilePic),
         profession: updatedInfo.profession,
-        description: updatedInfo.description,
+        description: formatForDb(updatedInfo.description),
         __typename: 'Talent',
       },
     },
@@ -164,6 +163,7 @@ export const BasicInfoEdit = ({
           value={updatedInfo.name?.firstName}
           setValue={setUpdatedInfo}
           fullWidth={false}
+          trim={true}
         />
         <InputField
           label={t('fullName.middleName')}
@@ -192,6 +192,7 @@ export const BasicInfoEdit = ({
         propName="profilePic"
         value={updatedInfo.profilePic}
         setValue={setUpdatedInfo}
+        trim={true}
       />
       <Box component="div">
         <InputField
@@ -200,6 +201,7 @@ export const BasicInfoEdit = ({
           value={updatedInfo.address?.city}
           setValue={setUpdatedInfo}
           fullWidth={false}
+          trim={true}
         />
         <CountrySelector
           t={t}
@@ -242,11 +244,16 @@ export const BasicInfoEditEmployer = ({
           lastName: updatedInfo.name?.lastName,
         },
         address: {
+          //   isoCode:
+          //   updatedInfo.address?.isoCode !== undefined &&
+          //   updatedInfo.address.isoCode !== ''
+          //     ? updatedInfo.address.isoCode
+          //     : null,
+          // __typename: 'Address',
           city: updatedInfo.address?.city,
           isoCode:
             updatedInfo.address?.isoCode !== undefined &&
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
         },
@@ -271,8 +278,7 @@ export const BasicInfoEditEmployer = ({
           city: updatedInfo.address?.city,
           isoCode:
             updatedInfo.address?.isoCode !== undefined &&
-            updatedInfo.address?.isoCode &&
-            updatedInfo.address.isoCode !== 'NONE'
+            updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
           __typename: 'Address',
@@ -353,6 +359,7 @@ export const BasicInfoEditEmployer = ({
       </Box>
       <InputField
         label={t('description')}
+        placeholder={t('components.basicInfoEdit.description.placeholder')}
         propName="description"
         value={updatedInfo.description}
         setValue={setUpdatedInfo}

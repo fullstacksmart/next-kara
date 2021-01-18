@@ -8,13 +8,13 @@ import { computeNestedValue } from '../../lib/utils/arrays';
 export interface CountrySelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
   propName?: string | string[];
-  defaultValue?: IsoCode | 'NONE';
+  value?: IsoCode | '';
   updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
 }
 
 const CountrySelector = ({
   t,
-  defaultValue = 'NONE',
+  value,
   updateFunction,
   propName = ['address', 'isoCode'],
   ...props
@@ -23,16 +23,13 @@ const CountrySelector = ({
   const propNameArray = Array.isArray(propName) ? propName : [propName];
 
   const handleChange = (value: string | undefined): void => {
-    if (value !== undefined) {
-      const newAddress: IsoCode | 'NONE' =
-        value !== '' ? (value as IsoCode) : 'NONE';
-      updateFunction((oldValues) => {
-        return {
-          ...oldValues,
-          ...computeNestedValue(oldValues, propNameArray, newAddress),
-        };
-      });
-    }
+    const newAddress: IsoCode | '' = value ? (value as IsoCode) : '';
+    updateFunction((oldValues) => {
+      return {
+        ...oldValues,
+        ...computeNestedValue(oldValues, propNameArray, newAddress),
+      };
+    });
   };
 
   const options = isoCodes.map((code) => {
@@ -42,12 +39,12 @@ const CountrySelector = ({
     };
   });
 
-  const enrichedOptions = [{ value: 'NONE', label: '' }, ...options];
+  const enrichedOptions = [{ value: '', label: '' }, ...options];
 
   return (
     <OptionsSelector
       {...props}
-      defaultValue={defaultValue}
+      value={value || ''}
       options={enrichedOptions}
       setUpdate={handleChange}
       inputLabelId="country-selector-label"
