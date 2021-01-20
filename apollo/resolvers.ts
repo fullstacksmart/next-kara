@@ -50,6 +50,7 @@ const resolvers = {
         id: employer.id,
         name: employer.name,
         companyName: employer.companyName,
+        industry: employer.industry,
         fullName: helpers.getFullName(employer),
         gender: employer.gender,
         profilePic: employer.profilePic,

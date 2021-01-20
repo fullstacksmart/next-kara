@@ -79,7 +79,7 @@ export const BasicInfo = ({
             </Typography>
             <Typography variant="h6">{basicInfoEmployer.website}</Typography>
             <Typography variant="h6">
-              Representative - {basicInfoEmployer.fullName}
+              Representated by {basicInfoEmployer.fullName}
             </Typography>
           </div>
         </div>

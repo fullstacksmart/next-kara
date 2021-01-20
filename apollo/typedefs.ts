@@ -69,6 +69,40 @@ const typeDefs = gql`
     OTHER
   }
 
+  enum Industry {
+    CARE
+    MEDICINE
+    PERSONNEL_CONSULTING
+    TECHNOLOGY
+  }
+
+  enum CARE {
+    HOSPITAL
+    NURSING_HOME
+    OUTPATIEN_CARE_SERVICE
+    REHAB
+    PRACTICE
+  }
+
+  enum MEDICINE {
+    HOSPITAL
+    DOCTORS_OFFICE
+    MEDICAL_RESEARCH_INSTITUTE
+    SANATORIUM
+  }
+
+  enum PERSONNEL_CONSULTING {
+    PERSONNEL_PLACEMENT
+    LANGUAGE_SCHOOL
+    MIGRATION_LAW
+    LABOR_LAW
+    OTHERS
+  }
+
+  enum TECHNOLOGY {
+    OTHER
+  }
+
   interface User {
     id: ID!
     name: FullName!
@@ -142,6 +176,7 @@ const typeDefs = gql`
   type Employer implements User {
     id: ID!
     companyName: String!
+    industry: Industry!
     email: String!
     password: String!
     gender: Gender!
@@ -159,6 +194,7 @@ const typeDefs = gql`
     id: ID!
     gender: Gender!
     companyName: String
+    industry: Industry!
     name: FullName!
     fullName: String
     profilePic: String
@@ -270,6 +306,7 @@ const typeDefs = gql`
     id: ID!
     name: NameInput
     companyName: String
+    industry: Industry
     website: String
     gender: Gender
     address: AddressInput

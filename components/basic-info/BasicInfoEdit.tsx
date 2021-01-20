@@ -7,6 +7,7 @@ import { formatForDb } from '../../lib/utils/strings';
 import CountrySelector from '../country-selector/CountrySelector';
 import { EditPopup } from '../edit-popup/EditPopup';
 import { GenderSelector } from '../gender-selector/GenderSelector';
+import { IndustrySelector } from '../industry-selector/IndustrySelector';
 import InputField from '../input-field/InputField';
 import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 
@@ -45,6 +46,7 @@ const UPDATE_EMPLOYER = gql`
       basicInfoEmployer {
         id
         companyName
+        industry
         name {
           firstName
           middleName
@@ -90,7 +92,6 @@ export const BasicInfoEdit = ({
     basicInfo,
   );
 
-  console.log(basicInfo);
   const [mutate] = useMutation(UPDATE_TALENT, {
     variables: {
       input: {
@@ -230,7 +231,6 @@ export const BasicInfoEditEmployer = ({
   const [updatedInfo, setUpdatedInfo] = useState<Partial<EmployerUpdate>>(
     basicInfoEmployer,
   );
-  console.log(basicInfoEmployer);
 
   const [mutateEmployer] = useMutation(UPDATE_EMPLOYER, {
     variables: {
@@ -238,28 +238,23 @@ export const BasicInfoEditEmployer = ({
         id: updatedInfo.id,
         gender: updatedInfo.gender,
         companyName: updatedInfo.companyName,
+        industry: updatedInfo.industry,
         name: {
-          firstName: updatedInfo.name?.firstName,
-          middleName: updatedInfo.name?.middleName,
-          lastName: updatedInfo.name?.lastName,
+          firstName: formatForDb(updatedInfo.name?.firstName),
+          middleName: formatForDb(updatedInfo.name?.middleName),
+          lastName: formatForDb(updatedInfo.name?.lastName),
         },
         address: {
-          //   isoCode:
-          //   updatedInfo.address?.isoCode !== undefined &&
-          //   updatedInfo.address.isoCode !== ''
-          //     ? updatedInfo.address.isoCode
-          //     : null,
-          // __typename: 'Address',
-          city: updatedInfo.address?.city,
+          city: formatForDb(updatedInfo.address?.city),
           isoCode:
             updatedInfo.address?.isoCode !== undefined &&
             updatedInfo.address.isoCode !== ''
               ? updatedInfo.address.isoCode
               : null,
         },
-        profilePic: updatedInfo.profilePic,
+        profilePic: formatForDb(updatedInfo.profilePic),
         website: updatedInfo.website,
-        description: updatedInfo.description,
+        description: formatForDb(updatedInfo.description),
       },
     },
     optimisticResponse: {
@@ -268,14 +263,15 @@ export const BasicInfoEditEmployer = ({
         id: updatedInfo.id,
         gender: updatedInfo.gender,
         companyName: updatedInfo.companyName,
+        industry: updatedInfo.industry,
         name: {
-          firstName: updatedInfo.name?.firstName,
-          middleName: updatedInfo.name?.middleName,
-          lastName: updatedInfo.name?.lastName,
+          firstName: formatForDb(updatedInfo.name?.firstName),
+          middleName: formatForDb(updatedInfo.name?.middleName),
+          lastName: formatForDb(updatedInfo.name?.lastName),
           __typename: 'FullName',
         },
         address: {
-          city: updatedInfo.address?.city,
+          city: formatForDb(updatedInfo.address?.city),
           isoCode:
             updatedInfo.address?.isoCode !== undefined &&
             updatedInfo.address.isoCode !== ''
@@ -283,9 +279,9 @@ export const BasicInfoEditEmployer = ({
               : null,
           __typename: 'Address',
         },
-        profilePic: updatedInfo.profilePic,
+        profilePic: formatForDb(updatedInfo.profilePic),
         website: updatedInfo.website,
-        description: updatedInfo.description,
+        description: formatForDb(updatedInfo.description),
         __typename: 'Employer',
       },
     },
@@ -334,6 +330,17 @@ export const BasicInfoEditEmployer = ({
         label={t('companyName')}
         propName="companyName"
         value={updatedInfo.companyName}
+        setValue={setUpdatedInfo}
+      />
+      <IndustrySelector
+        value={basicInfoEmployer.industry}
+        updateFunction={setUpdatedInfo}
+        t={t}
+      />
+      <InputField
+        label={t('website')}
+        propName="website"
+        value={updatedInfo.website}
         setValue={setUpdatedInfo}
       />
       <InputField

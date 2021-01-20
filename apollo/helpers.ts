@@ -296,15 +296,9 @@ export const isBasicInfoEmployerComplete = (employer: Employer): boolean => {
 
 export const getFullName = (user: Talent | Employer): string => {
   return `${user.name.firstName} ${
-    user.name.middleName ? user.name.middleName + '' : ''
+    user.name.middleName ? user.name.middleName + ' ' : ''
   }${user.name.lastName}`;
 };
-
-// export const getFullNameEmployer = (employer: Employer): string => {
-//   return `${employer.name.firstName} ${
-//     employer.name.middleName ? employer.name.middleName + ' ' : ''
-//   }${employer.name.lastName}`;
-// };
 
 export const isExperienceComplete = async (
   experience: Experience,
