@@ -1,9 +1,7 @@
 import { TFunction } from 'next-i18next';
 import { Experience, Gender } from '../../lib/types';
-import { CheckedTitle } from '../checked-title/CheckedTitle';
-import { Section } from '../section/Section';
+import { CheckedTitle, ItemDivider, Section } from '../';
 import { ExperienceItem } from '../experience-item/ExperienceItem';
-import { ItemDivider } from '../item-divider/ItemDivider';
 import { sortByFrom } from '../../lib/utils/arrays';
 
 export interface ExperienceSectionProps {

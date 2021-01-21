@@ -1,7 +1,5 @@
 import { Typography } from '@material-ui/core';
-import { SectionItem } from '../section-item/SectionItem';
-import { Section } from '../section/Section';
-import { CheckedTitle } from '../checked-title/CheckedTitle';
+import { Section, SectionItem, CheckedTitle } from '../';
 import styles from './BasicInfo.module.css';
 import { Talent } from '../../lib/types';
 import { TFunction } from 'next-i18next';

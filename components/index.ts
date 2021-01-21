@@ -10,9 +10,15 @@ import CountrySelector from './country-selector/CountrySelector';
 import { DatePicker } from './date-picker/DatePicker';
 import { BasicInfo, BasicInfoEdit } from './basic-info';
 import { Button } from './buttons';
+import { Section } from './section/Section';
+import { SectionItem } from './section-item/SectionItem';
+import { CheckedTitle } from './checked-title/CheckedTitle';
+import { ItemDivider } from './item-divider/ItemDivider';
 
 export {
   Button,
+  ItemDivider,
+  CheckedTitle,
   ProfessionRadio,
   GenderSelector,
   FieldDisplay,
@@ -26,4 +32,6 @@ export {
   DatePicker,
   BasicInfo,
   BasicInfoEdit,
+  Section,
+  SectionItem,
 };
