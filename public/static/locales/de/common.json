@@ -31,6 +31,9 @@
     "genderSelector": {
       "label": "Anrede"
     },
+    "languageSection": {
+      "title": "Sprachkenntnisse"
+    },
     "layout": {
       "backHome": "zurück zur Homepage"
     },
@@ -89,6 +92,14 @@
     "institution": "Schule / Institution",
     "position": "Position"
   },
+  "language": {
+    "level": {
+      "BASIC": "Anfänger (bis A2)",
+      "EXPERT": "Verhandlungssicher (bis C1)",
+      "MASTER": "Muttersprache",
+      "PROFICIENT": "Fortgeschritten (bis B2)"
+    }
+  },
   "pages": {
     "profile": {
       "greeting": "Schön, dass Du hier bist"
@@ -116,6 +127,14 @@
   "repeatPassword": "Passwort wiederholen",
   "signin": "anmelden",
   "signup": "registrieren",
+  "skill": {
+    "level": {
+      "BASIC": "Grundkenntnisse",
+      "EXPERT": "fortgeschritten",
+      "MASTER": "Experte",
+      "PROFICIENT": "kompetent"
+    }
+  },
   "type": {
     "employer": "Arbeitgeber",
     "talent": "Talent"

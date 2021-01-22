@@ -19,6 +19,7 @@ import {
   Button,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
+import { LanguageSection } from '../../../components/languages-section/LanguagesSection';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -239,6 +240,13 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         qualifications={qualifications}
         onClose={handleModalClose}
         open={modal.type === ModalType.QUALIFICATION}
+      />
+      <LanguageSection
+        t={t}
+        languages={[
+          { name: 'German', level: 'MASTER' },
+          { name: 'Serbian', level: 'EXPERT' },
+        ]}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

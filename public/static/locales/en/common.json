@@ -31,6 +31,9 @@
     "genderSelector": {
       "label": "Designation"
     },
+    "languageSection": {
+      "title": "Language Skills"
+    },
     "layout": {
       "backHome": "take me back home"
     },
@@ -89,6 +92,14 @@
     "institution": "School / Institution",
     "position": "Position"
   },
+  "language": {
+    "level": {
+      "BASIC": "basic (A)",
+      "EXPERT": "proficient (C1)",
+      "MASTER": "mother tongue",
+      "PROFICIENT": "independet (B)"
+    }
+  },
   "pages": {
     "profile": {
       "greeting": "Great that you're here"
@@ -122,6 +133,14 @@
   "repeatPassword": "please reenter password",
   "signin": "sign in",
   "signup": "sign up",
+  "skill": {
+    "level": {
+      "BASIC": "basic",
+      "EXPERT": "expert",
+      "MASTER": "master",
+      "PROFICIENT": "intermediate"
+    }
+  },
   "type": {
     "employer": "Employer",
     "talent": "Talent"

@@ -8,13 +8,7 @@ export type Profession =
 
 type ApprobationStatus = 'ONGOING' | 'APPROVED' | 'DENIED';
 
-type LanguageSkillLevel =
-  | 'BASIC'
-  | 'PROFICIENT'
-  | 'BUSINESS_LEVEL'
-  | 'MOTHER_TONGUE';
-
-type OtherSKillLevel = 'BASIC' | 'PROFICIENT' | 'EXPERT' | 'MASTER';
+type SkillLevel = 'BASIC' | 'PROFICIENT' | 'EXPERT' | 'MASTER';
 
 type FederalState =
   | 'BW'
@@ -72,8 +66,8 @@ export interface Talent extends User {
   qualifications: Qualification[];
   approbations: Approbation[];
   documents: Document[];
-  languages: LanguageSkill[];
-  otherSkills: OtherSkill[];
+  languages: Skill[];
+  otherSkills: Skill[];
   isBasicInfoComplete: boolean;
 }
 
@@ -87,8 +81,8 @@ export interface TalentEntry {
   qualifications: QualificationEntry[];
   approbations: Approbation[];
   documents: Document[];
-  languages: LanguageSkill[];
-  otherSkills: OtherSkill[];
+  languages: Skill[];
+  otherSkills: Skill[];
   isBasicInfoComplete: boolean;
 }
 
@@ -145,15 +139,10 @@ interface Document extends TalentAsset {
   url: string;
 }
 
-interface LanguageSkill extends TalentAsset {
-  language: string;
-  level: LanguageSkillLevel;
-}
-
-interface OtherSkill extends TalentAsset {
+export interface Skill {
   name: string;
-  level: OtherSKillLevel;
-  description: string;
+  level: SkillLevel;
+  description?: string;
 }
 
 export interface BasicInfoEntry {
