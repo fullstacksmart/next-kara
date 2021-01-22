@@ -35,14 +35,7 @@ const typeDefs = gql`
     DENIED
   }
 
-  enum LanguageSkillLevel {
-    BASIC
-    PROFICIENT
-    BUSINESS_LEVEL
-    MOTHER_TONGUE
-  }
-
-  enum OtherSKillLevel {
+  enum SkillLevel {
     BASIC
     PROFICIENT
     EXPERT
@@ -176,16 +169,17 @@ const typeDefs = gql`
   }
 
   type LanguageSkill {
+    id: ID!
     talent: Talent!
-    language: String
-    level: LanguageSkillLevel
+    name: String
+    level: SkillLevel
   }
 
   type OtherSkill {
     id: ID!
     talent: Talent!
     name: String
-    level: OtherSKillLevel
+    level: SkillLevel
     description: String
   }
   input NameInput {

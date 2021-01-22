@@ -105,58 +105,58 @@
       "name": "LKH"
     },
     {
-      "name": "LKH",
       "address": {
         "city": "Belgrad",
         "isoCode": null
       },
       "createdAt": 1610643359131,
-      "id": "rZzLKNGueaVtP124MYE0v"
+      "id": "rZzLKNGueaVtP124MYE0v",
+      "name": "LKH"
     },
     {
-      "name": "Hospitalo",
       "address": {
         "city": "Graz",
         "isoCode": "AUT"
       },
       "createdAt": 1610644171007,
-      "id": "ShERHi9MStQfCsYHbkq9X"
+      "id": "ShERHi9MStQfCsYHbkq9X",
+      "name": "Hospitalo"
     },
     {
-      "name": "Hospitalo",
       "address": {
         "city": "Grazio",
         "isoCode": "AUT"
       },
       "createdAt": 1610644219508,
-      "id": "koa4sOaC7m2PwcQ86cswO"
+      "id": "koa4sOaC7m2PwcQ86cswO",
+      "name": "Hospitalo"
     },
     {
-      "name": "LKH",
       "address": {
         "city": "",
         "isoCode": "SRB"
       },
       "createdAt": 1610644567999,
-      "id": "GmqgpnkLFpnwaE9-sHo0Z"
+      "id": "GmqgpnkLFpnwaE9-sHo0Z",
+      "name": "LKH"
     },
     {
-      "name": "LKH",
       "address": {
         "city": "Belgrad",
         "isoCode": "AUT"
       },
       "createdAt": 1610644678998,
-      "id": "K0vrVcy8XRCxGzv9fV2Zr"
+      "id": "K0vrVcy8XRCxGzv9fV2Zr",
+      "name": "LKH"
     },
     {
-      "name": "Srednja medicinska škola Milutin Milanković",
       "address": {
         "city": "Belgrade",
         "isoCode": "AUT"
       },
       "createdAt": 1610646190496,
-      "id": "S3sQORUrJuLhn_A0RKZPe"
+      "id": "S3sQORUrJuLhn_A0RKZPe",
+      "name": "Srednja medicinska škola Milutin Milanković"
     }
   ],
   "talents": [
@@ -215,14 +215,14 @@
       "languages": [
         {
           "id": "1",
-          "language": "Serbian",
-          "level": "MOTHER_TONGUE",
+          "level": "MASTER",
+          "name": "Serbian",
           "talent": "yasbiuycdbucoiuscboiucsiousc!@"
         },
         {
           "id": "2",
-          "language": "German",
           "level": "BASIC",
+          "name": "German",
           "talent": "yasbiuycdbucoiuscboiucsiousc!@"
         }
       ],

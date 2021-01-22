@@ -6,6 +6,7 @@ import {
   ModalType,
   PageProps,
   Qualification,
+  Skill,
 } from '../../../lib/types';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
@@ -160,6 +161,11 @@ const GET_ALL_INFO = gql`
         description
         isComplete
       }
+      languages {
+        id
+        name
+        level
+      }
     }
   }
 `;
@@ -183,6 +189,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const basicInfo = data?.getTalentById.basicInfo;
   const experiences: Experience[] = data.getTalentById.experiences;
   const qualifications: Qualification[] = data.getTalentById.qualifications;
+  const languages: Skill[] = data.getTalentById.languages;
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -241,13 +248,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         onClose={handleModalClose}
         open={modal.type === ModalType.QUALIFICATION}
       />
-      <LanguageSection
-        t={t}
-        languages={[
-          { name: 'German', level: 'MASTER' },
-          { name: 'Serbian', level: 'EXPERT' },
-        ]}
-      />
+      <LanguageSection t={t} languages={languages} />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );

@@ -1,4 +1,4 @@
-import { Experience, Qualification } from '../types';
+import { Experience, Qualification, Skill } from '../types';
 import { BaseEntity } from '../types/common';
 
 export const filterById = (
@@ -42,4 +42,10 @@ export const sortByFrom = (
   if (Number.isNaN(fromTimestampA)) return -1;
   if (Number.isNaN(fromTimestampB)) return 1;
   return fromTimestampB - fromTimestampA;
+};
+
+export const sortSkill = (a: Skill, b: Skill): number => {
+  if (a.level > b.level) return -1;
+  if (a.level < b.level) return 1;
+  return a.name < b.name ? -1 : 1;
 };
