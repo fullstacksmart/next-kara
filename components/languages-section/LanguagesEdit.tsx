@@ -5,10 +5,12 @@ import { SkillEdit } from '../skill-edit/SkillEdit';
 interface LanguagesEditProps extends DialogProps, ComponentWithT {
   onClose: () => void;
   languages: Skill[];
+  talentId: string;
 }
 
 export const LanguagesEdit = ({
   languages,
+  talentId,
   ...props
 }: LanguagesEditProps): React.ReactElement => {
   return (
@@ -17,6 +19,7 @@ export const LanguagesEdit = ({
       skills={languages}
       type={'language'}
       formId="languages-form"
+      talentId={talentId}
     />
   );
 };

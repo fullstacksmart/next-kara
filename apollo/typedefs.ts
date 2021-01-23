@@ -229,6 +229,13 @@ const typeDefs = gql`
     profilePic: String
     profession: Profession
     description: String
+    languages: [LanguageSkillInput]
+  }
+  input LanguageSkillInput {
+    id: ID!
+    talent: ID
+    name: String
+    level: SkillLevel
   }
 
   input NewExperience {

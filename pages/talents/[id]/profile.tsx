@@ -259,6 +259,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         languages={languages}
         onClose={handleModalClose}
         open={modal.type === ModalType.LANGUAGE}
+        talentId={basicInfo.id}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
