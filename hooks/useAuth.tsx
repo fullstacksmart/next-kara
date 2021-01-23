@@ -5,7 +5,7 @@ import {
   createContext,
   ReactNode,
  } from 'react';
- import { auth } from '../components/firebase';
+ import firebase, { auth } from '../components/firebase';
 
 type AuthContext = {
   user?: {
@@ -31,10 +31,19 @@ export const useAuth: any = () => {
 const useAuthProvider = () => {
   const [user, setUser] = useState({email: '', password: ''});
 
+  const handleAuthStateChanged = (user: any) => {
+    console.log(user.uid)
+    setUser(user);
+   };
+
+   useEffect(() => {
+    const unsub = auth.onAuthStateChanged(handleAuthStateChanged);
+
+    return () => unsub();
+   }, []);
+
   const signup = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password)
-      .then((response) => response)
-      .catch((error) => console.error(error))
   };
 
   const setContextUser = (user: AuthContext['user']) => {
