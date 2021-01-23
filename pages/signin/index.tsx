@@ -7,8 +7,7 @@ import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from '../../i18n';
 import firebase from '../../components/firebase';
 import styles from './Signin.module.css';
-
-console.log(firebase.auth().currentUser)
+import { useAuth } from '../../hooks/useAuth';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
@@ -20,18 +19,17 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     password: '',
     type: 'TALENT',
   });
-  const handleSubmit = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(formValues.email, formValues.password)
-      .then((response) => {
-        console.log(response.user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(error);
+  const auth = useAuth();
+
+  console.log(auth.user);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formValues.email && formValues.password) {
+      auth.signin(formValues.email, formValues.password).then(() => {
+        console.log('after signin', auth.user);
       });
+    }
   };
 
   return (

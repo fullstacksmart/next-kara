@@ -22,8 +22,6 @@ const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
     addUser(input: $input) {
       id
-      email
-      password
     }
   }
 `;
@@ -87,7 +85,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   useEffect(() => {
-    console.log('authContextUser: ', auth.user);
     if (newUser.data) {
       console.log('new User:', newUser); //eslint-disable-line no-console
     }
