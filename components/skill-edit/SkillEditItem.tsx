@@ -24,6 +24,12 @@ export const SkillEditItem = ({
           value={skills[id].name}
           setValue={setSkill}
         />
+        <InputField
+          label={t('labels.language.level')}
+          propName={[id, 'level']}
+          value={skills[id].level}
+          setValue={setSkill}
+        />
       </Box>
     </>
   );

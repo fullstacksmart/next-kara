@@ -8,7 +8,7 @@ export type Profession =
 
 type ApprobationStatus = 'ONGOING' | 'APPROVED' | 'DENIED';
 
-type SkillLevel = 'BASIC' | 'PROFICIENT' | 'EXPERT' | 'MASTER';
+export type SkillLevel = 'BASIC' | 'PROFICIENT' | 'EXPERT' | 'MASTER';
 
 type FederalState =
   | 'BW'
