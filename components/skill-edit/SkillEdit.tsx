@@ -1,4 +1,3 @@
-import { MutationFunction } from '@apollo/client';
 import { DialogProps } from '@material-ui/core';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ComponentWithT, Skill } from '../../lib/types';
