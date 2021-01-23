@@ -6,13 +6,14 @@ import {
   DialogContent,
   DialogActions,
 } from '@material-ui/core';
-import { TFunction } from 'next-i18next';
 import { PropsWithChildren } from 'react';
 import { Button } from '../buttons';
 import { nanoid } from 'nanoid';
+import { ComponentWithT } from '../../lib/types';
 
-interface EditPopupProps extends PropsWithChildren<DialogProps> {
-  t: TFunction;
+export interface EditPopupProps
+  extends PropsWithChildren<DialogProps>,
+    ComponentWithT {
   title: string;
   onClose: () => void;
   formId: string;

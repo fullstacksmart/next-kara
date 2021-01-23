@@ -2,7 +2,7 @@ import { TextField, TextFieldProps } from '@material-ui/core';
 import { Dispatch, SetStateAction } from 'react';
 import { computeNestedValue } from '../../lib/utils/arrays';
 
-type InputFieldProps = TextFieldProps & {
+type InputFieldProps = Partial<TextFieldProps> & {
   setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
   propName: string | string[];
   trim?: boolean;

@@ -48,6 +48,14 @@
     },
     "qualificationSection": {
       "title": "Qualifications"
+    },
+    "skillEdit": {
+      "language": {
+        "title": "Bearbeite Deine Sprachkenntnisse"
+      },
+      "skill": {
+        "title": "Bearbeite Deine Fähigkeiten"
+      }
     }
   },
   "description": "About Me",
@@ -90,6 +98,10 @@
     "experienceDescription": "Line of Work / Description",
     "fieldOfEducation": "Field of Education",
     "institution": "School / Institution",
+    "language": {
+      "level": "level",
+      "name": "language"
+    },
     "position": "Position"
   },
   "language": {

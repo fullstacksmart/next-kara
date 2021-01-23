@@ -6,11 +6,13 @@ import { SkillItem } from '../skill-item/SkillItem';
 
 export interface LanguageSectionProps extends ComponentWithT {
   languages: Skill[];
+  handleEdit: () => void;
 }
 
 export const LanguageSection = ({
   t,
   languages,
+  handleEdit,
 }: LanguageSectionProps): React.ReactElement => {
   const languageItems = languages
     .slice()
@@ -18,9 +20,6 @@ export const LanguageSection = ({
     .map((language) => (
       <SkillItem key={language.name} skill={language} t={t} type="language" />
     ));
-  const handleEdit = (): void => {
-    console.log('edit languages');
-  };
   return (
     <Section>
       <SectionItem handleEdit={handleEdit}>
