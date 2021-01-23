@@ -5,14 +5,16 @@ import {
   Typography,
   Box,
 } from '@material-ui/core';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { ComponentWithT, SkillLevel } from '../../lib/types';
+import { computeNestedValue } from '../../lib/utils/arrays';
 
 interface LevelSliderProps extends SliderProps, ComponentWithT {
   type: 'language' | 'skill';
-  setValue?: (val: SkillLevel) => void;
+  setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
   label: string;
   input?: SkillLevel;
+  propName: string | string[];
 }
 const levels: SkillLevel[] = ['BASIC', 'PROFICIENT', 'EXPERT', 'MASTER'];
 const useStyles = makeStyles({
@@ -33,18 +35,20 @@ export const LevelSlider = ({
   type,
   setValue,
   label,
+  propName,
   ...props
 }: LevelSliderProps): React.ReactElement => {
+  let propArray: string[];
+  if (Array.isArray(propName)) {
+    propArray = propName;
+  } else {
+    propArray = [propName];
+  }
+
   const marks = levels.map((level, idx) => ({
     value: idx,
     label: t(`${type}.level.${level}`),
   }));
-  const handleChange = (
-    event: React.ChangeEvent<Record<string, unknown>>,
-    value: number | number[],
-  ): void => {
-    if (setValue) setValue(levels[value as number]);
-  };
 
   const classes = useStyles();
 
@@ -61,6 +65,19 @@ export const LevelSlider = ({
     }
     return '';
   };
+  const handleChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number | number[],
+  ): void => {
+    if (setValue) {
+      setValue((oldValues) => {
+        return {
+          ...oldValues,
+          ...computeNestedValue(oldValues, propArray, levels[value as number]),
+        };
+      });
+    }
+  };
 
   return (
     <Box component="div">
@@ -71,7 +88,7 @@ export const LevelSlider = ({
         valueLabelDisplay={type === 'language' ? 'auto' : 'off'}
         valueLabelFormat={getText}
         className={classes.slider}
-        defaultValue={input ? levels.indexOf(input) : 0}
+        value={input ? levels.indexOf(input) : 0}
         max={marks.length - 1}
         step={1}
         marks={marks}

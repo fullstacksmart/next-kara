@@ -17,7 +17,6 @@ export const LanguagesEdit = ({
       {...props}
       skills={languages}
       type={'language'}
-      {...props}
       formId="languages-form"
       reset={handleReset}
     />

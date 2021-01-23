@@ -21,6 +21,8 @@ export const SkillEdit = ({
   type = 'skill',
   ...props
 }: SkillEditProps & ComponentWithT): React.ReactElement => {
+  const handleSave = () => console.log(updatedSkills);
+
   const title = t(`components.skillEdit.${type}.title`);
   let skillsObj = {};
   skills.forEach((skill) => (skillsObj = { ...skillsObj, [skill.id]: skill }));
@@ -38,7 +40,7 @@ export const SkillEdit = ({
     />
   ));
   return (
-    <EditPopup {...props} title={title} t={t}>
+    <EditPopup {...props} title={title} t={t} onSave={handleSave}>
       {editableSkills}
     </EditPopup>
   );

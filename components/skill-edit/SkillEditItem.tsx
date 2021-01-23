@@ -18,6 +18,15 @@ export const SkillEditItem = ({
   t,
   type = 'skill',
 }: SkillEditItemProps): React.ReactElement => {
+  const description = skills[id].description ? (
+    <InputField
+      label={t('labels.language.name')}
+      propName={[id, 'description']}
+      value={skills[id].description}
+      setValue={setSkill}
+      multiline
+    />
+  ) : null;
   return (
     <>
       <Box component="div">
@@ -31,9 +40,12 @@ export const SkillEditItem = ({
           t={t}
           type={type}
           label={t('labels.language.level')}
-          setValue={(value) => console.log(value)}
+          propName={[id, 'level']}
+          setValue={setSkill}
+          input={skills[id].level}
         />
       </Box>
+      {description}
     </>
   );
 };
