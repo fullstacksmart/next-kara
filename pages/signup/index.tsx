@@ -63,7 +63,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> | null => {
     e.preventDefault();
-    console.log(formValues);
     if (formValues.email && formValues.password) {
       return firebase
         .auth()

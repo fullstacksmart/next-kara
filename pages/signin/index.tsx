@@ -8,6 +8,8 @@ import { withTranslation } from '../../i18n';
 import firebase from '../../components/firebase';
 import styles from './Signin.module.css';
 
+console.log(firebase.auth().currentUser)
+
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
     name: {

@@ -5,7 +5,7 @@ import initFirebase from '../../lib/auth/initFirebase';
 initFirebase();
 
 //can also define other stuff here:
-//const firebaseAuth = firebase.auth()
+export const auth = firebase.auth();
 //const now = firebase.firestore.Timestamp.now();
 //const storage = firebase.storage();
 
