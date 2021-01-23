@@ -10,9 +10,6 @@ interface SkillEditProps extends DialogProps {
   type: 'language' | 'skill';
   onClose: () => void;
   formId: string;
-  mutate?: MutationFunction;
-  reset: () => void;
-  onSave?: () => void;
 }
 
 export const SkillEdit = ({
@@ -27,6 +24,9 @@ export const SkillEdit = ({
   let skillsObj = {};
   skills.forEach((skill) => (skillsObj = { ...skillsObj, [skill.id]: skill }));
   const [updatedSkills, setUpdatedSkills] = useState(skillsObj);
+  const reset = (): void => {
+    setUpdatedSkills(skillsObj);
+  };
   const editableSkills = Object.keys(updatedSkills).map((id) => (
     <SkillEditItem
       skills={updatedSkills}
@@ -40,7 +40,7 @@ export const SkillEdit = ({
     />
   ));
   return (
-    <EditPopup {...props} title={title} t={t} onSave={handleSave}>
+    <EditPopup {...props} title={title} t={t} onSave={handleSave} reset={reset}>
       {editableSkills}
     </EditPopup>
   );

@@ -11,14 +11,12 @@ export const LanguagesEdit = ({
   languages,
   ...props
 }: LanguagesEditProps): React.ReactElement => {
-  const handleReset = () => console.log('reset');
   return (
     <SkillEdit
       {...props}
       skills={languages}
       type={'language'}
       formId="languages-form"
-      reset={handleReset}
     />
   );
 };
