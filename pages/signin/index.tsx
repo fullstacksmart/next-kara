@@ -5,7 +5,6 @@ import InputField from '../../components/input-field/InputField';
 import { useState } from 'react';
 import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from '../../i18n';
-import firebase from '../../components/firebase';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -26,9 +25,16 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      auth.signin(formValues.email, formValues.password).then(() => {
-        console.log('after signin', auth.user);
-      });
+      auth
+        .signin(formValues.email, formValues.password)
+        .then((user) => {
+          if (typeof user !== 'undefined') {
+            console.log('after signin', auth.user);
+          } else {
+            console.log('wrong email or password');
+          }
+        })
+        .catch((error) => console.error(error));
     }
   };
 

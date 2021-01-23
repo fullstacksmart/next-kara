@@ -10,12 +10,9 @@ import {
 type AuthContext = {
   user?: {
     id: string,
-  },
-  signup?: (email: any, password: any) => Promise<void>,
-  setContextUser?: (user: any) => void;
+  }
 }
 
- //signup: (email: any, password: any) => Promise<void | firebase.auth.UserCredential>; setContextUser: (user: any) => void; }
 const AuthContext = createContext({ user: {id: ''} });
 const { Provider } = AuthContext;
 export function AuthProvider(props: { children: ReactNode }): JSX.Element {
@@ -36,9 +33,9 @@ const useAuthProvider = () => {
    };
 
    useEffect(() => {
-    const unsub = auth.onAuthStateChanged(handleAuthStateChanged);
+    const subscription = auth.onAuthStateChanged(handleAuthStateChanged);
 
-    return () => unsub();
+    return () => subscription();
    }, []);
 
   const signup = (email: string, password: string) => {
@@ -50,7 +47,7 @@ const useAuthProvider = () => {
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
       console.log('usercredentials', userCredential.user)
-      if( userCredential.user) setUser({id: userCredential.user.uid})
+      if (userCredential.user) setUser({id: userCredential.user.uid})
       return userCredential.user;
       })
       .catch((error) => {
