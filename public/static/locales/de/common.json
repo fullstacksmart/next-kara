@@ -106,10 +106,10 @@
   },
   "language": {
     "level": {
-      "BASIC": "Grundkenntnisse (bis A2)",
-      "EXPERT": "Verhandlungssicher (bis C1)",
+      "BASIC": "Grundkenntnisse",
+      "EXPERT": "Verhandlungssicher",
       "MASTER": "Muttersprache",
-      "PROFICIENT": "Fortgeschritten (bis B2)"
+      "PROFICIENT": "Fortgeschritten"
     }
   },
   "pages": {

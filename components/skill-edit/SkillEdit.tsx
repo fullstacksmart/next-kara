@@ -34,6 +34,7 @@ export const SkillEdit = ({
       setSkill={
         setUpdatedSkills as Dispatch<SetStateAction<Record<string, unknown>>>
       }
+      type={type}
     />
   ));
   return (

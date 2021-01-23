@@ -2,10 +2,12 @@ import { Box } from '@material-ui/core';
 import { Dispatch, SetStateAction } from 'react';
 import { InputField } from '..';
 import { ComponentWithT, Skill } from '../../lib/types';
+import { LevelSlider } from '../level-slider/LevelSlider';
 
 interface SkillEditItemProps extends ComponentWithT {
   skills: Record<string, Skill>;
   id: string;
+  type?: 'language' | 'skill';
   setSkill: Dispatch<SetStateAction<Record<string, unknown>>>;
 }
 
@@ -14,6 +16,7 @@ export const SkillEditItem = ({
   id,
   setSkill,
   t,
+  type = 'skill',
 }: SkillEditItemProps): React.ReactElement => {
   return (
     <>
@@ -24,11 +27,11 @@ export const SkillEditItem = ({
           value={skills[id].name}
           setValue={setSkill}
         />
-        <InputField
+        <LevelSlider
+          t={t}
+          type={type}
           label={t('labels.language.level')}
-          propName={[id, 'level']}
-          value={skills[id].level}
-          setValue={setSkill}
+          setValue={(value) => console.log(value)}
         />
       </Box>
     </>
