@@ -34,14 +34,6 @@ export const SkillEdit = ({
   type = 'skill',
   ...props
 }: SkillEditProps & ComponentWithT): React.ReactElement => {
-  const handleSave = () =>
-    console.log({
-      input: {
-        id: talentId,
-        languages: Object.values(updatedSkills),
-      },
-    });
-
   const title = t(`components.skillEdit.${type}.title`);
   let skillsObj = {};
   skills.forEach((skill) => (skillsObj = { ...skillsObj, [skill.id]: skill }));
@@ -79,7 +71,6 @@ export const SkillEdit = ({
       {...props}
       title={title}
       t={t}
-      onSave={handleSave}
       reset={reset}
       mutate={mutate as MutationFunction}
     >

@@ -1,4 +1,3 @@
-import { BasicInfo } from '../../components';
 import { Experience, Qualification, Skill } from '../types';
 import { BaseEntity } from '../types/common';
 
