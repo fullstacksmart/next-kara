@@ -21,9 +21,11 @@ export interface EditPopupProps
   reset: () => void;
   onSave?: () => void;
   onDelete?: MutationFunction;
+  disabled?: boolean;
 }
 
 export const EditPopup = ({
+  disabled = false,
   t,
   title,
   children,
@@ -76,7 +78,7 @@ export const EditPopup = ({
       <DialogActions>
         {deleteButton}
         <Button onClick={handleClose}>{t('labels.buttons.cancel')}</Button>
-        <Button type="submit" form={formId}>
+        <Button type="submit" form={formId} disabled={disabled}>
           {t('labels.buttons.save')}
         </Button>
       </DialogActions>

@@ -1,10 +1,13 @@
 import { gql, MutationFunction } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import { DialogProps } from '@material-ui/core';
+import { DialogProps, makeStyles } from '@material-ui/core';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ComponentWithT, Skill } from '../../lib/types';
 import { EditPopup } from '../edit-popup/EditPopup';
 import { SkillEditItem } from './SkillEditItem';
+import { IconButton } from '@material-ui/core';
+import { AddCircleOutline } from '@material-ui/icons';
+import { nanoid } from 'nanoid';
 
 interface SkillEditProps extends DialogProps {
   skills: Skill[];
@@ -27,6 +30,16 @@ const UPDATE_LANGUAGES = gql`
   }
 `;
 
+const useStyle = makeStyles({
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    display: 'flex',
+  },
+  button: {
+    marginRight: '-2rem',
+  },
+});
+
 export const SkillEdit = ({
   t,
   skills,
@@ -34,6 +47,7 @@ export const SkillEdit = ({
   type = 'skill',
   ...props
 }: SkillEditProps & ComponentWithT): React.ReactElement => {
+  const classes = useStyle();
   const title = t(`components.skillEdit.${type}.title`);
   let skillsObj: Record<string, Skill> = {};
   skills.forEach((skill) => (skillsObj = { ...skillsObj, [skill.id]: skill }));
@@ -53,6 +67,17 @@ export const SkillEdit = ({
   const reset = (): void => {
     setUpdatedSkills(skillsObj);
   };
+
+  const handleAdd = (): void => {
+    const id = nanoid();
+    const newSkill: Skill = {
+      id,
+      name: '',
+      level: 'BASIC',
+    };
+    if (type === 'skill') newSkill.description = '';
+    setUpdatedSkills((prev) => ({ ...prev, [id]: newSkill }));
+  };
   const mutate = type === 'language' ? updateLanguages : null;
   const editableSkills = Object.values(updatedSkills)
     // .sort((a, b) => (a.name === '' ? 1 : a.name < b.name ? -1 : 1))
@@ -68,6 +93,9 @@ export const SkillEdit = ({
         type={type}
       />
     ));
+  const isComplete = (): boolean => {
+    return Object.values(updatedSkills).every((skill) => Boolean(skill.name));
+  };
   return (
     <EditPopup
       {...props}
@@ -75,8 +103,18 @@ export const SkillEdit = ({
       t={t}
       reset={reset}
       mutate={mutate as MutationFunction}
+      disabled={!isComplete()}
     >
       {editableSkills}
+      <div className={classes.buttonContainer}>
+        <IconButton
+          aria-label="add item"
+          onClick={handleAdd}
+          className={classes.button}
+        >
+          <AddCircleOutline />
+        </IconButton>
+      </div>
     </EditPopup>
   );
 };

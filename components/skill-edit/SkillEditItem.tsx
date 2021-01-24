@@ -18,15 +18,16 @@ export const SkillEditItem = ({
   t,
   type = 'skill',
 }: SkillEditItemProps): React.ReactElement => {
-  const description = skills[id].description ? (
-    <InputField
-      label={t('labels.language.name')}
-      propName={[id, 'description']}
-      value={skills[id].description}
-      setValue={setSkill}
-      multiline
-    />
-  ) : null;
+  const description =
+    skills[id].description !== undefined ? (
+      <InputField
+        label={t('labels.language.name')}
+        propName={[id, 'description']}
+        value={skills[id].description}
+        setValue={setSkill}
+        multiline
+      />
+    ) : null;
   return (
     <>
       <Box component="div">
