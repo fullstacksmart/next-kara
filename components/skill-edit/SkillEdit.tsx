@@ -55,7 +55,7 @@ export const SkillEdit = ({
   };
   const mutate = type === 'language' ? updateLanguages : null;
   const editableSkills = Object.values(updatedSkills)
-    .sort((a, b) => (a.name === '' ? 1 : a.name < b.name ? -1 : 1))
+    // .sort((a, b) => (a.name === '' ? 1 : a.name < b.name ? -1 : 1))
     .map((skill) => (
       <SkillEditItem
         skills={updatedSkills}
