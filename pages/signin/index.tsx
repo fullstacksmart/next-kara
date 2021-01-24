@@ -20,22 +20,21 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   });
   const auth = useAuth();
 
-  console.log(auth.user);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (formValues.email && formValues.password) {
-      auth
-        .signin(formValues.email, formValues.password)
-        .then((user) => {
-          if (typeof user !== 'undefined') {
-            console.log('after signin', auth.user);
-          } else {
-            console.log('wrong email or password');
-          }
-        })
-        .catch((error) => console.error(error));
-    }
+    auth
+      .signin(formValues.email, formValues.password)
+      .then((user: any) => {
+        if (typeof user !== 'undefined') {
+          console.log('current user: ', auth.user);
+        } else {
+          console.log(
+            'wrong email or password, current user still is: ',
+            auth.user,
+          );
+        }
+      })
+      .catch((error: Error) => console.error(error));
   };
 
   return (

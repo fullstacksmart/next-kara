@@ -97,7 +97,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
           });
         }
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         console.error(error);
       });
 >>>>>>> types for useAuth hook

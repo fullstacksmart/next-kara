@@ -12,9 +12,9 @@ const getIdToken = async (): Promise<any> => {
     return await auth.currentUser
       .getIdToken(true)
       .then((idToken) => idToken)
-      .catch((err) => console.error(err));
+      .catch((error) => console.error(error));
   } else {
-    return await Promise.resolve("no token");
+    return Promise.resolve("no token");
   }
 };
 

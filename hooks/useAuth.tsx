@@ -26,7 +26,7 @@ export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   return <Provider value={auth}>{props.children}</Provider>;
 }
 
-export const useAuth: unknown = () => {
+export const useAuth: any = () => {
   return useContext(AuthContext);
 };
 
@@ -42,7 +42,6 @@ const useAuthProvider = (): useAuthProviderReturnType => {
 
   useEffect(() => {
     const subscription = auth.onAuthStateChanged(handleAuthStateChanged);
-
     return () => subscription();
   }, []);
 
@@ -58,7 +57,7 @@ const useAuthProvider = (): useAuthProviderReturnType => {
         if (userCredential.user) setUser({ id: userCredential.user.uid });
         return userCredential.user;
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error(error);
       });
   };
