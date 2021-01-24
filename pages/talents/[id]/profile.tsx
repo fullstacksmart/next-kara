@@ -18,6 +18,7 @@ import {
   QualificationSection,
   QualificationEdit,
   Button,
+  OtherSkillsSection,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
 import { LanguageSection } from '../../../components/languages-section/LanguagesSection';
@@ -167,6 +168,12 @@ const GET_ALL_INFO = gql`
         name
         level
       }
+      otherSkills {
+        id
+        name
+        level
+        description
+      }
     }
   }
 `;
@@ -191,6 +198,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const experiences: Experience[] = data.getTalentById.experiences;
   const qualifications: Qualification[] = data.getTalentById.qualifications;
   const languages: Skill[] = data.getTalentById.languages;
+  const otherSkills: Skill[] = data.getTalentById.otherSkills;
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -260,6 +268,11 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         onClose={handleModalClose}
         open={modal.type === ModalType.LANGUAGE}
         talentId={basicInfo.id}
+      />
+      <OtherSkillsSection
+        t={t}
+        otherSkills={otherSkills}
+        handleEdit={() => setModal({ type: ModalType.OTHERSKILL })}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

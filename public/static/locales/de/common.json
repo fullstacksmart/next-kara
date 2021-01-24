@@ -34,6 +34,9 @@
     "languageSection": {
       "title": "Sprachkenntnisse"
     },
+    "otherSkillsSection": {
+      "title": "Weitere Fähigkeiten"
+    },
     "layout": {
       "backHome": "zurück zur Homepage"
     },

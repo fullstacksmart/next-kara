@@ -14,8 +14,10 @@ import { Section } from './section/Section';
 import { SectionItem } from './section-item/SectionItem';
 import { CheckedTitle } from './checked-title/CheckedTitle';
 import { ItemDivider } from './item-divider/ItemDivider';
+import { OtherSkillsSection } from './other-skills-section/OtherSkillsSection';
 
 export {
+  OtherSkillsSection,
   Button,
   ItemDivider,
   CheckedTitle,

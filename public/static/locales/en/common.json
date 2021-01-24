@@ -37,6 +37,9 @@
     "layout": {
       "backHome": "take me back home"
     },
+    "otherSkillsSection": {
+      "title": "Other Skills"
+    },
     "qualificationEdit": {
       "description": {
         "placeholder": "Bla di blub"

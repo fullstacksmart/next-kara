@@ -20,6 +20,8 @@ export enum ModalType {
   EXPERIENCE,
   QUALIFICATION,
   LANGUAGE,
+  OTHERSKILL,
+  APPROBATION,
 }
 
 export interface BaseEntity {
