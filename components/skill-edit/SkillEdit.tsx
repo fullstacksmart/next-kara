@@ -88,7 +88,7 @@ export const SkillEdit = ({
         t={t}
         key={skill.id}
         setSkill={
-          setUpdatedSkills as Dispatch<SetStateAction<Record<string, unknown>>>
+          setUpdatedSkills as Dispatch<SetStateAction<Record<string, Skill>>>
         }
         type={type}
       />
