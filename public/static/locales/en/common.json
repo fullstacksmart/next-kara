@@ -105,7 +105,12 @@
       "level": "level",
       "name": "language"
     },
-    "position": "Position"
+    "position": "Position",
+    "skill": {
+      "description": "Beschreibung",
+      "level": "Stufe",
+      "name": "Fähigkeit"
+    }
   },
   "language": {
     "level": {

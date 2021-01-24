@@ -29,6 +29,19 @@ const UPDATE_LANGUAGES = gql`
     }
   }
 `;
+const UPDATE_OTHER_SKILLS = gql`
+  mutation UpdateOtherSkills($input: TalentUpdate!) {
+    updateTalent(input: $input) {
+      id
+      otherSkills {
+        id
+        name
+        level
+        description
+      }
+    }
+  }
+`;
 
 const useStyle = makeStyles({
   buttonContainer: {
@@ -64,6 +77,19 @@ export const SkillEdit = ({
       },
     },
   });
+  const [updateOtherSkills] = useMutation(UPDATE_OTHER_SKILLS, {
+    variables: {
+      input: {
+        id: talentId,
+        otherSkills: Object.values(updatedSkills).map((item) => ({
+          id: item.id,
+          name: item.name,
+          level: item.level,
+          description: item.description || null,
+        })),
+      },
+    },
+  });
   const reset = (): void => {
     setUpdatedSkills(skillsObj);
   };
@@ -78,7 +104,7 @@ export const SkillEdit = ({
     if (type === 'skill') newSkill.description = '';
     setUpdatedSkills((prev) => ({ ...prev, [id]: newSkill }));
   };
-  const mutate = type === 'language' ? updateLanguages : null;
+  const mutate = type === 'language' ? updateLanguages : updateOtherSkills;
   const editableSkills = Object.values(updatedSkills)
     // .sort((a, b) => (a.name === '' ? 1 : a.name < b.name ? -1 : 1))
     .map((skill) => (

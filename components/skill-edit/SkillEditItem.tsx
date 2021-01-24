@@ -39,7 +39,7 @@ export const SkillEditItem = ({
   const description =
     skills[id].description !== undefined ? (
       <InputField
-        label={t('labels.language.name')}
+        label={t(`labels.${type}.description`)}
         propName={[id, 'description']}
         value={skills[id].description}
         setValue={setSkill as Dispatch<SetStateAction<Record<string, unknown>>>}
@@ -50,7 +50,7 @@ export const SkillEditItem = ({
     <Grid container alignItems="flex-start">
       <Grid xs={10} item>
         <InputField
-          label={t('labels.language.name')}
+          label={t(`labels.${type}.name`)}
           propName={[id, 'name']}
           value={skills[id].name}
           setValue={
@@ -60,7 +60,7 @@ export const SkillEditItem = ({
         <LevelSlider
           t={t}
           type={type}
-          label={t('labels.language.level')}
+          label={t(`labels.${type}.level`)}
           propName={[id, 'level']}
           setValue={
             setSkill as Dispatch<SetStateAction<Record<string, unknown>>>

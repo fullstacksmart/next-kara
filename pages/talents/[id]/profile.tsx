@@ -19,10 +19,11 @@ import {
   QualificationEdit,
   Button,
   OtherSkillsSection,
+  LanguageSection,
+  LanguagesEdit,
+  OtherSkillsEdit,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
-import { LanguageSection } from '../../../components/languages-section/LanguagesSection';
-import { LanguagesEdit } from '../../../components/languages-section/LanguagesEdit';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -273,6 +274,13 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         t={t}
         otherSkills={otherSkills}
         handleEdit={() => setModal({ type: ModalType.OTHERSKILL })}
+      />
+      <OtherSkillsEdit
+        t={t}
+        otherSkills={otherSkills}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.OTHERSKILL}
+        talentId={basicInfo.id}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

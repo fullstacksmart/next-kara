@@ -15,9 +15,15 @@ import { SectionItem } from './section-item/SectionItem';
 import { CheckedTitle } from './checked-title/CheckedTitle';
 import { ItemDivider } from './item-divider/ItemDivider';
 import { OtherSkillsSection } from './other-skills-section/OtherSkillsSection';
+import { OtherSkillsEdit } from './other-skills-section/OtherSkillsEdit';
+import { LanguageSection } from './languages-section/LanguagesSection';
+import { LanguagesEdit } from './languages-section/LanguagesEdit';
 
 export {
+  LanguageSection,
+  LanguagesEdit,
   OtherSkillsSection,
+  OtherSkillsEdit,
   Button,
   ItemDivider,
   CheckedTitle,

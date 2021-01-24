@@ -230,12 +230,20 @@ const typeDefs = gql`
     profession: Profession
     description: String
     languages: [LanguageSkillInput]
+    otherSkills: [OtherSkillInput]
   }
   input LanguageSkillInput {
     id: ID!
     talent: ID
     name: String
     level: SkillLevel
+  }
+  input OtherSkillInput {
+    id: ID!
+    talent: ID
+    name: String
+    level: SkillLevel
+    description: String
   }
 
   input NewExperience {
