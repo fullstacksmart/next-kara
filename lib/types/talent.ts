@@ -139,7 +139,7 @@ interface Document extends TalentAsset {
   url: string;
 }
 
-export interface Skill extends TalentAsset {
+export interface Skill extends BaseEntity {
   name: string;
   level: SkillLevel;
   description?: string;

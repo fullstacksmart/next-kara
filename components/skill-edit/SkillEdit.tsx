@@ -35,14 +35,14 @@ export const SkillEdit = ({
   ...props
 }: SkillEditProps & ComponentWithT): React.ReactElement => {
   const title = t(`components.skillEdit.${type}.title`);
-  let skillsObj = {};
+  let skillsObj: Record<string, Skill> = {};
   skills.forEach((skill) => (skillsObj = { ...skillsObj, [skill.id]: skill }));
   const [updatedSkills, setUpdatedSkills] = useState(skillsObj);
   const [updateLanguages] = useMutation(UPDATE_LANGUAGES, {
     variables: {
       input: {
         id: talentId,
-        languages: Object.values<Skill>(updatedSkills).map((item) => ({
+        languages: Object.values(updatedSkills).map((item) => ({
           id: item.id,
           name: item.name,
           level: item.level,
@@ -54,18 +54,20 @@ export const SkillEdit = ({
     setUpdatedSkills(skillsObj);
   };
   const mutate = type === 'language' ? updateLanguages : null;
-  const editableSkills = Object.keys(updatedSkills).map((id) => (
-    <SkillEditItem
-      skills={updatedSkills}
-      id={id}
-      t={t}
-      key={id}
-      setSkill={
-        setUpdatedSkills as Dispatch<SetStateAction<Record<string, unknown>>>
-      }
-      type={type}
-    />
-  ));
+  const editableSkills = Object.values(updatedSkills)
+    .sort((a, b) => (a.name === '' ? 1 : a.name < b.name ? -1 : 1))
+    .map((skill) => (
+      <SkillEditItem
+        skills={updatedSkills}
+        id={skill.id}
+        t={t}
+        key={skill.id}
+        setSkill={
+          setUpdatedSkills as Dispatch<SetStateAction<Record<string, unknown>>>
+        }
+        type={type}
+      />
+    ));
   return (
     <EditPopup
       {...props}
