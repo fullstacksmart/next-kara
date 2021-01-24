@@ -12,8 +12,6 @@ const server = new ApolloServer({
     console.log('token received in server: ', token);
     try {
       const user = getUserFromToken(token);
-      // await verifyIdToken(token)
-      // const uid = await getUidFromToken(token)
       return { user };
     } catch (error) {
       console.error('error in server', error);

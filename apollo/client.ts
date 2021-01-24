@@ -24,7 +24,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const idToken = await getIdToken();
-  console.log(idToken);
+  console.log("token in apollo client: ", idToken);
   return {
     headers: {
       ...headers,
