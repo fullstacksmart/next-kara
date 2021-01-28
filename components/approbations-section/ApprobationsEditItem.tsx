@@ -1,10 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import {
-  ComponentWithT,
-  Approbation,
-  ApprobationStatus,
-  FederalState,
-} from '../../lib/types';
+import { ComponentWithT, Approbation } from '../../lib/types';
 import { ApprobationStatusSelector } from '../approbation-status-selector/ApprobationStatusSelector';
 import { CompactListItem } from '../compact-list-item/CompactListItem';
 import { StateSelector } from '../state-selector/StateSelector';

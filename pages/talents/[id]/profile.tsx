@@ -28,6 +28,7 @@ import {
   OtherSkillsEdit,
   ApprobationsSection,
   ApprobationsEdit,
+  ProgressIndicator,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
 
@@ -186,6 +187,7 @@ const GET_ALL_INFO = gql`
         state
         status
       }
+      percentageComplete
     }
   }
 `;
@@ -218,6 +220,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
       status: ApprobationStatus[approbation.status],
     }),
   );
+  const progress = data.getTalentById.percentageComplete;
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -312,6 +315,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         open={modal.type === ModalType.APPROBATION}
         talentId={basicInfo.id}
       />
+      <ProgressIndicator progress={progress} />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );

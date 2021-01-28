@@ -11,8 +11,6 @@ import {
   Experience,
   BaseEntity,
   Qualification,
-  FederalState,
-  Approbation,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -38,6 +36,9 @@ const resolvers = {
         description: talent.description,
         isBasicInfoComplete: helpers.isBasicInfoComplete(talent),
       };
+    },
+    percentageComplete(talent: Talent): number {
+      return helpers.percentageComplete(talent);
     },
   },
   Experience: {

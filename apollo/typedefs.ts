@@ -118,6 +118,7 @@ const typeDefs = gql`
     languages: [LanguageSkill]
     otherSkills: [OtherSkill]
     basicInfo: BasicInfo!
+    percentageComplete: Int!
   }
 
   type BasicInfo {

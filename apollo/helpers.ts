@@ -295,3 +295,32 @@ export const deleteItem = async (
   }
   return talent;
 };
+
+export const percentageComplete = (talent: Talent): number => {
+  let percentage = 0;
+  const percentages = {
+    basicInfo: 20,
+    experiences: 20,
+    qualifications: 20,
+    languages: 13,
+    otherSkills: 13,
+    approbations: 14,
+  };
+  if (isBasicInfoComplete(talent)) percentage += percentages.basicInfo;
+  if (
+    talent.experiences.filter((experience) => isExperienceComplete(experience))
+      .length
+  ) {
+    percentage += percentages.experiences;
+  }
+  if (
+    talent.qualifications.filter((qualification) =>
+      isQualificationComplete(qualification),
+    ).length
+  )
+    percentage += percentages.qualifications;
+  if (talent.languages.length) percentage += percentages.languages;
+  if (talent.otherSkills.length) percentage += percentages.otherSkills;
+  if (talent.approbations.length) percentage += percentages.approbations;
+  return percentage;
+};

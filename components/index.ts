@@ -20,8 +20,10 @@ import { LanguageSection } from './languages-section/LanguagesSection';
 import { LanguagesEdit } from './languages-section/LanguagesEdit';
 import { ApprobationsSection } from './approbations-section/ApprobationsSection';
 import { ApprobationsEdit } from './approbations-section/ApprobationsEdit';
+import { ProgressIndicator } from './progress-indicator/ProgressIndicator';
 
 export {
+  ProgressIndicator,
   ApprobationsEdit,
   ApprobationsSection,
   LanguageSection,
