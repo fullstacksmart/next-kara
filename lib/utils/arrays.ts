@@ -64,3 +64,18 @@ export const toObject = <T extends BaseEntity>(
   });
   return obj;
 };
+
+export const getPropArray = (
+  propName: string | string[],
+): [string[], string] => {
+  let id: string;
+  let propArray: string[];
+  if (Array.isArray(propName)) {
+    id = propName[propName.length - 1];
+    propArray = propName;
+  } else {
+    id = propName;
+    propArray = [propName];
+  }
+  return [propArray, id];
+};

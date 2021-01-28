@@ -1,6 +1,6 @@
 import { TextField, TextFieldProps } from '@material-ui/core';
 import { Dispatch, SetStateAction } from 'react';
-import { computeNestedValue } from '../../lib/utils/arrays';
+import { computeNestedValue, getPropArray } from '../../lib/utils/arrays';
 
 type InputFieldProps = Partial<TextFieldProps> & {
   setValue?: Dispatch<SetStateAction<Record<string, unknown>>>;
@@ -17,15 +17,7 @@ const InputField = ({
   ...props
 }: InputFieldProps): React.ReactElement => {
   const labelText = label?.toString();
-  let id: string;
-  let propArray: string[];
-  if (Array.isArray(propName)) {
-    id = propName[propName.length - 1];
-    propArray = propName;
-  } else {
-    id = propName;
-    propArray = [propName];
-  }
+  const [propArray, id] = getPropArray(propName);
   const handleChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {

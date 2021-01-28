@@ -23,10 +23,10 @@ import {
   LanguageSection,
   LanguagesEdit,
   OtherSkillsEdit,
-  ApprobationSection,
+  ApprobationsSection,
+  ApprobationsEdit,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
-import { Modal } from '@material-ui/core';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -291,10 +291,17 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         open={modal.type === ModalType.OTHERSKILL}
         talentId={basicInfo.id}
       />
-      <ApprobationSection
+      <ApprobationsSection
         t={t}
         approbations={approbations}
         handleEdit={() => setModal({ type: ModalType.APPROBATION })}
+      />
+      <ApprobationsEdit
+        t={t}
+        approbations={approbations}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.APPROBATION}
+        talentId={basicInfo.id}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

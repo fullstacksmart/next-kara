@@ -231,6 +231,7 @@ const typeDefs = gql`
     description: String
     languages: [LanguageSkillInput]
     otherSkills: [OtherSkillInput]
+    approbations: [ApprobationInput]
   }
   input LanguageSkillInput {
     id: ID!
@@ -244,6 +245,13 @@ const typeDefs = gql`
     name: String
     level: SkillLevel
     description: String
+  }
+
+  input ApprobationInput {
+    id: ID!
+    talent: ID
+    state: FederalState
+    status: ApprobationStatus
   }
 
   input NewExperience {

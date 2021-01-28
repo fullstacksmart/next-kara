@@ -16,6 +16,9 @@
     "approbationSection": {
       "title": "Approbationen"
     },
+    "approbationsEdit": {
+      "title": "Bearbeite Deine Approbationen"
+    },
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
     },
@@ -70,6 +73,9 @@
       "skill": {
         "title": "Bearbeite Deine Fähigkeiten"
       }
+    },
+    "stateSelector": {
+      "label": "Bundesland"
     }
   },
   "description": "Über mich",

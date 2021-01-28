@@ -3,16 +3,16 @@ import { ComponentWithT } from '../../lib/types';
 import { Approbation } from '../../lib/types/talent';
 import { ApprobationListItem } from '../approbation-list-item/ApprobationListItem';
 
-export interface ApprobationSectionProps extends ComponentWithT {
+export interface ApprobationsSectionProps extends ComponentWithT {
   approbations: Approbation[];
   handleEdit: () => void;
 }
 
-export const ApprobationSection = ({
+export const ApprobationsSection = ({
   t,
   approbations,
   handleEdit,
-}: ApprobationSectionProps): React.ReactElement => {
+}: ApprobationsSectionProps): React.ReactElement => {
   const approbationItems = approbations
     .slice()
     .sort((a, b) => b.state - a.state)

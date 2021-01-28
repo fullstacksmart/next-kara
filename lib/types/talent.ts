@@ -7,7 +7,7 @@ export enum Profession {
   OTHER_NON_MEDICAL,
 }
 
-enum ApprobationStatus {
+export enum ApprobationStatus {
   IN_PREPARATION,
   ONGOING,
   DENIED,
@@ -21,7 +21,7 @@ export enum SkillLevel {
   MASTER,
 }
 
-enum FederalState {
+export enum FederalState {
   'BW',
   'BY',
   'BE',
@@ -139,7 +139,7 @@ export interface QualificationEntry extends TalentAssetEntry {
   description: string;
 }
 
-export interface Approbation extends TalentAsset {
+export interface Approbation extends BaseEntity {
   status: ApprobationStatus;
   state: FederalState;
 }
