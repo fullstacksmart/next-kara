@@ -18,8 +18,10 @@ import { OtherSkillsSection } from './other-skills-section/OtherSkillsSection';
 import { OtherSkillsEdit } from './other-skills-section/OtherSkillsEdit';
 import { LanguageSection } from './languages-section/LanguagesSection';
 import { LanguagesEdit } from './languages-section/LanguagesEdit';
+import { ApprobationSection } from './approbation-section/ApprobationSection';
 
 export {
+  ApprobationSection,
   LanguageSection,
   LanguagesEdit,
   OtherSkillsSection,

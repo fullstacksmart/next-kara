@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Layout } from '../../../containers/layout';
 import {
+  Approbation,
   Experience,
   ModalType,
   PageProps,
@@ -22,8 +23,10 @@ import {
   LanguageSection,
   LanguagesEdit,
   OtherSkillsEdit,
+  ApprobationSection,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
+import { Modal } from '@material-ui/core';
 
 // export interface ProfilePageProps extends PageProps {
 //   id: string;
@@ -175,6 +178,11 @@ const GET_ALL_INFO = gql`
         level
         description
       }
+      approbations {
+        id
+        state
+        status
+      }
     }
   }
 `;
@@ -200,6 +208,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const qualifications: Qualification[] = data.getTalentById.qualifications;
   const languages: Skill[] = data.getTalentById.languages;
   const otherSkills: Skill[] = data.getTalentById.otherSkills;
+  const approbations: Approbation[] = data.getTalentById.approbations;
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -281,6 +290,11 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         onClose={handleModalClose}
         open={modal.type === ModalType.OTHERSKILL}
         talentId={basicInfo.id}
+      />
+      <ApprobationSection
+        t={t}
+        approbations={approbations}
+        handleEdit={() => setModal({ type: ModalType.APPROBATION })}
       />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>

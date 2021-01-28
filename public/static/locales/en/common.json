@@ -3,8 +3,19 @@
     "city": "City",
     "country": "Country"
   },
+  "approbation": {
+    "status": {
+      "DENIED": "denied",
+      "IN_PREPARATION": "in preparation",
+      "ONGOING": "ongoing",
+      "SUCCESSFUL": "successfully completed"
+    }
+  },
   "companyName": "Hospital / Company",
   "components": {
+    "approbationSection": {
+      "title": "Approbations"
+    },
     "basicInfo": {
       "title": "Edit your personal information"
     },
@@ -160,6 +171,24 @@
       "MASTER": "master",
       "PROFICIENT": "intermediate"
     }
+  },
+  "states": {
+    "BB": "Brandenburg",
+    "BE": "Berlin",
+    "BW": "Baden-Württemberg",
+    "BY": "Bavaria",
+    "HB": "Bremen",
+    "HE": "Hesse",
+    "HH": "Hamburg",
+    "MV": "Mecklenburg-Vorpommern",
+    "NI": "Lower Saxony",
+    "NW": "North Rhine-Westfalia",
+    "RP": "Rhineland-Palatinate",
+    "SH": "Schleswig-Holstein",
+    "SL": "Saarland",
+    "SN": "Saxony",
+    "ST": "Saxony-Anhalt",
+    "TH": "Thuringia"
   },
   "type": {
     "employer": "Employer",

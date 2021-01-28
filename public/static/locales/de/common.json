@@ -3,8 +3,19 @@
     "city": "Stadt",
     "country": "Land"
   },
+  "approbation": {
+    "status": {
+      "DENIED": "abgelehnt",
+      "IN_PREPARATION": "In Vorbereitung",
+      "ONGOING": "Verfahren läuft",
+      "SUCCESSFUL": "erfolgreich abgeschlossen"
+    }
+  },
   "companyName": "Klinik / Unternehmen",
   "components": {
+    "approbationSection": {
+      "title": "Approbationen"
+    },
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
     },
@@ -154,6 +165,24 @@
       "MASTER": "Experte",
       "PROFICIENT": "kompetent"
     }
+  },
+  "states": {
+    "BB": "Brandenburg",
+    "BE": "Berlin",
+    "BW": "Baden-Württemberg",
+    "BY": "Bayern",
+    "HB": "Bremen",
+    "HE": "Hessen",
+    "HH": "Hamburg",
+    "MV": "Mecklenburg-Vorpommern",
+    "NI": "Niedersachsen",
+    "NW": "Nordrhein-Westfalen",
+    "RP": "Rheinland-Pfalz",
+    "SH": "Schleswig-Holstein",
+    "SL": "Saarland",
+    "SN": "Sachsen",
+    "ST": "Sachsen-Anhalt",
+    "TH": "Thüringen"
   },
   "type": {
     "employer": "Arbeitgeber",

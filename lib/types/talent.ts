@@ -8,9 +8,10 @@ export enum Profession {
 }
 
 enum ApprobationStatus {
+  IN_PREPARATION,
   ONGOING,
-  APPROVED,
   DENIED,
+  APPROVED,
 }
 
 export enum SkillLevel {
@@ -37,7 +38,6 @@ enum FederalState {
   'ST',
   'SH',
   'TH',
-  'OTHER',
 }
 
 interface TalentAsset extends BaseEntity {
@@ -139,7 +139,7 @@ export interface QualificationEntry extends TalentAssetEntry {
   description: string;
 }
 
-interface Approbation extends TalentAsset {
+export interface Approbation extends TalentAsset {
   status: ApprobationStatus;
   state: FederalState;
 }
