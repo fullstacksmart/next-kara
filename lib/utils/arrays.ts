@@ -1,4 +1,4 @@
-import { Experience, Qualification, Skill } from '../types';
+import { Experience, Qualification, Skill, SkillLevel } from '../types';
 import { BaseEntity } from '../types/common';
 
 export const filterById = (
@@ -45,12 +45,6 @@ export const sortByFrom = (
 };
 
 export const sortSkill = (a: Skill, b: Skill): number => {
-  enum SkillLevel {
-    BASIC,
-    PROFICIENT,
-    EXPERT,
-    MASTER,
-  }
   if (SkillLevel[a.level] > SkillLevel[b.level]) return -1;
   if (SkillLevel[a.level] < SkillLevel[b.level]) return 1;
   return a.name < b.name ? -1 : 1;

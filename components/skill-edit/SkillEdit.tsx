@@ -2,7 +2,7 @@ import { gql, MutationFunction } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { DialogProps, makeStyles } from '@material-ui/core';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { ComponentWithT, Skill } from '../../lib/types';
+import { ComponentWithT, Skill, SkillLevel } from '../../lib/types';
 import { EditPopup } from '../edit-popup/EditPopup';
 import { SkillEditItem } from './SkillEditItem';
 import { IconButton } from '@material-ui/core';
@@ -99,7 +99,7 @@ export const SkillEdit = ({
     const newSkill: Skill = {
       id,
       name: '',
-      level: 'BASIC',
+      level: SkillLevel.BASIC,
     };
     if (type === 'skill') newSkill.description = '';
     setUpdatedSkills((prev) => ({ ...prev, [id]: newSkill }));
