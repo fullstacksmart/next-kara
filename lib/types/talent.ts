@@ -144,6 +144,11 @@ export interface Approbation extends BaseEntity {
   state: FederalState;
 }
 
+export interface DbApprobation extends BaseEntity {
+  status: keyof typeof ApprobationStatus;
+  state: keyof typeof FederalState;
+}
+
 interface Document extends TalentAsset {
   name: string;
   description: string;

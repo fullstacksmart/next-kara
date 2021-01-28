@@ -1,5 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { FederalState } from '../../lib/types';
+import { ApprobationStatus } from '../../lib/types';
 import { computeNestedValue, getPropArray } from '../../lib/utils/arrays';
 import OptionsSelector, {
   OptionsSelectorProps,
@@ -8,13 +8,13 @@ import OptionsSelector, {
 interface StateSelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
   updateFunction: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
-  value?: FederalState;
+  value?: ApprobationStatus;
   propName: string | string[];
 }
 
-export const StateSelector = ({
+export const ApprobationStatusSelector = ({
   t,
-  value = FederalState.BW,
+  value = ApprobationStatus.IN_PREPARATION,
   updateFunction,
   propName,
   ...props
@@ -29,13 +29,13 @@ export const StateSelector = ({
     });
   };
 
-  const keys = Object.keys(FederalState).filter(
+  const statusStrings = Object.keys(ApprobationStatus).filter(
     (item) => !Number.isNaN(parseInt(item)),
-  ) as (keyof typeof FederalState)[];
+  ) as (keyof typeof ApprobationStatus)[];
 
-  const options = keys.map((key) => ({
+  const options = statusStrings.map((key) => ({
     value: key,
-    label: t(`states.${FederalState[key]}`),
+    label: t(`approbation.status.${ApprobationStatus[key]}`),
   }));
 
   return (
@@ -44,8 +44,8 @@ export const StateSelector = ({
       options={options}
       setUpdate={handleChange}
       value={value}
-      inputLabelId="state"
-      inputLabel={t('components.stateSelector.label')}
+      inputLabelId="status"
+      inputLabel={t('components.statusSelector.label')}
     />
   );
 };

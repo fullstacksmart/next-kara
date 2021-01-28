@@ -76,6 +76,9 @@
     },
     "stateSelector": {
       "label": "Bundesland"
+    },
+    "statusSelector": {
+      "label": "Status"
     }
   },
   "description": "Über mich",

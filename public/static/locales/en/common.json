@@ -5,10 +5,10 @@
   },
   "approbation": {
     "status": {
+      "APPROVED": "Successfully Completed",
       "DENIED": "Denied",
       "IN_PREPARATION": "In Preparation",
-      "ONGOING": "Ongoing",
-      "SUCCESSFUL": "Successfully Completed"
+      "ONGOING": "Ongoing"
     }
   },
   "companyName": "Hospital / Company",
@@ -76,6 +76,9 @@
     },
     "stateSelector": {
       "label": "Federal State"
+    },
+    "statusSelector": {
+      "label": "Status"
     }
   },
   "description": "About Me",

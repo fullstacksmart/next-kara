@@ -1,6 +1,11 @@
 import { Box } from '@material-ui/core';
 import { FieldDisplay } from '..';
-import { Approbation, ComponentWithT } from '../../lib/types';
+import {
+  Approbation,
+  ApprobationStatus,
+  ComponentWithT,
+  FederalState,
+} from '../../lib/types';
 
 interface ApprobationListItemProps extends ComponentWithT {
   approbation: Approbation;
@@ -13,8 +18,12 @@ export const ApprobationListItem = ({
   return (
     <>
       <Box component="div">
-        <FieldDisplay value={t(`states.${approbation.state}`)} />
-        <FieldDisplay value={t(`approbation.status.${approbation.status}`)} />
+        <FieldDisplay value={t(`states.${FederalState[approbation.state]}`)} />
+        <FieldDisplay
+          value={t(
+            `approbation.status.${ApprobationStatus[approbation.status]}`,
+          )}
+        />
       </Box>
     </>
   );

@@ -11,6 +11,8 @@ import {
   Experience,
   BaseEntity,
   Qualification,
+  FederalState,
+  Approbation,
 } from '../lib/types';
 import * as helpers from './helpers';
 

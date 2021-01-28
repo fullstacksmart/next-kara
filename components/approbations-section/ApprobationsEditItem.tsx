@@ -1,5 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
-import { ComponentWithT, Approbation } from '../../lib/types';
+import {
+  ComponentWithT,
+  Approbation,
+  ApprobationStatus,
+  FederalState,
+} from '../../lib/types';
+import { ApprobationStatusSelector } from '../approbation-status-selector/ApprobationStatusSelector';
 import { CompactListItem } from '../compact-list-item/CompactListItem';
 import { StateSelector } from '../state-selector/StateSelector';
 
@@ -31,6 +37,14 @@ export const ApprobationsEditItem = ({
           setApprobation as Dispatch<SetStateAction<Record<string, unknown>>>
         }
         propName={[id, 'state']}
+      />
+      <ApprobationStatusSelector
+        t={t}
+        value={approbations[id].status}
+        updateFunction={
+          setApprobation as Dispatch<SetStateAction<Record<string, unknown>>>
+        }
+        propName={[id, 'status']}
       />
     </CompactListItem>
   );

@@ -64,8 +64,8 @@ export const ApprobationsEdit = ({
         approbations: Object.values(updatedApprobations).map((item) => {
           return {
             id: item.id,
-            state: item.state,
-            status: item.status,
+            state: FederalState[item.state],
+            status: ApprobationStatus[item.status],
           };
         }),
       },

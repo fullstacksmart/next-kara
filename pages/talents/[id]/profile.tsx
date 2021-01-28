@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 import { Layout } from '../../../containers/layout';
 import {
   Approbation,
+  ApprobationStatus,
+  DbApprobation,
   Experience,
+  FederalState,
   ModalType,
   PageProps,
   Qualification,
@@ -208,7 +211,13 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const qualifications: Qualification[] = data.getTalentById.qualifications;
   const languages: Skill[] = data.getTalentById.languages;
   const otherSkills: Skill[] = data.getTalentById.otherSkills;
-  const approbations: Approbation[] = data.getTalentById.approbations;
+  const approbations: Approbation[] = data.getTalentById.approbations.map(
+    (approbation: DbApprobation) => ({
+      ...approbation,
+      state: FederalState[approbation.state],
+      status: ApprobationStatus[approbation.status],
+    }),
+  );
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });

@@ -18,7 +18,7 @@ export const ApprobationsSection = ({
     .sort((a, b) => b.state - a.state)
     .map((approbation) => (
       <ApprobationListItem
-        key={`{approbation.state}=${approbation.status}`}
+        key={`${approbation.state}-${approbation.status}`}
         approbation={approbation}
         t={t}
       />
