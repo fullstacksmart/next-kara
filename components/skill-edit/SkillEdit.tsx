@@ -8,6 +8,7 @@ import { SkillEditItem } from './SkillEditItem';
 import { IconButton } from '@material-ui/core';
 import { AddCircleOutline } from '@material-ui/icons';
 import { nanoid } from 'nanoid';
+import { toObject } from '../../lib/utils/arrays';
 
 interface SkillEditProps extends DialogProps {
   skills: Skill[];
@@ -62,8 +63,7 @@ export const SkillEdit = ({
 }: SkillEditProps & ComponentWithT): React.ReactElement => {
   const classes = useStyle();
   const title = t(`components.skillEdit.${type}.title`);
-  let skillsObj: Record<string, Skill> = {};
-  skills.forEach((skill) => (skillsObj = { ...skillsObj, [skill.id]: skill }));
+  const skillsObj = toObject<Skill>(skills);
   const [updatedSkills, setUpdatedSkills] = useState(skillsObj);
   const [updateLanguages] = useMutation(UPDATE_LANGUAGES, {
     variables: {

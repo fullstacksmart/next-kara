@@ -1,5 +1,10 @@
-import { Experience, Qualification, Skill, SkillLevel } from '../types';
-import { BaseEntity } from '../types/common';
+import {
+  Experience,
+  Qualification,
+  Skill,
+  SkillLevel,
+  BaseEntity,
+} from '../types';
 
 export const filterById = (
   arr: BaseEntity[],
@@ -48,4 +53,14 @@ export const sortSkill = (a: Skill, b: Skill): number => {
   if (SkillLevel[a.level] > SkillLevel[b.level]) return -1;
   if (SkillLevel[a.level] < SkillLevel[b.level]) return 1;
   return a.name < b.name ? -1 : 1;
+};
+
+export const toObject = <T extends BaseEntity>(
+  array: T[],
+): Record<string, T> => {
+  let obj: Record<string, T> = {};
+  array.forEach((item) => {
+    obj = { ...obj, [item.id]: item };
+  });
+  return obj;
 };
