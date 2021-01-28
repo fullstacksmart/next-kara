@@ -30,6 +30,7 @@ const typeDefs = gql`
   }
 
   enum ApprobationStatus {
+    IN_PREPARATION
     ONGOING
     APPROVED
     DENIED
