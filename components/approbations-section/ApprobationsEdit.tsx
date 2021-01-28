@@ -30,6 +30,7 @@ const UPDATE_APPROBATIONS = gql`
         state
         status
       }
+      percentageComplete
     }
   }
 `;
@@ -80,7 +81,7 @@ export const ApprobationsEdit = ({
     const newApprobation: Approbation = {
       id,
       state: FederalState.BW,
-      status: ApprobationStatus.ONGOING,
+      status: ApprobationStatus.IN_PREPARATION,
     };
     setUpdatedApprobations((prev) => ({ ...prev, [id]: newApprobation }));
   };

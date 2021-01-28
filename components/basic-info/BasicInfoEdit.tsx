@@ -13,6 +13,7 @@ import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 const UPDATE_TALENT = gql`
   mutation UpdateTalent($input: TalentUpdate!) {
     updateTalent(input: $input) {
+      id
       basicInfo {
         id
         name {
@@ -35,6 +36,7 @@ const UPDATE_TALENT = gql`
           gender
         }
       }
+      percentageComplete
     }
   }
 `;

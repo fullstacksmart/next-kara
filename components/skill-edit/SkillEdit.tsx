@@ -27,6 +27,7 @@ const UPDATE_LANGUAGES = gql`
         name
         level
       }
+      percentageComplete
     }
   }
 `;
@@ -40,6 +41,7 @@ const UPDATE_OTHER_SKILLS = gql`
         level
         description
       }
+      percentageComplete
     }
   }
 `;
