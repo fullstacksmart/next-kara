@@ -5,10 +5,10 @@
   },
   "approbation": {
     "status": {
+      "APPROVED": "erfolgreich abgeschlossen",
       "DENIED": "abgelehnt",
       "IN_PREPARATION": "In Vorbereitung",
-      "ONGOING": "Verfahren läuft",
-      "SUCCESSFUL": "erfolgreich abgeschlossen"
+      "ONGOING": "Verfahren läuft"
     }
   },
   "companyName": "Klinik / Unternehmen",
