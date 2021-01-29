@@ -9,6 +9,7 @@ import {
   DbSkill,
   Experience,
   FederalState,
+  Gender,
   ModalType,
   PageProps,
   Profession,
@@ -127,7 +128,6 @@ const GET_ALL_INFO = gql`
         id
         talent {
           id
-          gender
         }
         lineOfWork
         employer {
@@ -216,6 +216,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const basicInfo = {
     ...dbBasicInfo,
     profession: Profession[dbBasicInfo.profession],
+    gender: Gender[dbBasicInfo.gender],
   };
   const experiences: Experience[] = data.getTalentById.experiences.map(
     (experience: DbExperience) => ({

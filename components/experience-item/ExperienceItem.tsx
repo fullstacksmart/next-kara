@@ -16,7 +16,7 @@ export const ExperienceItem = ({
   experience,
   t,
   handleEdit,
-  gender = 'OTHER',
+  gender = Gender.OTHER,
 }: ExperienceItemProps): React.ReactElement => {
   const formatedDuration = getFormatedDuration(
     t('duration.now'),
@@ -30,7 +30,9 @@ export const ExperienceItem = ({
     >
       <FieldDisplay
         label={t('labels.position')}
-        value={t(`profession.${Profession[experience.lineOfWork]}-${gender}`)}
+        value={t(
+          `profession.${Profession[experience.lineOfWork]}-${Gender[gender]}`,
+        )}
         enabled={Boolean(experience.lineOfWork !== undefined)}
       />
       <FieldDisplay

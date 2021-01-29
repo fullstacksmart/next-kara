@@ -20,14 +20,14 @@ export const ProfessionRadio = ({
   t,
   updateFunction,
   input,
-  gender = 'OTHER',
+  gender = Gender.OTHER,
   isExtended = false,
   propName = 'profession',
 }: GenderRadioProps): React.ReactElement => {
   const professions = getIntKeys(Profession);
   const options: OptionsRadioOption[] = professions.map((key) => ({
     value: key.toString(),
-    label: t(`profession.${Profession[key]}-${gender}`),
+    label: t(`profession.${Profession[key]}-${Gender[gender]}`),
     labelPlacement: 'top',
   }));
   if (!isExtended) options.pop();
@@ -36,8 +36,8 @@ export const ProfessionRadio = ({
       row
       options={options}
       label=""
-      ariaLabel="gender"
-      name="gender"
+      ariaLabel="profession"
+      name="profession"
       defaultValue={input?.toString()}
       setUpdate={(value) => {
         updateFunction((oldValues) => {

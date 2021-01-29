@@ -13,7 +13,7 @@ export interface ExperienceSectionProps {
 
 export const ExperienceSection = ({
   t,
-  gender = 'OTHER',
+  gender = Gender.OTHER,
   experiences,
   handleEdit,
   ...props
