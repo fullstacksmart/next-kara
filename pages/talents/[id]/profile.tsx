@@ -5,12 +5,15 @@ import {
   Approbation,
   ApprobationStatus,
   DbApprobation,
+  DbSkill,
   Experience,
   FederalState,
   ModalType,
   PageProps,
+  Profession,
   Qualification,
   Skill,
+  SkillLevel,
 } from '../../../lib/types';
 import { withTranslation } from '../../../i18n';
 import { useState } from 'react';
@@ -208,11 +211,23 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
     return <h1>Error: {error.message}</h1>;
   }
 
-  const basicInfo = data?.getTalentById.basicInfo;
+  const dbBasicInfo = data?.getTalentById.basicInfo;
+  const basicInfo = {
+    ...dbBasicInfo,
+    profession: Profession[dbBasicInfo.profession],
+  };
   const experiences: Experience[] = data.getTalentById.experiences;
   const qualifications: Qualification[] = data.getTalentById.qualifications;
-  const languages: Skill[] = data.getTalentById.languages;
-  const otherSkills: Skill[] = data.getTalentById.otherSkills;
+  const languages: Skill[] = data.getTalentById.languages.map(
+    (language: DbSkill) => {
+      return { ...language, level: SkillLevel[language.level] };
+    },
+  );
+  const otherSkills: Skill[] = data.getTalentById.otherSkills.map(
+    (otherSkill: DbSkill) => {
+      return { ...otherSkill, level: SkillLevel[otherSkill.level] };
+    },
+  );
   const approbations: Approbation[] = data.getTalentById.approbations.map(
     (approbation: DbApprobation) => ({
       ...approbation,

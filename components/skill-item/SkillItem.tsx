@@ -1,6 +1,6 @@
 import { Box } from '@material-ui/core';
 import { FieldDisplay } from '..';
-import { ComponentWithT, Skill } from '../../lib/types';
+import { ComponentWithT, Skill, SkillLevel } from '../../lib/types';
 
 interface SkillItemProps extends ComponentWithT {
   skill: Skill;
@@ -19,7 +19,7 @@ export const SkillItem = ({
     <>
       <Box component="div">
         <FieldDisplay value={skill.name} />
-        <FieldDisplay value={t(`${type}.level.${skill.level}`)} />
+        <FieldDisplay value={t(`${type}.level.${SkillLevel[skill.level]}`)} />
       </Box>
       {description}
     </>

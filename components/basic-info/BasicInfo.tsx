@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { Section, SectionItem, CheckedTitle } from '../';
 import styles from './BasicInfo.module.css';
-import { Talent } from '../../lib/types';
+import { Profession, Talent } from '../../lib/types';
 import { TFunction } from 'next-i18next';
 import { getDisplayAddress } from '../../lib/utils/strings';
 
@@ -34,7 +34,11 @@ export const BasicInfo = ({
                 done={basicInfo.isBasicInfoComplete}
               />
               <Typography variant="h4">
-                {t(`profession.${basicInfo.profession}-${basicInfo.gender}`)}
+                {t(
+                  `profession.${Profession[basicInfo.profession || 0]}-${
+                    basicInfo.gender
+                  }`,
+                )}
               </Typography>
               <Typography variant="h4">
                 {getDisplayAddress(basicInfo.address, t)}

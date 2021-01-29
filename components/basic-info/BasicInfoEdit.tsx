@@ -2,7 +2,7 @@ import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
-import { TalentUpdate } from '../../lib/types';
+import { Profession, TalentUpdate } from '../../lib/types';
 import { formatForDb } from '../../lib/utils/strings';
 import CountrySelector from '../country-selector/CountrySelector';
 import { EditPopup } from '../edit-popup/EditPopup';
@@ -76,7 +76,7 @@ export const BasicInfoEdit = ({
               : null,
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: updatedInfo.profession,
+        profession: Profession[updatedInfo.profession || 0],
         description: formatForDb(updatedInfo.description),
       },
     },
@@ -101,7 +101,7 @@ export const BasicInfoEdit = ({
           __typename: 'Address',
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: updatedInfo.profession,
+        profession: Profession[updatedInfo.profession || 0],
         description: formatForDb(updatedInfo.description),
         __typename: 'Talent',
       },

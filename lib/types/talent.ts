@@ -109,6 +109,16 @@ export interface BasicInfo {
   isBasicInfoComplete: boolean;
 }
 
+export interface DbBasicInfo extends BaseEntity {
+  name: FullName;
+  fullName: string;
+  gender: Gender;
+  profilePic: string;
+  profession: keyof typeof Profession;
+  address: Address;
+  isBasicInfocomplete: boolean;
+}
+
 export interface Experience extends TalentAsset {
   lineOfWork: Profession;
   employer?: Organization;
@@ -158,6 +168,12 @@ interface Document extends TalentAsset {
 export interface Skill extends BaseEntity {
   name: string;
   level: SkillLevel;
+  description?: string;
+}
+
+export interface DbSkill extends BaseEntity {
+  name: string;
+  level: keyof typeof SkillLevel;
   description?: string;
 }
 

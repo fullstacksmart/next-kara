@@ -74,7 +74,7 @@ export const SkillEdit = ({
         languages: Object.values(updatedSkills).map((item) => ({
           id: item.id,
           name: item.name,
-          level: item.level,
+          level: SkillLevel[item.level],
         })),
       },
     },
@@ -86,7 +86,7 @@ export const SkillEdit = ({
         otherSkills: Object.values(updatedSkills).map((item) => ({
           id: item.id,
           name: item.name,
-          level: item.level,
+          level: SkillLevel[item.level],
           description: item.description || null,
         })),
       },

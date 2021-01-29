@@ -215,15 +215,13 @@
       "languages": [
         {
           "id": "1",
-          "level": "MASTER",
           "name": "Serbian",
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+          "level": "MASTER"
         },
         {
           "id": "2",
-          "level": "BASIC",
           "name": "German",
-          "talent": "yasbiuycdbucoiuscboiucsiousc!@"
+          "level": "BASIC"
         }
       ],
       "name": {
