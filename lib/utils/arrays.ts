@@ -50,8 +50,8 @@ export const sortByFrom = (
 };
 
 export const sortSkill = (a: Skill, b: Skill): number => {
-  if (SkillLevel[a.level] > SkillLevel[b.level]) return -1;
-  if (SkillLevel[a.level] < SkillLevel[b.level]) return 1;
+  if (a.level > b.level) return -1;
+  if (a.level < b.level) return 1;
   return a.name < b.name ? -1 : 1;
 };
 
