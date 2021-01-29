@@ -1,5 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { Experience, Gender } from '../../lib/types';
+import { Experience, Gender, Profession } from '../../lib/types';
 import { getFormatedDuration } from '../../lib/utils/strings';
 import { FieldDisplay } from '../field-display/FieldDisplay';
 import { SectionItem } from '../section-item/SectionItem';
@@ -30,8 +30,8 @@ export const ExperienceItem = ({
     >
       <FieldDisplay
         label={t('labels.position')}
-        value={t(`profession.${experience.lineOfWork}-${gender}`)}
-        enabled={Boolean(experience.lineOfWork)}
+        value={t(`profession.${Profession[experience.lineOfWork]}-${gender}`)}
+        enabled={Boolean(experience.lineOfWork !== undefined)}
       />
       <FieldDisplay
         label={t('labels.duration.complete')}

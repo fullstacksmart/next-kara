@@ -31,7 +31,6 @@ export const ProfessionRadio = ({
     labelPlacement: 'top',
   }));
   if (!isExtended) options.pop();
-  console.log(options, input);
   return (
     <OptionsRadio
       row

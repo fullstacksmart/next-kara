@@ -5,6 +5,7 @@ import {
   Approbation,
   ApprobationStatus,
   DbApprobation,
+  DbExperience,
   DbSkill,
   Experience,
   FederalState,
@@ -216,7 +217,12 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
     ...dbBasicInfo,
     profession: Profession[dbBasicInfo.profession],
   };
-  const experiences: Experience[] = data.getTalentById.experiences;
+  const experiences: Experience[] = data.getTalentById.experiences.map(
+    (experience: DbExperience) => ({
+      ...experience,
+      lineOfWork: Profession[experience.lineOfWork],
+    }),
+  );
   const qualifications: Qualification[] = data.getTalentById.qualifications;
   const languages: Skill[] = data.getTalentById.languages.map(
     (language: DbSkill) => {
