@@ -131,7 +131,7 @@ export const ExperienceEdit = ({
       input: {
         id: updatedExperience.id,
         talent: updatedExperience.talent?.id,
-        lineOfWork: updatedExperience.lineOfWork,
+        lineOfWork: Profession[updatedExperience.lineOfWork || 0],
         employer: {
           name: formatForDb(updatedExperience.employer?.name),
           address: {

@@ -14,7 +14,7 @@ export const FieldDisplay = ({
   const labelElement = label ? (
     <Typography variant="h6">{label}</Typography>
   ) : null;
-  return Boolean(value) && enabled ? (
+  return Boolean(value !== undefined) && enabled ? (
     <Box component="div">
       {labelElement}
       <Typography variant="body1">{value}</Typography>

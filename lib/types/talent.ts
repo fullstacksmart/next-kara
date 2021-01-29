@@ -126,6 +126,10 @@ export interface Experience extends TalentAsset {
   description?: string;
 }
 
+export interface DbExperience {
+  lineOfWork: keyof typeof Profession;
+}
+
 export interface ExperienceEntry extends TalentAssetEntry {
   lineOfWork?: Profession;
   employer?: string;
