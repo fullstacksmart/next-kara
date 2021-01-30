@@ -4,8 +4,8 @@ import {
   useContext,
   createContext,
   ReactNode,
-} from "react";
-import { auth } from "../components/firebase";
+} from 'react';
+import { auth } from '../lib/auth/firebase';
 
 type ContextUserType = {
   id: string;
@@ -19,7 +19,7 @@ type useAuthProviderReturnType = {
   setContextUser: (user: ContextUserType) => void;
 };
 
-const AuthContext = createContext({ user: { id: "" } });
+const AuthContext = createContext({ user: { id: '' } });
 const { Provider } = AuthContext;
 export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   const auth = useAuthProvider();
@@ -32,7 +32,7 @@ export const useAuth: any = () => {
 
 // Provider hook that creates an auth object and handles it's state
 const useAuthProvider = (): useAuthProviderReturnType => {
-  const [user, setUser] = useState({ id: "" });
+  const [user, setUser] = useState({ id: '' });
 
   // return type: firebase.User
   const handleAuthStateChanged = (user: any): void => {

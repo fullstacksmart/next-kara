@@ -1,6 +1,6 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import initFirebase from "../../lib/auth/initFirebase";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import initFirebase from './initFirebase';
 
 initFirebase();
 
