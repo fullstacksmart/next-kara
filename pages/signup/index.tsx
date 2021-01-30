@@ -16,6 +16,8 @@ import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
+// firebase only imported to satisfy typescript. Better to find alternative.
+import firebase from 'firebase/app';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -84,8 +86,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     }
 =======
     auth
+      // tslint disable-next-line
       .signup(formValues.email, formValues.password)
-      .then((response: any) => {
+      .then((response: firebase.auth.UserCredential) => {
         if (response.user) {
           return createUser({
             variables: {

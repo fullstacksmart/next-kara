@@ -13,10 +13,20 @@ type ContextUserType = {
   type?: string;
 };
 
+type signup = (
+  email: string,
+  password: string,
+) => Promise<firebase.auth.UserCredential>;
+
+type signin = (
+  email: string,
+  password: string,
+) => Promise<firebase.User | void | null>;
+
 type useAuthProviderReturnType = {
   user: ContextUserType;
-  signup: (email: string, password: string) => any;
-  signin: (email: string, password: string) => any;
+  signup: signup;
+  signin: signin;
   setContextUser: (user: ContextUserType) => void;
 };
 
@@ -27,15 +37,13 @@ export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   return <Provider value={auth}>{props.children}</Provider>;
 }
 
-export const useAuth: any = () => {
+export const useAuth: () => useAuthProviderReturnType = () => {
   return useContext(AuthContext);
 };
 
-// Provider hook that creates an auth object and handles it's state
 const useAuthProvider = (): useAuthProviderReturnType => {
   const [user, setUser] = useState({ id: '' });
 
-  // return type: firebase.User
   const handleAuthStateChanged = (user: firebase.User | null): void => {
     //can save additional data here, e.g. type
     if (user) setUser({ id: user.uid });
@@ -62,9 +70,6 @@ const useAuthProvider = (): useAuthProviderReturnType => {
       .then((userCredential) => {
         if (userCredential.user) setUser({ id: userCredential.user.uid });
         return userCredential.user;
-      })
-      .catch((error: Error) => {
-        console.error(error);
       });
   };
 
