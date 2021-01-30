@@ -4,18 +4,18 @@ import {
   Typography,
   Container,
   Box,
-} from "@material-ui/core";
-import { withTranslation } from "../../i18n";
-import OptionsToggler from "../../components/option-toggler/OptionToggler";
-import { Layout } from "../../containers/layout";
-import { Button } from "../../components/buttons";
-import InputField from "../../components/input-field/InputField";
-import { useEffect, useState } from "react";
-import { PageProps, UserInput, UserType } from "../../lib/types";
-import { useMutation, gql } from "@apollo/client";
-import styles from "./Signup.module.css";
-import { GenderSelector } from "../../components/gender-selector/GenderSelector";
-import { useAuth } from "../../hooks/useAuth";
+} from '@material-ui/core';
+import { withTranslation } from '../../i18n';
+import OptionsToggler from '../../components/option-toggler/OptionToggler';
+import { Layout } from '../../containers/layout';
+import { Button } from '../../components/buttons';
+import InputField from '../../components/input-field/InputField';
+import { useEffect, useState } from 'react';
+import { PageProps, UserInput, UserType } from '../../lib/types';
+import { useMutation, gql } from '@apollo/client';
+import styles from './Signup.module.css';
+import { GenderSelector } from '../../components/gender-selector/GenderSelector';
+import { useAuth } from '../../hooks/useAuth';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -28,7 +28,7 @@ const ADD_USER = gql`
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
     name: {
-      lastName: "",
+      lastName: '',
     },
     gender: Gender.OTHER,
     email: '',
@@ -38,7 +38,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser, newUser] = useMutation(ADD_USER);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
-    { passwordConfirm: "" },
+    { passwordConfirm: '' },
   );
   const auth = useAuth();
 
@@ -50,11 +50,11 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   const company =
-    formValues.type === "EMPLOYER" ? (
+    formValues.type === 'EMPLOYER' ? (
       <InputField
         propName="company"
         value={formValues.company}
-        label={t("companyName")}
+        label={t('companyName')}
         setValue={setFormValues}
         required
       />
@@ -106,10 +106,14 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   useEffect(() => {
     if (newUser.data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       console.log('new User:', newUser); //eslint-disable-line no-console
 =======
       console.log("new User:", newUser);
 >>>>>>> types for useAuth hook
+=======
+      console.log('new User:', newUser);
+>>>>>>> double quote -> single quote
     }
   }, [newUser]);
 
@@ -118,12 +122,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       <Card>
         <CardContent>
           <Container>
-            <Typography variant="h2">{t("pages.signup.header")}</Typography>
+            <Typography variant="h2">{t('pages.signup.header')}</Typography>
             <form onSubmit={handleSubmit}>
               <OptionsToggler
                 options={[
-                  { value: "TALENT", display: t("type.talent") },
-                  { value: "EMPLOYER", display: t("type.employer") },
+                  { value: 'TALENT', display: t('type.talent') },
+                  { value: 'EMPLOYER', display: t('type.employer') },
                 ]}
                 optionsLabel="type"
                 setOption={(type) => {
@@ -142,8 +146,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                   label={t('fullName.firstName')}
 =======
                   nesting="name"
+<<<<<<< HEAD
                   label={t("fullName.firstName")}
 >>>>>>> types for useAuth hook
+=======
+                  label={t('fullName.firstName')}
+>>>>>>> double quote -> single quote
                   fullWidth={false}
                   setValue={setFormValues}
                 />
@@ -154,8 +162,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                   label={t('fullName.lastName')}
 =======
                   nesting="name"
+<<<<<<< HEAD
                   label={t("fullName.lastName")}
 >>>>>>> types for useAuth hook
+=======
+                  label={t('fullName.lastName')}
+>>>>>>> double quote -> single quote
                   fullWidth={false}
                   setValue={setFormValues}
                   required
@@ -166,7 +178,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 propName="email"
                 type="email"
                 value={formValues.email}
-                label={t("email")}
+                label={t('email')}
                 setValue={setFormValues}
                 inputProps={{ className: styles.FormInput }}
                 required
@@ -174,7 +186,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               <InputField
                 propName="password"
                 value={formValues.password}
-                label={t("password")}
+                label={t('password')}
                 setValue={setFormValues}
                 type="password"
                 required
@@ -185,8 +197,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 label={t('repeatPassword')}
 =======
                 id="passwordConfirm"
+<<<<<<< HEAD
                 label={t("repeatPassword")}
 >>>>>>> types for useAuth hook
+=======
+                label={t('repeatPassword')}
+>>>>>>> double quote -> single quote
                 onChange={handlePasswordRepeat}
                 type="password"
                 required
@@ -198,7 +214,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 }}
               />
               <Button disabled={!passwordsIdentical} type="submit">
-                {t("signup")}
+                {t('signup')}
               </Button>
             </form>
           </Container>
@@ -209,7 +225,11 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default withTranslation('common')(SignUpPage);
 =======
 export default withTranslation("common")(SignUpPage);
 >>>>>>> types for useAuth hook
+=======
+export default withTranslation('common')(SignUpPage);
+>>>>>>> double quote -> single quote
