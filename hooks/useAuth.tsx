@@ -5,6 +5,7 @@ import {
   createContext,
   ReactNode,
 } from 'react';
+import firebase from 'firebase/app';
 import { auth } from '../lib/auth/firebase';
 
 type ContextUserType = {
@@ -35,9 +36,9 @@ const useAuthProvider = (): useAuthProviderReturnType => {
   const [user, setUser] = useState({ id: '' });
 
   // return type: firebase.User
-  const handleAuthStateChanged = (user: any): void => {
+  const handleAuthStateChanged = (user: firebase.User | null): void => {
     //can save additional data here, e.g. type
-    setUser({ id: user.uid });
+    if (user) setUser({ id: user.uid });
   };
 
   useEffect(() => {
@@ -45,12 +46,17 @@ const useAuthProvider = (): useAuthProviderReturnType => {
     return () => subscription();
   }, []);
 
-  //return type: Promise<firebase.auth.UserCredential>
-  const signup = (email: string, password: string): any => {
+  const signup = (
+    email: string,
+    password: string,
+  ): Promise<firebase.auth.UserCredential> => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
 
-  const signin = (email: string, password: string): any => {
+  const signin = (
+    email: string,
+    password: string,
+  ): Promise<firebase.User | void | null> => {
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
