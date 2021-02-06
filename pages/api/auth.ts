@@ -1,3 +1,5 @@
+// THIS FILE MIGHT BE USED FOR DIRECTIVES. KEEPING IT HERE FOR NOW
+
 // import { AuthenticationError } from 'apollo-server-micro';
 // import {models} from '../../db'
 
