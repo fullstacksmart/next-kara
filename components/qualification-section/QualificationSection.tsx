@@ -1,9 +1,7 @@
 import { TFunction } from 'next-i18next';
 import { Qualification } from '../../lib/types';
-import { CheckedTitle } from '../checked-title/CheckedTitle';
-import { Section } from '../section/Section';
+import { CheckedTitle, Section, ItemDivider } from '../';
 import { QualificationItem } from '../qualification-item/QualificationItem';
-import { ItemDivider } from '../item-divider/ItemDivider';
 import { sortByFrom } from '../../lib/utils/arrays';
 
 export interface QualificationSectionProps {

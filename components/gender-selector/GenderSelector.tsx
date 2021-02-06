@@ -12,28 +12,27 @@ interface GenderSelectorProps extends Partial<OptionsSelectorProps> {
 
 export const GenderSelector = ({
   t,
-  value = 'OTHER',
+  value = Gender.OTHER,
   updateFunction,
   ...props
 }: GenderSelectorProps): React.ReactElement => {
   const handleChange = (value: string): void => {
-    const gender: Gender = value as Gender;
     updateFunction((oldValues) => ({
       ...oldValues,
-      gender,
+      gender: parseInt(value),
     }));
   };
   const options = [
     {
-      value: 'OTHER',
+      value: Gender.OTHER.toString(),
       label: t('gender.OTHER'),
     },
     {
-      value: 'FEMALE',
+      value: Gender.FEMALE.toString(),
       label: t('gender.FEMALE'),
     },
     {
-      value: 'MALE',
+      value: Gender.MALE.toString(),
       label: t('gender.MALE'),
     },
   ];

@@ -3,8 +3,22 @@
     "city": "City",
     "country": "Country"
   },
+  "approbation": {
+    "status": {
+      "APPROVED": "Successfully Completed",
+      "DENIED": "Denied",
+      "IN_PREPARATION": "In Preparation",
+      "ONGOING": "Ongoing"
+    }
+  },
   "companyName": "Hospital / Company",
   "components": {
+    "approbationSection": {
+      "title": "Approbations"
+    },
+    "approbationsEdit": {
+      "title": "Edit your Approbations"
+    },
     "basicInfo": {
       "title": "Edit your personal information"
     },
@@ -31,8 +45,14 @@
     "genderSelector": {
       "label": "Designation"
     },
+    "languageSection": {
+      "title": "Language Skills"
+    },
     "layout": {
       "backHome": "take me back home"
+    },
+    "otherSkillsSection": {
+      "title": "Other Skills"
     },
     "qualificationEdit": {
       "description": {
@@ -45,6 +65,20 @@
     },
     "qualificationSection": {
       "title": "Qualifications"
+    },
+    "skillEdit": {
+      "language": {
+        "title": "Bearbeite Deine Sprachkenntnisse"
+      },
+      "skill": {
+        "title": "Bearbeite Deine Fähigkeiten"
+      }
+    },
+    "stateSelector": {
+      "label": "Federal State"
+    },
+    "statusSelector": {
+      "label": "Status"
     }
   },
   "description": "About Me",
@@ -87,7 +121,24 @@
     "experienceDescription": "Line of Work / Description",
     "fieldOfEducation": "Field of Education",
     "institution": "School / Institution",
-    "position": "Position"
+    "language": {
+      "level": "level",
+      "name": "language"
+    },
+    "position": "Position",
+    "skill": {
+      "description": "Beschreibung",
+      "level": "Stufe",
+      "name": "Fähigkeit"
+    }
+  },
+  "language": {
+    "level": {
+      "BASIC": "basic (A)",
+      "EXPERT": "proficient (C1)",
+      "MASTER": "mother tongue",
+      "PROFICIENT": "independet (B)"
+    }
   },
   "pages": {
     "profile": {
@@ -122,6 +173,32 @@
   "repeatPassword": "please reenter password",
   "signin": "sign in",
   "signup": "sign up",
+  "skill": {
+    "level": {
+      "BASIC": "basic",
+      "EXPERT": "expert",
+      "MASTER": "master",
+      "PROFICIENT": "intermediate"
+    }
+  },
+  "states": {
+    "BB": "Brandenburg",
+    "BE": "Berlin",
+    "BW": "Baden-Württemberg",
+    "BY": "Bavaria",
+    "HB": "Bremen",
+    "HE": "Hesse",
+    "HH": "Hamburg",
+    "MV": "Mecklenburg-Vorpommern",
+    "NI": "Lower Saxony",
+    "NW": "North Rhine-Westfalia",
+    "RP": "Rhineland-Palatinate",
+    "SH": "Schleswig-Holstein",
+    "SL": "Saarland",
+    "SN": "Saxony",
+    "ST": "Saxony-Anhalt",
+    "TH": "Thuringia"
+  },
   "type": {
     "employer": "Employer",
     "talent": "Talent"

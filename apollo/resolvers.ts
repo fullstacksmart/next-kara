@@ -37,6 +37,9 @@ const resolvers = {
         isBasicInfoComplete: helpers.isBasicInfoComplete(talent),
       };
     },
+    percentageComplete(talent: Talent): number {
+      return helpers.percentageComplete(talent);
+    },
   },
   Experience: {
     async talent(experience: ExperienceEntry): Promise<Talent> {

@@ -2,7 +2,7 @@ import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { Box, DialogProps } from '@material-ui/core';
 import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
-import { TalentUpdate } from '../../lib/types';
+import { Gender, Profession, TalentUpdate } from '../../lib/types';
 import { formatForDb } from '../../lib/utils/strings';
 import CountrySelector from '../country-selector/CountrySelector';
 import { EditPopup } from '../edit-popup/EditPopup';
@@ -13,6 +13,7 @@ import { ProfessionRadio } from '../profession-radio/ProfessionRadio';
 const UPDATE_TALENT = gql`
   mutation UpdateTalent($input: TalentUpdate!) {
     updateTalent(input: $input) {
+      id
       basicInfo {
         id
         name {
@@ -35,6 +36,7 @@ const UPDATE_TALENT = gql`
           gender
         }
       }
+      percentageComplete
     }
   }
 `;
@@ -59,7 +61,7 @@ export const BasicInfoEdit = ({
     variables: {
       input: {
         id: updatedInfo.id,
-        gender: updatedInfo.gender,
+        gender: Gender[updatedInfo.gender || 0],
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),
@@ -74,7 +76,7 @@ export const BasicInfoEdit = ({
               : null,
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: updatedInfo.profession,
+        profession: Profession[updatedInfo.profession || 0],
         description: formatForDb(updatedInfo.description),
       },
     },
@@ -82,7 +84,7 @@ export const BasicInfoEdit = ({
       __typeName: 'Mutation',
       updateTalent: {
         id: updatedInfo.id,
-        gender: updatedInfo.gender,
+        gender: Gender[0],
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),
@@ -99,7 +101,7 @@ export const BasicInfoEdit = ({
           __typename: 'Address',
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: updatedInfo.profession,
+        profession: Profession[updatedInfo.profession || 0],
         description: formatForDb(updatedInfo.description),
         __typename: 'Talent',
       },

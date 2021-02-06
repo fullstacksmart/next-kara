@@ -6,13 +6,14 @@ import {
   DialogContent,
   DialogActions,
 } from '@material-ui/core';
-import { TFunction } from 'next-i18next';
 import { PropsWithChildren } from 'react';
 import { Button } from '../buttons';
 import { nanoid } from 'nanoid';
+import { ComponentWithT } from '../../lib/types';
 
-interface EditPopupProps extends PropsWithChildren<DialogProps> {
-  t: TFunction;
+export interface EditPopupProps
+  extends PropsWithChildren<DialogProps>,
+    ComponentWithT {
   title: string;
   onClose: () => void;
   formId: string;
@@ -20,9 +21,11 @@ interface EditPopupProps extends PropsWithChildren<DialogProps> {
   reset: () => void;
   onSave?: () => void;
   onDelete?: MutationFunction;
+  disabled?: boolean;
 }
 
 export const EditPopup = ({
+  disabled = false,
   t,
   title,
   children,
@@ -75,7 +78,7 @@ export const EditPopup = ({
       <DialogActions>
         {deleteButton}
         <Button onClick={handleClose}>{t('labels.buttons.cancel')}</Button>
-        <Button type="submit" form={formId}>
+        <Button type="submit" form={formId} disabled={disabled}>
           {t('labels.buttons.save')}
         </Button>
       </DialogActions>

@@ -1,39 +1,44 @@
 import { User, FullName, BaseEntity, Address, Gender } from './index';
 
-export type Profession =
-  | 'NURSE'
-  | 'DOCTOR'
-  | 'OTHER_MEDICAL'
-  | 'OTHER_NON_MEDICAL';
+export enum Profession {
+  NURSE,
+  DOCTOR,
+  OTHER_MEDICAL,
+  OTHER_NON_MEDICAL,
+}
 
-type ApprobationStatus = 'ONGOING' | 'APPROVED' | 'DENIED';
+export enum ApprobationStatus {
+  IN_PREPARATION,
+  ONGOING,
+  DENIED,
+  APPROVED,
+}
 
-type LanguageSkillLevel =
-  | 'BASIC'
-  | 'PROFICIENT'
-  | 'BUSINESS_LEVEL'
-  | 'MOTHER_TONGUE';
+export enum SkillLevel {
+  BASIC,
+  PROFICIENT,
+  EXPERT,
+  MASTER,
+}
 
-type OtherSKillLevel = 'BASIC' | 'PROFICIENT' | 'EXPERT' | 'MASTER';
-
-type FederalState =
-  | 'BW'
-  | 'BY'
-  | 'BE'
-  | 'BB'
-  | 'HB'
-  | 'HH'
-  | 'HE'
-  | 'NI'
-  | 'MV'
-  | 'NW'
-  | 'RP'
-  | 'SL'
-  | 'SN'
-  | 'ST'
-  | 'SH'
-  | 'TH'
-  | 'OTHER';
+export enum FederalState {
+  'BW',
+  'BY',
+  'BE',
+  'BB',
+  'HB',
+  'HH',
+  'HE',
+  'NI',
+  'MV',
+  'NW',
+  'RP',
+  'SL',
+  'SN',
+  'ST',
+  'SH',
+  'TH',
+}
 
 interface TalentAsset extends BaseEntity {
   talent: Talent;
@@ -72,8 +77,8 @@ export interface Talent extends User {
   qualifications: Qualification[];
   approbations: Approbation[];
   documents: Document[];
-  languages: LanguageSkill[];
-  otherSkills: OtherSkill[];
+  languages: Skill[];
+  otherSkills: Skill[];
   isBasicInfoComplete: boolean;
 }
 
@@ -87,8 +92,8 @@ export interface TalentEntry {
   qualifications: QualificationEntry[];
   approbations: Approbation[];
   documents: Document[];
-  languages: LanguageSkill[];
-  otherSkills: OtherSkill[];
+  languages: Skill[];
+  otherSkills: Skill[];
   isBasicInfoComplete: boolean;
 }
 
@@ -104,11 +109,25 @@ export interface BasicInfo {
   isBasicInfoComplete: boolean;
 }
 
+export interface DbBasicInfo extends BaseEntity {
+  name: FullName;
+  fullName: string;
+  gender: Gender;
+  profilePic: string;
+  profession: keyof typeof Profession;
+  address: Address;
+  isBasicInfocomplete: boolean;
+}
+
 export interface Experience extends TalentAsset {
   lineOfWork: Profession;
   employer?: Organization;
   duration?: Duration;
   description?: string;
+}
+
+export interface DbExperience {
+  lineOfWork: keyof typeof Profession;
 }
 
 export interface ExperienceEntry extends TalentAssetEntry {
@@ -134,9 +153,14 @@ export interface QualificationEntry extends TalentAssetEntry {
   description: string;
 }
 
-interface Approbation extends TalentAsset {
+export interface Approbation extends BaseEntity {
   status: ApprobationStatus;
   state: FederalState;
+}
+
+export interface DbApprobation extends BaseEntity {
+  status: keyof typeof ApprobationStatus;
+  state: keyof typeof FederalState;
 }
 
 interface Document extends TalentAsset {
@@ -145,15 +169,16 @@ interface Document extends TalentAsset {
   url: string;
 }
 
-interface LanguageSkill extends TalentAsset {
-  language: string;
-  level: LanguageSkillLevel;
+export interface Skill extends BaseEntity {
+  name: string;
+  level: SkillLevel;
+  description?: string;
 }
 
-interface OtherSkill extends TalentAsset {
+export interface DbSkill extends BaseEntity {
   name: string;
-  level: OtherSKillLevel;
-  description: string;
+  level: keyof typeof SkillLevel;
+  description?: string;
 }
 
 export interface BasicInfoEntry {

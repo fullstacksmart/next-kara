@@ -3,8 +3,22 @@
     "city": "Stadt",
     "country": "Land"
   },
+  "approbation": {
+    "status": {
+      "APPROVED": "erfolgreich abgeschlossen",
+      "DENIED": "abgelehnt",
+      "IN_PREPARATION": "In Vorbereitung",
+      "ONGOING": "Verfahren läuft"
+    }
+  },
   "companyName": "Klinik / Unternehmen",
   "components": {
+    "approbationSection": {
+      "title": "Approbationen"
+    },
+    "approbationsEdit": {
+      "title": "Bearbeite Deine Approbationen"
+    },
     "basicInfo": {
       "title": "Bearbeite Deine persönlichen Informationen"
     },
@@ -31,8 +45,14 @@
     "genderSelector": {
       "label": "Anrede"
     },
+    "languageSection": {
+      "title": "Sprachkenntnisse"
+    },
     "layout": {
       "backHome": "zurück zur Homepage"
+    },
+    "otherSkillsSection": {
+      "title": "Weitere Fähigkeiten"
     },
     "qualificationEdit": {
       "description": {
@@ -45,6 +65,20 @@
     },
     "qualificationSection": {
       "title": "Ausbildung"
+    },
+    "skillEdit": {
+      "language": {
+        "title": "Bearbeite Deine Sprachkenntnisse"
+      },
+      "skill": {
+        "title": "Bearbeite Deine Fähigkeiten"
+      }
+    },
+    "stateSelector": {
+      "label": "Bundesland"
+    },
+    "statusSelector": {
+      "label": "Status"
     }
   },
   "description": "Über mich",
@@ -87,7 +121,24 @@
     "experienceDescription": "Tätigkeit / Beschreibung",
     "fieldOfEducation": "Bereich",
     "institution": "Schule / Institution",
-    "position": "Position"
+    "language": {
+      "level": "Stufe",
+      "name": "Sprache"
+    },
+    "position": "Position",
+    "skill": {
+      "description": "Beschreibung",
+      "level": "Stufe",
+      "name": "Fähigkeit"
+    }
+  },
+  "language": {
+    "level": {
+      "BASIC": "Grundkenntnisse",
+      "EXPERT": "Verhandlungssicher",
+      "MASTER": "Muttersprache",
+      "PROFICIENT": "Fortgeschritten"
+    }
   },
   "pages": {
     "profile": {
@@ -116,6 +167,32 @@
   "repeatPassword": "Passwort wiederholen",
   "signin": "anmelden",
   "signup": "registrieren",
+  "skill": {
+    "level": {
+      "BASIC": "Grundkenntnisse",
+      "EXPERT": "fortgeschritten",
+      "MASTER": "Experte",
+      "PROFICIENT": "kompetent"
+    }
+  },
+  "states": {
+    "BB": "Brandenburg",
+    "BE": "Berlin",
+    "BW": "Baden-Württemberg",
+    "BY": "Bayern",
+    "HB": "Bremen",
+    "HE": "Hessen",
+    "HH": "Hamburg",
+    "MV": "Mecklenburg-Vorpommern",
+    "NI": "Niedersachsen",
+    "NW": "Nordrhein-Westfalen",
+    "RP": "Rheinland-Pfalz",
+    "SH": "Schleswig-Holstein",
+    "SL": "Saarland",
+    "SN": "Sachsen",
+    "ST": "Sachsen-Anhalt",
+    "TH": "Thüringen"
+  },
   "type": {
     "employer": "Arbeitgeber",
     "talent": "Talent"
