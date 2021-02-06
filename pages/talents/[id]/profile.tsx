@@ -7,7 +7,7 @@ import {
   PageProps,
   Qualification,
 } from '../../../lib/types';
-import { withTranslation } from '../../../i18n';
+import { withTranslation } from '../../../i18n.config';
 import { useState } from 'react';
 import {
   BasicInfo,

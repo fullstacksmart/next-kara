@@ -1,4 +1,4 @@
-import { withTranslation } from '../i18n';
+import { withTranslation } from '../i18n.config';
 import type { NextPageContext } from 'next';
 import { TFunction } from 'next-i18next';
 

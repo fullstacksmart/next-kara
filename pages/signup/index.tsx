@@ -5,7 +5,7 @@ import {
   Container,
   Box,
 } from '@material-ui/core';
-import { withTranslation } from '../../i18n';
+import { withTranslation } from '../../i18n.config';
 import OptionsToggler from '../../components/option-toggler/OptionToggler';
 import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
