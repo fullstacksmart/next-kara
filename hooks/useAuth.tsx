@@ -37,6 +37,9 @@ export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   return <Provider value={auth}>{props.children}</Provider>;
 }
 
+// ignoring because context needs initial state
+// eslint-disable-next-line
+// @ts-ignore
 export const useAuth: () => useAuthProviderReturnType = () => {
   return useContext(AuthContext);
 };

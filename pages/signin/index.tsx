@@ -7,7 +7,7 @@ import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from '../../i18n';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-// firebase only imported to satisfy typescript. Better to find alternative.
+// firebase only imported to satisfy typescript. Not sure whether there is an alternative.
 import firebase from 'firebase/app';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
@@ -24,20 +24,21 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    auth
-      // tslint disable-next-line
-      .signin(formValues.email, formValues.password)
-      .then((user: firebase.User | void | null) => {
-        if (typeof user !== null) {
-          console.log('current user: ', auth.user);
-        } else {
-          console.log(
-            'wrong email or password, current user still is: ',
-            auth.user,
-          );
-        }
-      })
-      .catch((error: Error) => console.error(error));
+    if (formValues.email && formValues.password) {
+      auth
+        .signin(formValues.email, formValues.password)
+        .then((user: firebase.User | void | null) => {
+          if (typeof user !== null) {
+            console.log('current user: ', auth.user);
+          } else {
+            console.log(
+              'wrong email or password, current user still is: ',
+              auth.user,
+            );
+          }
+        })
+        .catch((error: Error) => console.error(error));
+    }
   };
 
   return (

@@ -16,8 +16,6 @@ import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
-// firebase only imported to satisfy typescript. Better to find alternative.
-import firebase from 'firebase/app';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -64,31 +62,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-<<<<<<< HEAD
-    if (formValues.email && formValues.password) {
-      auth
-        .signup(formValues.email, formValues.password)
-        .then((response: any) => {
-          if (response.user) {
-            return createUser({
-              variables: {
-                input: { id: response.user.uid, ...formValues },
-              },
-            }).then(({ data }) => {
-              const user = data.addUser;
-              auth.setContextUser(user);
-            });
-          }
-        })
-        .catch((error: any) => {
-          console.error(error);
-        });
-    }
-=======
     auth
-      // tslint disable-next-line
       .signup(formValues.email, formValues.password)
-      .then((response: firebase.auth.UserCredential) => {
+      .then((response: any) => {
         if (response.user) {
           return createUser({
             variables: {
@@ -103,20 +79,11 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       .catch((error: Error) => {
         console.error(error);
       });
->>>>>>> types for useAuth hook
   };
 
   useEffect(() => {
     if (newUser.data) {
-<<<<<<< HEAD
-<<<<<<< HEAD
       console.log('new User:', newUser); //eslint-disable-line no-console
-=======
-      console.log("new User:", newUser);
->>>>>>> types for useAuth hook
-=======
-      console.log('new User:', newUser);
->>>>>>> double quote -> single quote
     }
   }, [newUser]);
 
@@ -145,32 +112,14 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 <InputField
                   propName={['name', 'firstName']}
                   value={formValues.name?.firstName}
-<<<<<<< HEAD
                   label={t('fullName.firstName')}
-=======
-                  nesting="name"
-<<<<<<< HEAD
-                  label={t("fullName.firstName")}
->>>>>>> types for useAuth hook
-=======
-                  label={t('fullName.firstName')}
->>>>>>> double quote -> single quote
                   fullWidth={false}
                   setValue={setFormValues}
                 />
                 <InputField
                   propName={['name', 'lastName']}
                   value={formValues.name?.lastName}
-<<<<<<< HEAD
                   label={t('fullName.lastName')}
-=======
-                  nesting="name"
-<<<<<<< HEAD
-                  label={t("fullName.lastName")}
->>>>>>> types for useAuth hook
-=======
-                  label={t('fullName.lastName')}
->>>>>>> double quote -> single quote
                   fullWidth={false}
                   setValue={setFormValues}
                   required
@@ -195,17 +144,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 required
               />
               <InputField
-<<<<<<< HEAD
                 propName="passwordConfirm"
                 label={t('repeatPassword')}
-=======
-                id="passwordConfirm"
-<<<<<<< HEAD
-                label={t("repeatPassword")}
->>>>>>> types for useAuth hook
-=======
-                label={t('repeatPassword')}
->>>>>>> double quote -> single quote
                 onChange={handlePasswordRepeat}
                 type="password"
                 required
@@ -227,12 +167,4 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   );
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 export default withTranslation('common')(SignUpPage);
-=======
-export default withTranslation("common")(SignUpPage);
->>>>>>> types for useAuth hook
-=======
-export default withTranslation('common')(SignUpPage);
->>>>>>> double quote -> single quote
