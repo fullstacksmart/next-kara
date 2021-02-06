@@ -7,7 +7,13 @@ import {
 } from 'react';
 import firebase from 'firebase/app';
 import { auth } from '../lib/auth/firebase';
-import { ContextUserType, useAuthProviderReturnType } from '../lib/types/auth';
+import {
+  ContextUserType,
+  useAuthProviderReturnType,
+  signup,
+  signin,
+  logout,
+} from '../lib/types/auth';
 
 const AuthContext = createContext({ user: { id: '' } });
 const { Provider } = AuthContext;
@@ -36,17 +42,11 @@ const useAuthProvider = (): useAuthProviderReturnType => {
     return () => subscription();
   }, []);
 
-  const signup = (
-    email: string,
-    password: string,
-  ): Promise<firebase.auth.UserCredential> => {
+  const signup: signup = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
 
-  const signin = (
-    email: string,
-    password: string,
-  ): Promise<firebase.User | void | null> => {
+  const signin: signin = (email, password) => {
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -55,7 +55,7 @@ const useAuthProvider = (): useAuthProviderReturnType => {
       });
   };
 
-  const logout = (): Promise<void> => {
+  const logout: logout = () => {
     return auth
       .signOut()
       .then(() => setUser({ id: '' }))
