@@ -5,16 +5,16 @@ import {
   Container,
   Box,
 } from '@material-ui/core';
-import { withTranslation } from '../../i18n.config';
-import OptionsToggler from '../../components/option-toggler/OptionToggler';
-import { Layout } from '../../containers/layout';
-import { Button } from '../../components/buttons';
-import InputField from '../../components/input-field/InputField';
+import { withTranslation } from 'i18n.config';
+import OptionsToggler from 'components/option-toggler/OptionToggler';
+import { Layout } from 'containers/layout';
+import { Button } from 'components/buttons';
+import InputField from 'components/input-field/InputField';
 import { useEffect, useState } from 'react';
-import { PageProps, UserInput, UserType } from '../../lib/types';
+import { PageProps, UserInput, UserType } from 'lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
-import { GenderSelector } from '../../components/gender-selector/GenderSelector';
+import { GenderSelector } from 'components/gender-selector/GenderSelector';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {

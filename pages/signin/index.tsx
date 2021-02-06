@@ -1,7 +1,7 @@
-import { Button } from '../../components/buttons';
-import { Layout } from '../../containers/layout';
-import { withTranslation } from '../../i18n.config';
-import { PageProps } from '../../lib/types';
+import { Button } from 'components/buttons';
+import { Layout } from 'containers/layout';
+import { withTranslation } from 'i18n.config';
+import { PageProps } from 'lib/types';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
   return (
