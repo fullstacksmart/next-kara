@@ -148,7 +148,11 @@
       "header": "Erstelle Dein Profil"
     }
   },
-  "password": "Passwort",
+  "password": {
+    "password": "Passwort",
+    "forgot": "Passwort vergessen?",
+    "reset": "Jetzt E-Mail zum Zurücksetzen des Passworts schicken"
+  },
   "profession": {
     "DOCTOR-FEMALE": "Ärztin",
     "DOCTOR-MALE": "Arzt",
