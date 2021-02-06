@@ -16,6 +16,7 @@ import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
+import { FirebaseUserCredential } from '../../lib/types/auth';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -62,23 +63,25 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    auth
-      .signup(formValues.email, formValues.password)
-      .then((response: any) => {
-        if (response.user) {
-          return createUser({
-            variables: {
-              input: { id: response.user.uid, ...formValues },
-            },
-          }).then(({ data }) => {
-            const user = data.addUser;
-            auth.setContextUser(user);
-          });
-        }
-      })
-      .catch((error: Error) => {
-        console.error(error);
-      });
+    if (formValues.email && formValues.password) {
+      auth
+        .signup(formValues.email, formValues.password)
+        .then((response: FirebaseUserCredential) => {
+          if (response.user) {
+            return createUser({
+              variables: {
+                input: { id: response.user.uid, ...formValues },
+              },
+            }).then(({ data }) => {
+              const user = data.addUser;
+              auth.setContextUser(user);
+            });
+          }
+        })
+        .catch((error: Error) => {
+          console.error(error);
+        });
+    }
   };
 
   useEffect(() => {

@@ -7,28 +7,7 @@ import {
 } from 'react';
 import firebase from 'firebase/app';
 import { auth } from '../lib/auth/firebase';
-
-type ContextUserType = {
-  id: string;
-  type?: string;
-};
-
-type signup = (
-  email: string,
-  password: string,
-) => Promise<firebase.auth.UserCredential>;
-
-type signin = (
-  email: string,
-  password: string,
-) => Promise<firebase.User | void | null>;
-
-type useAuthProviderReturnType = {
-  user: ContextUserType;
-  signup: signup;
-  signin: signin;
-  setContextUser: (user: ContextUserType) => void;
-};
+import { ContextUserType, useAuthProviderReturnType } from '../lib/types/auth';
 
 const AuthContext = createContext({ user: { id: '' } });
 const { Provider } = AuthContext;

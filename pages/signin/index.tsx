@@ -7,8 +7,7 @@ import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from '../../i18n';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-// firebase only imported to satisfy typescript. Not sure whether there is an alternative.
-import firebase from 'firebase/app';
+import { FirebaseUser } from '../../lib/types/auth';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
@@ -27,7 +26,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     if (formValues.email && formValues.password) {
       auth
         .signin(formValues.email, formValues.password)
-        .then((user: firebase.User | void | null) => {
+        .then((user: FirebaseUser | void | null) => {
           if (typeof user !== null) {
             console.log('current user: ', auth.user);
           } else {

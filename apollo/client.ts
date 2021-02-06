@@ -7,7 +7,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { auth } from '../lib/auth/firebase';
 
-const getIdToken = async (): Promise<any> => {
+const getIdToken = async (): Promise<string | void> => {
   if (auth.currentUser) {
     return await auth.currentUser
       .getIdToken(true)
