@@ -55,6 +55,13 @@ const useAuthProvider = (): useAuthProviderReturnType => {
       });
   };
 
+  const logout = (): Promise<void> => {
+    return auth
+      .signOut()
+      .then(() => setUser({ id: '' }))
+      .catch((e) => console.error(e));
+  };
+
   const setContextUser = (user: ContextUserType): void => {
     if (user) setUser(user);
   };
@@ -63,6 +70,7 @@ const useAuthProvider = (): useAuthProviderReturnType => {
     user,
     signup,
     signin,
+    logout,
     setContextUser,
   };
 };

@@ -20,6 +20,12 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     type: 'TALENT',
   });
   const auth = useAuth();
+  console.log(auth.user);
+
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    auth.logout();
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -74,6 +80,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
         Talents
       </Button>
       <Button href="/employers/1/profile">Employers</Button>
+      <Button onClick={handleLogout}>Logout</Button>
     </Layout>
   );
 };

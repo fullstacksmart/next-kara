@@ -15,10 +15,13 @@ export type signin = (
   password: string,
 ) => Promise<firebase.User | void | null>;
 
+export type logout = () => Promise<void>;
+
 export type useAuthProviderReturnType = {
   user: ContextUserType;
   signup: signup;
   signin: signin;
+  logout: logout;
   setContextUser: (user: ContextUserType) => void;
 };
 
