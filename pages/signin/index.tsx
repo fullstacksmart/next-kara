@@ -80,6 +80,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
         Talents
       </Button>
       <Button href="/employers/1/profile">Employers</Button>
+      {/* TODO: Add Logout Button to Navbar */}
       <Button onClick={handleLogout}>Logout</Button>
     </Layout>
   );
