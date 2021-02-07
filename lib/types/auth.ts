@@ -5,23 +5,23 @@ export type ContextUserType = {
   type?: string;
 };
 
-export type signup = (
+export type Signup = (
   email: string,
   password: string,
 ) => Promise<firebase.auth.UserCredential>;
 
-export type signin = (
+export type Signin = (
   email: string,
   password: string,
 ) => Promise<firebase.User | void | null>;
 
-export type logout = () => Promise<void>;
+export type Logout = () => Promise<void>;
 
-export type useAuthProviderReturnType = {
+export type UseAuthProviderReturnType = {
   user: ContextUserType;
-  signup: signup;
-  signin: signin;
-  logout: logout;
+  signup: Signup;
+  signin: Signin;
+  logout: Logout;
   setContextUser: (user: ContextUserType) => void;
 };
 

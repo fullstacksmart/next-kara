@@ -9,10 +9,10 @@ import firebase from 'firebase/app';
 import { auth } from '../lib/auth/firebase';
 import {
   ContextUserType,
-  useAuthProviderReturnType,
-  signup,
-  signin,
-  logout,
+  UseAuthProviderReturnType,
+  Signup,
+  Signin,
+  Logout,
 } from '../lib/types/auth';
 
 const AuthContext = createContext({ user: { id: '' } });
@@ -25,11 +25,11 @@ export function AuthProvider(props: { children: ReactNode }): JSX.Element {
 // ignoring because context needs initial state
 // eslint-disable-next-line
 // @ts-ignore
-export const useAuth: () => useAuthProviderReturnType = () => {
+export const useAuth: () => UseAuthProviderReturnType = () => {
   return useContext(AuthContext);
 };
 
-const useAuthProvider = (): useAuthProviderReturnType => {
+const useAuthProvider = (): UseAuthProviderReturnType => {
   const [user, setUser] = useState({ id: '' });
 
   const handleAuthStateChanged = (user: firebase.User | null): void => {
@@ -42,11 +42,11 @@ const useAuthProvider = (): useAuthProviderReturnType => {
     return () => subscription();
   }, []);
 
-  const signup: signup = (email, password) => {
+  const signup: Signup = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
 
-  const signin: signin = (email, password) => {
+  const signin: Signin = (email, password) => {
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -55,7 +55,7 @@ const useAuthProvider = (): useAuthProviderReturnType => {
       });
   };
 
-  const logout: logout = () => {
+  const logout: Logout = () => {
     return auth
       .signOut()
       .then(() => setUser({ id: '' }))
