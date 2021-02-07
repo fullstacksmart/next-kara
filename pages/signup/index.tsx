@@ -11,7 +11,7 @@ import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { useEffect, useState } from 'react';
-import { PageProps, UserInput, UserType } from '../../lib/types';
+import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
