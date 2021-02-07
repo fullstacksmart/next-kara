@@ -11,10 +11,12 @@ import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { useEffect, useState } from 'react';
-import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
+import { PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
+import { useAuth } from '../../hooks/useAuth';
+import { FirebaseUserCredential } from '../../lib/types/auth';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -39,6 +41,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
+  const auth = useAuth();
 
   const handlePasswordRepeat = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -58,22 +61,31 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     ) : null;
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    try {
-      await createUser({
-        variables: {
-          input: formValues,
-        },
-      });
-    } catch (e) {
-      console.error('user already exists: ', e.message); //eslint-disable-line no-console
+    if (formValues.email && formValues.password) {
+      auth
+        .signup(formValues.email, formValues.password)
+        .then((response: FirebaseUserCredential) => {
+          if (response.user) {
+            return createUser({
+              variables: {
+                input: { id: response.user.uid, ...formValues },
+              },
+            }).then(({ data }) => {
+              const user = data.addUser;
+              auth.setContextUser(user);
+            });
+          }
+        })
+        .catch((error: Error) => {
+          console.error(error);
+        });
     }
   };
 
   useEffect(() => {
+    // TODO: Remove unnecessary check of user
     if (newUser.data) {
       console.log('new User:', newUser); //eslint-disable-line no-console
     }
@@ -158,9 +170,5 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     </Layout>
   );
 };
-
-SignUpPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
 
 export default withTranslation('common')(SignUpPage);
