@@ -11,7 +11,6 @@ const getIdToken = async (): Promise<string | void> => {
   if (auth.currentUser) {
     return await auth.currentUser
       .getIdToken(true)
-      .then((idToken) => idToken)
       .catch((error) => console.error(error));
   } else {
     return Promise.resolve('no token');
