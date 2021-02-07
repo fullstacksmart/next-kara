@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Layout } from '../../../containers/layout';
+import { Grid, Hidden } from '@material-ui/core';
 import {
   Approbation,
   ApprobationStatus,
@@ -26,7 +27,6 @@ import {
   ExperienceEdit,
   QualificationSection,
   QualificationEdit,
-  Button,
   OtherSkillsSection,
   LanguageSection,
   LanguagesEdit,
@@ -36,71 +36,7 @@ import {
   ProgressIndicator,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
-
-// export interface ProfilePageProps extends PageProps {
-//   id: string;
-// }
-
-// const GET_TALENT = gql`
-//   query GetTalent($id: String!) {
-//     getTalentById(id: $id) {
-//       id
-//       name {
-//         firstName
-//         middleName
-//         lastName
-//       }
-//       gender
-//       fullName
-//       profilePic
-//       profession
-//       address {
-//         city
-//         isoCode
-//       }
-//       description
-//       experiences {
-//         id
-//         title
-//         lineOfWork
-//         employer {
-//           id
-//           name
-//           address {
-//             city
-//             isoCode
-//           }
-//         }
-//         duration {
-//           from {
-//             timeStamp
-//           }
-//           to {
-//             timeStamp
-//           }
-//         }
-//         description
-//       }
-//       qualifications {
-//         institution {
-//           name
-//         }
-//       }
-//       approbations {
-//         id
-//       }
-//       documents {
-//         id
-//       }
-//       languages {
-//         language
-//       }
-//       otherSkills {
-//         name
-//       }
-//     }
-//   }
-// `;
+import useStyles from './profile.styles';
 
 const GET_ALL_INFO = gql`
   query GetTalentById($id: String!) {
@@ -197,6 +133,7 @@ const GET_ALL_INFO = gql`
 `;
 
 const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
+  const classes = useStyles();
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
     variables: {
@@ -259,24 +196,65 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
       }
       i18n={i18n}
     >
-      <BasicInfo
-        t={t}
-        basicInfo={basicInfo}
-        handleEdit={() => setModal({ type: ModalType.BASIC_INFO })}
-      />
+      <Grid container spacing={3} className={classes.OuterContainer}>
+        <Grid item md={8} xs={12}>
+          <BasicInfo
+            t={t}
+            basicInfo={basicInfo}
+            handleEdit={() => setModal({ type: ModalType.BASIC_INFO })}
+          />
+          <ExperienceSection
+            t={t}
+            gender={basicInfo.gender}
+            experiences={experiences}
+            handleEdit={(id?: string) => {
+              setModal({ type: ModalType.EXPERIENCE, id });
+            }}
+          />
+          <QualificationSection
+            t={t}
+            qualifications={qualifications}
+            handleEdit={(id?: string) => {
+              setModal({ type: ModalType.QUALIFICATION, id });
+            }}
+          />
+        </Grid>
+        <Grid item md={4} xs={12}>
+          <Hidden xsDown>
+            <ProgressIndicator progress={progress} />
+          </Hidden>
+          <LanguageSection
+            t={t}
+            languages={languages}
+            handleEdit={() => setModal({ type: ModalType.LANGUAGE })}
+          />
+          <OtherSkillsSection
+            t={t}
+            otherSkills={otherSkills}
+            handleEdit={() => setModal({ type: ModalType.OTHERSKILL })}
+          />
+          <OtherSkillsEdit
+            t={t}
+            otherSkills={otherSkills}
+            onClose={handleModalClose}
+            open={modal.type === ModalType.OTHERSKILL}
+            talentId={basicInfo.id}
+          />
+          <ApprobationsSection
+            t={t}
+            approbations={approbations}
+            handleEdit={() => setModal({ type: ModalType.APPROBATION })}
+          />
+          <Hidden mdUp>
+            <ProgressIndicator progress={progress} />
+          </Hidden>
+        </Grid>
+      </Grid>
       <BasicInfoEdit
         t={t}
         basicInfo={basicInfo}
         open={modal.type === ModalType.BASIC_INFO}
         onClose={handleModalClose}
-      />
-      <ExperienceSection
-        t={t}
-        gender={basicInfo.gender}
-        experiences={experiences}
-        handleEdit={(id?: string) => {
-          setModal({ type: ModalType.EXPERIENCE, id });
-        }}
       />
       <ExperienceEdit
         t={t}
@@ -286,13 +264,6 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         onClose={handleModalClose}
         open={modal.type === ModalType.EXPERIENCE}
       />
-      <QualificationSection
-        t={t}
-        qualifications={qualifications}
-        handleEdit={(id?: string) => {
-          setModal({ type: ModalType.QUALIFICATION, id });
-        }}
-      />
       <QualificationEdit
         t={t}
         talent={basicInfo}
@@ -301,34 +272,12 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         onClose={handleModalClose}
         open={modal.type === ModalType.QUALIFICATION}
       />
-      <LanguageSection
-        t={t}
-        languages={languages}
-        handleEdit={() => setModal({ type: ModalType.LANGUAGE })}
-      />
       <LanguagesEdit
         t={t}
         languages={languages}
         onClose={handleModalClose}
         open={modal.type === ModalType.LANGUAGE}
         talentId={basicInfo.id}
-      />
-      <OtherSkillsSection
-        t={t}
-        otherSkills={otherSkills}
-        handleEdit={() => setModal({ type: ModalType.OTHERSKILL })}
-      />
-      <OtherSkillsEdit
-        t={t}
-        otherSkills={otherSkills}
-        onClose={handleModalClose}
-        open={modal.type === ModalType.OTHERSKILL}
-        talentId={basicInfo.id}
-      />
-      <ApprobationsSection
-        t={t}
-        approbations={approbations}
-        handleEdit={() => setModal({ type: ModalType.APPROBATION })}
       />
       <ApprobationsEdit
         t={t}
@@ -337,8 +286,6 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         open={modal.type === ModalType.APPROBATION}
         talentId={basicInfo.id}
       />
-      <ProgressIndicator progress={progress} />
-      <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );
 };
