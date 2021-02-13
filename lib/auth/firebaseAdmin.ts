@@ -32,9 +32,13 @@ export const getUserFromToken = async (
     });
 
   if (uid) {
-    const user = await getTalentById(uid);
-    console.log('found user: ', user);
-    return user;
+    try {
+      const user = await getTalentById(uid);
+      console.log('found user: ', user);
+      return user;
+    } catch (e) {
+      console.error(e);
+    }
   } else {
     console.log('no uid found');
     return undefined;
