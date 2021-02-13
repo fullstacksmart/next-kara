@@ -47,14 +47,14 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   return (
-    <Layout title="sign in">
+    <Layout title="sign in" t={t}>
       <Card>
         <CardContent>
           <Container>
             <Typography variant="h2">Sign In</Typography>
             <form onSubmit={handleSubmit}>
               <InputField
-                id="email"
+                propName="email"
                 type="email"
                 value={formValues.email}
                 label={t('email')}
@@ -63,7 +63,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
                 required
               />
               <InputField
-                id="password"
+                propName="password"
                 value={formValues.password}
                 label={t('password')}
                 setValue={setFormValues}
