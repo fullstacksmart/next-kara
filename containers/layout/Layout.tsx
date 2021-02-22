@@ -56,7 +56,7 @@ const Layout = ({
             <Typography variant="h5">{heading}</Typography>
           </Box>
           <div className={classes.buttons}>
-            <Button href="/">{t('labels.buttons.home')}</Button>
+            <Button href="/">{'labels.buttons.home'}</Button>
             {i18n ? (
               <OptionToggler
                 className={classes.languageButton}

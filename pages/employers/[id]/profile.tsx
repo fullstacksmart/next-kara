@@ -23,6 +23,7 @@ const GET_ALL_INFO = gql`
       basicInfoEmployer {
         id
         companyName
+        industry
         address {
           street
           streetNo
