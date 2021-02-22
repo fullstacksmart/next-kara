@@ -30,19 +30,13 @@ const typeDefs = gql`
   }
 
   enum ApprobationStatus {
+    IN_PREPARATION
     ONGOING
     APPROVED
     DENIED
   }
 
-  enum LanguageSkillLevel {
-    BASIC
-    PROFICIENT
-    BUSINESS_LEVEL
-    MOTHER_TONGUE
-  }
-
-  enum OtherSKillLevel {
+  enum SkillLevel {
     BASIC
     PROFICIENT
     EXPERT
@@ -159,6 +153,7 @@ const typeDefs = gql`
     languages: [LanguageSkill]
     otherSkills: [OtherSkill]
     basicInfo: BasicInfo!
+    percentageComplete: Int!
   }
 
   type BasicInfo {
@@ -241,16 +236,17 @@ const typeDefs = gql`
   }
 
   type LanguageSkill {
+    id: ID!
     talent: Talent!
-    language: String
-    level: LanguageSkillLevel
+    name: String
+    level: SkillLevel
   }
 
   type OtherSkill {
     id: ID!
     talent: Talent!
     name: String
-    level: OtherSKillLevel
+    level: SkillLevel
     description: String
   }
   input NameInput {
@@ -271,6 +267,7 @@ const typeDefs = gql`
   }
 
   input UserInput {
+    id: ID!
     name: InitialNameInput!
     email: String!
     gender: Gender!
@@ -300,6 +297,29 @@ const typeDefs = gql`
     profilePic: String
     profession: Profession
     description: String
+    languages: [LanguageSkillInput]
+    otherSkills: [OtherSkillInput]
+    approbations: [ApprobationInput]
+  }
+  input LanguageSkillInput {
+    id: ID!
+    talent: ID
+    name: String
+    level: SkillLevel
+  }
+  input OtherSkillInput {
+    id: ID!
+    talent: ID
+    name: String
+    level: SkillLevel
+    description: String
+  }
+
+  input ApprobationInput {
+    id: ID!
+    talent: ID
+    state: FederalState
+    status: ApprobationStatus
   }
 
   input EmployerUpdate {

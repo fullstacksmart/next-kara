@@ -14,6 +14,7 @@ const DELETE_QUALIFICATION = gql`
       qualifications {
         id
       }
+      percentageComplete
     }
   }
 `;
@@ -43,6 +44,7 @@ const UPDATE_QUALIFICATION = gql`
         }
         description
       }
+      percentageComplete
     }
   }
 `;
@@ -73,6 +75,7 @@ const ADD_QUALIFICATION = gql`
         }
         description
       }
+      percentageComplete
     }
   }
 `;

@@ -40,6 +40,9 @@ const resolvers = {
         isBasicInfoComplete: helpers.isBasicInfoComplete(talent),
       };
     },
+    percentageComplete(talent: Talent): number {
+      return helpers.percentageComplete(talent);
+    },
   },
   Employer: {
     type(): string {
