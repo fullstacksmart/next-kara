@@ -31,13 +31,15 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     name: {
       lastName: '',
     },
-    gender: Gender.OTHER,
+    // TO DO: Handle Gender
+    gender: 'OTHER',
     email: '',
     password: '',
     type: 'TALENT',
   });
+
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
-  const [createUser, newUser] = useMutation(ADD_USER);
+  const [createUser] = useMutation(ADD_USER);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
@@ -79,17 +81,10 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
           }
         })
         .catch((error: Error) => {
-          console.error(error);
+          console.error(error); //eslint-disable-line no-console
         });
     }
   };
-
-  useEffect(() => {
-    // TODO: Remove unnecessary check of user
-    if (newUser.data) {
-      console.log('new User:', newUser); //eslint-disable-line no-console
-    }
-  }, [newUser]);
 
   return (
     <Layout title="sign up" t={t}>

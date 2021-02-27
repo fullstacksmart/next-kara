@@ -20,7 +20,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     type: 'TALENT',
   });
   const auth = useAuth();
-  console.log(auth.user);
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
@@ -33,28 +32,27 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
       auth
         .signin(formValues.email, formValues.password)
         .then((user: FirebaseUser | void | null) => {
-          if (typeof user !== null) {
-            console.log('current user: ', auth.user);
-          } else {
-            console.log(
+          if (typeof user === null) {
+            //eslint-disable-next-line no-console
+            console.error(
               'wrong email or password, current user still is: ',
               auth.user,
             );
           }
         })
-        .catch((error: Error) => console.error(error));
+        .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
   };
 
   return (
-    <Layout title="sign in">
+    <Layout title="sign in" t={t}>
       <Card>
         <CardContent>
           <Container>
             <Typography variant="h2">Sign In</Typography>
             <form onSubmit={handleSubmit}>
               <InputField
-                id="email"
+                propName="email"
                 type="email"
                 value={formValues.email}
                 label={t('email')}
@@ -63,7 +61,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
                 required
               />
               <InputField
-                id="password"
+                propName="password"
                 value={formValues.password}
                 label={t('password')}
                 setValue={setFormValues}
