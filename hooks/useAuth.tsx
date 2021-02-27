@@ -44,16 +44,19 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
   }, []);
 
   const signup: Signup = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => error);
   };
 
   const signin: Signin = (email, password) => {
     return auth
       .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        if (userCredential.user) setUser({ id: userCredential.user.uid });
-        return userCredential.user;
-      });
+      .then((response) => {
+        if (response.user) setUser({ id: response.user.uid });
+        return response.user;
+      })
+      .catch((error) => error);
   };
 
   const logout: Logout = () => {
