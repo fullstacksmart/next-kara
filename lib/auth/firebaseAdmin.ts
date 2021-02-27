@@ -26,7 +26,7 @@ export const getUserFromToken = async (
       return decodedToken.uid;
     })
     .catch((error) => {
-      console.error('uid failed', error);
+      console.error('uid failed', error); //eslint-disable-line no-console
       return null;
     });
 
@@ -35,7 +35,8 @@ export const getUserFromToken = async (
       const user = await getTalentById(uid);
       return user;
     } catch (e) {
-      console.error(e);
+      console.error(e); //eslint-disable-line no-console
+      return undefined;
     }
   } else {
     return undefined;

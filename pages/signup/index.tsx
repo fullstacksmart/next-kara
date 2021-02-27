@@ -5,13 +5,13 @@ import {
   Container,
   Box,
 } from '@material-ui/core';
+import OptionsToggler from '../../components/option-toggler/OptionToggler';
+import { Layout } from '../../containers/layout';
+import { Button } from '../../components/buttons';
+import InputField from '../../components/input-field/InputField';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
-import OptionsToggler from 'components/option-toggler/OptionToggler';
-import { Layout } from 'containers/layout';
-import { Button } from 'components/buttons';
-import InputField from 'components/input-field/InputField';
-import { useEffect, useState } from 'react';
-import { Gender, PageProps, UserInput, UserType } from 'lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
@@ -27,12 +27,42 @@ const ADD_USER = gql`
 `;
 
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
-  const [formValues, setFormValues] = useState<Partial<UserInput>>({
+  interface FormValues {
+    name: {
+      firstName?: string;
+      lastName: string;
+    };
+    company?: string;
+    gender: Gender;
+    email: string;
+    password: string;
+    type: 'TALENT' | 'EMPLOYER' | 'AGENCY';
+  }
+  interface AddUserInput {
+    name: {
+      firstName?: string;
+      lastName: string;
+    };
+    company?: string;
+    gender: string;
+    email: string;
+    password: string;
+    type: 'TALENT' | 'EMPLOYER' | 'AGENCY';
+  }
+
+  const addUserInputTransformer = (formValues: FormValues): AddUserInput => {
+    return {
+      ...formValues,
+      gender: Gender[formValues.gender],
+    };
+  };
+
+  const [formValues, setFormValues] = useState<FormValues>({
     name: {
       lastName: '',
     },
     // TO DO: Handle Gender
-    gender: 'OTHER',
+    gender: Gender.OTHER,
     email: '',
     password: '',
     type: 'TALENT',
@@ -58,7 +88,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         propName="company"
         value={formValues.company}
         label={t('companyName')}
-        setValue={setFormValues}
+        setValue={setFormValues as Dispatch<SetStateAction<Partial<UserInput>>>}
         required
       />
     ) : null;
@@ -72,7 +102,10 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
           if (response.user) {
             return createUser({
               variables: {
-                input: { id: response.user.uid, ...formValues },
+                input: {
+                  id: response.user.uid,
+                  ...addUserInputTransformer(formValues),
+                },
               },
             }).then(({ data }) => {
               const user = data.addUser;
@@ -107,20 +140,35 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 }}
               />
               <Box component="div">
-                <GenderSelector t={t} updateFunction={setFormValues} />
+                <GenderSelector
+                  t={t}
+                  updateFunction={
+                    setFormValues as Dispatch<
+                      SetStateAction<Partial<UserInput>>
+                    >
+                  }
+                />
                 <InputField
                   propName={['name', 'firstName']}
                   value={formValues.name?.firstName}
                   label={t('fullName.firstName')}
                   fullWidth={false}
-                  setValue={setFormValues}
+                  setValue={
+                    setFormValues as Dispatch<
+                      SetStateAction<Partial<UserInput>>
+                    >
+                  }
                 />
                 <InputField
                   propName={['name', 'lastName']}
                   value={formValues.name?.lastName}
                   label={t('fullName.lastName')}
                   fullWidth={false}
-                  setValue={setFormValues}
+                  setValue={
+                    setFormValues as Dispatch<
+                      SetStateAction<Partial<UserInput>>
+                    >
+                  }
                   required
                 />
               </Box>
@@ -130,7 +178,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 type="email"
                 value={formValues.email}
                 label={t('email')}
-                setValue={setFormValues}
+                setValue={
+                  setFormValues as Dispatch<SetStateAction<Partial<UserInput>>>
+                }
                 inputProps={{ className: styles.FormInput }}
                 required
               />
@@ -138,7 +188,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 propName="password"
                 value={formValues.password}
                 label={t('password')}
-                setValue={setFormValues}
+                setValue={
+                  setFormValues as Dispatch<SetStateAction<Partial<UserInput>>>
+                }
                 type="password"
                 required
               />
