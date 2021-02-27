@@ -1,6 +1,6 @@
 import { EditPopup } from '../edit-popup/EditPopup';
 import { TFunction } from 'next-i18next';
-import { Experience, Talent } from '../../lib/types';
+import { Experience, Profession, Talent } from '../../lib/types';
 import { DialogProps, Box } from '@material-ui/core';
 import { useEffect, useMemo, useState } from 'react';
 import InputField from '../input-field/InputField';
@@ -18,6 +18,7 @@ const DELETE_EXPERIENCE = gql`
       experiences {
         id
       }
+      percentageComplete
     }
   }
 `;
@@ -46,6 +47,7 @@ const UPDATE_EXPERIENCE = gql`
         }
         description
       }
+      percentageComplete
     }
   }
 `;
@@ -74,6 +76,7 @@ const ADD_EXPERIENCE = gql`
         }
         description
       }
+      percentageComplete
     }
   }
 `;
@@ -96,7 +99,7 @@ export const ExperienceEdit = ({
   const newExperience: Experience = useMemo(
     () => ({
       id,
-      lineOfWork: 'NURSE',
+      lineOfWork: Profession.NURSE,
       talent,
       isComplete: false,
       duration: {
@@ -128,7 +131,7 @@ export const ExperienceEdit = ({
       input: {
         id: updatedExperience.id,
         talent: updatedExperience.talent?.id,
-        lineOfWork: updatedExperience.lineOfWork,
+        lineOfWork: Profession[updatedExperience.lineOfWork || 0],
         employer: {
           name: formatForDb(updatedExperience.employer?.name),
           address: {

@@ -2,7 +2,11 @@ import { BaseEntity } from '.';
 
 export type UserType = 'TALENT' | 'EMPLOYER' | 'AGENCY';
 
-export type Gender = 'MALE' | 'FEMALE' | 'OTHER';
+export enum Gender {
+  'OTHER',
+  'FEMALE',
+  'MALE',
+}
 
 export interface FullName {
   firstName?: string;
@@ -20,6 +24,7 @@ export interface User extends BaseEntity {
 }
 
 export interface UserInput {
+  id: string;
   name: FullName;
   gender: Gender;
   company?: string;

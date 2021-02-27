@@ -1,7 +1,7 @@
 import { Box, Typography, BoxProps } from '@material-ui/core';
 
 interface FieldDisplayProps extends BoxProps {
-  label: string;
+  label?: string;
   value: React.ReactNode;
   enabled?: boolean;
 }
@@ -11,12 +11,13 @@ export const FieldDisplay = ({
   value,
   enabled = true,
 }: FieldDisplayProps): React.ReactElement | null => {
-  return Boolean(value) && enabled ? (
+  const labelElement = label ? (
+    <Typography variant="h6">{label}</Typography>
+  ) : null;
+  return Boolean(value !== undefined) && enabled ? (
     <Box component="div">
-      <Typography variant="h6">{label}</Typography>
-      <Typography id={`bodyFor${label}`} variant="body1">
-        {value}
-      </Typography>
+      {labelElement}
+      <Typography variant="body1">{value}</Typography>
     </Box>
   ) : null;
 };

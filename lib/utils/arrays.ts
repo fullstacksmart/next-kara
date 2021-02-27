@@ -1,5 +1,10 @@
-import { Experience, Qualification } from '../types';
-import { BaseEntity } from '../types/common';
+import {
+  Experience,
+  Qualification,
+  Skill,
+  SkillLevel,
+  BaseEntity,
+} from '../types';
 
 export const filterById = (
   arr: BaseEntity[],
@@ -42,4 +47,35 @@ export const sortByFrom = (
   if (Number.isNaN(fromTimestampA)) return -1;
   if (Number.isNaN(fromTimestampB)) return 1;
   return fromTimestampB - fromTimestampA;
+};
+
+export const sortSkill = (a: Skill, b: Skill): number => {
+  if (a.level > b.level) return -1;
+  if (a.level < b.level) return 1;
+  return a.name < b.name ? -1 : 1;
+};
+
+export const toObject = <T extends BaseEntity>(
+  array: T[],
+): Record<string, T> => {
+  let obj: Record<string, T> = {};
+  array.forEach((item) => {
+    obj = { ...obj, [item.id]: item };
+  });
+  return obj;
+};
+
+export const getPropArray = (
+  propName: string | string[],
+): [string[], string] => {
+  let id: string;
+  let propArray: string[];
+  if (Array.isArray(propName)) {
+    id = propName[propName.length - 1];
+    propArray = propName;
+  } else {
+    id = propName;
+    propArray = [propName];
+  }
+  return [propArray, id];
 };

@@ -2,10 +2,20 @@ import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Layout } from '../../../containers/layout';
 import {
+  Approbation,
+  ApprobationStatus,
+  DbApprobation,
+  DbExperience,
+  DbSkill,
   Experience,
+  FederalState,
+  Gender,
   ModalType,
   PageProps,
+  Profession,
   Qualification,
+  Skill,
+  SkillLevel,
 } from '../../../lib/types';
 import { withTranslation } from '../../../i18n.config';
 import { useState } from 'react';
@@ -17,6 +27,13 @@ import {
   QualificationSection,
   QualificationEdit,
   Button,
+  OtherSkillsSection,
+  LanguageSection,
+  LanguagesEdit,
+  OtherSkillsEdit,
+  ApprobationsSection,
+  ApprobationsEdit,
+  ProgressIndicator,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
 
@@ -111,7 +128,6 @@ const GET_ALL_INFO = gql`
         id
         talent {
           id
-          gender
         }
         lineOfWork
         employer {
@@ -159,6 +175,23 @@ const GET_ALL_INFO = gql`
         description
         isComplete
       }
+      languages {
+        id
+        name
+        level
+      }
+      otherSkills {
+        id
+        name
+        level
+        description
+      }
+      approbations {
+        id
+        state
+        status
+      }
+      percentageComplete
     }
   }
 `;
@@ -179,9 +212,37 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
     return <h1>Error: {error.message}</h1>;
   }
 
-  const basicInfo = data?.getTalentById.basicInfo;
-  const experiences: Experience[] = data.getTalentById.experiences;
+  const dbBasicInfo = data?.getTalentById.basicInfo;
+  const basicInfo = {
+    ...dbBasicInfo,
+    profession: Profession[dbBasicInfo.profession],
+    gender: Gender[dbBasicInfo.gender],
+  };
+  const experiences: Experience[] = data.getTalentById.experiences.map(
+    (experience: DbExperience) => ({
+      ...experience,
+      lineOfWork: Profession[experience.lineOfWork],
+    }),
+  );
   const qualifications: Qualification[] = data.getTalentById.qualifications;
+  const languages: Skill[] = data.getTalentById.languages.map(
+    (language: DbSkill) => {
+      return { ...language, level: SkillLevel[language.level] };
+    },
+  );
+  const otherSkills: Skill[] = data.getTalentById.otherSkills.map(
+    (otherSkill: DbSkill) => {
+      return { ...otherSkill, level: SkillLevel[otherSkill.level] };
+    },
+  );
+  const approbations: Approbation[] = data.getTalentById.approbations.map(
+    (approbation: DbApprobation) => ({
+      ...approbation,
+      state: FederalState[approbation.state],
+      status: ApprobationStatus[approbation.status],
+    }),
+  );
+  const progress = data.getTalentById.percentageComplete;
 
   const handleModalClose = (): void => {
     setModal({ type: ModalType.NONE });
@@ -240,6 +301,43 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         onClose={handleModalClose}
         open={modal.type === ModalType.QUALIFICATION}
       />
+      <LanguageSection
+        t={t}
+        languages={languages}
+        handleEdit={() => setModal({ type: ModalType.LANGUAGE })}
+      />
+      <LanguagesEdit
+        t={t}
+        languages={languages}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.LANGUAGE}
+        talentId={basicInfo.id}
+      />
+      <OtherSkillsSection
+        t={t}
+        otherSkills={otherSkills}
+        handleEdit={() => setModal({ type: ModalType.OTHERSKILL })}
+      />
+      <OtherSkillsEdit
+        t={t}
+        otherSkills={otherSkills}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.OTHERSKILL}
+        talentId={basicInfo.id}
+      />
+      <ApprobationsSection
+        t={t}
+        approbations={approbations}
+        handleEdit={() => setModal({ type: ModalType.APPROBATION })}
+      />
+      <ApprobationsEdit
+        t={t}
+        approbations={approbations}
+        onClose={handleModalClose}
+        open={modal.type === ModalType.APPROBATION}
+        talentId={basicInfo.id}
+      />
+      <ProgressIndicator progress={progress} />
       <Button href={`/talents/${id}/settings`}>To Settings</Button>
     </Layout>
   );
