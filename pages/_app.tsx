@@ -14,6 +14,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 import '../styles/globals.css';
+import { AuthProvider } from '../hooks/useAuth';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
 
   return (
     <ApolloProvider client={client}>
+      <AuthProvider>
       <Head>
         <title>Kara</title>
         <meta
@@ -39,6 +41,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
           <Component {...pageProps} />
         </MuiPickersUtilsProvider>
       </ThemeProvider>
+      </AuthProvider>
     </ApolloProvider>
   );
 }

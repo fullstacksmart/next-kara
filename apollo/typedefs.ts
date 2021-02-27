@@ -202,6 +202,7 @@ const typeDefs = gql`
   }
 
   input UserInput {
+    id: ID!
     name: InitialNameInput!
     email: String!
     gender: Gender!

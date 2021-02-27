@@ -15,6 +15,8 @@ import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from '../../components/gender-selector/GenderSelector';
+import { useAuth } from '../../hooks/useAuth';
+import { FirebaseUserCredential } from '../../lib/types/auth';
 
 const ADD_USER = gql`
   mutation AddUser($input: UserInput!) {
@@ -29,16 +31,19 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     name: {
       lastName: '',
     },
-    gender: Gender.OTHER,
+    // TO DO: Handle Gender
+    gender: 'OTHER',
     email: '',
     password: '',
     type: 'TALENT',
   });
+
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
-  const [createUser, newUser] = useMutation(ADD_USER);
+  const [createUser] = useMutation(ADD_USER);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
+  const auth = useAuth();
 
   const handlePasswordRepeat = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -58,26 +63,28 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     ) : null;
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    try {
-      await createUser({
-        variables: {
-          input: formValues,
-        },
-      });
-    } catch (e) {
-      console.error('user already exists: ', e.message); //eslint-disable-line no-console
+    if (formValues.email && formValues.password) {
+      auth
+        .signup(formValues.email, formValues.password)
+        .then((response: FirebaseUserCredential) => {
+          if (response.user) {
+            return createUser({
+              variables: {
+                input: { id: response.user.uid, ...formValues },
+              },
+            }).then(({ data }) => {
+              const user = data.addUser;
+              auth.setContextUser(user);
+            });
+          }
+        })
+        .catch((error: Error) => {
+          console.error(error); //eslint-disable-line no-console
+        });
     }
   };
-
-  useEffect(() => {
-    if (newUser.data) {
-      console.log('new User:', newUser); //eslint-disable-line no-console
-    }
-  }, [newUser]);
 
   return (
     <Layout title="sign up" t={t}>
@@ -158,9 +165,5 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     </Layout>
   );
 };
-
-SignUpPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
 
 export default withTranslation('common')(SignUpPage);

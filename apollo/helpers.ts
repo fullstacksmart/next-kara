@@ -54,10 +54,11 @@ export const getTalentById = async (id: string): Promise<Talent> => {
   } catch (e) {
     handleError(e);
   }
-  if (!talent)
+  if (!talent) {
     throw new ApolloError({
       errorMessage: `404: No user with id ${id} found in db`,
     });
+  }
   return talent;
 };
 

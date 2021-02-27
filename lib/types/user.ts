@@ -24,6 +24,7 @@ export interface User extends BaseEntity {
 }
 
 export interface UserInput {
+  id: string;
   name: FullName;
   gender: Gender;
   company?: string;
