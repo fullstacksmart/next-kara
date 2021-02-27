@@ -5,7 +5,7 @@ import Head from 'next/head';
 import baseTheme from '../lib/material-ui/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { appWithTranslation } from '../i18n';
+import { appWithTranslation } from '../i18n.config';
 import { ApolloProvider } from '@apollo/client';
 import client from '../apollo/client';
 import { Router } from 'next/dist/client/router';

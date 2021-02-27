@@ -1,4 +1,4 @@
-import { Link } from '../../i18n';
+import { Link } from '../../i18n.config';
 import { Typography, Grid } from '@material-ui/core';
 import useStyles from './NavbarItemStyles';
 

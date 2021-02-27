@@ -3,7 +3,7 @@ import {
   Button as MuiButton,
 } from '@material-ui/core';
 import { LinkProps } from 'next/link';
-import { Link } from '../../i18n';
+import { Link } from '../../i18n.config';
 
 type OptionalLinkProps =
   | {
