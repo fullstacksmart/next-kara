@@ -9,12 +9,11 @@ const server = new ApolloServer({
   async context({ req }) {
     const auth = req.headers.authorization;
     const token = auth.replace('Bearer ', '');
-    console.log('token received in server: ', token);
     try {
       const user = getUserFromToken(token);
       return { user };
     } catch (error) {
-      console.error('error in server', error);
+      console.error('error in server', error); //eslint-disable-line no-console
     }
   },
   playground: true,

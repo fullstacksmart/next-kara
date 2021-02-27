@@ -59,7 +59,7 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
     return auth
       .signOut()
       .then(() => setUser({ id: '' }))
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e)); //eslint-disable-line no-console
   };
 
   const setContextUser = (user: ContextUserType): void => {

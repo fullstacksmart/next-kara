@@ -20,7 +20,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     type: 'TALENT',
   });
   const auth = useAuth();
-  console.log(auth.user);
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
@@ -33,16 +32,15 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
       auth
         .signin(formValues.email, formValues.password)
         .then((user: FirebaseUser | void | null) => {
-          if (typeof user !== null) {
-            console.log('current user: ', auth.user);
-          } else {
-            console.log(
+          if (typeof user === null) {
+            //eslint-disable-next-line no-console
+            console.error(
               'wrong email or password, current user still is: ',
               auth.user,
             );
           }
         })
-        .catch((error: Error) => console.error(error));
+        .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
   };
 

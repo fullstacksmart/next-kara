@@ -81,7 +81,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
           }
         })
         .catch((error: Error) => {
-          console.error(error);
+          console.error(error); //eslint-disable-line no-console
         });
     }
   };

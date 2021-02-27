@@ -23,7 +23,6 @@ export const getUserFromToken = async (
     .auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
-      console.log('uid from token: ', decodedToken.uid);
       return decodedToken.uid;
     })
     .catch((error) => {
@@ -34,13 +33,11 @@ export const getUserFromToken = async (
   if (uid) {
     try {
       const user = await getTalentById(uid);
-      console.log('found user: ', user);
       return user;
     } catch (e) {
       console.error(e);
     }
   } else {
-    console.log('no uid found');
     return undefined;
   }
 };

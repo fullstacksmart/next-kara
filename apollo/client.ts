@@ -11,7 +11,7 @@ const getIdToken = async (): Promise<string | void> => {
   if (auth.currentUser) {
     return await auth.currentUser
       .getIdToken(true)
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error)); //eslint-disable-line no-console
   } else {
     return Promise.resolve('no token');
   }
@@ -23,7 +23,6 @@ const httpLink = createHttpLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const idToken = await getIdToken();
-  console.log('token in apollo client: ', idToken);
   return {
     headers: {
       ...headers,
