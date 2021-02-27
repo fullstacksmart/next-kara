@@ -67,7 +67,6 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
     return auth
       .sendPasswordResetEmail(email)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((e) => console.error(e));

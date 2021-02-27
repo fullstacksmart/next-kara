@@ -15,20 +15,20 @@ const PasswordResetPage = ({ t }: PageProps): React.ReactElement => {
 
   const auth = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    auth.sendPasswordResetEmail(formValues.email);
+    if (formValues.email) auth.sendPasswordResetEmail(formValues.email);
   };
 
   return (
-    <Layout title="reset password">
+    <Layout title="reset password" t={t}>
       <Card>
         <CardContent>
           <Container>
             <Typography variant="h2">Sign In</Typography>
             <form onSubmit={handleSubmit}>
               <InputField
-                id="email"
+                propName="email"
                 type="email"
                 value={formValues.email}
                 label={t('email')}
