@@ -13,7 +13,7 @@ export type Signup = (
 export type Signin = (
   email: string,
   password: string,
-) => Promise<firebase.User | void | null>;
+) => Promise<firebase.User | void | null | FirebaseError>;
 
 export type Logout = () => Promise<void>;
 
@@ -30,3 +30,9 @@ export type FirebaseUserCredential = firebase.auth.UserCredential;
 export type FirebaseUser = firebase.User;
 
 export type FirebaseError = firebase.auth.Error;
+
+export const isError = (
+  response: FirebaseUser | FirebaseError | void | null,
+): response is FirebaseError => {
+  return (response as FirebaseError).code !== undefined;
+};

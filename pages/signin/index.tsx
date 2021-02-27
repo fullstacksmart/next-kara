@@ -2,13 +2,15 @@ import { Button } from 'components/buttons';
 import { Card, CardContent, Typography, Container } from '@material-ui/core';
 import { Layout } from 'containers/layout';
 import InputField from 'components/input-field/InputField';
-import { useState } from 'react';
+import { useState, SetStateAction } from 'react';
 import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import { FirebaseUser } from '../../lib/types/auth';
 import SigninErrors from 'components/error-handling/signin-errors';
+import { isError } from 'lib/types/auth';
+import { FirebaseError } from 'lib/types/auth';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
@@ -21,7 +23,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     type: 'TALENT',
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<FirebaseError | null>(null);
   const auth = useAuth();
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -36,9 +38,9 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
       setError(null);
       auth
         .signin(formValues.email, formValues.password)
-        .then((response: FirebaseUser | void | null) => {
+        .then((response) => {
           setIsLoading(false);
-          if (response.error) setError(response.error);
+          if (isError(response)) setError(() => response);
         })
         .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
@@ -48,7 +50,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
 
   return (
     <Layout title="sign in" t={t}>
-      {error ? <SigninErrors error={error} t={t} /> : null}
+      {error && <SigninErrors error={error} />}
       <Card>
         <CardContent>
           <Container>
