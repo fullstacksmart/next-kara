@@ -52,6 +52,10 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
       .then((userCredential) => {
         if (userCredential.user) setUser({ id: userCredential.user.uid });
         return userCredential.user;
+      })
+      .catch((error) => {
+        console.error(error);
+        return { error };
       });
   };
 

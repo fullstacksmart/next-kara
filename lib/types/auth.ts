@@ -28,3 +28,5 @@ export type UseAuthProviderReturnType = {
 export type FirebaseUserCredential = firebase.auth.UserCredential;
 
 export type FirebaseUser = firebase.User;
+
+export type FirebaseError = firebase.auth.Error;

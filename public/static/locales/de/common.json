@@ -196,5 +196,8 @@
   "type": {
     "employer": "Arbeitgeber",
     "talent": "Talent"
+  },
+  "errors": {
+    "auth/user-not-found": "Es konnte kein Benutzer mit dieser E-Mail-Adresse gefunden werden. Bitte versuchen Sie es erneut oder registrieren Sie sich."
   }
 }
