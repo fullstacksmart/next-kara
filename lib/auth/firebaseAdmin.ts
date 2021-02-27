@@ -4,7 +4,7 @@ import { User } from '../../lib/types';
 
 export const getUserFromToken = async (
   token: string,
-): Promise<Partial<User> | undefined | null> => {
+): Promise<Partial<User> | undefined> => {
   const firebasePrivateKey = process.env.FIREBASE_PRIVATE_KEY;
 
   if (!admin.apps.length) {

@@ -42,7 +42,7 @@ const resolvers = {
     },
   },
   Experience: {
-    async talent(experience: ExperienceEntry): Promise<Talent | null> {
+    async talent(experience: ExperienceEntry): Promise<Talent> {
       return helpers.getTalentById(experience.talent);
     },
     async employer(experience: ExperienceEntry): Promise<Organization | null> {
@@ -54,7 +54,7 @@ const resolvers = {
     },
   },
   Qualification: {
-    async talent(qualification: QualificationEntry): Promise<Talent | null> {
+    async talent(qualification: QualificationEntry): Promise<Talent> {
       return helpers.getTalentById(qualification.talent);
     },
     async institution(
@@ -77,10 +77,7 @@ const resolvers = {
     getAllUserIds(): string[] {
       return helpers.getAllUserIds();
     },
-    async getTalentById(
-      _: unknown,
-      { id }: { id: string },
-    ): Promise<Talent | null> {
+    async getTalentById(_: unknown, { id }: { id: string }): Promise<Talent> {
       return await helpers.getTalentById(id);
     },
   },

@@ -47,12 +47,17 @@ export const getAllUserIds = (): string[] => {
   return talents.concat(employers);
 };
 
-export const getTalentById = async (id: string): Promise<Talent | null> => {
+export const getTalentById = async (id: string): Promise<Talent> => {
   let talent: Talent | null = null;
   try {
     talent = await models.Talent.findOne({ id });
   } catch (e) {
     handleError(e);
+  }
+  if (!talent) {
+    throw new ApolloError({
+      errorMessage: `404: No user with id ${id} found in db`,
+    });
   }
   return talent;
 };

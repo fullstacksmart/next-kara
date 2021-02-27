@@ -39,7 +39,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   });
 
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
-  const [createUser, newUser] = useMutation(ADD_USER);
+  const [createUser] = useMutation(ADD_USER);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
@@ -85,13 +85,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         });
     }
   };
-
-  useEffect(() => {
-    // TODO: Remove unnecessary check of user
-    if (newUser.data) {
-      console.log('new User:', newUser); //eslint-disable-line no-console
-    }
-  }, [newUser]);
 
   return (
     <Layout title="sign up" t={t}>
