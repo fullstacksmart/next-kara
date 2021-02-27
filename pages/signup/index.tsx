@@ -5,16 +5,16 @@ import {
   Container,
   Box,
 } from '@material-ui/core';
-import { withTranslation } from '../../i18n';
 import OptionsToggler from '../../components/option-toggler/OptionToggler';
 import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
+import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
-import { GenderSelector } from '../../components/gender-selector/GenderSelector';
+import { GenderSelector } from 'components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
 import { FirebaseUserCredential } from '../../lib/types/auth';
 
