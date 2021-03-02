@@ -54,6 +54,7 @@ const UPDATE_EMPLOYER = gql`
         id
         companyName
         industry
+        branch
         name {
           firstName
           middleName
@@ -246,6 +247,7 @@ export const BasicInfoEditEmployer = ({
         gender: updatedInfo.gender,
         companyName: updatedInfo.companyName,
         industry: updatedInfo.industry,
+        branch: updatedInfo.branch,
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),
@@ -271,6 +273,7 @@ export const BasicInfoEditEmployer = ({
         gender: updatedInfo.gender,
         companyName: updatedInfo.companyName,
         industry: updatedInfo.industry,
+        branch: updatedInfo.branch,
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),

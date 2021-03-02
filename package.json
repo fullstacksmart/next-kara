@@ -20,11 +20,11 @@
     "firebase": "^8.2.2",
     "firebase-admin": "^9.4.2",
     "js-cookie": "^2.2.1",
+    "lowdb": "^1.0.0",
     "next": "10.0.3",
     "next-i18next": "^7.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "lowdb": "^1.0.0",
     "react-material-ui-carousel": "^2.1.1"
   },
   "devDependencies": {

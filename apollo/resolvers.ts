@@ -54,6 +54,7 @@ const resolvers = {
         name: employer.name,
         companyName: employer.companyName,
         industry: employer.industry,
+        branch: employer.branch,
         fullName: helpers.getFullName(employer),
         gender: employer.gender,
         profilePic: employer.profilePic,

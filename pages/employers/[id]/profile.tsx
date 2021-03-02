@@ -24,6 +24,7 @@ const GET_ALL_INFO = gql`
         id
         companyName
         industry
+        branch
         address {
           street
           streetNo

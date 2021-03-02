@@ -6,12 +6,29 @@ export type Industry =
   | 'PERSONNEL_CONSULTING'
   | 'TECHNOLOGY';
 
+export type Branch =
+  | 'HOSPITAL'
+  | 'NURSING_HOME'
+  | 'AMBULATORY_CARE_SERVICE'
+  | 'REHAB'
+  | 'PRACTICE'
+  | 'DOCTORS_OFFICE'
+  | 'MEDICAL_RESEARCH_INSTITUTE'
+  | 'RESEARCH_INSTITUTE'
+  | 'SANATORIUM'
+  | 'RECRUITMENT'
+  | 'LANGUAGE_SCHOOL'
+  | 'MIGRATION_LAW'
+  | 'EMPLOYMENT_LAW'
+  | 'OTHER';
+
 export interface Employer extends User {
   address: Address;
   profilePic: string;
   description: string;
   companyName: string;
   industry: Industry;
+  branch: Branch;
   website?: string;
   //search preferences
   isBasicInfoComplete: boolean;
@@ -22,6 +39,7 @@ export interface EmployerEntry {
   profilePic: string;
   companyName: string;
   industry: Industry;
+  branch: Branch;
   address: Address;
   description: string;
   website: string;
@@ -33,6 +51,7 @@ export interface BasicInfoEmployer {
   name: FullName;
   companyName: string;
   industry: Industry;
+  branch: Branch;
   fullName: string;
   website?: string;
   gender: Gender;
@@ -46,6 +65,7 @@ export interface BasicInfoEntryEmployer {
   name?: FullName;
   companyName: string;
   industry: Industry;
+  branch: Branch;
   website?: string;
   gender?: Gender;
   address?: Address;

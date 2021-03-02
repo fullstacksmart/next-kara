@@ -70,6 +70,23 @@ const typeDefs = gql`
     TECHNOLOGY
   }
 
+  enum Branch {
+    HOSPITAL
+    NURSING_HOME
+    AMBULATORY_CARE_SERVICE
+    REHAB
+    PRACTICE
+    DOCTORS_OFFICE
+    MEDICAL_RESEARCH_INSTITUTE
+    RESEARCH_INSTITUTE
+    SANATORIUM
+    RECRUITMENT
+    LANGUAGE_SCHOOL
+    MIGRATION_LAW
+    EMPLOYMENT_LAW
+    OTHER
+  }
+
   enum CARE {
     HOSPITAL
     NURSING_HOME
@@ -172,6 +189,7 @@ const typeDefs = gql`
     id: ID!
     companyName: String!
     industry: Industry!
+    branch: Branch!
     email: String!
     password: String!
     gender: Gender!
@@ -190,6 +208,7 @@ const typeDefs = gql`
     gender: Gender!
     companyName: String
     industry: Industry!
+    branch: Branch!
     name: FullName!
     fullName: String
     profilePic: String
@@ -327,6 +346,7 @@ const typeDefs = gql`
     name: NameInput
     companyName: String
     industry: Industry
+    branch: Branch
     website: String
     gender: Gender
     address: AddressInput
