@@ -1,12 +1,12 @@
 import { TFunction } from 'next-i18next';
-import { Gender, Talent } from '../../lib/types';
+import { BaseUser, Gender } from '../../lib/types';
 import OptionsSelector, {
   OptionsSelectorProps,
 } from '../options-selector/OptionsSelector';
 
 interface GenderSelectorProps extends Partial<OptionsSelectorProps> {
   t: TFunction;
-  updateFunction: React.Dispatch<React.SetStateAction<Partial<Talent>>>;
+  updateFunction: React.Dispatch<React.SetStateAction<Partial<BaseUser>>>;
   value?: Gender;
 }
 
@@ -19,7 +19,7 @@ export const GenderSelector = ({
   const handleChange = (value: string): void => {
     updateFunction((oldValues) => ({
       ...oldValues,
-      gender: parseInt(value),
+      gender: Gender[value as keyof typeof Gender],
     }));
   };
   const options = [

@@ -68,8 +68,8 @@ const typeDefs = gql`
     name: FullName!
     gender: Gender!
     email: String!
-    password: String!
-    type: UserType!
+    password: String
+    type: UserType
   }
 
   type FullName {
@@ -104,9 +104,9 @@ const typeDefs = gql`
   type Talent implements User {
     id: ID!
     email: String!
-    password: String!
+    password: String
     gender: Gender!
-    type: UserType!
+    type: UserType
     name: FullName!
     profilePic: String
     profession: Profession
@@ -120,6 +120,23 @@ const typeDefs = gql`
     otherSkills: [OtherSkill]
     basicInfo: BasicInfo!
     percentageComplete: Int!
+  }
+
+  input TalentInput {
+    id: ID!
+    gender: Gender!
+    name: NameInput!
+    email: String
+    profilePic: String
+    profession: Profession
+    address: AddressInput
+    description: String
+    experiences: [NewExperience]!
+    qualifications: [NewQualification]!
+    approbations: [ApprobationInput]!
+    documents: [String]!
+    languages: [LanguageSkillInput]!
+    otherSkills: [OtherSkillInput]!
   }
 
   type BasicInfo {
@@ -190,12 +207,6 @@ const typeDefs = gql`
     lastName: String
   }
 
-  input InitialNameInput {
-    firstName: String
-    middleName: String
-    lastName: String!
-  }
-
   input AddressInput {
     city: String
     isoCode: IsoCode
@@ -203,7 +214,7 @@ const typeDefs = gql`
 
   input UserInput {
     id: ID!
-    name: InitialNameInput!
+    name: NameInput!
     email: String!
     gender: Gender!
     company: String
@@ -311,7 +322,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(input: UserInput!): User!
+    addTalent(input: TalentInput!): Talent!
+    addEmployer(input: UserInput!): User!
     updateTalent(input: TalentUpdate!): Talent!
     addExperience(input: NewExperience!): Talent!
     updateExperience(input: ExperienceUpdate!): Talent!

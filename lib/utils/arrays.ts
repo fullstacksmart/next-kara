@@ -1,10 +1,4 @@
-import {
-  Experience,
-  Qualification,
-  Skill,
-  SkillLevel,
-  BaseEntity,
-} from '../types';
+import { Experience, Qualification, Skill, BaseEntity } from '../types';
 
 export const filterById = (
   arr: BaseEntity[],

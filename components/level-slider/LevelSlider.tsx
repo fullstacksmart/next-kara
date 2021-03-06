@@ -8,7 +8,6 @@ import {
 import React, { Dispatch, SetStateAction } from 'react';
 import { ComponentWithT, SkillLevel } from '../../lib/types';
 import { computeNestedValue } from '../../lib/utils/arrays';
-import { getIntKeys } from '../../lib/utils/objects';
 
 interface LevelSliderProps extends SliderProps, ComponentWithT {
   type: 'language' | 'skill';
@@ -17,7 +16,7 @@ interface LevelSliderProps extends SliderProps, ComponentWithT {
   input?: SkillLevel;
   propName: string | string[];
 }
-const levels = getIntKeys(SkillLevel);
+const levels = Object.keys(SkillLevel);
 const useStyles = makeStyles({
   slider: {
     width: '55rem',
@@ -46,9 +45,16 @@ export const LevelSlider = ({
     propArray = [propName];
   }
 
+  const intLevels: (keyof typeof SkillLevel)[] = [
+    'BASIC',
+    'PROFICIENT',
+    'EXPERT',
+    'MASTER',
+  ];
+
   const marks = levels.map((level) => ({
-    value: level,
-    label: t(`${type}.level.${SkillLevel[level]}`),
+    value: intLevels.indexOf(level as keyof typeof SkillLevel),
+    label: t(`${type}.level.${level}`),
   }));
 
   const classes = useStyles();
@@ -74,7 +80,11 @@ export const LevelSlider = ({
       setValue((oldValues) => {
         return {
           ...oldValues,
-          ...computeNestedValue(oldValues, propArray, value),
+          ...computeNestedValue(
+            oldValues,
+            propArray,
+            intLevels[value as number],
+          ),
         };
       });
     }
@@ -89,7 +99,7 @@ export const LevelSlider = ({
         valueLabelDisplay={type === 'language' ? 'auto' : 'off'}
         valueLabelFormat={getText}
         className={classes.slider}
-        value={input || 0}
+        value={intLevels.indexOf(input || SkillLevel.BASIC)}
         max={marks.length - 1}
         step={1}
         marks={marks}
