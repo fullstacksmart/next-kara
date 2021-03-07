@@ -61,7 +61,7 @@ export const BasicInfoEdit = ({
     variables: {
       input: {
         id: updatedInfo.id,
-        gender: Gender[updatedInfo.gender || 0],
+        gender: Gender[updatedInfo.gender || Gender.OTHER],
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),
@@ -76,7 +76,7 @@ export const BasicInfoEdit = ({
               : null,
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: Profession[updatedInfo.profession || 0],
+        profession: Profession[updatedInfo.profession || Profession.NURSE],
         description: formatForDb(updatedInfo.description),
       },
     },
@@ -84,7 +84,7 @@ export const BasicInfoEdit = ({
       __typeName: 'Mutation',
       updateTalent: {
         id: updatedInfo.id,
-        gender: Gender[0],
+        gender: updatedInfo.gender,
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),
@@ -101,7 +101,7 @@ export const BasicInfoEdit = ({
           __typename: 'Address',
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: Profession[updatedInfo.profession || 0],
+        profession: updatedInfo.profession || Profession.NURSE,
         description: formatForDb(updatedInfo.description),
         __typename: 'Talent',
       },

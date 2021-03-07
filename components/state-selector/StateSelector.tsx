@@ -1,7 +1,6 @@
 import { TFunction } from 'next-i18next';
 import { FederalState } from '../../lib/types';
 import { computeNestedValue, getPropArray } from '../../lib/utils/arrays';
-import { getIntKeys } from '../../lib/utils/objects';
 import OptionsSelector, {
   OptionsSelectorProps,
 } from '../options-selector/OptionsSelector';
@@ -30,11 +29,11 @@ export const StateSelector = ({
     });
   };
 
-  const keys = getIntKeys(FederalState);
+  const keys = Object.keys(FederalState);
 
   const options = keys.map((key) => ({
     value: key.toString(),
-    label: t(`states.${FederalState[key]}`),
+    label: t(`states.${FederalState[key as keyof typeof FederalState]}`),
   }));
 
   return (

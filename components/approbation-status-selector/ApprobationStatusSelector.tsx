@@ -29,13 +29,15 @@ export const ApprobationStatusSelector = ({
     });
   };
 
-  const statusStrings = Object.keys(ApprobationStatus).filter(
-    (item) => !Number.isNaN(parseInt(item)),
-  ) as (keyof typeof ApprobationStatus)[];
+  const statusStrings = Object.keys(ApprobationStatus);
 
   const options = statusStrings.map((key) => ({
     value: key,
-    label: t(`approbation.status.${ApprobationStatus[key]}`),
+    label: t(
+      `approbation.status.${
+        ApprobationStatus[key as keyof typeof ApprobationStatus]
+      }`,
+    ),
   }));
 
   return (
