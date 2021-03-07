@@ -4,6 +4,9 @@ import { UserType } from 'lib/types/common';
 export const defaultNameInput: FullName = {
   lastName: '',
 };
+export const defaultGender = Gender.OTHER;
+
+export const defaultUserType = UserType.TALENT;
 
 export const defaultAddress: Address = {};
 
@@ -11,8 +14,8 @@ export const defaultSignupFormValues: SignupFormValues = {
   name: {
     lastName: '',
   },
-  gender: Gender.OTHER,
+  gender: defaultGender,
   email: '',
   password: '',
-  type: UserType.TALENT,
+  type: defaultUserType,
 };

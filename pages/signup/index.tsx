@@ -20,6 +20,7 @@ import { FirebaseUserCredential } from '../../lib/types/auth';
 import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
+import { useRouter } from 'next/router';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -42,6 +43,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     defaultSignupFormValues,
   );
 
+  const router = useRouter();
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser] = useMutation(ADD_EMPLOYER);
   const [createTalent] = useMutation(ADD_TALENT);
@@ -79,9 +81,10 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         .signup(formValues.email, formValues.password)
         .then((response: FirebaseUserCredential) => {
           if (response.user) {
+            const id = response.user.uid || '';
             const input = {
               ...transformSignupFormValuesToTalentInput(formValues),
-              id: response.user.uid,
+              id,
             };
             if (formValues.type === UserType.TALENT) {
               return createTalent({
@@ -91,18 +94,20 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               }).then(({ data }) => {
                 const user = data.addTalent;
                 auth.setContextUser(user);
+                router.push(`/talents/${id}`);
               });
             } else {
               return createUser({
                 variables: {
                   input: {
                     ...formValues,
-                    id: response.user.uid,
+                    id,
                   },
                 },
               }).then(({ data }) => {
                 const user = data.addEmployer;
                 auth.setContextUser(user);
+                router.push(`/employers/${id}`);
               });
             }
           }

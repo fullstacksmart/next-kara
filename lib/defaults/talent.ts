@@ -1,14 +1,15 @@
-import { Gender } from 'lib/types';
 import { Profession, TalentInput } from 'lib/types/talent';
-import { defaultAddress, defaultNameInput } from './common';
+import { defaultAddress, defaultGender, defaultNameInput } from './common';
+
+export const defaultProfession = Profession.NURSE;
 
 export const defaultTalentInput: TalentInput = {
   id: '',
   email: '',
-  gender: Gender.OTHER,
+  gender: defaultGender,
   name: defaultNameInput,
   profilePic: '',
-  profession: Profession.NURSE,
+  profession: defaultProfession,
   address: defaultAddress,
   description: '',
   experiences: [],

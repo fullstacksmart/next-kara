@@ -45,12 +45,7 @@ export const LevelSlider = ({
     propArray = [propName];
   }
 
-  const intLevels: (keyof typeof SkillLevel)[] = [
-    'BASIC',
-    'PROFICIENT',
-    'EXPERT',
-    'MASTER',
-  ];
+  const intLevels = Object.keys(SkillLevel) as (keyof typeof SkillLevel)[];
 
   const marks = levels.map((level) => ({
     value: intLevels.indexOf(level as keyof typeof SkillLevel),

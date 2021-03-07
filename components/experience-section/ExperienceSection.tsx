@@ -3,6 +3,7 @@ import { Experience, Gender } from '../../lib/types';
 import { CheckedTitle, ItemDivider, Section } from '../';
 import { ExperienceItem } from '../experience-item/ExperienceItem';
 import { sortByFrom } from '../../lib/utils/arrays';
+import { defaultGender } from 'lib/defaults/common';
 
 export interface ExperienceSectionProps {
   t: TFunction;
@@ -13,7 +14,7 @@ export interface ExperienceSectionProps {
 
 export const ExperienceSection = ({
   t,
-  gender = Gender.OTHER,
+  gender = defaultGender,
   experiences,
   handleEdit,
   ...props

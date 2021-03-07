@@ -1,3 +1,4 @@
+import { defaultGender } from 'lib/defaults/common';
 import { TFunction } from 'next-i18next';
 import { BaseUser, Gender } from '../../lib/types';
 import OptionsSelector, {
@@ -12,7 +13,7 @@ interface GenderSelectorProps extends Partial<OptionsSelectorProps> {
 
 export const GenderSelector = ({
   t,
-  value = Gender.OTHER,
+  value = defaultGender,
   updateFunction,
   ...props
 }: GenderSelectorProps): React.ReactElement => {
@@ -24,15 +25,15 @@ export const GenderSelector = ({
   };
   const options = [
     {
-      value: Gender.OTHER.toString(),
+      value: Gender.OTHER,
       label: t('gender.OTHER'),
     },
     {
-      value: Gender.FEMALE.toString(),
+      value: Gender.FEMALE,
       label: t('gender.FEMALE'),
     },
     {
-      value: Gender.MALE.toString(),
+      value: Gender.MALE,
       label: t('gender.MALE'),
     },
   ];

@@ -4,6 +4,8 @@ import styles from './BasicInfo.module.css';
 import { Gender, Profession, Talent } from '../../lib/types';
 import { TFunction } from 'next-i18next';
 import { getDisplayAddress } from '../../lib/utils/strings';
+import { defaultProfession } from 'lib/defaults/talent';
+import { defaultGender } from 'lib/defaults/common';
 
 interface BasicInfoProps {
   basicInfo: Partial<Talent>;
@@ -35,9 +37,9 @@ export const BasicInfo = ({
               />
               <Typography variant="h4">
                 {t(
-                  `profession.${Profession[basicInfo.profession || 0]}-${
-                    Gender[basicInfo.gender || 0]
-                  }`,
+                  `profession.${
+                    Profession[basicInfo.profession || defaultProfession]
+                  }-${Gender[basicInfo.gender || defaultGender]}`,
                 )}
               </Typography>
               <Typography variant="h4">
