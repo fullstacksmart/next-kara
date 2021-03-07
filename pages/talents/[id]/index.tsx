@@ -153,8 +153,8 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const dbBasicInfo = data?.getTalentById.basicInfo;
   const basicInfo = {
     ...dbBasicInfo,
-    profession: Profession[dbBasicInfo.profession],
-    gender: Gender[dbBasicInfo.gender],
+    profession: Profession[dbBasicInfo.profession as keyof typeof Profession],
+    gender: Gender[dbBasicInfo.gender as keyof typeof Gender],
   };
   const experiences: Experience[] = data.getTalentById.experiences.map(
     (experience: DbExperience) => ({

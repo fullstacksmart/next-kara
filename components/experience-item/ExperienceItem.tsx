@@ -4,6 +4,7 @@ import { getFormatedDuration } from '../../lib/utils/strings';
 import { FieldDisplay } from '../field-display/FieldDisplay';
 import { SectionItem } from '../section-item/SectionItem';
 import { Box } from '@material-ui/core';
+import { defaultGender } from 'lib/defaults/common';
 
 export interface ExperienceItemProps {
   t: TFunction;
@@ -16,7 +17,7 @@ export const ExperienceItem = ({
   experience,
   t,
   handleEdit,
-  gender = Gender.OTHER,
+  gender = defaultGender,
 }: ExperienceItemProps): React.ReactElement => {
   const formatedDuration = getFormatedDuration(
     t('duration.now'),

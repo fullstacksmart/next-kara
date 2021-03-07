@@ -10,6 +10,7 @@ import { DatePicker } from '../date-picker/DatePicker';
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { filterById } from '../../lib/utils/arrays';
 import { formatForDb } from '../../lib/utils/strings';
+import { defaultProfession } from 'lib/defaults/talent';
 
 const DELETE_EXPERIENCE = gql`
   mutation Delete_Experience($input: DeleteExperience!) {
@@ -99,7 +100,7 @@ export const ExperienceEdit = ({
   const newExperience: Experience = useMemo(
     () => ({
       id,
-      lineOfWork: Profession.NURSE,
+      lineOfWork: defaultProfession,
       talent,
       isComplete: false,
       duration: {
@@ -131,7 +132,8 @@ export const ExperienceEdit = ({
       input: {
         id: updatedExperience.id,
         talent: updatedExperience.talent?.id,
-        lineOfWork: Profession[updatedExperience.lineOfWork || 0],
+        lineOfWork:
+          Profession[updatedExperience.lineOfWork || defaultProfession],
         employer: {
           name: formatForDb(updatedExperience.employer?.name),
           address: {
