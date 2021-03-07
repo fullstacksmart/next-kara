@@ -5,11 +5,8 @@ type StandardErrorProps = {
   errorMsg: string;
 };
 
-const StandardError = ({
-  errorMsg,
-}: StandardErrorProps): React.ReactElement => {
-  console.log('standard error');
+const ErrorMsg = ({ errorMsg }: StandardErrorProps): React.ReactElement => {
   return <Typography>{errorMsg}</Typography>;
 };
 
-export default StandardError;
+export default ErrorMsg;

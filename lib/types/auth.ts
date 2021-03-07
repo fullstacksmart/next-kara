@@ -8,7 +8,7 @@ export type ContextUserType = {
 export type Signup = (
   email: string,
   password: string,
-) => Promise<firebase.auth.UserCredential>;
+) => Promise<firebase.auth.UserCredential | FirebaseError>;
 
 export type Signin = (
   email: string,
@@ -32,7 +32,7 @@ export type FirebaseUser = firebase.User;
 export type FirebaseError = firebase.auth.Error;
 
 export const isError = (
-  response: FirebaseUser | FirebaseError | void | null,
+  response: FirebaseUser | FirebaseUserCredential | FirebaseError | void | null,
 ): response is FirebaseError => {
   return (response as FirebaseError).code !== undefined;
 };

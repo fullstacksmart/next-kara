@@ -7,9 +7,8 @@ import { PageProps, UserInput } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import SigninErrors from 'components/error-handling/signin-errors';
-import { isError } from 'lib/types/auth';
-import { FirebaseError } from 'lib/types/auth';
+import Error from 'components/error-handling';
+import { isError, FirebaseError } from 'lib/types/auth';
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
@@ -21,7 +20,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     password: '',
     type: 'TALENT',
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<FirebaseError | null>(null);
   const auth = useAuth();
 
@@ -33,13 +31,11 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      setIsLoading(true);
       setError(null);
       auth
         .signin(formValues.email, formValues.password)
         .then((response) => {
-          setIsLoading(false);
-          if (isError(response)) setError(() => response);
+          if (isError(response)) setError(response);
         })
         .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
@@ -49,7 +45,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
 
   return (
     <Layout title="sign in" t={t}>
-      {error && <SigninErrors error={error} />}
+      {error && <Error error={error} />}
       <Card>
         <CardContent>
           <Container>

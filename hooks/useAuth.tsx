@@ -43,7 +43,12 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
   }, []);
 
   const signup: Signup = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => {
+        console.error('error in hook', error);
+        return error;
+      });
   };
 
   const signin: Signin = (email, password) => {
