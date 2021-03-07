@@ -16,7 +16,6 @@ import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
-import { FirebaseUserCredential } from '../../lib/types/auth';
 import Error from 'components/error-handling';
 import { isError, FirebaseError } from 'lib/types/auth';
 

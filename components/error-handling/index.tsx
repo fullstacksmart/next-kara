@@ -15,7 +15,7 @@ const Error = ({ t, error }: ErrorProps): React.ReactElement => {
 
   const specificErrorMsg = errorMap.get(code);
 
-  const errorMsg = t(specificErrorMsg) || message;
+  const errorMsg = specificErrorMsg ? t(specificErrorMsg) : message;
 
   return <ErrorMsg errorMsg={errorMsg} />;
 };

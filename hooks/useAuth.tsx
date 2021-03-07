@@ -45,10 +45,7 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
   const signup: Signup = (email, password) => {
     return auth
       .createUserWithEmailAndPassword(email, password)
-      .catch((error) => {
-        console.error('error in hook', error);
-        return error;
-      });
+      .catch((error) => error);
   };
 
   const signin: Signin = (email, password) => {
@@ -58,10 +55,7 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
         if (response.user) setUser({ id: response.user.uid });
         return response.user;
       })
-      .catch((error) => {
-        console.error(error);
-        return error;
-      });
+      .catch((error) => error);
   };
 
   const logout: Logout = () => {
