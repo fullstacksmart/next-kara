@@ -25,7 +25,8 @@
     "next-i18next": "^7.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-material-ui-carousel": "^2.1.1"
+    "react-material-ui-carousel": "^2.1.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/lowdb": "^1.0.9",
