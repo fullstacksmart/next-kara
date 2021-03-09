@@ -21,6 +21,7 @@ import { LanguagesEdit } from './languages-section/LanguagesEdit';
 import { ApprobationsSection } from './approbations-section/ApprobationsSection';
 import { ApprobationsEdit } from './approbations-section/ApprobationsEdit';
 import { ProgressIndicator } from './progress-indicator/ProgressIndicator';
+import Loader from './loader/Loader';
 
 export {
   ProgressIndicator,
@@ -48,4 +49,5 @@ export {
   BasicInfoEdit,
   Section,
   SectionItem,
+  Loader,
 };
