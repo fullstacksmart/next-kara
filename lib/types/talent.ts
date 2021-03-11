@@ -1,43 +1,44 @@
+import { NewTalent } from './common';
 import { User, FullName, BaseEntity, Address, Gender } from './index';
 
 export enum Profession {
-  NURSE,
-  DOCTOR,
-  OTHER_MEDICAL,
-  OTHER_NON_MEDICAL,
+  NURSE = 'NURSE',
+  DOCTOR = 'DOCTOR',
+  OTHER_MEDICAL = 'OTHER_MEDICAL',
+  OTHER_NON_MEDICAL = 'OTHER_NON_MEDICAL',
 }
 
 export enum ApprobationStatus {
-  IN_PREPARATION,
-  ONGOING,
-  DENIED,
-  APPROVED,
+  IN_PREPARATION = 'IN_PREPARATION',
+  ONGOING = 'ONGOING',
+  DENIED = 'DENIED',
+  APPROVED = 'APPROVED',
 }
 
 export enum SkillLevel {
-  BASIC,
-  PROFICIENT,
-  EXPERT,
-  MASTER,
+  BASIC = 'BASIC',
+  PROFICIENT = 'PROFICIENT',
+  EXPERT = 'EXPERT',
+  MASTER = 'MASTER',
 }
 
 export enum FederalState {
-  'BW',
-  'BY',
-  'BE',
-  'BB',
-  'HB',
-  'HH',
-  'HE',
-  'NI',
-  'MV',
-  'NW',
-  'RP',
-  'SL',
-  'SN',
-  'ST',
-  'SH',
-  'TH',
+  BW = 'BW',
+  BY = 'BY',
+  BE = 'BE',
+  BB = 'BB',
+  HB = 'HB',
+  HH = 'HH',
+  HE = 'HE',
+  NI = 'NI',
+  MV = 'MV',
+  NW = 'NW',
+  RP = 'RP',
+  SL = 'SL',
+  SN = 'SN',
+  ST = 'ST',
+  SH = 'SH',
+  TH = 'TH',
 }
 
 interface TalentAsset extends BaseEntity {
@@ -68,7 +69,7 @@ export interface OrganizationEntry {
   address: Address;
 }
 
-export interface Talent extends User {
+export interface Talent extends Omit<User, 'type'> {
   profilePic: string;
   profession: Profession;
   address: Address;
@@ -80,6 +81,19 @@ export interface Talent extends User {
   languages: Skill[];
   otherSkills: Skill[];
   isBasicInfoComplete: boolean;
+}
+
+export interface TalentInput extends BaseEntity, Omit<NewTalent, 'password'> {
+  profession: Profession;
+  profilePic: string;
+  address: Address;
+  description: string;
+  experiences: Experience[];
+  qualifications: Qualification[];
+  approbations: Approbation[];
+  documents: Document[];
+  languages: Skill[];
+  otherSkills: Skill[];
 }
 
 export interface TalentEntry {

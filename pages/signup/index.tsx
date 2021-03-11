@@ -10,66 +10,41 @@ import { Layout } from '../../containers/layout';
 import { Button } from '../../components/buttons';
 import InputField from '../../components/input-field/InputField';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Gender, PageProps, UserInput, UserType } from '../../lib/types';
+import { PageProps, SignupFormValues } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
 import { FirebaseUserCredential } from '../../lib/types/auth';
+import { defaultSignupFormValues } from 'lib/defaults/common';
+import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
+import { BaseUser, UserType } from 'lib/types/common';
 
-const ADD_USER = gql`
-  mutation AddUser($input: UserInput!) {
-    addUser(input: $input) {
+const ADD_EMPLOYER = gql`
+  mutation AddEmployer($input: UserInput!) {
+    addEmployer(input: $input) {
+      id
+    }
+  }
+`;
+
+const ADD_TALENT = gql`
+  mutation AddTalent($input: TalentInput!) {
+    addTalent(input: $input) {
       id
     }
   }
 `;
 
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
-  interface FormValues {
-    name: {
-      firstName?: string;
-      lastName: string;
-    };
-    company?: string;
-    gender: Gender;
-    email: string;
-    password: string;
-    type: 'TALENT' | 'EMPLOYER' | 'AGENCY';
-  }
-  interface AddUserInput {
-    name: {
-      firstName?: string;
-      lastName: string;
-    };
-    company?: string;
-    gender: string;
-    email: string;
-    password: string;
-    type: 'TALENT' | 'EMPLOYER' | 'AGENCY';
-  }
-
-  const addUserInputTransformer = (formValues: FormValues): AddUserInput => {
-    return {
-      ...formValues,
-      gender: Gender[formValues.gender],
-    };
-  };
-
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: {
-      lastName: '',
-    },
-    // TO DO: Handle Gender
-    gender: Gender.OTHER,
-    email: '',
-    password: '',
-    type: 'TALENT',
-  });
+  const [formValues, setFormValues] = useState<SignupFormValues>(
+    defaultSignupFormValues,
+  );
 
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
-  const [createUser] = useMutation(ADD_USER);
+  const [createUser] = useMutation(ADD_EMPLOYER);
+  const [createTalent] = useMutation(ADD_TALENT);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
@@ -83,12 +58,16 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   const company =
-    formValues.type === 'EMPLOYER' ? (
+    formValues.type === UserType.EMPLOYER ? (
       <InputField
         propName="company"
-        value={formValues.company}
+        value={'company' in formValues ? formValues.company : ''}
         label={t('companyName')}
-        setValue={setFormValues as Dispatch<SetStateAction<Partial<UserInput>>>}
+        setValue={
+          (setFormValues as unknown) as Dispatch<
+            SetStateAction<Record<string, unknown>>
+          >
+        }
         required
       />
     ) : null;
@@ -100,17 +79,32 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         .signup(formValues.email, formValues.password)
         .then((response: FirebaseUserCredential) => {
           if (response.user) {
-            return createUser({
-              variables: {
-                input: {
-                  id: response.user.uid,
-                  ...addUserInputTransformer(formValues),
+            const input = {
+              ...transformSignupFormValuesToTalentInput(formValues),
+              id: response.user.uid,
+            };
+            if (formValues.type === UserType.TALENT) {
+              return createTalent({
+                variables: {
+                  input,
                 },
-              },
-            }).then(({ data }) => {
-              const user = data.addUser;
-              auth.setContextUser(user);
-            });
+              }).then(({ data }) => {
+                const user = data.addTalent;
+                auth.setContextUser(user);
+              });
+            } else {
+              return createUser({
+                variables: {
+                  input: {
+                    ...formValues,
+                    id: response.user.uid,
+                  },
+                },
+              }).then(({ data }) => {
+                const user = data.addEmployer;
+                auth.setContextUser(user);
+              });
+            }
           }
         })
         .catch((error: Error) => {
@@ -135,7 +129,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 setOption={(type) => {
                   setFormValues((oldValues) => ({
                     ...oldValues,
-                    type: type as UserType,
+                    type: UserType[type as keyof typeof UserType],
                   }));
                 }}
               />
@@ -143,9 +137,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 <GenderSelector
                   t={t}
                   updateFunction={
-                    setFormValues as Dispatch<
-                      SetStateAction<Partial<UserInput>>
-                    >
+                    setFormValues as Dispatch<SetStateAction<Partial<BaseUser>>>
                   }
                 />
                 <InputField
@@ -155,7 +147,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                   fullWidth={false}
                   setValue={
                     setFormValues as Dispatch<
-                      SetStateAction<Partial<UserInput>>
+                      SetStateAction<Partial<SignupFormValues>>
                     >
                   }
                 />
@@ -166,7 +158,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                   fullWidth={false}
                   setValue={
                     setFormValues as Dispatch<
-                      SetStateAction<Partial<UserInput>>
+                      SetStateAction<Partial<SignupFormValues>>
                     >
                   }
                   required
@@ -179,7 +171,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 value={formValues.email}
                 label={t('email')}
                 setValue={
-                  setFormValues as Dispatch<SetStateAction<Partial<UserInput>>>
+                  setFormValues as Dispatch<
+                    SetStateAction<Partial<SignupFormValues>>
+                  >
                 }
                 inputProps={{ className: styles.FormInput }}
                 required
@@ -189,7 +183,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 value={formValues.password}
                 label={t('password')}
                 setValue={
-                  setFormValues as Dispatch<SetStateAction<Partial<UserInput>>>
+                  setFormValues as Dispatch<
+                    SetStateAction<Partial<SignupFormValues>>
+                  >
                 }
                 type="password"
                 required

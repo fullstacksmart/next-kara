@@ -5,7 +5,6 @@ import {
   OptionsRadioProps,
 } from '../options-radio/OptionsRadio';
 import { Gender, Profession } from '../../lib/types';
-import { getIntKeys } from '../../lib/utils/objects';
 
 export interface GenderRadioProps extends Partial<OptionsRadioProps> {
   updateFunction: React.Dispatch<React.SetStateAction<object>>; //eslint-disable-line @typescript-eslint/ban-types
@@ -24,10 +23,10 @@ export const ProfessionRadio = ({
   isExtended = false,
   propName = 'profession',
 }: GenderRadioProps): React.ReactElement => {
-  const professions = getIntKeys(Profession);
+  const professions = Object.keys(Profession);
   const options: OptionsRadioOption[] = professions.map((key) => ({
-    value: key.toString(),
-    label: t(`profession.${Profession[key]}-${Gender[gender]}`),
+    value: key,
+    label: t(`profession.${key}-${Gender[gender]}`),
     labelPlacement: 'top',
   }));
   if (!isExtended) options.pop();

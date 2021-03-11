@@ -11,6 +11,7 @@ import {
   Experience,
   BaseEntity,
   Qualification,
+  TalentInput,
 } from '../lib/types';
 import * as helpers from './helpers';
 
@@ -82,9 +83,20 @@ const resolvers = {
     },
   },
   Mutation: {
-    async addUser(_: unknown, { input }: { input: UserInput }): Promise<User> {
+    async addTalent(
+      _: unknown,
+      { input }: { input: TalentInput },
+    ): Promise<Talent> {
+      return await helpers.addTalent(input);
+    },
+    // TODO @all create correct resolver and helper once types are there
+    async addEmployer(
+      _: unknown,
+      { input }: { input: UserInput },
+    ): Promise<User> {
       return await helpers.addUser(input);
     },
+
     async updateTalent(
       _: unknown,
       { input }: { input: TalentUpdate },

@@ -10,10 +10,13 @@ import {
   BaseEntity,
   Qualification,
   AssetType,
+  TalentInput,
+  BaseUser,
 } from '../lib/types';
 import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
 import { ApolloError } from '@apollo/client';
+import { defaultTalentInput } from 'lib/defaults/talent';
 
 const handleError = (e: Error): Error => {
   console.error(e); //eslint-disable-line no-console
@@ -68,6 +71,20 @@ export const getOrganizationById = async (
   return await models.Organization.findOne({ id });
 };
 
+export const addTalent = async (input: TalentInput): Promise<Talent> => {
+  let newTalent: TalentInput = defaultTalentInput;
+  try {
+    newTalent = await models.Talent.createOne(input);
+  } catch (error) {
+    console.error(error); //eslint-disable-line no-console
+  }
+  return {
+    ...newTalent,
+    fullName: getFullName(newTalent),
+    isBasicInfoComplete: false,
+  };
+};
+
 export const addUser = async (input: UserInput): Promise<User> => {
   const type =
     input.type === 'TALENT'
@@ -75,12 +92,16 @@ export const addUser = async (input: UserInput): Promise<User> => {
       : input.type === 'EMPLOYER'
       ? 'Employer'
       : 'Agency';
+  // unnecessary: check through firebase
   const oldUser = models[type].findOne({
     email: input.email,
   });
   if (oldUser) throw new Error('user already exists');
+  // END: unnecessary: check through firebase;
   return await models[type].createOne(input);
 };
+
+export const addEmployer = addUser;
 
 const getOrCreateOrganizationId = async (
   organization: Organization | undefined,
@@ -245,7 +266,7 @@ export const isBasicInfoComplete = (talent: Talent): boolean => {
   );
 };
 
-export const getFullName = (talent: Talent): string => {
+export const getFullName = (talent: BaseUser): string => {
   return `${talent.name.firstName} ${
     talent.name.middleName ? talent.name.middleName + ' ' : ''
   }${talent.name.lastName}`;
