@@ -22,6 +22,7 @@ import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent'
 import { BaseUser, UserType } from 'lib/types/common';
 
 import passwordSchema from '../../lib/validations/validations';
+import { AnyAaaaRecord } from 'dns';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -125,9 +126,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
           });
       } catch (err) {
         const { inner } = err;
-        const formErrors = {};
+        const formErrors: { [path: number]: string } = {};
         if (inner && inner[0]) {
-          inner.forEach((error: Error) => {
+          inner.forEach((error: { path: number; message: string }) => {
             const { path, message } = error;
             if (!formErrors[path]) {
               formErrors[path] = message;
