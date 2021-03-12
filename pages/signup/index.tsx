@@ -21,6 +21,8 @@ import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
 
+import passwordSchema from '../../lib/validations/validations';
+
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
     addEmployer(input: $input) {
@@ -45,6 +47,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser] = useMutation(ADD_EMPLOYER);
   const [createTalent] = useMutation(ADD_TALENT);
+  const [errors, setErrors] = useState({});
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
@@ -75,41 +78,64 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      auth
-        .signup(formValues.email, formValues.password)
-        .then((response: FirebaseUserCredential) => {
-          if (response.user) {
-            const input = {
-              ...transformSignupFormValuesToTalentInput(formValues),
-              id: response.user.uid,
-            };
-            if (formValues.type === UserType.TALENT) {
-              return createTalent({
-                variables: {
-                  input,
-                },
-              }).then(({ data }) => {
-                const user = data.addTalent;
-                auth.setContextUser(user);
-              });
-            } else {
-              return createUser({
-                variables: {
-                  input: {
-                    ...formValues,
-                    id: response.user.uid,
+      // console.log(formValues.password);
+      const password = formValues.password;
+      try {
+        passwordSchema.validateSync(
+          {
+            password,
+          },
+          { abortEarly: false },
+        );
+
+        auth
+          .signup(formValues.email, password)
+          .then((response: FirebaseUserCredential) => {
+            if (response.user) {
+              const input = {
+                ...transformSignupFormValuesToTalentInput(formValues),
+                id: response.user.uid,
+              };
+              if (formValues.type === UserType.TALENT) {
+                return createTalent({
+                  variables: {
+                    input,
                   },
-                },
-              }).then(({ data }) => {
-                const user = data.addEmployer;
-                auth.setContextUser(user);
-              });
+                }).then(({ data }) => {
+                  const user = data.addTalent;
+                  auth.setContextUser(user);
+                });
+              } else {
+                return createUser({
+                  variables: {
+                    input: {
+                      ...formValues,
+                      id: response.user.uid,
+                    },
+                  },
+                }).then(({ data }) => {
+                  const user = data.addEmployer;
+                  auth.setContextUser(user);
+                });
+              }
             }
-          }
-        })
-        .catch((error: Error) => {
-          console.error(error); //eslint-disable-line no-console
-        });
+          })
+          .catch((error: Error) => {
+            console.error(error); //eslint-disable-line no-console
+          });
+      } catch (err) {
+        const { inner } = err;
+        const formErrors: { [path: number]: string } = {};
+        if (inner && inner[0]) {
+          inner.forEach((error: { path: number; message: string }) => {
+            const { path, message } = error;
+            if (!formErrors[path]) {
+              formErrors[path] = message;
+            }
+          });
+        }
+        setErrors(formErrors);
+      }
     }
   };
 
@@ -206,6 +232,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               <Button disabled={!passwordsIdentical} type="submit">
                 {t('signup')}
               </Button>
+              {errors.password}
             </form>
           </Container>
         </CardContent>
