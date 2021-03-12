@@ -34,6 +34,7 @@ import {
   ApprobationsSection,
   ApprobationsEdit,
   ProgressIndicator,
+  Loader,
 } from '../../../components';
 import { getShortName } from '../../../lib/utils/strings';
 import useStyles from './profile.styles';
@@ -143,7 +144,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <Loader />;
   if (error) {
     if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
     return <h1>Error: {error.message}</h1>;
