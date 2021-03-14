@@ -16,10 +16,11 @@ import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
 import { useAuth } from '../../hooks/useAuth';
-import { FirebaseUserCredential } from '../../lib/types/auth';
 import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
+import Error from 'components/error-handling';
+import { isError, FirebaseError } from 'lib/types/auth';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -48,6 +49,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
+  const [error, setError] = useState<FirebaseError | null>(null);
+
   const auth = useAuth();
 
   const handlePasswordRepeat = (
@@ -75,10 +78,13 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
+      setError(null);
       auth
         .signup(formValues.email, formValues.password)
-        .then((response: FirebaseUserCredential) => {
-          if (response.user) {
+        .then((response) => {
+          if (isError(response)) {
+            setError(response);
+          } else if (response.user) {
             const input = {
               ...transformSignupFormValuesToTalentInput(formValues),
               id: response.user.uid,
@@ -115,6 +121,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 
   return (
     <Layout title="sign up" t={t}>
+      {error && <Error error={error} />}
       <Card>
         <CardContent>
           <Container>
