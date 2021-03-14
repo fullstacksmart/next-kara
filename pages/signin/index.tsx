@@ -1,10 +1,10 @@
-import { Button } from '../../components/buttons';
+import { Button } from 'components/buttons';
 import { Card, CardContent, Typography, Container } from '@material-ui/core';
-import { Layout } from '../../containers/layout';
-import InputField from '../../components/input-field/InputField';
+import { Layout } from 'containers/layout';
+import InputField from 'components/input-field/InputField';
 import { useState } from 'react';
 import { PageProps, UserInput } from '../../lib/types';
-import { withTranslation } from '../../i18n';
+import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import { FirebaseUser } from '../../lib/types/auth';
