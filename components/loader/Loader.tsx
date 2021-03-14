@@ -1,7 +1,6 @@
 import useStyles from './LoaderStyles';
-import { Box, Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-// import k_gradient from '../../public/static/k_gradient.png';
 
 const Loader = (): React.ReactElement => {
   const classes = useStyles();
