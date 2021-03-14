@@ -181,7 +181,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               <InputField
                 propName="password"
                 value={formValues.password}
-                label={t('password')}
+                label={t('password.password')}
                 setValue={
                   setFormValues as Dispatch<
                     SetStateAction<Partial<SignupFormValues>>

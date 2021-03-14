@@ -17,11 +17,14 @@ export type Signin = (
 
 export type Logout = () => Promise<void>;
 
+export type sendPasswordResetEmail = (email: string) => Promise<void>;
+
 export type UseAuthProviderReturnType = {
   user: ContextUserType;
   signup: Signup;
   signin: Signin;
   logout: Logout;
+  sendPasswordResetEmail: sendPasswordResetEmail;
   setContextUser: (user: ContextUserType) => void;
 };
 

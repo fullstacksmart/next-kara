@@ -148,7 +148,11 @@
       "header": "Create your profile"
     }
   },
-  "password": "password",
+  "password": {
+    "password": "Password",
+    "forgot": "Forgot your password?",
+    "reset": "Send Email to reset your password"
+  },
   "profession": {
     "DOCTOR-FEMALE": "Doctor",
     "DOCTOR-MALE": "Doctor",

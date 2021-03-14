@@ -13,6 +13,7 @@ import {
   Signup,
   Signin,
   Logout,
+  sendPasswordResetEmail,
 } from '../lib/types/auth';
 
 const AuthContext = createContext({ user: { id: '' } });
@@ -62,6 +63,15 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
       .catch((e) => console.error(e)); //eslint-disable-line no-console
   };
 
+  const sendPasswordResetEmail: sendPasswordResetEmail = (email) => {
+    return auth
+      .sendPasswordResetEmail(email)
+      .then((response) => {
+        return response;
+      })
+      .catch((e) => console.error(e));
+  };
+
   const setContextUser = (user: ContextUserType): void => {
     if (user) setUser(user);
   };
@@ -71,6 +81,7 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
     signup,
     signin,
     logout,
+    sendPasswordResetEmail,
     setContextUser,
   };
 };

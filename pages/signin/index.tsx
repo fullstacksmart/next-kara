@@ -63,7 +63,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
               <InputField
                 propName="password"
                 value={formValues.password}
-                label={t('password')}
+                label={t('password.password')}
                 setValue={setFormValues}
                 type="password"
                 required
@@ -73,7 +73,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
           </Container>
         </CardContent>
       </Card>
-
+      <Button href="/reset-password">{t('password.forgot')}</Button>
       <Button href="/talents/yasbiuycdbucoiuscboiucsiousc!@/profile">
         Talents
       </Button>
