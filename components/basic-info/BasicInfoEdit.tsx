@@ -1,5 +1,7 @@
 import { gql, MutationFunction, useMutation } from '@apollo/client';
 import { Box, DialogProps } from '@material-ui/core';
+import { defaultGender } from 'lib/defaults/common';
+import { defaultProfession } from 'lib/defaults/talent';
 import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
 import { Gender, Profession, TalentUpdate } from '../../lib/types';
@@ -61,7 +63,7 @@ export const BasicInfoEdit = ({
     variables: {
       input: {
         id: updatedInfo.id,
-        gender: Gender[updatedInfo.gender || Gender.OTHER],
+        gender: Gender[updatedInfo.gender || defaultGender],
         name: {
           firstName: formatForDb(updatedInfo.name?.firstName),
           middleName: formatForDb(updatedInfo.name?.middleName),
@@ -76,7 +78,7 @@ export const BasicInfoEdit = ({
               : null,
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: Profession[updatedInfo.profession || Profession.NURSE],
+        profession: Profession[updatedInfo.profession || defaultProfession],
         description: formatForDb(updatedInfo.description),
       },
     },
@@ -101,7 +103,7 @@ export const BasicInfoEdit = ({
           __typename: 'Address',
         },
         profilePic: formatForDb(updatedInfo.profilePic),
-        profession: updatedInfo.profession || Profession.NURSE,
+        profession: updatedInfo.profession || defaultProfession,
         description: formatForDb(updatedInfo.description),
         __typename: 'Talent',
       },

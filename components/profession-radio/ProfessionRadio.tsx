@@ -5,6 +5,7 @@ import {
   OptionsRadioProps,
 } from '../options-radio/OptionsRadio';
 import { Gender, Profession } from '../../lib/types';
+import { defaultGender } from 'lib/defaults/common';
 
 export interface GenderRadioProps extends Partial<OptionsRadioProps> {
   updateFunction: React.Dispatch<React.SetStateAction<object>>; //eslint-disable-line @typescript-eslint/ban-types
@@ -19,7 +20,7 @@ export const ProfessionRadio = ({
   t,
   updateFunction,
   input,
-  gender = Gender.OTHER,
+  gender = defaultGender,
   isExtended = false,
   propName = 'profession',
 }: GenderRadioProps): React.ReactElement => {
