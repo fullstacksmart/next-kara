@@ -37,14 +37,9 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
       auth
         .signin(formValues.email, formValues.password)
         .then((response) => {
-          if (isError(response)) setError(response);
-          if (typeof response === null || typeof response === undefined) {
-            //eslint-disable-next-line no-console
-            console.error(
-              'wrong email or password, current user still is: ',
-              auth.user,
-            );
-          } else {
+          if (isError(response)) {
+            setError(response);
+          } else if (response) {
             return (response as FirebaseUser).uid;
           }
         })
