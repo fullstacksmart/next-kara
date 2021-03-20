@@ -2,13 +2,13 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { I18n, TFunction } from 'next-i18next';
 import Head from 'next/head';
-import { getTitleString } from '../../lib/utils/strings';
-import Footer from '../../components/footer/Footer';
+import { getTitleString } from 'lib/utils/strings';
+import Footer from 'components/footer/Footer';
 import useStyles from './LayoutStyles';
 import { Box, Typography } from '@material-ui/core';
-import OptionToggler from '../../components/option-toggler/OptionToggler';
-import { Button } from '../../components';
-
+import OptionToggler from 'components/option-toggler/OptionToggler';
+import { Button } from 'components';
+import { useAuth } from 'hooks/useAuth';
 export interface LayoutProps {
   home?: boolean;
   heading?: string;
@@ -27,6 +27,7 @@ const Layout = ({
   t,
 }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
+  const auth = useAuth();
   // const handleClick = (): void => {
   //   const newLang = i18n.language === 'en' ? 'de' : 'en'
   //   i18n.changeLanguage(newLang)
@@ -39,6 +40,12 @@ const Layout = ({
       value: 'en',
     },
   ];
+
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    auth.logout();
+  };
+
   const handleChange = (value: string): void => {
     if (i18n) {
       i18n.changeLanguage(value);
@@ -56,6 +63,7 @@ const Layout = ({
             <Typography variant="h5">{heading}</Typography>
           </Box>
           <div className={classes.buttons}>
+            <Button onClick={handleLogout}>{t('logout')}</Button>
             <Button href="/">{t('labels.buttons.home')}</Button>
             {i18n ? (
               <OptionToggler

@@ -25,11 +25,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [error, setError] = useState<FirebaseError | null>(null);
   const auth = useAuth();
 
-  // const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
-  //   e.preventDefault();
-  //   auth.logout();
-  // };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
@@ -87,7 +82,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
         </CardContent>
       </Card>
       <Button href="/reset-password">{t('password.forgot')}</Button>
-      {/* TODO: Add Logout Button to Navbar */}
     </Layout>
   );
 };
