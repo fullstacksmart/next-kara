@@ -9,6 +9,8 @@ import { Box, Typography } from '@material-ui/core';
 import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
+import { useRouter } from 'next/router';
+
 export interface LayoutProps {
   home?: boolean;
   heading?: string;
@@ -28,6 +30,8 @@ const Layout = ({
 }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
   const auth = useAuth();
+  const router = useRouter();
+
   // const handleClick = (): void => {
   //   const newLang = i18n.language === 'en' ? 'de' : 'en'
   //   i18n.changeLanguage(newLang)
@@ -44,6 +48,7 @@ const Layout = ({
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     auth.logout();
+    router.push('/');
   };
 
   const handleChange = (value: string): void => {
