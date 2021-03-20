@@ -8,7 +8,7 @@ import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import Error from 'components/error-handling';
-import { isError, FirebaseError, FirebaseUser } from 'lib/types/auth';
+import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 
 interface FormValues {
@@ -34,14 +34,10 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
         .then((response) => {
           if (isError(response)) {
             setError(response);
-          } else if (response) {
-            return (response as FirebaseUser).uid;
+            return;
           }
-        })
-        .then((id) => {
-          if (id) {
-            router.push(`/talents/${id}`);
-          }
+          if (response && 'uid' in response)
+            router.push(`/talents/${response.uid}`);
         })
         .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
@@ -85,9 +81,5 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     </Layout>
   );
 };
-
-SignInPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
 
 export default withTranslation('common')(SignInPage);

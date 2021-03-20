@@ -77,6 +77,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       />
     ) : null;
 
+  // TODO: refactor long handleSubmit
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
