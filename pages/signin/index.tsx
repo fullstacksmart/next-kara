@@ -86,6 +86,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
           </Container>
         </CardContent>
       </Card>
+      <Button href="/reset-password">{t('password.forgot')}</Button>
       {/* TODO: Add Logout Button to Navbar */}
     </Layout>
   );

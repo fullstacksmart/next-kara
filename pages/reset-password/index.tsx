@@ -4,7 +4,7 @@ import { Layout } from '../../containers/layout';
 import InputField from '../../components/input-field/InputField';
 import { useState } from 'react';
 import { PageProps, UserInput } from '../../lib/types';
-import { withTranslation } from '../../i18n';
+import { withTranslation } from '../../i18n.config';
 import styles from './ResetPassword.module.css';
 import { useAuth } from '../../hooks/useAuth';
 
