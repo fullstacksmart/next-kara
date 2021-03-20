@@ -177,6 +177,7 @@
   "repeatPassword": "please reenter password",
   "signin": "sign in",
   "signup": "sign up",
+  "logout": "logout",
   "skill": {
     "level": {
       "BASIC": "basic",

@@ -25,11 +25,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [error, setError] = useState<FirebaseError | null>(null);
   const auth = useAuth();
 
-  // const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
-  //   e.preventDefault();
-  //   auth.logout();
-  // };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
@@ -37,14 +32,9 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
       auth
         .signin(formValues.email, formValues.password)
         .then((response) => {
-          if (isError(response)) setError(response);
-          if (typeof response === null || typeof response === undefined) {
-            //eslint-disable-next-line no-console
-            console.error(
-              'wrong email or password, current user still is: ',
-              auth.user,
-            );
-          } else {
+          if (isError(response)) {
+            setError(response);
+          } else if (response) {
             return (response as FirebaseUser).uid;
           }
         })
@@ -91,7 +81,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
           </Container>
         </CardContent>
       </Card>
-      {/* TODO: Add Logout Button to Navbar */}
+      <Button href="/reset-password">{t('password.forgot')}</Button>
     </Layout>
   );
 };

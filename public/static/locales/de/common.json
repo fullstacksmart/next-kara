@@ -171,6 +171,7 @@
   "repeatPassword": "Passwort wiederholen",
   "signin": "anmelden",
   "signup": "registrieren",
+  "logout": "abmelden",
   "skill": {
     "level": {
       "BASIC": "Grundkenntnisse",
