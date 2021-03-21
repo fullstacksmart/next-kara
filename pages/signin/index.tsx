@@ -7,8 +7,8 @@ import { PageProps } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import Error from 'components/error';
-import { isError, FirebaseError, FirebaseUser } from 'lib/types/auth';
+import Error from 'components/error-handling';
+import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 
 interface FormValues {
@@ -25,11 +25,6 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const [error, setError] = useState<FirebaseError | null>(null);
   const auth = useAuth();
 
-  // const handleLogout = (e: React.MouseEvent<HTMLButtonElement>): void => {
-  //   e.preventDefault();
-  //   auth.logout();
-  // };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
@@ -37,21 +32,12 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
       auth
         .signin(formValues.email, formValues.password)
         .then((response) => {
-          if (isError(response)) setError(response);
-          if (typeof response === null || typeof response === undefined) {
-            //eslint-disable-next-line no-console
-            console.error(
-              'wrong email or password, current user still is: ',
-              auth.user,
-            );
-          } else {
-            return (response as FirebaseUser).uid;
+          if (isError(response)) {
+            setError(response);
+            return;
           }
-        })
-        .then((id) => {
-          if (id) {
-            router.push(`/talents/${id}`);
-          }
+          if (response && 'uid' in response)
+            router.push(`/talents/${response.uid}`);
         })
         .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
@@ -80,7 +66,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
               <InputField
                 propName="password"
                 value={formValues.password}
-                label={t('password')}
+                label={t('password.password')}
                 setValue={
                   setFormValues as Dispatch<SetStateAction<Partial<FormValues>>>
                 }
@@ -92,13 +78,9 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
           </Container>
         </CardContent>
       </Card>
-      {/* TODO: Add Logout Button to Navbar */}
+      <Button href="/reset-password">{t('password.forgot')}</Button>
     </Layout>
   );
 };
-
-SignInPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
 
 export default withTranslation('common')(SignInPage);

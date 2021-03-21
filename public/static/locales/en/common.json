@@ -68,10 +68,10 @@
     },
     "skillEdit": {
       "language": {
-        "title": "Bearbeite Deine Sprachkenntnisse"
+        "title": "Edit your language skills"
       },
       "skill": {
-        "title": "Bearbeite Deine Fähigkeiten"
+        "title": "Edit your skills"
       }
     },
     "stateSelector": {
@@ -85,7 +85,7 @@
   "duration": {
     "now": "present"
   },
-  "email": "email",
+  "email": "Email",
   "fullName": {
     "firstName": "first name",
     "lastName": "last name",
@@ -127,9 +127,9 @@
     },
     "position": "Position",
     "skill": {
-      "description": "Beschreibung",
-      "level": "Stufe",
-      "name": "Fähigkeit"
+      "description": "Description",
+      "level": "level",
+      "name": "skill"
     }
   },
   "language": {
@@ -151,7 +151,7 @@
   "password": {
     "password": "Password",
     "forgot": "Forgot your password?",
-    "reset": "Send Email to reset your password"
+    "reset": "Send an email to reset your password"
   },
   "profession": {
     "DOCTOR-FEMALE": "Doctor",
@@ -177,6 +177,7 @@
   "repeatPassword": "please reenter password",
   "signin": "sign in",
   "signup": "sign up",
+  "logout": "logout",
   "skill": {
     "level": {
       "BASIC": "basic",
@@ -213,7 +214,7 @@
       "wrongPassword": "Wrong password. Please try again. If you forgot your password, please click on \"reset password\".",
       "tooManyRequests": "Too many login attempts. Please reset your password or try again later.",
       "weakPassword": "The password needs to be at least 6 characters long",
-      "emailAlreadyInUse": "This email is already in use for another account. Please log in with this email or register with a different email"
+      "emailAlreadyInUse": "This email is already in use. Please log in with this email or register with a different email"
     }
   }
 }
