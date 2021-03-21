@@ -13,7 +13,7 @@ export interface LayoutProps {
   home?: boolean;
   heading?: string;
   title?: string | string[];
-  error?: React.ReactNode;
+  error: React.ReactNode | null;
   children?: React.ReactNode;
   i18n?: I18n;
   t: TFunction;

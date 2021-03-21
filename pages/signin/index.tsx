@@ -57,7 +57,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     }
   };
 
-  const errorComponent = error && <Error error={error} />;
+  const errorComponent = error ? <Error error={error} /> : null;
 
   return (
     <Layout title="sign in" t={t} error={errorComponent}>

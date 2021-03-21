@@ -124,7 +124,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     }
   };
 
-  const errorComponent = error && <Error error={error} />;
+  const errorComponent = error ? <Error error={error} /> : null;
 
   return (
     <Layout title="sign up" t={t} error={errorComponent}>
