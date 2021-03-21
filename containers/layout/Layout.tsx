@@ -13,6 +13,7 @@ export interface LayoutProps {
   home?: boolean;
   heading?: string;
   title?: string | string[];
+  error?: React.ReactNode;
   children?: React.ReactNode;
   i18n?: I18n;
   t: TFunction;
@@ -20,6 +21,7 @@ export interface LayoutProps {
 
 const Layout = ({
   home = false,
+  error = null,
   children,
   heading,
   title,
@@ -74,6 +76,7 @@ const Layout = ({
       ) : (
         <></>
       )}
+      {error}
       <main className={classes.main}>{children}</main>
       {!home && <Footer />}
     </Container>

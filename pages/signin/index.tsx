@@ -7,7 +7,7 @@ import { PageProps } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import Error from 'components/error-handling';
+import Error from 'components/error';
 import { isError, FirebaseError, FirebaseUser } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 
@@ -57,9 +57,10 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     }
   };
 
+  const errorComponent = error && <Error error={error} />;
+
   return (
-    <Layout title="sign in" t={t}>
-      {error && <Error error={error} />}
+    <Layout title="sign in" t={t} error={errorComponent}>
       <Card>
         <CardContent>
           <Container>
