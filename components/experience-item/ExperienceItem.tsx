@@ -2,7 +2,7 @@ import { TFunction } from 'next-i18next';
 import { Experience, Gender, Profession } from '../../lib/types';
 import { getFormatedDuration } from '../../lib/utils/strings';
 import { FieldDisplay } from '../field-display/FieldDisplay';
-import { SectionItem } from '../section-item/SectionItem';
+import { SectionItem } from '../SectionItem/SectionItem';
 import { Box } from '@material-ui/core';
 import { defaultGender } from 'lib/defaults/common';
 
@@ -25,7 +25,7 @@ export const ExperienceItem = ({
   );
   return (
     <SectionItem
-      handleEdit={
+      onClick={
         () => handleEdit(experience.id) /* eslint-disable-line no-console*/
       }
     >

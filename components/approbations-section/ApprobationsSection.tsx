@@ -29,7 +29,7 @@ export const ApprobationsSection = ({
     ));
   return (
     <Section>
-      <SectionItem handleEdit={handleEdit}>
+      <SectionItem onClick={handleEdit}>
         <CheckedTitle
           title={t('components.approbationSection.title')}
           done={Boolean(approbations.length)}

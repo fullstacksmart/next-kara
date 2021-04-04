@@ -22,7 +22,7 @@ export const OtherSkillsSection = ({
     ));
   return (
     <Section>
-      <SectionItem handleEdit={handleEdit}>
+      <SectionItem onClick={handleEdit}>
         <CheckedTitle
           title={t('components.otherSkillsSection.title')}
           done={Boolean(otherSkills.length)}

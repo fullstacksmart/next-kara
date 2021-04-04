@@ -1,38 +1,30 @@
 // Top level component for profile page
 // supply addFItem mutation, e.g. ADD_EXPERIENCE
 
-import {
-  Card,
-  CardContent,
-  CardProps,
-  IconButton,
-  CardActions,
-} from '@material-ui/core';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import styles from './Section.module.css';
-interface SectionProps extends CardProps {
-  handleAdd?: () => void;
-  children: React.ReactNode;
-}
+import { Paper, Box } from '@material-ui/core';
+import SectionItem, { ButtonIcon } from 'components/SectionItem';
+import useStyles from './Section.styles';
+import { SectionProps } from './Section.types';
 
-export const Section = ({
+const Section = ({
   handleAdd,
   children,
+  ...props
 }: SectionProps): React.ReactElement => {
+  const classes = useStyles({ withAddButton: Boolean(handleAdd) });
+  const addButton = handleAdd ? (
+    <SectionItem onClick={handleAdd} icon={ButtonIcon.add} />
+  ) : null;
   return (
     <section>
-      <Card className={styles.Card}>
-        <CardContent className={styles.ContentContainer}>
+      <Paper className={classes.Paper} elevation={3} {...props}>
+        <Box className={classes.ContentBox}>
           {children}
-        </CardContent>
-        <CardActions disableSpacing className={styles.AddButtonContainer}>
-          {handleAdd && (
-            <IconButton aria-label="add item" onClick={handleAdd}>
-              <AddCircleOutlineIcon />
-            </IconButton>
-          )}
-        </CardActions>
-      </Card>
+          {addButton}
+        </Box>
+      </Paper>
     </section>
   );
 };
+
+export default Section;
