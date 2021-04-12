@@ -19,7 +19,7 @@ const CountrySelector = ({
   propName = ['address', 'isoCode'],
   ...props
 }: CountrySelectorProps): React.ReactElement => {
-  const isoCodes: IsoCode[] = ['SRB', 'AUT', 'DEU', 'CRO', 'POL'];
+  const isoCodes: IsoCode[] = ['SRB', 'AUT', 'GER', 'CRO', 'POL'];
   const propNameArray = Array.isArray(propName) ? propName : [propName];
 
   const handleChange = (value: string | undefined): void => {

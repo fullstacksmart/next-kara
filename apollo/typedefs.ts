@@ -11,7 +11,7 @@ const typeDefs = gql`
   # TODO populate dynamically
   enum IsoCode {
     SRB
-    DEU
+    GER
     AUT
     CRO
     POL
