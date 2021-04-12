@@ -69,13 +69,13 @@ const resolvers = {
   },
 
   Query: {
-    getAllTalentIds(): string[] {
+    getAllTalentIds(): Promise<string[]> {
       return helpers.getAllTalentIds();
     },
     getAllEmployerIds(): string[] {
       return helpers.getAllEmployerIds();
     },
-    getAllUserIds(): string[] {
+    getAllUserIds(): Promise<string[]> {
       return helpers.getAllUserIds();
     },
     async getTalentById(_: unknown, { id }: { id: string }): Promise<Talent> {

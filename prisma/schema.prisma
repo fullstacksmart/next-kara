@@ -74,14 +74,14 @@ model Address {
 }
 
 model Organization {
-  id            Int             @id @default(autoincrement())
-  name          String
-  address       Address         @relation(fields: [addressId], references: [id])
-  experiences   Experience[]
-  addressId     Int
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  Qualification Qualification[]
+  id             Int             @id @default(autoincrement())
+  name           String
+  address        Address         @relation(fields: [addressId], references: [id])
+  addressId      Int
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  experiences    Experience[]
+  qualifications Qualification[]
 }
 
 model Experience {
@@ -89,11 +89,11 @@ model Experience {
   lineOfWork     Profession
   employer       Organization @relation(fields: [organizationId], references: [id])
   from           DateTime
-  to             DateTime
-  description    String
+  to             DateTime?
+  description    String?
   talent         Talent       @relation(fields: [talentId], references: [id])
   organizationId Int
-  talentId       Int
+  talentId       String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 }
@@ -101,14 +101,16 @@ model Experience {
 model Qualification {
   id               Int          @id @default(autoincrement())
   fieldOfEducation Profession
-  degree           String
+  degree           String?
   institution      Organization @relation(fields: [organizationId], references: [id])
   from             DateTime
-  to               DateTime
-  description      String
-  Talent           Talent?      @relation(fields: [talentId], references: [id])
-  talentId         Int?
+  to               DateTime?
+  description      String?
+  Talent           Talent       @relation(fields: [talentId], references: [id])
+  talentId         String
   organizationId   Int
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
 }
 
 model Approbation {
@@ -116,48 +118,56 @@ model Approbation {
   status       ApprobationStatus
   federalState FederalState
   talent       Talent            @relation(fields: [talentId], references: [id])
-  talentId     Int
+  talentId     String
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 }
 
 model Document {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  description String
+  description String?
   url         String
-  Talent      Talent @relation(fields: [talentId], references: [id])
-  talentId    Int
+  Talent      Talent   @relation(fields: [talentId], references: [id])
+  talentId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model OtherSkill {
   id          Int        @id @default(autoincrement())
   name        String
   level       SkillLevel
-  description String
+  description String?
   talent      Talent     @relation(fields: [talentId], references: [id])
-  talentId    Int
+  talentId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model LanguageSkill {
   id          Int        @id @default(autoincrement())
   name        String
   level       SkillLevel
-  description String
+  description String?
   talent      Talent     @relation(fields: [talentId], references: [id])
-  talentId    Int
+  talentId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model Talent {
-  id            Int             @id
+  id            String          @id
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
-  firstName     String
-  middleName    String
+  firstName     String?
+  middleName    String?
   lastName      String
   email         String
   profession    Profession
-  profilePic    String
-  address       Address         @relation(fields: [addressId], references: [id])
-  description   String
+  profilePic    String?
+  address       Address?        @relation(fields: [addressId], references: [id])
+  description   String?
   type          UserType
   experiences   Experience[]
   qualification Qualification[]
@@ -165,5 +175,5 @@ model Talent {
   documents     Document[]
   otherSkills   OtherSkill[]
   languages     LanguageSkill[]
-  addressId     Int
+  addressId     Int?
 }
