@@ -39,17 +39,21 @@ const getExperienceById = (
   return (filterById(talent.experiences, id) as Experience | undefined) || null;
 };
 
-export const getAllTalentIds = async (): Promise<string[]> => {
-  const talents = await prisma.talent.findMany();
-  return talents.map((talent) => talent.id.toString());
+export const getAllTalentIds = async (): Promise<string[] | undefined> => {
+  try {
+    const talents = await prisma.talent.findMany();
+    return talents.map((talent) => talent.id.toString()) || ['none'];
+  } catch (e) {
+    handleError(e);
+  }
 };
-// models.Talent.findMany().map((talent: User) => talent.id);
+// return models.Talent.findMany().map((talent: User) => talent.id);
 
 export const getAllEmployerIds = (): string[] =>
   models.Employer.findMany().map((employer: User) => employer.id);
 
 export const getAllUserIds = async (): Promise<string[]> => {
-  const talents = await getAllTalentIds.call(null);
+  const talents = (await getAllTalentIds.call(null)) || [];
   const employers = getAllEmployerIds();
   return talents.concat(employers);
 };

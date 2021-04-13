@@ -69,8 +69,8 @@ const resolvers = {
   },
 
   Query: {
-    getAllTalentIds(): Promise<string[]> {
-      return helpers.getAllTalentIds();
+    async getAllTalentIds(): Promise<string[]> {
+      return (await helpers.getAllTalentIds()) || [];
     },
     getAllEmployerIds(): string[] {
       return helpers.getAllEmployerIds();
