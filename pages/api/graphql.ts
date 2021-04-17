@@ -8,8 +8,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   async context({ req }) {
-    if (process.env.uid) {
-      const user = await getTalentById(process.env.uid);
+    if (process.env.DEV_USER_UID) {
+      const user = await getTalentById(process.env.DEV_USER_UID);
       return { user };
     } else {
       const auth = req.headers.authorization;
