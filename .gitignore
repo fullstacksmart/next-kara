@@ -38,3 +38,10 @@ yarn-error.log*
 
 # test db
 
+#google cloud
+mythical-module-308515-8f036fb55006.json
+app.yaml
+
+#prisma
+prisma/.env
+
