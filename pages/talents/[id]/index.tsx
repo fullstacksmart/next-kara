@@ -39,6 +39,12 @@ import {
 import { getShortName } from '../../../lib/utils/strings';
 import useStyles from './profile.styles';
 
+const GET_ALL_TALENTS = gql`
+  query getAllTalentIds {
+    id
+  }
+`;
+
 const GET_ALL_INFO = gql`
   query GetTalentById($id: String!) {
     getTalentById(id: $id) {
@@ -134,6 +140,7 @@ const GET_ALL_INFO = gql`
 `;
 
 const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
+  const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
   const classes = useStyles();
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
@@ -144,6 +151,8 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+  if (idLoading) return <></>;
+  console.log(talentIds);
   if (loading) return <Loader />;
   if (error) {
     if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
@@ -290,30 +299,5 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
     </Layout>
   );
 };
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   return {
-//     paths: [
-//       {
-//         params: {
-//           id: 'yasbiuycdbucoiuscboiucsiousc!@',
-//         },
-//       },
-//     ],
-//     fallback: false,
-//   };
-// };
-
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//   return {
-//     props: {
-//       id: params?.id,
-//     },
-//   };
-// };
-
-ProfilePage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
 
 export default withTranslation('common')(ProfilePage);

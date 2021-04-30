@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Profession {
+  NURSE
+  DOCTOR
+  OTHER_MEDICAL
+  OTHER_NON_MEDICAL
+}
+
+enum IsoCode {
+  SRB
+  AUT
+  GER
+  SUI
+  CRO
+  POL
+}
+
+enum UserType {
+  Talent
+  EMPLOYER
+  AGENCY
+}
+
+enum ApprobationStatus {
+  IN_PREPARATION
+  ONGOING
+  DENIED
+  APPROVED
+}
+
+enum FederalState {
+  BW
+  BY
+  BE
+  BB
+  HB
+  HH
+  HE
+  NI
+  MV
+  NW
+  RP
+  SL
+  SN
+  ST
+  SH
+  TH
+}
+
+enum SkillLevel {
+  BASIC
+  PROFICIENT
+  EXPERT
+  MASTER
+}
+
+model Address {
+  id           Int            @id @default(autoincrement())
+  city         String
+  isoCode      IsoCode
+  Talent       Talent[]
+  Organization Organization[]
+}
+
+model Organization {
+  id             Int             @id @default(autoincrement())
+  name           String
+  address        Address         @relation(fields: [addressId], references: [id])
+  addressId      Int
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  experiences    Experience[]
+  qualifications Qualification[]
+}
+
+model Experience {
+  id             Int          @id @default(autoincrement())
+  lineOfWork     Profession
+  employer       Organization @relation(fields: [organizationId], references: [id])
+  from           DateTime
+  to             DateTime?
+  description    String?
+  talent         Talent       @relation(fields: [talentId], references: [id])
+  organizationId Int
+  talentId       String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Qualification {
+  id               Int          @id @default(autoincrement())
+  fieldOfEducation Profession
+  degree           String?
+  institution      Organization @relation(fields: [organizationId], references: [id])
+  from             DateTime
+  to               DateTime?
+  description      String?
+  Talent           Talent       @relation(fields: [talentId], references: [id])
+  talentId         String
+  organizationId   Int
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Approbation {
+  id           Int               @id @default(autoincrement())
+  status       ApprobationStatus
+  federalState FederalState
+  talent       Talent            @relation(fields: [talentId], references: [id])
+  talentId     String
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+}
+
+model Document {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  url         String
+  Talent      Talent   @relation(fields: [talentId], references: [id])
+  talentId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OtherSkill {
+  id          Int        @id @default(autoincrement())
+  name        String
+  level       SkillLevel
+  description String?
+  talent      Talent     @relation(fields: [talentId], references: [id])
+  talentId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model LanguageSkill {
+  id          Int        @id @default(autoincrement())
+  name        String
+  level       SkillLevel
+  description String?
+  talent      Talent     @relation(fields: [talentId], references: [id])
+  talentId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Talent {
+  id            String          @id
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  firstName     String?
+  middleName    String?
+  lastName      String
+  email         String
+  profession    Profession
+  profilePic    String?
+  address       Address?        @relation(fields: [addressId], references: [id])
+  description   String?
+  type          UserType
+  experiences   Experience[]
+  qualification Qualification[]
+  approbations  Approbation[]
+  documents     Document[]
+  otherSkills   OtherSkill[]
+  languages     LanguageSkill[]
+  addressId     Int?
+}
