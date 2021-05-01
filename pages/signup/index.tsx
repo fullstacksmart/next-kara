@@ -49,22 +49,19 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const router = useRouter();
   const [weakPassword, setWeakPassword] = useState(false);
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
-  const [createUser] = useMutation(ADD_EMPLOYER);
-  const [createTalent] = useMutation(ADD_TALENT);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
   const [error, setError] = useState<FirebaseError | null>(null);
 
+  const [createUser] = useMutation(ADD_EMPLOYER);
+  const [createTalent] = useMutation(ADD_TALENT);
   const auth = useAuth();
 
   const checkPasswordStrength = (): boolean => {
-    if (formValues.password) {
-      const isPasswordWeak = !strongCombination.test(formValues.password);
-      setWeakPassword(isPasswordWeak);
-      return isPasswordWeak;
-    }
-    return true;
+    const isPasswordWeak = !strongCombination.test(formValues.password);
+    setWeakPassword(isPasswordWeak);
+    return isPasswordWeak;
   };
 
   const handlePasswordRepeat = (
