@@ -1,6 +1,6 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(({ spacing }) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       width: '100%',
