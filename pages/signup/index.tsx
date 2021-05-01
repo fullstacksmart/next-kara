@@ -5,17 +5,17 @@ import {
   Container,
   Box,
 } from '@material-ui/core';
-import OptionsToggler from '../../components/option-toggler/OptionToggler';
-import { Layout } from '../../containers/layout';
-import { Button } from '../../components/buttons';
-import InputField from '../../components/input-field/InputField';
+import OptionsToggler from 'components/option-toggler/OptionToggler';
+import { Layout } from 'containers/layout';
+import { Button } from 'components/buttons';
+import InputField from 'components/input-field/InputField';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { PageProps, SignupFormValues } from '../../lib/types';
+import { PageProps, SignupFormValues } from 'lib/types';
 import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from 'hooks/useAuth';
 import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
