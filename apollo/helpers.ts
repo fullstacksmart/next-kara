@@ -17,6 +17,7 @@ import { nanoid } from 'nanoid';
 import { filterById } from '../lib/utils/arrays';
 import { ApolloError } from '@apollo/client';
 import { defaultTalentInput } from 'lib/defaults/talent';
+import prisma from 'prisma/client';
 
 const handleError = (e: Error): Error => {
   console.error(e); //eslint-disable-line no-console
@@ -38,14 +39,21 @@ const getExperienceById = (
   return (filterById(talent.experiences, id) as Experience | undefined) || null;
 };
 
-export const getAllTalentIds = (): string[] =>
-  models.Talent.findMany().map((talent: User) => talent.id);
+export const getAllTalentIds = async (): Promise<string[] | undefined> => {
+  try {
+    const talents = await prisma.talent.findMany();
+    return talents.map((talent) => talent.id.toString()) || ['none'];
+  } catch (e) {
+    handleError(e);
+  }
+};
+// return models.Talent.findMany().map((talent: User) => talent.id);
 
 export const getAllEmployerIds = (): string[] =>
   models.Employer.findMany().map((employer: User) => employer.id);
 
-export const getAllUserIds = (): string[] => {
-  const talents = getAllTalentIds.call(null);
+export const getAllUserIds = async (): Promise<string[]> => {
+  const talents = (await getAllTalentIds.call(null)) || [];
   const employers = getAllEmployerIds();
   return talents.concat(employers);
 };

@@ -4,7 +4,7 @@ export type SupportedLanguage = 'de' | 'en';
 
 export type AssetType = 'EXPERIENCES' | 'QUALIFICATIONS';
 
-export type IsoCode = 'SRB' | 'DEU' | 'CRO' | 'POL' | 'AUT';
+export type IsoCode = 'SRB' | 'GER' | 'CRO' | 'POL' | 'AUT';
 
 export enum Gender {
   OTHER = 'OTHER',
