@@ -94,49 +94,47 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e.preventDefault();
     const weakPassword = checkPasswordStrength();
     if (weakPassword) return;
-    if (formValues.email) {
-      setError(null);
-      auth
-        .signup(formValues.email, formValues.password)
-        .then((response) => {
-          if (isError(response)) {
-            setError(response);
-          } else if (response.user) {
-            const id = response.user.uid || '';
-            const input = {
-              ...transformSignupFormValuesToTalentInput(formValues),
-              id,
-            };
-            if (formValues.type === UserType.TALENT) {
-              return createTalent({
-                variables: {
-                  input,
+    setError(null);
+    auth
+      .signup(formValues.email, formValues.password)
+      .then((response) => {
+        if (isError(response)) {
+          setError(response);
+        } else if (response.user) {
+          const id = response.user.uid || '';
+          const input = {
+            ...transformSignupFormValuesToTalentInput(formValues),
+            id,
+          };
+          if (formValues.type === UserType.TALENT) {
+            return createTalent({
+              variables: {
+                input,
+              },
+            }).then(({ data }) => {
+              const user = data.addTalent;
+              auth.setContextUser(user);
+              router.push(`/talents/${id}`);
+            });
+          } else {
+            return createUser({
+              variables: {
+                input: {
+                  ...formValues,
+                  id,
                 },
-              }).then(({ data }) => {
-                const user = data.addTalent;
-                auth.setContextUser(user);
-                router.push(`/talents/${id}`);
-              });
-            } else {
-              return createUser({
-                variables: {
-                  input: {
-                    ...formValues,
-                    id,
-                  },
-                },
-              }).then(({ data }) => {
-                const user = data.addEmployer;
-                auth.setContextUser(user);
-                router.push(`/employers/${id}`);
-              });
-            }
+              },
+            }).then(({ data }) => {
+              const user = data.addEmployer;
+              auth.setContextUser(user);
+              router.push(`/employers/${id}`);
+            });
           }
-        })
-        .catch((error: Error) => {
-          console.error(error); //eslint-disable-line no-console
-        });
-    }
+        }
+      })
+      .catch((error: Error) => {
+        console.error(error); //eslint-disable-line no-console
+      });
   };
 
   return (
