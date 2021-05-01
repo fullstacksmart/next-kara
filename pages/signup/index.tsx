@@ -21,6 +21,7 @@ import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent'
 import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
+import { computeNestedValue, getPropArray } from '../../lib/utils/arrays';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -62,6 +63,20 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     const isPasswordWeak = !strongCombination.test(formValues.password);
     setWeakPassword(isPasswordWeak);
     return isPasswordWeak;
+  };
+
+  const handlePasswordChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
+    setWeakPassword(false);
+    setFormValues((oldValues) => {
+      const [propArray] = getPropArray('password');
+      const newValue = e.target.value;
+      return {
+        ...oldValues,
+        ...computeNestedValue(oldValues, propArray, newValue),
+      };
+    });
   };
 
   const handlePasswordRepeat = (
@@ -205,11 +220,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 propName="password"
                 value={formValues.password}
                 label={t('password.password')}
-                setValue={
-                  setFormValues as Dispatch<
-                    SetStateAction<Partial<SignupFormValues>>
-                  >
-                }
+                onChange={handlePasswordChange}
                 type="password"
                 required
               />
