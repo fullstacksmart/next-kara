@@ -10,12 +10,14 @@ import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
+import { FirebaseError } from 'lib/types/auth';
+import Error from 'components/error';
 
 export interface LayoutProps {
   home?: boolean;
   heading?: string;
   title?: string | string[];
-  error: React.ReactNode | null;
+  error: FirebaseError | null;
   children?: React.ReactNode;
   i18n?: I18n;
   t: TFunction;
@@ -34,10 +36,6 @@ const Layout = ({
   const auth = useAuth();
   const router = useRouter();
 
-  // const handleClick = (): void => {
-  //   const newLang = i18n.language === 'en' ? 'de' : 'en'
-  //   i18n.changeLanguage(newLang)
-  // }
   const languageOptions = [
     {
       value: 'de',
@@ -89,7 +87,7 @@ const Layout = ({
       ) : (
         <></>
       )}
-      {error}
+      {error ? <Error error={error} /> : null}
       <main className={classes.main}>{children}</main>
       {!home && <Footer />}
     </Container>

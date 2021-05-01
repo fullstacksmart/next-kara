@@ -19,7 +19,6 @@ import { useAuth } from '../../hooks/useAuth';
 import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
-import Error from 'components/error';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 
@@ -125,10 +124,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     }
   };
 
-  const errorComponent = error ? <Error error={error} /> : null;
-
   return (
-    <Layout title="sign up" t={t} error={errorComponent}>
+    <Layout title="sign up" t={t} error={error}>
       <Card>
         <CardContent>
           <Container>
