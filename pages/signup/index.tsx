@@ -21,7 +21,7 @@ import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent'
 import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
-import { computeNestedValue, getPropArray } from '../../lib/utils/arrays';
+import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -78,6 +78,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       };
     });
   };
+
+  console.log('hi');
 
   const handlePasswordRepeat = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
