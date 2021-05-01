@@ -79,8 +79,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     });
   };
 
-  console.log('hi');
-
   const handlePasswordRepeat = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {
@@ -106,8 +104,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   // TODO: refactor long handleSubmit
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const weakPassword = checkPasswordStrength();
-    if (weakPassword) return;
+    const isPasswordWeak = checkPasswordStrength();
+    if (isPasswordWeak) return;
     setError(null);
     auth
       .signup(formValues.email, formValues.password)
