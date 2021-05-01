@@ -7,9 +7,9 @@ const localeSubpaths = {
 };
 
 module.exports = (phase) => {
-  let uid;
+  let DEV_USER_UID;
   if (phase === PHASE_DEVELOPMENT_SERVER) {
-    uid = 'fUl2uRrJV4hzg2r077loNCLDajL2';
+    DEV_USER_UID = 'fUl2uRrJV4hzg2r077loNCLDajL2';
   }
   return {
     rewrites: async () => nextI18NextRewrites(localeSubpaths),
@@ -17,7 +17,7 @@ module.exports = (phase) => {
       localeSubpaths,
     },
     env: {
-      uid,
+      DEV_USER_UID,
     },
   };
 };
