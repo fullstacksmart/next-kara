@@ -151,7 +151,8 @@
   "password": {
     "password": "Passwort",
     "forgot": "Passwort vergessen?",
-    "reset": "Jetzt E-Mail zum Zurücksetzen des Passworts schicken"
+    "reset": "Jetzt E-Mail zum Zurücksetzen des Passworts schicken",
+    "weakPassword": "Das Passwort muss mind. acht Zeichen, Groß- und Kleinbuchstaben und Zahlen enthalten."
   },
   "profession": {
     "DOCTOR-FEMALE": "Ärztin",

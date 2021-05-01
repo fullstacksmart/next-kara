@@ -38,12 +38,16 @@ const ADD_TALENT = gql`
   }
 `;
 
+// Min 8 characters. At least 1 capital, 1 number
+const strongCombination = new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z]).{8,}$/);
+
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [formValues, setFormValues] = useState<SignupFormValues>(
     defaultSignupFormValues,
   );
 
   const router = useRouter();
+  const [weakPassword, setWeakPassword] = useState(false);
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [createUser] = useMutation(ADD_EMPLOYER);
   const [createTalent] = useMutation(ADD_TALENT);
@@ -53,6 +57,15 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [error, setError] = useState<FirebaseError | null>(null);
 
   const auth = useAuth();
+
+  const checkPasswordStrength = (): boolean => {
+    if (formValues.password) {
+      const isPasswordWeak = !strongCombination.test(formValues.password);
+      setWeakPassword(isPasswordWeak);
+      return isPasswordWeak;
+    }
+    return true;
+  };
 
   const handlePasswordRepeat = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -79,7 +92,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   // TODO: refactor long handleSubmit
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (formValues.email && formValues.password) {
+    const weakPassword = checkPasswordStrength();
+    if (weakPassword) return;
+    if (formValues.email) {
       setError(null);
       auth
         .signup(formValues.email, formValues.password)
@@ -190,6 +205,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 required
               />
               <InputField
+                error={weakPassword}
+                helperText={weakPassword ? t('password.weakPassword') : null}
                 propName="password"
                 value={formValues.password}
                 label={t('password.password')}

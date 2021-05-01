@@ -151,7 +151,8 @@
   "password": {
     "password": "Password",
     "forgot": "Forgot your password?",
-    "reset": "Send an email to reset your password"
+    "reset": "Send an email to reset your password",
+    "weakPassword": "Password must contain at least eight characters with uppercase and lowercase letters and numbers."
   },
   "profession": {
     "DOCTOR-FEMALE": "Doctor",
