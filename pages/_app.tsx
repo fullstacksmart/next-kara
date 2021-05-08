@@ -15,6 +15,7 @@ import DateFnsUtils from '@date-io/date-fns';
 
 import '../styles/globals.css';
 import { AuthProvider } from '../hooks/useAuth';
+import { Layout } from 'containers/layout';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
@@ -28,19 +29,21 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
-      <Head>
-        <title>Kara</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <ThemeProvider theme={baseTheme}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </MuiPickersUtilsProvider>
-      </ThemeProvider>
+        <Head>
+          <title>Kara</title>
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width"
+          />
+        </Head>
+        <ThemeProvider theme={baseTheme}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <CssBaseline />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </MuiPickersUtilsProvider>
+        </ThemeProvider>
       </AuthProvider>
     </ApolloProvider>
   );

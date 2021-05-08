@@ -22,6 +22,7 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
+import { layoutVar } from 'lib/context-variables';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -149,102 +150,104 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       });
   };
 
+  console.log('signup', error);
+
+  layoutVar({ title: 'sign in', error });
+
   return (
-    <Layout title="sign up" t={t} error={error}>
-      <Card>
-        <CardContent>
-          <Container>
-            <Typography variant="h2">{t('pages.signup.header')}</Typography>
-            <form onSubmit={handleSubmit}>
-              <OptionsToggler
-                options={[
-                  { value: 'TALENT', display: t('type.talent') },
-                  { value: 'EMPLOYER', display: t('type.employer') },
-                ]}
-                optionsLabel="type"
-                setOption={(type) => {
-                  setFormValues((oldValues) => ({
-                    ...oldValues,
-                    type: UserType[type as keyof typeof UserType],
-                  }));
-                }}
+    <Card>
+      <CardContent>
+        <Container>
+          <Typography variant="h2">{t('pages.signup.header')}</Typography>
+          <form onSubmit={handleSubmit}>
+            <OptionsToggler
+              options={[
+                { value: 'TALENT', display: t('type.talent') },
+                { value: 'EMPLOYER', display: t('type.employer') },
+              ]}
+              optionsLabel="type"
+              setOption={(type) => {
+                setFormValues((oldValues) => ({
+                  ...oldValues,
+                  type: UserType[type as keyof typeof UserType],
+                }));
+              }}
+            />
+            <Box component="div">
+              <GenderSelector
+                t={t}
+                updateFunction={
+                  setFormValues as Dispatch<SetStateAction<Partial<BaseUser>>>
+                }
               />
-              <Box component="div">
-                <GenderSelector
-                  t={t}
-                  updateFunction={
-                    setFormValues as Dispatch<SetStateAction<Partial<BaseUser>>>
-                  }
-                />
-                <InputField
-                  propName={['name', 'firstName']}
-                  value={formValues.name?.firstName}
-                  label={t('fullName.firstName')}
-                  fullWidth={false}
-                  setValue={
-                    setFormValues as Dispatch<
-                      SetStateAction<Partial<SignupFormValues>>
-                    >
-                  }
-                />
-                <InputField
-                  propName={['name', 'lastName']}
-                  value={formValues.name?.lastName}
-                  label={t('fullName.lastName')}
-                  fullWidth={false}
-                  setValue={
-                    setFormValues as Dispatch<
-                      SetStateAction<Partial<SignupFormValues>>
-                    >
-                  }
-                  required
-                />
-              </Box>
-              {company}
               <InputField
-                propName="email"
-                type="email"
-                value={formValues.email}
-                label={t('email')}
+                propName={['name', 'firstName']}
+                value={formValues.name?.firstName}
+                label={t('fullName.firstName')}
+                fullWidth={false}
                 setValue={
                   setFormValues as Dispatch<
                     SetStateAction<Partial<SignupFormValues>>
                   >
                 }
-                inputProps={{ className: styles.FormInput }}
-                required
               />
               <InputField
-                error={weakPassword}
-                helperText={weakPassword ? t('password.weakPassword') : null}
-                propName="password"
-                value={formValues.password}
-                label={t('password.password')}
-                onChange={handlePasswordChange}
-                type="password"
+                propName={['name', 'lastName']}
+                value={formValues.name?.lastName}
+                label={t('fullName.lastName')}
+                fullWidth={false}
+                setValue={
+                  setFormValues as Dispatch<
+                    SetStateAction<Partial<SignupFormValues>>
+                  >
+                }
                 required
               />
-              <InputField
-                propName="passwordConfirm"
-                label={t('repeatPassword')}
-                onChange={handlePasswordRepeat}
-                type="password"
-                required
-                value={passwordRepeat.passwordConfirm}
-                // setValue={handlePasswordRepeat}
-                inputProps={{
-                  className: styles.FormInput,
-                  pattern: `^${formValues.password}$`,
-                }}
-              />
-              <Button disabled={!passwordsIdentical} type="submit">
-                {t('signup')}
-              </Button>
-            </form>
-          </Container>
-        </CardContent>
-      </Card>
-    </Layout>
+            </Box>
+            {company}
+            <InputField
+              propName="email"
+              type="email"
+              value={formValues.email}
+              label={t('email')}
+              setValue={
+                setFormValues as Dispatch<
+                  SetStateAction<Partial<SignupFormValues>>
+                >
+              }
+              inputProps={{ className: styles.FormInput }}
+              required
+            />
+            <InputField
+              error={weakPassword}
+              helperText={weakPassword ? t('password.weakPassword') : null}
+              propName="password"
+              value={formValues.password}
+              label={t('password.password')}
+              onChange={handlePasswordChange}
+              type="password"
+              required
+            />
+            <InputField
+              propName="passwordConfirm"
+              label={t('repeatPassword')}
+              onChange={handlePasswordRepeat}
+              type="password"
+              required
+              value={passwordRepeat.passwordConfirm}
+              // setValue={handlePasswordRepeat}
+              inputProps={{
+                className: styles.FormInput,
+                pattern: `^${formValues.password}$`,
+              }}
+            />
+            <Button disabled={!passwordsIdentical} type="submit">
+              {t('signup')}
+            </Button>
+          </form>
+        </Container>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -13,20 +13,7 @@ const Home = ({ t }: PageProps): React.ReactElement => {
   //   i18n.changeLanguage(newLang)
   // }
 
-  return (
-    <Layout title="Home" home t={t}>
-      {/* <Button onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true"  color="primary" startIcon={<TranslateIcon />}>
-           Switch Language
-      </Button>
-      <Button href="/signin" color="primary" variant="contained">
-        {t('signin')}
-      </Button>
-      <Button href="/signup" color="secondary" variant="contained">
-        {t('signup')}
-      </Button> */}
-      <LandingPage />
-    </Layout>
-  );
+  return <LandingPage />;
 };
 
 Home.getInitialProps = async () => ({

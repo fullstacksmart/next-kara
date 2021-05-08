@@ -12,29 +12,26 @@ import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import { FirebaseError } from 'lib/types/auth';
 import Error from 'components/error';
+import { withTranslation } from 'i18n.config';
+import { layoutVar } from 'lib/context-variables';
 
 export interface LayoutProps {
-  home?: boolean;
-  heading?: string;
-  title?: string | string[];
-  error: FirebaseError | null;
   children?: React.ReactNode;
   i18n?: I18n;
   t: TFunction;
 }
 
-const Layout = ({
-  home = false,
-  error = null,
-  children,
-  heading,
-  title,
-  i18n,
-  t,
-}: LayoutProps): React.ReactElement => {
+const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
   const auth = useAuth();
   const router = useRouter();
+  const { pathname } = router;
+
+  const isHome = pathname === '/';
+
+  const { title, heading, error } = layoutVar();
+  console.log('layoutVar: ', layoutVar);
+  console.log('error: ', error);
 
   const languageOptions = [
     {
@@ -62,7 +59,7 @@ const Layout = ({
       <Head>
         <title>{getTitleString(title)}</title>
       </Head>
-      {!home ? (
+      {!isHome ? (
         <header className={classes.header}>
           <Box component="div" className={classes.text}>
             <Typography variant="h5">{heading}</Typography>
@@ -89,9 +86,9 @@ const Layout = ({
       )}
       {error ? <Error error={error} /> : null}
       <main className={classes.main}>{children}</main>
-      {!home && <Footer />}
+      {!isHome && <Footer />}
     </Container>
   );
 };
 
-export default Layout;
+export default withTranslation('common')(Layout);
