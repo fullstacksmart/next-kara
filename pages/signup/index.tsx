@@ -109,11 +109,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e.preventDefault();
     const isPasswordWeak = checkPasswordStrength();
     if (isPasswordWeak) return;
-    //setError(null);
+    changeLayoutProps('error', null);
     auth
       .signup(formValues.email, formValues.password)
       .then((response) => {
         if (isError(response)) {
+          changeLayoutProps('error', response);
           //setError(response);
         } else if (response.user) {
           const id = response.user.uid || '';
