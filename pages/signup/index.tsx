@@ -60,7 +60,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [createTalent] = useMutation(ADD_TALENT);
   const auth = useAuth();
 
-  const { title, heading, error, changeTitle } = useLayoutContext();
+  const { title, error, heading, changeLayoutProps } = useLayoutContext();
 
   const checkPasswordStrength = (): boolean => {
     const isPasswordWeak = !strongCombination.test(formValues.password);
@@ -152,8 +152,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       });
   };
 
-  console.log('signup', error);
-  changeTitle('jfnwenfwe');
+  console.log('signup LayoutProps', title, error, heading);
+  const change = () => changeLayoutProps('title', 'test new title');
 
   return (
     <Card>
@@ -245,6 +245,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
             <Button disabled={!passwordsIdentical} type="submit">
               {t('signup')}
             </Button>
+            <Button onClick={change}>{'change'}</Button>
           </form>
         </Container>
       </CardContent>

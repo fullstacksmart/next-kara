@@ -16,7 +16,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import '../styles/globals.css';
 import { AuthProvider } from '../hooks/useAuth';
 import { Layout } from 'containers/layout';
-import { LayoutProvider } from 'hooks/useLayoutContext';
+import { LayoutProvider, initialLayoutContext } from 'hooks/useLayoutContext';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
@@ -30,9 +30,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
-        <LayoutProvider
-          initialLayoutContext={{ title: '', heading: '', error: '' }}
-        >
+        <LayoutProvider initialLayoutContext={initialLayoutContext}>
           <Head>
             <title>Kara</title>
             <meta

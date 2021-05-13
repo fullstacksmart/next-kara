@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const initialTitle = '';
+const initialTitle = 'testInitialTitle';
 const initialHeading = '';
 const initialError = null;
 
-export const LayoutContext = React.createContext({
+export const initialLayoutContext = {
   title: initialTitle,
   heading: initialHeading,
   error: initialError,
-});
+};
+
+export const LayoutContext = React.createContext(initialLayoutContext);
 
 export const LayoutProvider = ({ children, initialLayoutContext }) => {
-  const [title, setTitle] = React.useState(initialTitle);
-  const [heading, setHeading] = React.useState(initialHeading);
-  const [error, setError] = React.useState(initialError);
+  const [layoutProps, setLayoutProps] = useState(initialLayoutContext);
 
-  const changeTitle = (newTitle: string) => setTitle(newTitle);
+  const { title, error, heading } = layoutProps;
+
+  const changeLayoutProps = (propName, newValue) =>
+    setLayoutProps({
+      ...layoutProps,
+      [propName]: newValue,
+    });
 
   return (
-    <LayoutContext.Provider value={{ title, heading, error, changeTitle }}>
+    <LayoutContext.Provider
+      value={{ title, error, heading, changeLayoutProps }}
+    >
       {children}
     </LayoutContext.Provider>
   );

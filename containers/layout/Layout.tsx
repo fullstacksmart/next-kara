@@ -50,7 +50,8 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
     }
   };
 
-  const { title, heading, error } = useLayoutContext();
+  const { title, error, heading } = useLayoutContext();
+  console.log('in Layout title etc.', title, error, heading);
 
   return (
     <Container disableGutters className={classes.container}>
