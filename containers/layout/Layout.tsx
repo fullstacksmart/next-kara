@@ -49,6 +49,10 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
     }
   };
 
+  const title = '';
+  const heading = '';
+  const error = '';
+
   return (
     <Container disableGutters className={classes.container}>
       <Head>
