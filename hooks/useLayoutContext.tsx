@@ -30,19 +30,11 @@ export const LayoutProvider = ({
     newValue,
     resetOtherProps,
   ) => {
-    // TODO: improve function for the case resetOtherProps
-    // and pass object with arguments instead (better readability for function calls)
-    resetOtherProps
-      ? setLayoutProps({
-          ...layoutProps,
-          error: null,
-          heading: '',
-          [propName]: newValue,
-        })
-      : setLayoutProps({
-          ...layoutProps,
-          [propName]: newValue,
-        });
+    const newLayoutProps = resetOtherProps
+      ? { ...layoutProps, ...initialLayoutProps, [propName]: newValue }
+      : { ...layoutProps, [propName]: newValue };
+
+    setLayoutProps(newLayoutProps);
   };
 
   return (
