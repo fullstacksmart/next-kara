@@ -6,10 +6,9 @@ import {
   Box,
 } from '@material-ui/core';
 import OptionsToggler from 'components/option-toggler/OptionToggler';
-import { Layout } from 'containers/layout';
 import { Button } from 'components/buttons';
 import InputField from 'components/input-field/InputField';
-import { Dispatch, SetStateAction, useState, useContext } from 'react';
+import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { PageProps, SignupFormValues } from 'lib/types';
 import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
@@ -19,7 +18,7 @@ import { useAuth } from 'hooks/useAuth';
 import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
-import { isError, FirebaseError } from 'lib/types/auth';
+import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
 import { useLayoutContext } from 'hooks/useLayoutContext';
@@ -44,23 +43,25 @@ const ADD_TALENT = gql`
 const strongCombination = new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z]).{8,}$/);
 
 const SignUpPage = ({ t }: PageProps): React.ReactElement => {
+  const { changeLayoutProps } = useLayoutContext();
+  const auth = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    changeLayoutProps('title', 'signup');
+  }, []);
+
   const [formValues, setFormValues] = useState<SignupFormValues>(
     defaultSignupFormValues,
   );
 
-  const router = useRouter();
   const [weakPassword, setWeakPassword] = useState(false);
   const [passwordsIdentical, setPasswordsIdentical] = useState(true);
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
-  //const [error, setError] = useState<FirebaseError | null>(null);
-
   const [createUser] = useMutation(ADD_EMPLOYER);
   const [createTalent] = useMutation(ADD_TALENT);
-  const auth = useAuth();
-
-  const { title, error, heading, changeLayoutProps } = useLayoutContext();
 
   const checkPasswordStrength = (): boolean => {
     const isPasswordWeak = !strongCombination.test(formValues.password);
@@ -115,7 +116,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
       .then((response) => {
         if (isError(response)) {
           changeLayoutProps('error', response);
-          //setError(response);
         } else if (response.user) {
           const id = response.user.uid || '';
           const input = {
@@ -152,9 +152,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         console.error(error); //eslint-disable-line no-console
       });
   };
-
-  console.log('signup LayoutProps', title, error, heading);
-  const change = () => changeLayoutProps('title', 'test new title');
 
   return (
     <Card>
@@ -246,7 +243,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
             <Button disabled={!passwordsIdentical} type="submit">
               {t('signup')}
             </Button>
-            <Button onClick={change}>{'change'}</Button>
           </form>
         </Container>
       </CardContent>

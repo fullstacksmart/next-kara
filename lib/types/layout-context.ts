@@ -1,11 +1,13 @@
+import { FirebaseError } from 'lib/types/auth';
+
 export type ChangeLayoutProps = (
   propName: string,
-  newValue: string | any,
+  newValue: string | FirebaseError | null,
 ) => void;
 
 export type LayoutContextType = {
   title: string;
   heading: string;
-  error: any;
+  error: FirebaseError | null;
   changeLayoutProps: ChangeLayoutProps;
 };

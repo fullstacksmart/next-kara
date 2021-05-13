@@ -14,7 +14,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 import '../styles/globals.css';
-import { AuthProvider } from '../hooks/useAuth';
+import { AuthProvider } from 'hooks/useAuth';
 import { Layout } from 'containers/layout';
 import { LayoutProvider, initialLayoutContext } from 'hooks/useLayoutContext';
 

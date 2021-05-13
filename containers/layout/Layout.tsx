@@ -10,7 +10,6 @@ import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
-import { FirebaseError } from 'lib/types/auth';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
 import { useLayoutContext } from 'hooks/useLayoutContext';
@@ -26,6 +25,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const auth = useAuth();
   const router = useRouter();
   const { pathname } = router;
+  const { title, error, heading } = useLayoutContext();
 
   const isHome = pathname === '/';
 
@@ -49,9 +49,6 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
       i18n.changeLanguage(value);
     }
   };
-
-  const { title, error, heading } = useLayoutContext();
-  console.log('in Layout title etc.', title, error, heading);
 
   return (
     <Container disableGutters className={classes.container}>
