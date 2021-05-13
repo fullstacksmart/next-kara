@@ -1,14 +1,14 @@
 import { Button } from 'components/buttons';
 import { Card, CardContent, Typography, Container } from '@material-ui/core';
-import { Layout } from 'containers/layout';
 import InputField from 'components/input-field/InputField';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { PageProps } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import { isError, FirebaseError } from 'lib/types/auth';
+import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
+import { useLayoutContext } from 'hooks/useLayoutContext';
 
 interface FormValues {
   email: string;
@@ -21,18 +21,18 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
     email: '',
     password: '',
   });
-  const [error, setError] = useState<FirebaseError | null>(null);
+  const { changeLayoutProps } = useLayoutContext();
   const auth = useAuth();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      setError(null);
+      changeLayoutProps('error', null);
       auth
         .signin(formValues.email, formValues.password)
         .then((response) => {
           if (isError(response)) {
-            setError(response);
+            changeLayoutProps('error', response);
             return;
           }
           if (response && 'uid' in response)
@@ -43,7 +43,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   return (
-    <Layout title="sign in" t={t} error={error}>
+    <>
       <Card>
         <CardContent>
           <Container>
@@ -76,7 +76,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
         </CardContent>
       </Card>
       <Button href="/reset-password">{t('password.forgot')}</Button>
-    </Layout>
+    </>
   );
 };
 
