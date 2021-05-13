@@ -13,7 +13,6 @@ import { useRouter } from 'next/router';
 import { FirebaseError } from 'lib/types/auth';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
-import { layoutVar } from 'lib/context-variables';
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -28,10 +27,6 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const { pathname } = router;
 
   const isHome = pathname === '/';
-
-  const { title, heading, error } = layoutVar();
-  console.log('layoutVar: ', layoutVar);
-  console.log('error: ', error);
 
   const languageOptions = [
     {
