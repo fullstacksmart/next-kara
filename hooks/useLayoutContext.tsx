@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChangeLayoutProps, LayoutContextType } from 'lib/types/layout-context';
 
 const initialLayoutProps = {
-  title: 'testInitialTitle',
+  title: '',
   heading: '',
   error: null,
 };
