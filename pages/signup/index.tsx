@@ -9,7 +9,7 @@ import OptionsToggler from 'components/option-toggler/OptionToggler';
 import { Layout } from 'containers/layout';
 import { Button } from 'components/buttons';
 import InputField from 'components/input-field/InputField';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState, useContext } from 'react';
 import { PageProps, SignupFormValues } from 'lib/types';
 import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
@@ -22,6 +22,7 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
+import { LayoutContext } from 'hooks/useLayoutContext';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -53,11 +54,13 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
-  const [error, setError] = useState<FirebaseError | null>(null);
+  //const [error, setError] = useState<FirebaseError | null>(null);
 
   const [createUser] = useMutation(ADD_EMPLOYER);
   const [createTalent] = useMutation(ADD_TALENT);
   const auth = useAuth();
+
+  const { title, heading, error } = useContext(LayoutContext);
 
   const checkPasswordStrength = (): boolean => {
     const isPasswordWeak = !strongCombination.test(formValues.password);
@@ -106,12 +109,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e.preventDefault();
     const isPasswordWeak = checkPasswordStrength();
     if (isPasswordWeak) return;
-    setError(null);
+    //setError(null);
     auth
       .signup(formValues.email, formValues.password)
       .then((response) => {
         if (isError(response)) {
-          setError(response);
+          //setError(response);
         } else if (response.user) {
           const id = response.user.uid || '';
           const input = {
