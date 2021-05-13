@@ -47,9 +47,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const auth = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    changeLayoutProps('title', 'signup');
-  }, []);
+  // useEffect(() => {
+  //   changeLayoutProps('title', 'signup');
+  // }, []);
 
   const [formValues, setFormValues] = useState<SignupFormValues>(
     defaultSignupFormValues,

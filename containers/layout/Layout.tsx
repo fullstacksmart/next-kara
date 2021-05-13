@@ -9,10 +9,12 @@ import { Box, Typography } from '@material-ui/core';
 import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
 import { useLayoutContext } from 'hooks/useLayoutContext';
+import { getTitleFromPathname } from 'lib/utils/strings';
+import { useEffect } from 'react';
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -25,9 +27,25 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const auth = useAuth();
   const router = useRouter();
   const { pathname } = router;
-  const { title, error, heading } = useLayoutContext();
+  const { title, error, heading, changeLayoutProps } = useLayoutContext();
 
   const isHome = pathname === '/';
+
+  useEffect(() => {
+    console.log('useEffect in layout was called');
+    const title = getTitleFromPathname(pathname);
+    changeLayoutProps('title', title);
+    //changeLayoutProps('error', null);
+  }, [pathname]);
+
+  // Router.events.on('routeChangeComplete', () => {
+  //   console.log('url change triggered');
+  //   //reset all props
+  //   //changeLayoutProps({ title: title, error: null, heading: '' });
+  //   // reset all other props (heading, error)
+  // });
+
+  console.log('layout was called. error is:', error);
 
   const languageOptions = [
     {

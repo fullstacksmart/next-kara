@@ -2,6 +2,15 @@ import { Duration } from '../../lib/types';
 import { TFunction } from 'next-i18next';
 import { Address, FullName } from '../types';
 
+// more sophisticated mapping can be applied
+export const getTitleFromPathname = (pathname: string): string => {
+  if (pathname === '/') {
+    return 'Home';
+  } else {
+    return pathname.substring(1);
+  }
+};
+
 export const getTitleString = (
   title: string | string[] | undefined,
 ): string => {
