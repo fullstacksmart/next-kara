@@ -22,7 +22,6 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
-import { layoutVar } from 'lib/context-variables';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -94,7 +93,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         value={'company' in formValues ? formValues.company : ''}
         label={t('companyName')}
         setValue={
-          (setFormValues as unknown) as Dispatch<
+          setFormValues as unknown as Dispatch<
             SetStateAction<Record<string, unknown>>
           >
         }
@@ -151,8 +150,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   console.log('signup', error);
-
-  layoutVar({ title: 'sign in', error });
 
   return (
     <Card>
