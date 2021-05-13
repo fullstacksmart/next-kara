@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { FirebaseError } from 'lib/types/auth';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
+import { useLayoutContext } from 'hooks/useLayoutContext';
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -49,9 +50,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
     }
   };
 
-  const title = '';
-  const heading = '';
-  const error = '';
+  const { title, heading, error } = useLayoutContext();
 
   return (
     <Container disableGutters className={classes.container}>

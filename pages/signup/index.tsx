@@ -22,7 +22,7 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
-import { LayoutContext } from 'hooks/useLayoutContext';
+import { useLayoutContext } from 'hooks/useLayoutContext';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -60,7 +60,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [createTalent] = useMutation(ADD_TALENT);
   const auth = useAuth();
 
-  const { title, heading, error } = useContext(LayoutContext);
+  const { title, heading, error, changeTitle } = useLayoutContext();
 
   const checkPasswordStrength = (): boolean => {
     const isPasswordWeak = !strongCombination.test(formValues.password);
@@ -153,6 +153,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   };
 
   console.log('signup', error);
+  changeTitle('jfnwenfwe');
 
   return (
     <Card>

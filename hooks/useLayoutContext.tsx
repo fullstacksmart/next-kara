@@ -18,7 +18,7 @@ export const LayoutProvider = ({ children, initialLayoutContext }) => {
   const changeTitle = (newTitle: string) => setTitle(newTitle);
 
   return (
-    <LayoutContext.Provider value={{ title, heading, error }}>
+    <LayoutContext.Provider value={{ title, heading, error, changeTitle }}>
       {children}
     </LayoutContext.Provider>
   );
