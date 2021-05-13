@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { ChangeLayoutProps, LayoutContextType } from 'lib/types/layout-context';
 
-const initialTitle = 'testInitialTitle';
-const initialHeading = '';
-const initialError = null;
+const initialLayoutProps = {
+  title: 'testInitialTitle',
+  heading: '',
+  error: null,
+};
 
 export const initialLayoutContext: LayoutContextType = {
-  title: initialTitle,
-  heading: initialHeading,
-  error: initialError,
+  ...initialLayoutProps,
   changeLayoutProps: () => ({}),
 };
 
@@ -25,11 +25,25 @@ export const LayoutProvider = ({
 
   const { title, error, heading } = layoutProps;
 
-  const changeLayoutProps: ChangeLayoutProps = (propName, newValue) =>
-    setLayoutProps({
-      ...layoutProps,
-      [propName]: newValue,
-    });
+  const changeLayoutProps: ChangeLayoutProps = (
+    propName,
+    newValue,
+    resetOtherProps,
+  ) => {
+    // TODO: improve function for the case resetOtherProps
+    // and pass object with arguments instead (better readability for function calls)
+    resetOtherProps
+      ? setLayoutProps({
+          ...layoutProps,
+          error: null,
+          heading: '',
+          [propName]: newValue,
+        })
+      : setLayoutProps({
+          ...layoutProps,
+          [propName]: newValue,
+        });
+  };
 
   return (
     <LayoutContext.Provider

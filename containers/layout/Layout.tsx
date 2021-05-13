@@ -28,14 +28,15 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const router = useRouter();
   const { pathname } = router;
   const { title, error, heading, changeLayoutProps } = useLayoutContext();
+  console.log('error: ', error);
 
   const isHome = pathname === '/';
 
   useEffect(() => {
     console.log('useEffect in layout was called');
     const title = getTitleFromPathname(pathname);
-    changeLayoutProps('title', title);
-    //changeLayoutProps('error', null);
+    changeLayoutProps('title', title, true);
+    // changeLayoutProps('error', null);
   }, [pathname]);
 
   // Router.events.on('routeChangeComplete', () => {
@@ -44,8 +45,6 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   //   //changeLayoutProps({ title: title, error: null, heading: '' });
   //   // reset all other props (heading, error)
   // });
-
-  console.log('layout was called. error is:', error);
 
   const languageOptions = [
     {
