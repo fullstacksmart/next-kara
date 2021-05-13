@@ -9,7 +9,7 @@ import { Box, Typography } from '@material-ui/core';
 import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
 import { useLayoutContext } from 'hooks/useLayoutContext';
@@ -28,23 +28,14 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const router = useRouter();
   const { pathname } = router;
   const { title, error, heading, changeLayoutProps } = useLayoutContext();
-  console.log('error: ', error);
 
   const isHome = pathname === '/';
 
+  // ensure that 1. title is set on initial page load and 2. errors etc. are reset when switching the page
   useEffect(() => {
-    console.log('useEffect in layout was called');
     const title = getTitleFromPathname(pathname);
     changeLayoutProps('title', title, true);
-    // changeLayoutProps('error', null);
   }, [pathname]);
-
-  // Router.events.on('routeChangeComplete', () => {
-  //   console.log('url change triggered');
-  //   //reset all props
-  //   //changeLayoutProps({ title: title, error: null, heading: '' });
-  //   // reset all other props (heading, error)
-  // });
 
   const languageOptions = [
     {

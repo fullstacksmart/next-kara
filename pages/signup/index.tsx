@@ -8,7 +8,7 @@ import {
 import OptionsToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components/buttons';
 import InputField from 'components/input-field/InputField';
-import { Dispatch, SetStateAction, useState, useEffect } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { PageProps, SignupFormValues } from 'lib/types';
 import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
@@ -46,10 +46,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const { changeLayoutProps } = useLayoutContext();
   const auth = useAuth();
   const router = useRouter();
-
-  // useEffect(() => {
-  //   changeLayoutProps('title', 'signup');
-  // }, []);
 
   const [formValues, setFormValues] = useState<SignupFormValues>(
     defaultSignupFormValues,
