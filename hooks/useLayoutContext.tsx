@@ -30,6 +30,9 @@ export const LayoutProvider = ({
     newValue,
     resetOtherProps,
   ) => {
+    const currentValue = layoutProps[propName];
+    if (currentValue === newValue && !resetOtherProps) return;
+
     const newLayoutProps = resetOtherProps
       ? { ...layoutProps, ...initialLayoutProps, [propName]: newValue }
       : { ...layoutProps, [propName]: newValue };
