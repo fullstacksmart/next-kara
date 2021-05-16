@@ -14,6 +14,7 @@ import { FirebaseError } from 'lib/types/auth';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
 import { layoutVar } from 'lib/context-variables';
+import { useReactiveVar } from '@apollo/client';
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -29,7 +30,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
 
   const isHome = pathname === '/';
 
-  const { title, heading, error } = layoutVar();
+  const { title, heading, error } = useReactiveVar(layoutVar);
   console.log('layoutVar: ', layoutVar);
   console.log('error: ', error);
 
