@@ -18,7 +18,7 @@ import { useAuth } from 'hooks/useAuth';
 import { defaultSignupFormValues } from 'lib/defaults/common';
 import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent';
 import { BaseUser, UserType } from 'lib/types/common';
-import { isError, FirebaseError } from 'lib/types/auth';
+import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
 import { layoutError } from 'lib/context-variables';
@@ -55,10 +55,9 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   );
 
   useEffect(
-    () =>
-      function cleanup() {
-        layoutError(null);
-      },
+    () => () => {
+      layoutError(null);
+    },
     [],
   );
 
