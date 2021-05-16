@@ -17,6 +17,17 @@ export const getTitleString = (
   return titleString;
 };
 
+// more sophisticated mapping can be applied
+export const getTitleStringFromPathname = (pathname: string): string => {
+  let title;
+  if (pathname === '/') {
+    title = 'Home';
+  } else {
+    title = pathname.substring(1);
+  }
+  return getTitleString(title);
+};
+
 export const getDisplayAddress = (address?: Address, t?: TFunction): string => {
   if (!address) return '';
   if (!t) return `${address.city}, ${address.isoCode}`;

@@ -1,1 +1,1 @@
-export { layoutVar } from './context-variables';
+export { layoutError } from './context-variables';

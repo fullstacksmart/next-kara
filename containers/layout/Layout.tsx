@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Container from '@material-ui/core/Container';
 import { I18n, TFunction } from 'next-i18next';
 import Head from 'next/head';
-import { getTitleString } from 'lib/utils/strings';
 import Footer from 'components/footer/Footer';
 import useStyles from './LayoutStyles';
 import { Box, Typography } from '@material-ui/core';
@@ -10,11 +9,11 @@ import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
-import { FirebaseError } from 'lib/types/auth';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
-import { layoutVar } from 'lib/context-variables';
+import { layoutError } from 'lib/context-variables';
 import { useReactiveVar } from '@apollo/client';
+import { getTitleStringFromPathname } from 'lib/utils/strings';
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -30,9 +29,9 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
 
   const isHome = pathname === '/';
 
-  const { title, heading, error } = useReactiveVar(layoutVar);
-  console.log('layoutVar: ', layoutVar);
-  console.log('error: ', error);
+  const error = useReactiveVar(layoutError);
+  const title = getTitleStringFromPathname(pathname);
+  const heading = '';
 
   const languageOptions = [
     {
@@ -58,7 +57,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   return (
     <Container disableGutters className={classes.container}>
       <Head>
-        <title>{getTitleString(title)}</title>
+        <title>{title}</title>
       </Head>
       {!isHome ? (
         <header className={classes.header}>

@@ -1,7 +1,3 @@
 import { makeVar } from '@apollo/client';
 
-export const layoutVar = makeVar({
-  title: '',
-  heading: '',
-  error: null,
-});
+export const layoutError = makeVar(null);

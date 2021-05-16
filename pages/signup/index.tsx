@@ -6,10 +6,9 @@ import {
   Box,
 } from '@material-ui/core';
 import OptionsToggler from 'components/option-toggler/OptionToggler';
-import { Layout } from 'containers/layout';
 import { Button } from 'components/buttons';
 import InputField from 'components/input-field/InputField';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { PageProps, SignupFormValues } from 'lib/types';
 import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
@@ -22,7 +21,7 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError, FirebaseError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
-import { layoutVar } from 'lib/context-variables';
+import { layoutError } from 'lib/context-variables';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -54,7 +53,14 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
-  const [error, setError] = useState<FirebaseError | null>(null);
+
+  useEffect(
+    () =>
+      function cleanup() {
+        layoutError(null);
+      },
+    [],
+  );
 
   const [createUser] = useMutation(ADD_EMPLOYER);
   const [createTalent] = useMutation(ADD_TALENT);
@@ -94,7 +100,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         value={'company' in formValues ? formValues.company : ''}
         label={t('companyName')}
         setValue={
-          (setFormValues as unknown) as Dispatch<
+          setFormValues as unknown as Dispatch<
             SetStateAction<Record<string, unknown>>
           >
         }
@@ -107,12 +113,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e.preventDefault();
     const isPasswordWeak = checkPasswordStrength();
     if (isPasswordWeak) return;
-    setError(null);
+    layoutError(null);
     auth
       .signup(formValues.email, formValues.password)
       .then((response) => {
         if (isError(response)) {
-          setError(response);
+          layoutError(response);
         } else if (response.user) {
           const id = response.user.uid || '';
           const input = {
@@ -149,10 +155,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         console.error(error); //eslint-disable-line no-console
       });
   };
-
-  console.log('signup', error);
-
-  layoutVar({ title: 'sign in', error });
 
   return (
     <Card>
