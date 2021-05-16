@@ -6,7 +6,7 @@ import { PageProps } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import { isError, FirebaseError } from 'lib/types/auth';
+import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { layoutError } from 'lib/context-variables';
 
