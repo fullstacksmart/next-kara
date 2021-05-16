@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import { I18n, TFunction } from 'next-i18next';
 import Head from 'next/head';
