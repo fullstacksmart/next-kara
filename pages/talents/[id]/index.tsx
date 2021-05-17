@@ -1,6 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Layout } from '../../../containers/layout';
 import { Grid, Hidden } from '@material-ui/core';
 import {
   Approbation,
@@ -17,8 +16,8 @@ import {
   Qualification,
   Skill,
   SkillLevel,
-} from '../../../lib/types';
-import { withTranslation } from '../../../i18n.config';
+} from 'lib/types';
+import { withTranslation } from 'i18n.config';
 import { useState } from 'react';
 import {
   BasicInfo,
@@ -35,8 +34,7 @@ import {
   ApprobationsEdit,
   ProgressIndicator,
   Loader,
-} from '../../../components';
-import { getShortName } from '../../../lib/utils/strings';
+} from 'components';
 import useStyles from './profile.styles';
 
 const GET_ALL_TALENTS = gql`
