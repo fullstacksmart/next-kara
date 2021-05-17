@@ -47,7 +47,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const { pathname, query } = router;
 
   const isHome = pathname === '/';
-  const loadBasicInfo = pathname.includes('/talents/[id]');
+  const loadBasicInfo = pathname.includes('/talents/[id]'); // dependent on how profile page is named
 
   const { id } = query;
 
