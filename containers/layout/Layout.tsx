@@ -67,7 +67,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   let heading = '';
 
   if (data) {
-    const basicInfo = data?.getTalentById.basicInfo;
+    const { basicInfo } = data?.getTalentById;
     const { name } = basicInfo;
     const titleArray = ['profile', getShortName(name)];
     title = getTitleString(titleArray);
