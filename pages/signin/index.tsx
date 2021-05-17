@@ -8,7 +8,7 @@ import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
-import { layoutError } from 'lib/context-variables';
+import { layoutError } from 'apollo/cache';
 
 interface FormValues {
   email: string;

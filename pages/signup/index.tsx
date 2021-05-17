@@ -21,7 +21,7 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
-import { layoutError } from 'lib/context-variables';
+import { layoutError } from 'apollo/cache';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {

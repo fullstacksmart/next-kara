@@ -11,7 +11,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
-import { layoutError } from 'lib/context-variables';
+import { layoutError } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
 import { getTitleStringFromPathname } from 'lib/utils/strings';
 
