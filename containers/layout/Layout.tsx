@@ -17,7 +17,7 @@ import { getTitleString, getTitleStringFromPathname } from 'lib/utils/strings';
 import { gql, useQuery } from '@apollo/client';
 import { getShortName } from 'lib/utils/strings';
 
-const GET_BASIC_INFO = gql`
+const GET_TALENT_NAME = gql`
   query GetTalentById($id: String!) {
     getTalentById(id: $id) {
       id
@@ -51,7 +51,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
 
   const { id } = query;
 
-  const { data, error } = useQuery(GET_BASIC_INFO, {
+  const { data, error } = useQuery(GET_TALENT_NAME, {
     variables: {
       id,
     },

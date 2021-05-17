@@ -2,7 +2,6 @@
 // import { withTranslation } from '../i18n';
 // import TranslateIcon from "@material-ui/icons/Translate";
 // import { Button } from '../components/buttons';
-import { Layout } from '../containers/layout';
 import LandingPage from '../containers/landing/LandingPage';
 import { PageProps } from '../lib/types';
 import { withTranslation } from '../i18n.config';
