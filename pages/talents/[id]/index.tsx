@@ -196,16 +196,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   };
 
   return (
-    <Layout
-      t={t}
-      title={['profile', getShortName(basicInfo.name)]}
-      heading={
-        t('pages.profile.greeting') +
-        (basicInfo.name?.firstName ? ', ' + basicInfo.name.firstName : '') +
-        '!'
-      }
-      i18n={i18n}
-    >
+    <>
       <Grid container spacing={3} className={classes.OuterContainer}>
         <Grid item md={8} xs={12}>
           <BasicInfo
@@ -296,7 +287,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         open={modal.type === ModalType.APPROBATION}
         talentId={basicInfo.id}
       />
-    </Layout>
+    </>
   );
 };
 

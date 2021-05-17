@@ -13,7 +13,25 @@ import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
 import { layoutError } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
-import { getTitleStringFromPathname } from 'lib/utils/strings';
+import { getTitleString, getTitleStringFromPathname } from 'lib/utils/strings';
+import { gql, useQuery } from '@apollo/client';
+import { getShortName } from 'lib/utils/strings';
+
+const GET_BASIC_INFO = gql`
+  query GetTalentById($id: String!) {
+    getTalentById(id: $id) {
+      id
+      basicInfo {
+        id
+        name {
+          firstName
+          middleName
+          lastName
+        }
+      }
+    }
+  }
+`;
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -24,14 +42,42 @@ export interface LayoutProps {
 const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
   const auth = useAuth();
+  const reactiveError = useReactiveVar(layoutError);
   const router = useRouter();
-  const { pathname } = router;
+  const { pathname, query } = router;
 
   const isHome = pathname === '/';
+  const loadBasicInfo = pathname.includes('/talents/[id]');
 
-  const error = useReactiveVar(layoutError);
-  const title = getTitleStringFromPathname(pathname);
-  const heading = '';
+  const { id } = query;
+
+  const { data, error } = useQuery(GET_BASIC_INFO, {
+    variables: {
+      id,
+    },
+    skip: !loadBasicInfo,
+  });
+
+  if (error) {
+    if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
+    return <h1>Error: {error.message}</h1>;
+  }
+
+  let title = '';
+  let heading = '';
+
+  if (data) {
+    const basicInfo = data?.getTalentById.basicInfo;
+    const { name } = basicInfo;
+    const titleArray = ['profile', getShortName(name)];
+    title = getTitleString(titleArray);
+    heading =
+      t('pages.profile.greeting') +
+      (name?.firstName ? ', ' + name.firstName : '') +
+      '!';
+  } else {
+    title = getTitleStringFromPathname(pathname);
+  }
 
   const languageOptions = [
     {
@@ -84,7 +130,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
       ) : (
         <></>
       )}
-      {error ? <Error error={error} /> : null}
+      {reactiveError ? <Error error={reactiveError} /> : null}
       <main className={classes.main}>{children}</main>
       {!isHome && <Footer />}
     </Container>
