@@ -1,7 +1,7 @@
 import { UserType } from 'lib/types/common';
 import { useRouter } from 'next/router';
 
-type UseRedirectToProfileType = ({
+type RedirectToProfileType = ({
   userType,
   id,
 }: {
@@ -14,14 +14,20 @@ userTypeToProfilePathMap.set(UserType.TALENT, '/talents');
 userTypeToProfilePathMap.set(UserType.EMPLOYER, '/employers');
 userTypeToProfilePathMap.set(UserType.AGENCY, '/agencies');
 
-const useRedirectToProfile: UseRedirectToProfileType = ({ userType, id }) => {
+const useRedirectToProfile = (): {
+  redirectToProfile: RedirectToProfileType;
+} => {
   const router = useRouter();
 
-  const profileBasePath = userTypeToProfilePathMap.get(userType);
+  const redirectToProfile: RedirectToProfileType = ({ userType, id }) => {
+    const profileBasePath = userTypeToProfilePathMap.get(userType);
+    const path = `${profileBasePath}/${id}`;
+    router.push(path);
+  };
 
-  const path = `${profileBasePath}/${id}`;
-
-  router.push(path);
+  return {
+    redirectToProfile,
+  };
 };
 
 export default useRedirectToProfile;
