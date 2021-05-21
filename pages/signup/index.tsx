@@ -103,7 +103,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 const user = data.addTalent;
                 auth.setContextUser(user);
                 redirectToProfile({ userType: UserType.TALENT, id });
-                //router.push(`/talents/${id}`);
               });
             } else {
               return createUser({
@@ -117,7 +116,6 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
                 const user = data.addEmployer;
                 auth.setContextUser(user);
                 redirectToProfile({ userType: UserType.EMPLOYER, id });
-                //router.push(`/employers/${id}`);
               });
             }
           }

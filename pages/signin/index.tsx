@@ -3,13 +3,13 @@ import { Card, CardContent, Typography, Container } from '@material-ui/core';
 import { Layout } from 'containers/layout';
 import InputField from 'components/input-field/InputField';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { PageProps } from '../../lib/types';
+import { PageProps, UserType } from '../../lib/types';
 import { withTranslation } from 'i18n.config';
 import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import Error from 'components/error-handling';
 import { isError, FirebaseError } from 'lib/types/auth';
-import { useRouter } from 'next/router';
+import useRedirectToProfile from 'hooks/useRedirectToProfile';
 
 interface FormValues {
   email: string;
@@ -17,7 +17,7 @@ interface FormValues {
 }
 
 const SignInPage = ({ t }: PageProps): React.ReactElement => {
-  const router = useRouter();
+  const { redirectToProfile } = useRedirectToProfile();
   const [formValues, setFormValues] = useState<FormValues>({
     email: '',
     password: '',
@@ -36,8 +36,11 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
             setError(response);
             return;
           }
-          if (response && 'uid' in response)
-            router.push(`/talents/${response.uid}`);
+          if (response && 'uid' in response) {
+            console.log('response: ', response);
+            // TODO: CHeck if Talent or Employer
+            redirectToProfile({ userType: UserType.TALENT, id: response.uid });
+          }
         })
         .catch((error: Error) => console.error(error)); //eslint-disable-line no-console
     }
