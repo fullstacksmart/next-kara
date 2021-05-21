@@ -22,7 +22,7 @@ export const LanguageSection = ({
     ));
   return (
     <Section>
-      <SectionItem handleEdit={handleEdit}>
+      <SectionItem onClick={handleEdit}>
         <CheckedTitle
           title={t('components.languageSection.title')}
           done={Boolean(languages.length)}

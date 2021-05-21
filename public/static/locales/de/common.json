@@ -14,7 +14,7 @@
   "companyName": "Klinik / Unternehmen",
   "components": {
     "approbationSection": {
-      "title": "Approbationen"
+      "title": "Approbatio\u00ADnen"
     },
     "approbationsEdit": {
       "title": "Bearbeite Deine Approbationen"
@@ -46,7 +46,7 @@
       "label": "Anrede"
     },
     "languageSection": {
-      "title": "Sprachkenntnisse"
+      "title": "Sprach\u00ADkenntnisse"
     },
     "layout": {
       "backHome": "zurück zur Homepage"
@@ -157,7 +157,7 @@
     "DOCTOR-FEMALE": "Ärztin",
     "DOCTOR-MALE": "Arzt",
     "DOCTOR-OTHER": "Arzt",
-    "NURSE-FEMALE": "Krankenpflegerin",
+    "NURSE-FEMALE": "Kranken\u00ADpflegerin",
     "NURSE-MALE": "Krankenpfleger",
     "NURSE-OTHER": "Krankenpfleger",
     "OTHER_MEDICAL-FEMALE": "Sonstiges Medizinisches Personal",

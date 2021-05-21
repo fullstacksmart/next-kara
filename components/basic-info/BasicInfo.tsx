@@ -21,7 +21,7 @@ export const BasicInfo = ({
   return (
     <div className={styles.BasicInfo}>
       <Section>
-        <SectionItem handleEdit={handleEdit}>
+        <SectionItem onClick={handleEdit}>
           <div className={styles.HeaderContainer}>
             {basicInfo.profilePic && (
               <img

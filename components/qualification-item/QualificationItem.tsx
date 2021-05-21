@@ -1,8 +1,8 @@
 import { TFunction } from 'next-i18next';
-import { Qualification, Gender } from '../../lib/types';
+import { Qualification } from '../../lib/types';
 import { getFormatedDuration } from '../../lib/utils/strings';
 import { FieldDisplay } from '../field-display/FieldDisplay';
-import { SectionItem } from '../section-item/SectionItem';
+import { SectionItem } from '../SectionItem/SectionItem';
 import { Box } from '@material-ui/core';
 
 export interface QualificationItemProps {
@@ -22,7 +22,7 @@ export const QualificationItem = ({
   );
   return (
     <SectionItem
-      handleEdit={
+      onClick={
         () => handleEdit(qualification.id) /* eslint-disable-line no-console*/
       }
     >

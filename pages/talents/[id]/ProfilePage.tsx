@@ -17,8 +17,8 @@ import {
   Qualification,
   Skill,
   SkillLevel,
-} from '../../../lib/types';
-import { withTranslation } from '../../../i18n.config';
+} from 'lib/types';
+import { withTranslation } from 'i18n.config';
 import { useState } from 'react';
 import {
   BasicInfo,
@@ -35,9 +35,9 @@ import {
   ApprobationsEdit,
   ProgressIndicator,
   Loader,
-} from '../../../components';
-import { getShortName } from '../../../lib/utils/strings';
-import useStyles from './profile.styles';
+} from 'components';
+import { getShortName } from 'lib/utils/strings';
+import useStyles from './ProfilePage.styles';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -207,7 +207,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
       i18n={i18n}
     >
       <Grid container spacing={3} className={classes.OuterContainer}>
-        <Grid item md={8} xs={12}>
+        <Grid item md={7} xs={12}>
           <BasicInfo
             t={t}
             basicInfo={basicInfo}
@@ -229,7 +229,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
             }}
           />
         </Grid>
-        <Grid item md={4} xs={12}>
+        <Grid item md={5} xs={12}>
           <Hidden xsDown>
             <ProgressIndicator progress={progress} />
           </Hidden>
