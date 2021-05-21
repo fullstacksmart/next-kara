@@ -21,7 +21,8 @@ import { transformSignupFormValuesToTalentInput } from 'lib/transformers/talent'
 import { BaseUser, UserType } from 'lib/types/common';
 import Error from 'components/error-handling';
 import { isError, FirebaseError } from 'lib/types/auth';
-import { useRouter } from 'next/router';
+import useRedirectToProfile from 'hooks/useRedirectToProfile';
+import { UserType } from 'lib/types/common';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -69,7 +70,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
         value={'company' in formValues ? formValues.company : ''}
         label={t('companyName')}
         setValue={
-          (setFormValues as unknown) as Dispatch<
+          setFormValues as unknown as Dispatch<
             SetStateAction<Record<string, unknown>>
           >
         }
@@ -101,7 +102,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
               }).then(({ data }) => {
                 const user = data.addTalent;
                 auth.setContextUser(user);
-                router.push(`/talents/${id}`);
+                useRedirectToProfile({ userType: UserType.TALENT, id });
+                //router.push(`/talents/${id}`);
               });
             } else {
               return createUser({
