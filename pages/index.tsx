@@ -2,7 +2,7 @@
 // import { withTranslation } from '../i18n';
 // import TranslateIcon from "@material-ui/icons/Translate";
 // import { Button } from '../components/buttons';
-import LandingPage from '../containers/landing/LandingPage';
+import HomePage from '../containers/Home/HomePage';
 import { PageProps } from '../lib/types';
 import { withTranslation } from '../i18n.config';
 
@@ -12,7 +12,7 @@ const Home = ({ t }: PageProps): React.ReactElement => {
   //   i18n.changeLanguage(newLang)
   // }
 
-  return <LandingPage />;
+  return <HomePage />;
 };
 
 Home.getInitialProps = async () => ({
