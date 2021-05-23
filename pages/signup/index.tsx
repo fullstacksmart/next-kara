@@ -21,7 +21,7 @@ import { BaseUser, UserType } from 'lib/types/common';
 import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
-import { layoutError } from 'apollo/cache';
+import { layoutErrorVar } from 'apollo/cache';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -56,7 +56,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
 
   useEffect(
     () => () => {
-      layoutError(null);
+      layoutErrorVar(null);
     },
     [],
   );
@@ -112,12 +112,12 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
     e.preventDefault();
     const isPasswordWeak = checkPasswordStrength();
     if (isPasswordWeak) return;
-    layoutError(null);
+    layoutErrorVar(null);
     auth
       .signup(formValues.email, formValues.password)
       .then((response) => {
         if (isError(response)) {
-          layoutError(response);
+          layoutErrorVar(response);
         } else if (response.user) {
           const id = response.user.uid || '';
           const input = {

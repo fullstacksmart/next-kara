@@ -8,7 +8,7 @@ import styles from './Signin.module.css';
 import { useAuth } from '../../hooks/useAuth';
 import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
-import { layoutError } from 'apollo/cache';
+import { layoutErrorVar } from 'apollo/cache';
 
 interface FormValues {
   email: string;
@@ -25,7 +25,7 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
 
   useEffect(
     () => () => {
-      layoutError(null);
+      layoutErrorVar(null);
     },
     [],
   );
@@ -33,12 +33,12 @@ const SignInPage = ({ t }: PageProps): React.ReactElement => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      layoutError(null);
+      layoutErrorVar(null);
       auth
         .signin(formValues.email, formValues.password)
         .then((response) => {
           if (isError(response)) {
-            layoutError(response);
+            layoutErrorVar(response);
             return;
           }
           if (response && 'uid' in response)

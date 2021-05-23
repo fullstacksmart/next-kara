@@ -11,7 +11,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
-import { layoutError } from 'apollo/cache';
+import { layoutErrorVar } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
 import { getTitleString, getTitleStringFromPathname } from 'lib/utils/strings';
 import { gql, useQuery } from '@apollo/client';
@@ -42,7 +42,7 @@ export interface LayoutProps {
 const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
   const auth = useAuth();
-  const reactiveError = useReactiveVar(layoutError);
+  const layoutError = useReactiveVar(layoutErrorVar);
   const router = useRouter();
   const { pathname, query } = router;
 
@@ -130,7 +130,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
       ) : (
         <></>
       )}
-      {reactiveError ? <Error error={reactiveError} /> : null}
+      {layoutError ? <Error error={layoutError} /> : null}
       <main className={classes.main}>{children}</main>
       {!isHome && <Footer />}
     </Container>

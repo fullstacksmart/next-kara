@@ -3,7 +3,7 @@ import { FirebaseError } from 'lib/types/auth';
 import { ReactiveVar } from '@apollo/react-hooks';
 import { InMemoryCache } from '@apollo/client';
 
-export const layoutError: ReactiveVar<FirebaseError | null> = makeVar(
+export const layoutErrorVar: ReactiveVar<FirebaseError | null> = makeVar(
   null as FirebaseError | null,
 );
 
