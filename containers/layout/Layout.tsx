@@ -51,17 +51,12 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
 
   const { id } = query;
 
-  const { data, error } = useQuery(GET_TALENT_NAME, {
+  const { data } = useQuery(GET_TALENT_NAME, {
     variables: {
       id,
     },
     skip: !isOnTalentProfilePage,
   });
-
-  if (error) {
-    if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
-    return <h1>Error: {error.message}</h1>;
-  }
 
   let title = '';
   let heading = '';
