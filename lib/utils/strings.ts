@@ -17,15 +17,12 @@ export const getTitleString = (
   return titleString;
 };
 
-// more sophisticated mapping can be applied
 export const getTitleStringFromPathname = (pathname: string): string => {
-  let title;
-  if (pathname === '/') {
-    title = 'Home';
-  } else {
-    title = pathname.substring(1);
+  const path = pathname.split('/').filter((segment) => segment !== '');
+  if (path.length === 0) {
+    return getTitleString('Home');
   }
-  return getTitleString(title);
+  return getTitleString(path.join(' | '));
 };
 
 export const getDisplayAddress = (address?: Address, t?: TFunction): string => {
