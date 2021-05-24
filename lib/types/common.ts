@@ -53,21 +53,21 @@ export interface Address {
   isoCode?: IsoCode | '';
 }
 
-export interface BaseUser {
+export type BaseUser = {
   gender: Gender;
   name: FullName;
   email: string;
-}
+};
 
-interface NewBaseUser extends BaseUser {
+type NewBaseUser = BaseUser & {
   password: string;
-}
+};
 
 export type NewTalent = NewBaseUser;
 
-export interface NewEmployer extends NewBaseUser {
+export type NewEmployer = NewBaseUser & {
   company: string;
-}
+};
 
 export type SignupFormValues = (NewTalent | NewEmployer) & {
   type: UserType;
