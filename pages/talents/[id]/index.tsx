@@ -139,7 +139,7 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
+const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
   const classes = useStyles();
   const id = useRouter().query.id;
