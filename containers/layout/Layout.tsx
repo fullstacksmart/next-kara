@@ -11,27 +11,10 @@ import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
-import { layoutErrorVar } from 'apollo/cache';
+import { layoutVar } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
 import { getTitleString, getTitleStringFromPathname } from 'lib/utils/strings';
-import { gql, useQuery } from '@apollo/client';
 import { getShortName } from 'lib/utils/strings';
-
-const GET_TALENT_NAME = gql`
-  query GetTalentById($id: String!) {
-    getTalentById(id: $id) {
-      id
-      basicInfo {
-        id
-        name {
-          firstName
-          middleName
-          lastName
-        }
-      }
-    }
-  }
-`;
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -42,37 +25,13 @@ export interface LayoutProps {
 const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
   const auth = useAuth();
-  const layoutError = useReactiveVar(layoutErrorVar);
   const router = useRouter();
-  const { pathname, query } = router;
-
+  const { pathname } = router;
   const isHome = pathname === '/';
-  const isOnTalentProfilePage = pathname.includes('/talents/[id]'); // dependent on how profile page is named
 
-  const { id } = query;
+  const { title, heading, error } = useReactiveVar(layoutVar);
 
-  const { data } = useQuery(GET_TALENT_NAME, {
-    variables: {
-      id,
-    },
-    skip: !isOnTalentProfilePage,
-  });
-
-  let title = '';
-  let heading = '';
-
-  if (data) {
-    const { basicInfo } = data?.getTalentById;
-    const { name } = basicInfo;
-    const titleArray = ['profile', getShortName(name)];
-    title = getTitleString(titleArray);
-    heading =
-      t('pages.profile.greeting') +
-      (name?.firstName ? ', ' + name.firstName : '') +
-      '!';
-  } else {
-    title = getTitleStringFromPathname(pathname);
-  }
+  const titleToDisplay = title || getTitleStringFromPathname(pathname);
 
   const languageOptions = [
     {
@@ -98,7 +57,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   return (
     <Container disableGutters className={classes.container}>
       <Head>
-        <title>{title}</title>
+        <title>{titleToDisplay}</title>
       </Head>
       {!isHome ? (
         <header className={classes.header}>
@@ -125,7 +84,7 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
       ) : (
         <></>
       )}
-      {layoutError ? <Error error={layoutError} /> : null}
+      {error ? <Error error={error} /> : null}
       <main className={classes.main}>{children}</main>
       {!isHome && <Footer />}
     </Container>
