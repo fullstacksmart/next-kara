@@ -11,7 +11,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
-import { layoutVar } from 'apollo/cache';
+import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
 import { getTitleString, getTitleStringFromPathname } from 'lib/utils/strings';
 import { getShortName } from 'lib/utils/strings';
@@ -29,7 +29,13 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const { pathname } = router;
   const isHome = pathname === '/';
 
-  const { title, heading, error } = useReactiveVar(layoutVar);
+  const title = useReactiveVar(layoutTitleVar);
+  const heading = useReactiveVar(layoutHeadingVar);
+  const error = useReactiveVar(layoutErrorVar);
+
+  console.log('error: ', error);
+  console.log('heading: ', heading);
+  console.log('title: ', title);
 
   const titleToDisplay = title || getTitleStringFromPathname(pathname);
 
