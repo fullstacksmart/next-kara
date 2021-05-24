@@ -6,9 +6,9 @@ import {
   CardActionArea,
   Typography,
 } from '@material-ui/core';
-import useStyles from './LandingCardsStyles';
+import useStyles from './HomePageCards.styles';
 
-const LandingCards = (): React.ReactElement => {
+const HomePageCards = (): React.ReactElement => {
   const classes = useStyles();
 
   const content = [
@@ -67,4 +67,4 @@ const LandingCards = (): React.ReactElement => {
   );
 };
 
-export default LandingCards;
+export default HomePageCards;

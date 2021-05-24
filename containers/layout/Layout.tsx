@@ -2,7 +2,6 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { I18n, TFunction } from 'next-i18next';
 import Head from 'next/head';
-import { getTitleString } from 'lib/utils/strings';
 import Footer from 'components/footer/Footer';
 import useStyles from './LayoutStyles';
 import { Box, Typography } from '@material-ui/core';
@@ -10,32 +9,31 @@ import OptionToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
+import Error from 'components/error';
+import { withTranslation } from 'i18n.config';
+import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
+import { useReactiveVar } from '@apollo/client';
+import { getTitleStringFromPathname } from 'lib/utils/strings';
 
 export interface LayoutProps {
-  home?: boolean;
-  heading?: string;
-  title?: string | string[];
   children?: React.ReactNode;
   i18n?: I18n;
   t: TFunction;
 }
 
-const Layout = ({
-  home = false,
-  children,
-  heading,
-  title,
-  i18n,
-  t,
-}: LayoutProps): React.ReactElement => {
+const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
   const auth = useAuth();
   const router = useRouter();
+  const { pathname } = router;
+  const isHome = pathname === '/';
 
-  // const handleClick = (): void => {
-  //   const newLang = i18n.language === 'en' ? 'de' : 'en'
-  //   i18n.changeLanguage(newLang)
-  // }
+  const title = useReactiveVar(layoutTitleVar);
+  const heading = useReactiveVar(layoutHeadingVar);
+  const error = useReactiveVar(layoutErrorVar);
+
+  const titleToDisplay = title || getTitleStringFromPathname(pathname);
+
   const languageOptions = [
     {
       value: 'de',
@@ -60,9 +58,9 @@ const Layout = ({
   return (
     <Container disableGutters className={classes.container}>
       <Head>
-        <title>{getTitleString(title)}</title>
+        <title>{titleToDisplay}</title>
       </Head>
-      {!home ? (
+      {!isHome ? (
         <header className={classes.header}>
           <Box component="div" className={classes.text}>
             <Typography variant="h5">{heading}</Typography>
@@ -87,10 +85,11 @@ const Layout = ({
       ) : (
         <></>
       )}
+      {error ? <Error error={error} /> : null}
       <main className={classes.main}>{children}</main>
-      {!home && <Footer />}
+      {!isHome && <Footer />}
     </Container>
   );
 };
 
-export default Layout;
+export default withTranslation('common')(Layout);

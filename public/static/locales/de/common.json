@@ -151,7 +151,8 @@
   "password": {
     "password": "Passwort",
     "forgot": "Passwort vergessen?",
-    "reset": "Jetzt E-Mail zum Zurücksetzen des Passworts schicken"
+    "reset": "Jetzt E-Mail zum Zurücksetzen des Passworts schicken",
+    "weakPassword": "Das Passwort muss mind. acht Zeichen, Groß- und Kleinbuchstaben und Zahlen enthalten."
   },
   "profession": {
     "DOCTOR-FEMALE": "Ärztin",
@@ -204,7 +205,7 @@
   },
   "errors": {
     "auth": {
-      "userNotFound": "Es konnte kein Benutzer mit dieser E-Mail-Adresse gefunden werden. Bitte versuchen Sie es erneut oder registrieren Sie sich.",
+      "userNotFound": "Benutzername oder Passwort sind nicht korrekt. Bitte versuchen Sie es erneut oder registrieren Sie sich.",
       "wrongPassword": "Inkorrektes Passwort. Bitte versuchen Sie es erneut. Falls Sie Ihr Passwort vergessen haben, klicken Sie auf \"Passwort zurücksetzen\".",
       "tooManyRequests": "Zu viele Anmeldeversuche. Aus Sicherheitsgründen wurde Ihr Account vorrübergehen blockiert. Setzen Sie Ihr Passwort zurück oder versuchen Sie es später erneut.",
       "weakPassword": "Das Passwort muss mindestens sechs Zeichen lang sein.",

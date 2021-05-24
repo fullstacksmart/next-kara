@@ -1,6 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Layout } from '../../../containers/layout';
 import { Grid, Hidden } from '@material-ui/core';
 import {
   Approbation,
@@ -19,7 +18,7 @@ import {
   SkillLevel,
 } from 'lib/types';
 import { withTranslation } from 'i18n.config';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BasicInfo,
   BasicInfoEdit,
@@ -36,8 +35,9 @@ import {
   ProgressIndicator,
   Loader,
 } from 'components';
-import { getShortName } from 'lib/utils/strings';
 import useStyles from './ProfilePage.styles';
+import { getTitleString } from 'lib/utils/strings';
+import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -139,7 +139,7 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
+const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
   const classes = useStyles();
   const id = useRouter().query.id;
@@ -151,6 +151,24 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+
+  useEffect(() => {
+    if (data) {
+      const title = getTitleString(
+        `profile | ${data.getTalentById.basicInfo.fullName}`,
+      );
+      const heading = `${t('pages.profile.greeting')}, ${
+        data.getTalentById.basicInfo.name.firstName
+      }!`;
+      layoutTitleVar(title);
+      layoutHeadingVar(heading);
+    }
+    return () => {
+      layoutTitleVar('');
+      layoutHeadingVar('');
+    };
+  }, [data, t]);
+
   if (idLoading) return <></>;
   console.log(talentIds);
   if (loading) return <Loader />;
@@ -165,6 +183,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
     profession: Profession[dbBasicInfo.profession as keyof typeof Profession],
     gender: Gender[dbBasicInfo.gender as keyof typeof Gender],
   };
+
   const experiences: Experience[] = data.getTalentById.experiences.map(
     (experience: DbExperience) => ({
       ...experience,
@@ -196,16 +215,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   };
 
   return (
-    <Layout
-      t={t}
-      title={['profile', getShortName(basicInfo.name)]}
-      heading={
-        t('pages.profile.greeting') +
-        (basicInfo.name?.firstName ? ', ' + basicInfo.name.firstName : '') +
-        '!'
-      }
-      i18n={i18n}
-    >
+    <>
       <Grid container spacing={3} className={classes.OuterContainer}>
         <Grid item md={7} xs={12}>
           <BasicInfo
@@ -296,7 +306,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
         open={modal.type === ModalType.APPROBATION}
         talentId={basicInfo.id}
       />
-    </Layout>
+    </>
   );
 };
 

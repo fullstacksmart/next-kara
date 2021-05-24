@@ -1,6 +1,5 @@
 // import { GetStaticPaths, GetStaticProps } from 'next';
 import { Button } from '../../../components/buttons';
-import { Layout } from '../../../containers/layout';
 import { PageProps } from '../../../lib/types';
 
 export interface ProfilePageProps extends PageProps {
@@ -9,10 +8,10 @@ export interface ProfilePageProps extends PageProps {
 
 const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
   return (
-    <Layout t={t} title={['profile', `Employer ${id}`]}>
+    <>
       <h1>Profile Page for Employer {id}</h1>
       <Button href={`/employers/${id}/settings`}>To Settings</Button>
-    </Layout>
+    </>
   );
 };
 

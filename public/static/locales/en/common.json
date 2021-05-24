@@ -151,7 +151,8 @@
   "password": {
     "password": "Password",
     "forgot": "Forgot your password?",
-    "reset": "Send an email to reset your password"
+    "reset": "Send an email to reset your password",
+    "weakPassword": "Password must contain at least eight characters with uppercase and lowercase letters and numbers."
   },
   "profession": {
     "DOCTOR-FEMALE": "Doctor",
@@ -210,7 +211,7 @@
   },
   "errors": {
     "auth": {
-      "userNotFound": "No User found for this email address. Please try again or register.",
+      "userNotFound": "Username or password are incorrect. Please try again or register.",
       "wrongPassword": "Wrong password. Please try again. If you forgot your password, please click on \"reset password\".",
       "tooManyRequests": "Too many login attempts. Please reset your password or try again later.",
       "weakPassword": "The password needs to be at least 6 characters long",

@@ -14,6 +14,7 @@ import DateFnsUtils from '@date-io/date-fns';
 
 import '../styles/globals.css';
 import { AuthProvider } from '../hooks/useAuth';
+import { Layout } from 'containers/layout';
 import theme from 'lib/material-ui/theme';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
@@ -38,7 +39,9 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
         <ThemeProvider theme={theme}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <CssBaseline />
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </MuiPickersUtilsProvider>
         </ThemeProvider>
       </AuthProvider>
