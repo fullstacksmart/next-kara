@@ -1,9 +1,9 @@
 import {
   ApolloClient,
   createHttpLink,
-  InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
+import cache from './cache';
 import { setContext } from '@apollo/client/link/context';
 import { auth } from '../lib/auth/firebase';
 
@@ -30,8 +30,6 @@ const authLink = setContext(async (_, { headers }) => {
     },
   };
 });
-
-const cache = new InMemoryCache();
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link: authLink.concat(httpLink),

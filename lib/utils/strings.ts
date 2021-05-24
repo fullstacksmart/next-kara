@@ -17,6 +17,14 @@ export const getTitleString = (
   return titleString;
 };
 
+export const getTitleStringFromPathname = (pathname: string): string => {
+  const path = pathname.split('/').filter((segment) => segment !== '');
+  if (path.length === 0) {
+    return getTitleString('Home');
+  }
+  return getTitleString(path.join(' | '));
+};
+
 export const getDisplayAddress = (address?: Address, t?: TFunction): string => {
   if (!address) return '';
   if (!t) return `${address.city}, ${address.isoCode}`;
