@@ -35,7 +35,7 @@ import {
   ProgressIndicator,
   Loader,
 } from 'components';
-import useStyles from './profile.styles';
+import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
 
