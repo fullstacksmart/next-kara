@@ -18,7 +18,7 @@ import {
   SkillLevel,
 } from 'lib/types';
 import { withTranslation } from 'i18n.config';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BasicInfo,
   BasicInfoEdit,
@@ -36,6 +36,9 @@ import {
   Loader,
 } from 'components';
 import useStyles from './profile.styles';
+import { getShortName } from 'lib/utils/strings';
+import { getTitleString } from 'lib/utils/strings';
+import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -149,6 +152,22 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+
+  useEffect(() => {
+    if (data) {
+      const title = `profile | ${data.getTalentById.basicInfo.fullName}`;
+      const heading = `${t('pages.profile.greeting')}, ${
+        data.getTalentById.basicInfo.name.firstName
+      }!`;
+      layoutTitleVar(title);
+      layoutHeadingVar(heading);
+    }
+    return () => {
+      layoutTitleVar('');
+      layoutHeadingVar('');
+    };
+  }, [data, t]);
+
   if (idLoading) return <></>;
   console.log(talentIds);
   if (loading) return <Loader />;
@@ -163,6 +182,7 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
     profession: Profession[dbBasicInfo.profession as keyof typeof Profession],
     gender: Gender[dbBasicInfo.gender as keyof typeof Gender],
   };
+
   const experiences: Experience[] = data.getTalentById.experiences.map(
     (experience: DbExperience) => ({
       ...experience,
