@@ -13,8 +13,7 @@ import Error from 'components/error';
 import { withTranslation } from 'i18n.config';
 import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
-import { getTitleString, getTitleStringFromPathname } from 'lib/utils/strings';
-import { getShortName } from 'lib/utils/strings';
+import { getTitleStringFromPathname } from 'lib/utils/strings';
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -32,10 +31,6 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   const title = useReactiveVar(layoutTitleVar);
   const heading = useReactiveVar(layoutHeadingVar);
   const error = useReactiveVar(layoutErrorVar);
-
-  console.log('error: ', error);
-  console.log('heading: ', heading);
-  console.log('title: ', title);
 
   const titleToDisplay = title || getTitleStringFromPathname(pathname);
 

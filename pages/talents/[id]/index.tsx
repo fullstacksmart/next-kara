@@ -36,7 +36,6 @@ import {
   Loader,
 } from 'components';
 import useStyles from './profile.styles';
-import { getShortName } from 'lib/utils/strings';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
 
@@ -155,7 +154,9 @@ const ProfilePage = ({ t, i18n }: PageProps): React.ReactElement => {
 
   useEffect(() => {
     if (data) {
-      const title = `profile | ${data.getTalentById.basicInfo.fullName}`;
+      const title = getTitleString(
+        `profile | ${data.getTalentById.basicInfo.fullName}`,
+      );
       const heading = `${t('pages.profile.greeting')}, ${
         data.getTalentById.basicInfo.name.firstName
       }!`;
