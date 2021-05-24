@@ -217,7 +217,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   return (
     <>
       <Grid container spacing={3} className={classes.OuterContainer}>
-        <Grid item md={8} xs={12}>
+        <Grid item md={7} xs={12}>
           <BasicInfo
             t={t}
             basicInfo={basicInfo}
@@ -239,7 +239,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
             }}
           />
         </Grid>
-        <Grid item md={4} xs={12}>
+        <Grid item md={5} xs={12}>
           <Hidden xsDown>
             <ProgressIndicator progress={progress} />
           </Hidden>

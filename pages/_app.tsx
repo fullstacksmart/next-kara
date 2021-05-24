@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import App from 'next/app';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import baseTheme from '../lib/material-ui/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { appWithTranslation } from '../i18n.config';
@@ -16,6 +15,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import '../styles/globals.css';
 import { AuthProvider } from '../hooks/useAuth';
 import { Layout } from 'containers/layout';
+import theme from 'lib/material-ui/theme';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
         </Head>
-        <ThemeProvider theme={baseTheme}>
+        <ThemeProvider theme={theme}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <CssBaseline />
             <Layout>
