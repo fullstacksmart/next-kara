@@ -1,8 +1,10 @@
 import firebase from 'firebase/app';
+import { UserGroup } from './user';
 
 export type ContextUserType = {
   id: string;
   type?: string;
+  group?: UserGroup;
 };
 
 export type Signup = (

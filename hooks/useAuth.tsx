@@ -31,7 +31,7 @@ export const useAuth: () => UseAuthProviderReturnType = () => {
 };
 
 const useAuthProvider = (): UseAuthProviderReturnType => {
-  const [user, setUser] = useState({ id: '' });
+  const [user, setUser] = useState<ContextUserType>({ id: '' });
 
   const handleAuthStateChanged = (user: firebase.User | null): void => {
     //can save additional data here, e.g. type
@@ -72,7 +72,7 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
       .then((response) => {
         return response;
       })
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e)); //eslint-disable-line
   };
 
   const setContextUser = (user: ContextUserType): void => {
