@@ -5,18 +5,23 @@ import { ContextUserType } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+const editorIds = ['Kx00tfTGy6ei8olseVTJc988f992'];
+
 const isAuthorizedToView = (user: ContextUserType, id: string): boolean => {
   return (
     user.id === id ||
     user.group === UserGroup.Editor ||
-    user.group === UserGroup.Admin
+    user.group === UserGroup.Admin ||
+    editorIds.includes(user.id)
   );
 };
 
 const isAuthorizedToEdit = (user: ContextUserType, id: string): boolean => {
   return (
     isAuthorizedToView(user, id) &&
-    (user.id === id || user.group === UserGroup.Admin)
+    (user.id === id ||
+      user.group === UserGroup.Admin ||
+      editorIds.includes(user.id))
   );
 };
 
@@ -27,9 +32,15 @@ const withAuthorization = <Props extends object>( //eslint-disable-line
     const { user } = useAuth();
     const id = useRouter().query.id as string;
 
-    if (!id) return null;
+    if (!user) {
+      return <Unauthorized />;
+    }
 
-    if (!user || !isAuthorizedToView(user, id)) {
+    if (!id || !user.id) {
+      return <Page editable={false} {...props} />;
+    }
+
+    if (!isAuthorizedToView(user, id)) {
       return <Unauthorized />;
     }
 
