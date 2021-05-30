@@ -3,7 +3,6 @@ import { useAuth } from 'hooks/useAuth';
 import { UserGroup } from 'lib/types';
 import { ContextUserType } from 'lib/types/auth';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 const editorIds = ['Kx00tfTGy6ei8olseVTJc988f992'];
 
