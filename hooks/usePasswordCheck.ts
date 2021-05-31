@@ -11,8 +11,8 @@ const usePasswordCheck = (): boolean | undefined => {
     const sessionStorage = window.sessionStorage;
     if (!sessionStorage.getItem('canVisit')) {
       //eslint-disable-next-line
-      if (process.env.NODE_ENV === 'production' || true) {
-        // || true for testing
+      if (process.env.NODE_ENV === 'production') {
+        // add || true for testing
         sessionStorage.setItem('canVisit', 'false');
       } else {
         sessionStorage.setItem('canVisit', 'true');
