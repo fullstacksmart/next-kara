@@ -31,12 +31,8 @@ const withAuthorization = <Props extends object>( //eslint-disable-line
     const { user } = useAuth();
     const id = useRouter().query.id as string;
 
-    if (!user) {
+    if (!user || !user.id) {
       return <Unauthorized />;
-    }
-
-    if (!id || !user.id) {
-      return <Page editable={false} {...props} />;
     }
 
     if (!isAuthorizedToView(user, id)) {
