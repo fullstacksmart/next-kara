@@ -28,8 +28,10 @@ const withAuthorization = <Props extends object>( //eslint-disable-line
   Page: React.ComponentType<Props & { editable: boolean }>,
 ): React.ComponentType<Props> =>
   function PageWithAuthorization(props) {
-    const { user } = useAuth();
+    const { user, authStateChangeFinished } = useAuth();
     const id = useRouter().query.id as string;
+
+    if (!authStateChangeFinished) return <></>;
 
     if (!user || !user.id) {
       return <Unauthorized />;

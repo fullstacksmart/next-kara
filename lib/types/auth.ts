@@ -28,6 +28,7 @@ export type UseAuthProviderReturnType = {
   logout: Logout;
   sendPasswordResetEmail: sendPasswordResetEmail;
   setContextUser: (user: ContextUserType) => void;
+  authStateChangeFinished: boolean;
 };
 
 export type FirebaseUserCredential = firebase.auth.UserCredential;
