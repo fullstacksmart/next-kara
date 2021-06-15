@@ -3,6 +3,7 @@ import { useAuth } from 'hooks/useAuth';
 import { UserGroup } from 'lib/types';
 import { ContextUserType } from 'lib/types/auth';
 import { useRouter } from 'next/router';
+import { Loader } from 'components';
 
 const editorIds = ['Kx00tfTGy6ei8olseVTJc988f992'];
 
@@ -31,7 +32,7 @@ const withAuthorization = <Props extends object>( //eslint-disable-line
     const { user, authStateChangeFinished } = useAuth();
     const id = useRouter().query.id as string;
 
-    if (!authStateChangeFinished) return null;
+    if (!authStateChangeFinished) return <Loader />;
 
     if (!user || !user.id) {
       return <Unauthorized />;
