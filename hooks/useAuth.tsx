@@ -32,10 +32,14 @@ export const useAuth: () => UseAuthProviderReturnType = () => {
 
 const useAuthProvider = (): UseAuthProviderReturnType => {
   const [user, setUser] = useState<ContextUserType>({ id: '' });
+  const [authStateChangeFinished, setAuthStateChangeFinished] = useState(false);
 
   const handleAuthStateChanged = (user: firebase.User | null): void => {
     //can save additional data here, e.g. type
-    if (user) setUser({ id: user.uid });
+    if (user) {
+      setUser({ id: user.uid });
+      setAuthStateChangeFinished(true);
+    }
   };
 
   useEffect(() => {
@@ -86,5 +90,6 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
     logout,
     sendPasswordResetEmail,
     setContextUser,
+    authStateChangeFinished,
   };
 };
