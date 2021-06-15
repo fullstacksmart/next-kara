@@ -31,7 +31,7 @@ const withAuthorization = <Props extends object>( //eslint-disable-line
     const { user, authStateChangeFinished } = useAuth();
     const id = useRouter().query.id as string;
 
-    if (!authStateChangeFinished) return <></>;
+    if (!authStateChangeFinished) return null;
 
     if (!user || !user.id) {
       return <Unauthorized />;
