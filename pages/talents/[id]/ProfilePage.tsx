@@ -17,7 +17,6 @@ import {
   Skill,
   SkillLevel,
 } from 'lib/types';
-import { withTranslation } from 'i18n.config';
 import { useState, useEffect } from 'react';
 import {
   BasicInfo,
@@ -38,6 +37,7 @@ import {
 import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
+import { useTranslation } from 'react-i18next';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -139,7 +139,7 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ t }: PageProps): React.ReactElement => {
+const ProfilePage = (): React.ReactElement => {
   const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
   const classes = useStyles();
   const id = useRouter().query.id;
@@ -151,6 +151,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (data) {
@@ -310,4 +311,8 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   );
 };
 
-export default withTranslation('common')(ProfilePage);
+ProfilePage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default ProfilePage;
