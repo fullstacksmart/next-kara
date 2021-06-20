@@ -11,7 +11,6 @@ import {
   FederalState,
   Gender,
   ModalType,
-  PageProps,
   Profession,
   Qualification,
   Skill,

@@ -1,20 +1,21 @@
-import { withTranslation } from '../i18n.config';
 import type { NextPageContext } from 'next';
-import { TFunction } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Error = ({
   statusCode,
-  t,
 }: {
   statusCode: number | null;
-  t: TFunction;
-}): React.ReactElement => (
-  <p>
-    {statusCode
-      ? t('error-with-status', { statusCode })
-      : t('error-without-status')}
-  </p>
-);
+}): React.ReactElement => {
+  const { t } = useTranslation('common');
+
+  return (
+    <p>
+      {statusCode
+        ? t('error-with-status', { statusCode })
+        : t('error-without-status')}
+    </p>
+  );
+};
 
 Error.getInitialProps = async ({ res, err }: NextPageContext) => {
   let statusCode = null;
@@ -33,4 +34,4 @@ Error.defaultProps = {
   statusCode: null,
 };
 
-export default withTranslation('common')(Error);
+export default Error;

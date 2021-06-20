@@ -10,7 +10,6 @@ import { Button } from 'components/buttons';
 import InputField from 'components/input-field/InputField';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { SignupFormValues } from 'lib/types';
-import { withTranslation } from 'i18n.config';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
@@ -258,4 +257,4 @@ SignUpPage.getInitialProps = async () => ({
   namespacesRequired: ['common'],
 });
 
-export default withTranslation('common')(SignUpPage);
+export default SignUpPage;
