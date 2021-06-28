@@ -1,8 +1,10 @@
 import firebase from 'firebase/app';
+import { UserGroup } from './user';
 
 export type ContextUserType = {
   id: string;
   type?: string;
+  group?: UserGroup;
 };
 
 export type Signup = (
@@ -26,6 +28,7 @@ export type UseAuthProviderReturnType = {
   logout: Logout;
   sendPasswordResetEmail: sendPasswordResetEmail;
   setContextUser: (user: ContextUserType) => void;
+  authStateChangeFinished: boolean;
 };
 
 export type FirebaseUserCredential = firebase.auth.UserCredential;

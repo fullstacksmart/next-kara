@@ -38,12 +38,7 @@ import {
 import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
-
-const GET_ALL_TALENTS = gql`
-  query getAllTalentIds {
-    id
-  }
-`;
+import withAuthorization from 'hocs/withAuthorization';
 
 const GET_ALL_INFO = gql`
   query GetTalentById($id: String!) {
@@ -139,8 +134,10 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ t }: PageProps): React.ReactElement => {
-  const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
+const ProfilePage = ({
+  t,
+  editable,
+}: PageProps & { editable: boolean }): React.ReactElement => {
   const classes = useStyles();
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
@@ -151,6 +148,7 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+  console.log(editable); // eslint-disable-line
 
   useEffect(() => {
     if (data) {
@@ -169,8 +167,6 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
     };
   }, [data, t]);
 
-  if (idLoading) return <></>;
-  console.log(talentIds);
   if (loading) return <Loader />;
   if (error) {
     if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
@@ -310,4 +306,4 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   );
 };
 
-export default withTranslation('common')(ProfilePage);
+export default withTranslation('common')(withAuthorization(ProfilePage));
