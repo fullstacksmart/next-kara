@@ -16,6 +16,8 @@ import '../styles/globals.css';
 import { AuthProvider } from '../hooks/useAuth';
 import { Layout } from 'containers/layout';
 import theme from 'lib/material-ui/theme';
+import PasswordDialog from 'components/PasswordDialog';
+import usePasswordCheck from 'hooks/usePasswordCheck';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
@@ -25,6 +27,17 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
       jssStyles.parentElement?.removeChild(jssStyles);
     }
   }, []);
+  const isAllowed = usePasswordCheck();
+
+  let ComponentToDisplay = Component;
+
+  if (isAllowed === undefined) {
+    return <div></div>;
+  }
+
+  if (isAllowed === false) {
+    ComponentToDisplay = PasswordDialog;
+  }
 
   return (
     <ApolloProvider client={client}>
@@ -40,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <CssBaseline />
             <Layout>
-              <Component {...pageProps} />
+              <ComponentToDisplay {...pageProps} />
             </Layout>
           </MuiPickersUtilsProvider>
         </ThemeProvider>

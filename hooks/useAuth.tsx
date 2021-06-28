@@ -76,7 +76,7 @@ const useAuthProvider = (): UseAuthProviderReturnType => {
       .then((response) => {
         return response;
       })
-      .catch((e) => console.error(e)); //eslint-disable-line
+      .catch((e) => console.error(e)); //eslint-disable-line no-console
   };
 
   const setContextUser = (user: ContextUserType): void => {
