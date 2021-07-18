@@ -11,13 +11,11 @@ import {
   FederalState,
   Gender,
   ModalType,
-  PageProps,
   Profession,
   Qualification,
   Skill,
   SkillLevel,
 } from 'lib/types';
-import { withTranslation } from 'i18n.config';
 import { useState, useEffect } from 'react';
 import {
   BasicInfo,
@@ -38,7 +36,15 @@ import {
 import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
+import { useTranslation } from 'react-i18next';
 import withAuthorization from 'hocs/withAuthorization';
+import { PageProps } from '../../../lib/types';
+
+const GET_ALL_TALENTS = gql`
+  query getAllTalentIds {
+    id
+  }
+`;
 
 const GET_ALL_INFO = gql`
   query GetTalentById($id: String!) {
@@ -135,7 +141,6 @@ const GET_ALL_INFO = gql`
 `;
 
 const ProfilePage = ({
-  t,
   editable,
 }: PageProps & { editable: boolean }): React.ReactElement => {
   const classes = useStyles();
@@ -148,6 +153,7 @@ const ProfilePage = ({
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+  const { t } = useTranslation('common');
   console.log(editable); // eslint-disable-line
 
   useEffect(() => {
@@ -306,4 +312,8 @@ const ProfilePage = ({
   );
 };
 
-export default withTranslation('common')(withAuthorization(ProfilePage));
+ProfilePage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withAuthorization(ProfilePage);

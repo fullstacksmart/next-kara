@@ -9,8 +9,7 @@ import OptionsToggler from 'components/option-toggler/OptionToggler';
 import { Button } from 'components/buttons';
 import InputField from 'components/input-field/InputField';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { PageProps, SignupFormValues } from 'lib/types';
-import { withTranslation } from 'i18n.config';
+import { SignupFormValues } from 'lib/types';
 import { useMutation, gql } from '@apollo/client';
 import styles from './Signup.module.css';
 import { GenderSelector } from 'components/gender-selector/GenderSelector';
@@ -22,6 +21,7 @@ import { isError } from 'lib/types/auth';
 import { useRouter } from 'next/router';
 import { computeNestedValue, getPropArray } from 'lib/utils/arrays';
 import { layoutErrorVar } from 'apollo/cache';
+import { useTranslation } from 'react-i18next';
 
 const ADD_EMPLOYER = gql`
   mutation AddEmployer($input: UserInput!) {
@@ -42,7 +42,7 @@ const ADD_TALENT = gql`
 // Min 8 characters. At least 1 capital, 1 number
 const strongCombination = new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z]).{8,}$/);
 
-const SignUpPage = ({ t }: PageProps): React.ReactElement => {
+const SignUpPage = (): React.ReactElement => {
   const [formValues, setFormValues] = useState<SignupFormValues>(
     defaultSignupFormValues,
   );
@@ -53,6 +53,7 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   const [passwordRepeat, setPasswordRepeat] = useState<Record<string, unknown>>(
     { passwordConfirm: '' },
   );
+  const { t } = useTranslation('common');
 
   useEffect(
     () => () => {
@@ -252,4 +253,8 @@ const SignUpPage = ({ t }: PageProps): React.ReactElement => {
   );
 };
 
-export default withTranslation('common')(SignUpPage);
+SignUpPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default SignUpPage;
