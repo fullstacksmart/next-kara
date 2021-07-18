@@ -37,6 +37,8 @@ import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
 import { useTranslation } from 'react-i18next';
+import withAuthorization from 'hocs/withAuthorization';
+import { PageProps } from '../../../lib/types';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -138,8 +140,9 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = (): React.ReactElement => {
-  const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
+const ProfilePage = ({
+  editable,
+}: PageProps & { editable: boolean }): React.ReactElement => {
   const classes = useStyles();
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
@@ -151,6 +154,7 @@ const ProfilePage = (): React.ReactElement => {
     type: ModalType.NONE,
   });
   const { t } = useTranslation('common');
+  console.log(editable); // eslint-disable-line
 
   useEffect(() => {
     if (data) {
@@ -169,8 +173,6 @@ const ProfilePage = (): React.ReactElement => {
     };
   }, [data, t]);
 
-  if (idLoading) return <></>;
-  console.log(talentIds);
   if (loading) return <Loader />;
   if (error) {
     if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
@@ -314,4 +316,4 @@ ProfilePage.getInitialProps = async () => ({
   namespacesRequired: ['common'],
 });
 
-export default ProfilePage;
+export default withAuthorization(ProfilePage);
