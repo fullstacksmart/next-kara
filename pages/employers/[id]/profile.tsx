@@ -1,12 +1,11 @@
 // import { GetStaticPaths, GetStaticProps } from 'next';
 import { Button } from '../../../components/buttons';
 import { PageProps } from '../../../lib/types';
-
 export interface ProfilePageProps extends PageProps {
   id: string;
 }
 
-const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
+const ProfilePage = ({ id }: ProfilePageProps): React.ReactElement => {
   return (
     <>
       <h1>Profile Page for Employer {id}</h1>
@@ -35,5 +34,9 @@ const ProfilePage = ({ id, t }: ProfilePageProps): React.ReactElement => {
 //     },
 //   };
 // };
+
+ProfilePage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default ProfilePage;

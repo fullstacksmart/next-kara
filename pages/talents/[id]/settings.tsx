@@ -1,12 +1,13 @@
 import { Button } from '../../../components/buttons';
-import { withTranslation } from '../../../i18n.config';
 import { PageProps } from '../../../lib/types';
-
+import { useTranslation } from 'react-i18next';
 export interface SettingsPageProps extends PageProps {
   id: string;
 }
 
-const SettingsPage = ({ id, t }: SettingsPageProps): React.ReactElement => {
+const SettingsPage = ({ id }: SettingsPageProps): React.ReactElement => {
+  const { t } = useTranslation('common');
+
   return (
     <>
       <h1>Settings Page for Talent {id}</h1>
@@ -19,4 +20,4 @@ SettingsPage.getInitialProps = async () => ({
   namespacesRequired: ['common'],
 });
 
-export default withTranslation('common')(SettingsPage);
+export default SettingsPage;

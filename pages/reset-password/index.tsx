@@ -2,17 +2,18 @@ import { Button } from '../../components/buttons';
 import { Card, CardContent, Typography, Container } from '@material-ui/core';
 import InputField from '../../components/input-field/InputField';
 import { useState } from 'react';
-import { PageProps, UserInput } from '../../lib/types';
-import { withTranslation } from '../../i18n.config';
+import { UserInput } from '../../lib/types';
 import styles from './ResetPassword.module.css';
 import { useAuth } from '../../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
-const PasswordResetPage = ({ t }: PageProps): React.ReactElement => {
+const PasswordResetPage = (): React.ReactElement => {
   const [formValues, setFormValues] = useState<Partial<UserInput>>({
     email: '',
   });
 
   const auth = useAuth();
+  const { t } = useTranslation('common');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -43,4 +44,8 @@ const PasswordResetPage = ({ t }: PageProps): React.ReactElement => {
   );
 };
 
-export default withTranslation('common')(PasswordResetPage);
+PasswordResetPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default PasswordResetPage;

@@ -11,13 +11,11 @@ import {
   FederalState,
   Gender,
   ModalType,
-  PageProps,
   Profession,
   Qualification,
   Skill,
   SkillLevel,
 } from 'lib/types';
-import { withTranslation } from 'i18n.config';
 import { useState, useEffect } from 'react';
 import {
   BasicInfo,
@@ -38,6 +36,9 @@ import {
 import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
 import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
+import { useTranslation } from 'react-i18next';
+import withAuthorization from 'hocs/withAuthorization';
+import { PageProps } from '../../../lib/types';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -139,8 +140,9 @@ const GET_ALL_INFO = gql`
   }
 `;
 
-const ProfilePage = ({ t }: PageProps): React.ReactElement => {
-  const { data: talentIds, loading: idLoading } = useQuery(GET_ALL_TALENTS);
+const ProfilePage = ({
+  editable,
+}: PageProps & { editable: boolean }): React.ReactElement => {
   const classes = useStyles();
   const id = useRouter().query.id;
   const { data, loading, error } = useQuery(GET_ALL_INFO, {
@@ -151,6 +153,8 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   const [modal, setModal] = useState<{ type: ModalType; id?: string }>({
     type: ModalType.NONE,
   });
+  const { t } = useTranslation('common');
+  console.log(editable); // eslint-disable-line
 
   useEffect(() => {
     if (data) {
@@ -169,8 +173,6 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
     };
   }, [data, t]);
 
-  if (idLoading) return <></>;
-  console.log(talentIds);
   if (loading) return <Loader />;
   if (error) {
     if (error.message.startsWith('404')) return <h1>insert 404 page here</h1>;
@@ -310,4 +312,8 @@ const ProfilePage = ({ t }: PageProps): React.ReactElement => {
   );
 };
 
-export default withTranslation('common')(ProfilePage);
+ProfilePage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withAuthorization(ProfilePage);

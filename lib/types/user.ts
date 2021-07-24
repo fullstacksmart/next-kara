@@ -17,3 +17,9 @@ export interface UserInput {
   password: string;
   type: UserType;
 }
+
+export enum UserGroup {
+  NormalUser,
+  Editor,
+  Admin,
+}

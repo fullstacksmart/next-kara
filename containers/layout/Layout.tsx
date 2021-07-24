@@ -1,6 +1,5 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import { I18n, TFunction } from 'next-i18next';
 import Head from 'next/head';
 import Footer from 'components/footer/Footer';
 import useStyles from './LayoutStyles';
@@ -10,19 +9,17 @@ import { Button } from 'components';
 import { useAuth } from 'hooks/useAuth';
 import { useRouter } from 'next/router';
 import Error from 'components/error';
-import { withTranslation } from 'i18n.config';
 import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
 import { useReactiveVar } from '@apollo/client';
 import { getTitleStringFromPathname } from 'lib/utils/strings';
-
+import { useTranslation } from 'react-i18next';
 export interface LayoutProps {
   children?: React.ReactNode;
-  i18n?: I18n;
-  t: TFunction;
 }
 
-const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
+const Layout = ({ children }: LayoutProps): React.ReactElement => {
   const classes = useStyles();
+  const { t, i18n } = useTranslation('common');
   const auth = useAuth();
   const router = useRouter();
   const { pathname } = router;
@@ -92,4 +89,4 @@ const Layout = ({ children, t, i18n }: LayoutProps): React.ReactElement => {
   );
 };
 
-export default withTranslation('common')(Layout);
+export default Layout;

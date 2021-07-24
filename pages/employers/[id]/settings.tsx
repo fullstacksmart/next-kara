@@ -17,4 +17,8 @@ const SettingsPage = ({ id, t }: SettingsPageProps): React.ReactElement => {
 
 // export { getStaticPaths, getStaticProps };
 
+SettingsPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default SettingsPage;
