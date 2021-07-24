@@ -27,7 +27,14 @@ const Header = (): React.ReactElement => {
           </Typography>
         </div>
       </Grid>
-      <Grid item lg={6} container spacing={0} className={classes.picsContainer}>
+      <Grid
+        item
+        lg={6}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="flex-end"
+      >
         <AnimatedPics />
         <div className={classes.rightColoredDiv}></div>
       </Grid>

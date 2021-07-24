@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
         'linear-gradient(270deg, #018395 0%, rgba(255, 255, 255, 0) 75%), #00ACAC',
       borderRadius: '0px 0px 0px 100px',
     },
-    picsContainer: {
-      justifyContent: 'flex-end',
-    },
   }),
 );
 
