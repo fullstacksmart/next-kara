@@ -6,6 +6,6 @@ initFirebase();
 
 export const auth: firebase.auth.Auth = firebase.auth();
 //can also define other stuff here:
-//const storage = firebase.storage();
+export const storage: firebase.storage.Storage = firebase.storage();
 
 export default firebase;
