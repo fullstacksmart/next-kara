@@ -34,30 +34,6 @@ const PictureUpload: FC = () => {
     if (fileInput) fileInput.click();
   };
 
-  const handleFileUpload = (e) => {
-    const fileList = e.target.files;
-    const file = fileList[0];
-    // can insert more conditions here, e.g. if filesize < X;
-    if (file) {
-      const uploadTask = storageRef.put(file);
-      uploadTask.on(
-        'state_changed',
-        function progress(snapshot) {
-          const percentage =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('uploading percentage: ' + percentage);
-        },
-        function error(err) {
-          console.log('upload error', err);
-        },
-        function complete() {
-          console.log('complete');
-          // downloadImage();
-        },
-      );
-    }
-  };
-
   useEffect(() => {
     const setFileInputEventListener = async () => {
       const fileInput = document.getElementById(
@@ -66,8 +42,48 @@ const PictureUpload: FC = () => {
       fileInput.addEventListener('change', handleFileUpload, false);
     };
 
+    const handleFileDownload = () => {
+      storageRef
+        .getDownloadURL()
+        .then((url) => {
+          console.log('url: ', url);
+          const imageInput = document.getElementById(
+            'image-input',
+          ) as HTMLImageElement;
+          if (imageInput) imageInput.src = url;
+        })
+        .catch((e) => console.error('download error', e));
+    };
+
+    const handleFileUpload = (e) => {
+      const fileList = e.target.files;
+      const file = fileList[0];
+      // can insert more conditions here, e.g. if filesize < X;
+      if (file) {
+        const uploadTask = storageRef.put(file);
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const percentage =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('uploading percentage: ' + percentage);
+          },
+          (error) => {
+            // add error handling
+            console.log('upload error', error);
+          },
+          () => {
+            //handle complete state
+            console.log('complete');
+            handleFileDownload();
+          },
+        );
+      }
+    };
+
+    handleFileDownload();
     setFileInputEventListener();
-  }, []);
+  }, [storageRef]);
 
   return (
     <div className={classes.root}>
