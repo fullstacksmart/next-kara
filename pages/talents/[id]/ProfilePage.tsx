@@ -35,7 +35,7 @@ import {
 } from 'components';
 import useStyles from './ProfilePage.styles';
 import { getTitleString } from 'lib/utils/strings';
-import { layoutTitleVar, layoutHeadingVar } from 'apollo/cache';
+import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
 import { useTranslation } from 'react-i18next';
 import withAuthorization from 'hocs/withAuthorization';
 import { PageProps } from '../../../lib/types';
@@ -170,6 +170,7 @@ const ProfilePage = ({
     return () => {
       layoutTitleVar('');
       layoutHeadingVar('');
+      layoutErrorVar(null);
     };
   }, [data, t]);
 
