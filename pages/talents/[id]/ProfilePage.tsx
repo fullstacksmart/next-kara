@@ -39,7 +39,6 @@ import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
 import { useTranslation } from 'react-i18next';
 import withAuthorization from 'hocs/withAuthorization';
 import { PageProps } from '../../../lib/types';
-import PictureUpload from 'components/PictureUpload';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -220,9 +219,6 @@ const ProfilePage = ({
 
   return (
     <>
-      <div style={{ height: '100px', width: '100px' }}>
-        <PictureUpload />
-      </div>
       <Grid container spacing={3} className={classes.OuterContainer}>
         <Grid item md={7} xs={12}>
           <BasicInfo
