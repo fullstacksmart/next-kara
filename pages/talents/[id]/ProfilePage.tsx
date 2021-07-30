@@ -39,7 +39,6 @@ import { layoutTitleVar, layoutHeadingVar, layoutErrorVar } from 'apollo/cache';
 import { useTranslation } from 'react-i18next';
 import withAuthorization from 'hocs/withAuthorization';
 import { PageProps } from '../../../lib/types';
-import { storage } from 'lib/auth/firebase';
 import PictureUpload from 'components/PictureUpload';
 
 const GET_ALL_TALENTS = gql`
