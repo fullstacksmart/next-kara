@@ -40,6 +40,7 @@ import { useTranslation } from 'react-i18next';
 import withAuthorization from 'hocs/withAuthorization';
 import { PageProps } from '../../../lib/types';
 import PictureUpload from 'components/PictureUpload';
+import { layoutErrorVar } from 'apollo/cache';
 
 const GET_ALL_TALENTS = gql`
   query getAllTalentIds {
@@ -171,6 +172,7 @@ const ProfilePage = ({
     return () => {
       layoutTitleVar('');
       layoutHeadingVar('');
+      layoutErrorVar(null);
     };
   }, [data, t]);
 
