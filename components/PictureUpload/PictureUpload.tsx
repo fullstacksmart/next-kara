@@ -3,6 +3,8 @@ import { storage } from 'lib/auth/firebase';
 import { useRouter } from 'next/router';
 import useStyles from './PictureUpload.styles';
 
+const MAX_FILE_SIZE_IN_BYTES = 10485760; // equal to 10MB
+
 const PictureUpload: FC = () => {
   const classes = useStyles();
   const idFromQueryString = useRouter().query.id;
@@ -27,7 +29,6 @@ const PictureUpload: FC = () => {
       storageRef
         .getDownloadURL()
         .then((url) => {
-          console.log('url: ', url);
           const imageInput = document.getElementById(
             'image-input',
           ) as HTMLImageElement;
@@ -36,26 +37,26 @@ const PictureUpload: FC = () => {
         .catch((e) => console.error('download error', e));
     };
 
-    const handleFileUpload = (e: Event): void => {
+    const handleFileUpload = (e): void => {
       e.preventDefault();
-      const fileList = e.target.files;
-      const file = fileList[0];
+      const file = e.target.files[0];
       // can insert more conditions here, e.g. if filesize < X;
       if (file) {
         const uploadTask = storageRef.put(file);
+        if (file.size > MAX_FILE_SIZE_IN_BYTES) {
+          return;
+        }
+
         uploadTask.on(
           'state_changed',
-          (snapshot) => {
-            const percentage =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('uploading percentage: ' + percentage);
-          },
+          // 1. 'state_changed' observer, called any time the state changes
+          () => {},
+          // 2. Error observer, called on failure
           (error) => {
-            // add error handling
             console.log('upload error', error);
           },
+          // 3. Completion observer, called on successful completion
           () => {
-            //handle complete state
             console.log('complete');
             handleFileDownload();
           },
