@@ -1,24 +1,7 @@
-import { FC, useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { FC, useEffect } from 'react';
 import { storage } from 'lib/auth/firebase';
 import { useRouter } from 'next/router';
-
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-    height: '100%',
-  },
-  imageInput: {
-    backgroundColor: 'rgb(255, 255, 255)',
-    border: '2px solid rgba(211, 220, 225, 1)',
-    borderRadius: '50%',
-    height: '100%',
-    width: '100%',
-  },
-  fileInput: {
-    display: 'none',
-  },
-});
+import useStyles from './PictureUpload.styles';
 
 const PictureUpload: FC = () => {
   const classes = useStyles();
@@ -27,22 +10,20 @@ const PictureUpload: FC = () => {
     `/talents/${idFromQueryString}/images/profile-picture`,
   );
 
-  //   const [value, setValue] = useState('');
-
-  const handleClick = () => {
+  const handleClick = (): void => {
     const fileInput = document.getElementById('file-input');
     if (fileInput) fileInput.click();
   };
 
   useEffect(() => {
-    const setFileInputEventListener = async () => {
+    const setFileInputEventListener = (): void => {
       const fileInput = document.getElementById(
         'file-input',
       ) as HTMLInputElement;
       fileInput.addEventListener('change', handleFileUpload, false);
     };
 
-    const handleFileDownload = () => {
+    const handleFileDownload = (): void => {
       storageRef
         .getDownloadURL()
         .then((url) => {
@@ -55,7 +36,8 @@ const PictureUpload: FC = () => {
         .catch((e) => console.error('download error', e));
     };
 
-    const handleFileUpload = (e) => {
+    const handleFileUpload = (e: Event): void => {
+      e.preventDefault();
       const fileList = e.target.files;
       const file = fileList[0];
       // can insert more conditions here, e.g. if filesize < X;
